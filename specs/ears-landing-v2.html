@@ -315,9 +315,19 @@ function updateSummary() {
   bar.classList.toggle('visible', ok > 0 || rev > 0);
 }
 
+// Default compliance state based on current implementation (2026-03-25)
+const DEFAULT_STATE = {
+  '032': { checked: true, status: 'ok' }  // Inter font loaded from Google Fonts
+};
+
 // Restore state on load
 document.addEventListener('DOMContentLoaded', function() {
-  const state = loadState();
+  let state = loadState();
+  // Apply defaults only if no state exists yet
+  if (Object.keys(state).length === 0) {
+    state = { ...DEFAULT_STATE };
+    saveState(state);
+  }
   document.querySelectorAll('tr[data-id]').forEach(row => {
     const id = row.dataset.id;
     const s = state[id];
