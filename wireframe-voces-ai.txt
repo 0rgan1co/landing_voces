@@ -1,0 +1,246 @@
+
+================================================================================
+                              VOCES.AI
+                    Wireframe - Landing Page v1.0
+       Plataforma de diagnostico cultural y escucha sistemica con IA
+================================================================================
+  Fecha: 25 marzo 2026          Estado: Borrador para feedback
+--------------------------------------------------------------------------------
+
+
+1. COOKIE BANNER                                      [Flotante / Fixed Bottom]
+================================================================================
+
+  +------------------------------------------------------------------------+
+  |                                                                        |
+  |  Usamos cookies de Google Analytics para         +----------+  +------+|
+  |  entender el uso del sitio y mejorar             | Rechazar |  |Acepta||
+  |  el producto.                                    +----------+  |  r   ||
+  |                                                                +------+|
+  +------------------------------------------------------------------------+
+                                                     outline btn   purple bg
+
+  > Fondo blanco, bordes redondeados, sombra. Se oculta al interactuar.
+
+
+2. NAVBAR                                                        [Sticky Top]
+================================================================================
+
+  +------------------------------------------------------------------------+
+  |                                                                        |
+  |  (o) Voces.ai    Funcionalidades  Casos de Uso  Precios  [ES v] [Demo]|
+  |                                                                        |
+  +------------------------------------------------------------------------+
+
+  > Mobile: hamburguesa reemplaza links + idioma dentro del menu.
+  > CTA "Agendar Demo" siempre visible.
+
+
+3. HERO                                                     [Above the fold]
+================================================================================
+
+                            +----------+
+                            |  Nuevo   |
+                            +----------+
+
+              Escucha lo que tu organizacion
+                no sabe que esta diciendo
+
+       Voces.ai convierte conversaciones con IA en un
+       mapa de narrativas, creencias y tensiones que
+       ningun formulario puede capturar.
+
+          [  Agendar una demo ->  ]    Ver como funciona
+
+   +----------------------------------------------------------------+
+   | . . .                                                          |
+   |  +---------------------------+  +----------------------------+ |
+   |  |  ENTREVISTA IA            |  |  MAPA DE NARRATIVAS        | |
+   |  |                           |  |                            | |
+   |  |  "Como describirias la    |  |  o Confianza -- o Liderazgo| |
+   |  |   cultura de tu equipo?"  |  |       \            /       | |
+   |  |                           |  |        o Autonomia o       | |
+   |  |  ============--  62%      |  |       /            \       | |
+   |  |                           |  |  o Innovacion -- o Cambio  | |
+   |  |  > Siguiente              |  |                            | |
+   |  |                           |  |  Narrativas emergentes: 12 | |
+   |  +---------------------------+  +----------------------------+ |
+   |                    PRODUCT MOCKUP                              |
+   +----------------------------------------------------------------+
+
+
+4. SOCIAL PROOF BAR                                        [Full Width]
+================================================================================
+
+            Empresas que ya escuchan diferente
+
+   [Logo 1]  [Logo 2]  [Logo 3]  [Logo 4]  [Logo 5]  [Logo 6]
+
+
+5. PROPUESTA DE VALOR + FEATURES                    [3 Bloques / 6 Cards]
+================================================================================
+
+        Menos formularios. Mas escucha. Mejores conversaciones.
+
+     Voces.ai reemplaza encuestas por conversaciones que revelan
+     lo que piensan y sienten las personas.
+
+  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  BLOQUE 1: "Menos Formularios"
+  Deja de preguntar lo que ya sabes. Empeza a escuchar lo que no.
+
+  +-------------------------------+  +-------------------------------+
+  |  Entrevistas con IA           |  |  Anonimizacion Nativa         |
+  |                               |  |                               |
+  |  Conversaciones que profun-   |  |  Las respuestas se desvincu-  |
+  |  dizan en lo que importa,     |  |  lan de identidades desde el  |
+  |  sin guion predefinido.       |  |  momento en que se registran.  |
+  +-------------------------------+  +-------------------------------+
+
+  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  BLOQUE 2: "Mas Escucha"
+  Lo importante no es lo que preguntas. Es lo que emerge.
+
+  +-------------------------------+  +-------------------------------+
+  |  Extraccion de Narrativas     |  |  Analisis Semantico           |
+  |                               |  |                               |
+  |  La IA identifica patrones,   |  |  Detecta temas, tensiones y   |
+  |  metaforas y creencias que    |  |  conexiones entre las voces    |
+  |  atraviesan las respuestas.   |  |  de tu equipo que no aparecen  |
+  |                               |  |  en encuestas.                 |
+  +-------------------------------+  +-------------------------------+
+
+  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  BLOQUE 3: "Mejores Conversaciones"
+  Los datos no cambian culturas. Las conversaciones si.
+
+  +-------------------------------+  +-------------------------------+
+  |  Hallazgos que Activan        |  |  Medicion del Cambio          |
+  |  Dialogos                     |  |                               |
+  |                               |  |  Compara diagnosticos en el   |
+  |  Hallazgos que se comparten   |  |  tiempo y observa como cam-   |
+  |  en equipo y activan          |  |  bian las narrativas despues  |
+  |  conversaciones.              |  |  de cada intervencion.        |
+  +-------------------------------+  +-------------------------------+
+
+  > Journey visual izq -> der en desktop, arriba -> abajo en mobile.
+
+
+6. CASOS DE USO                                          [5 Cards / Tabs]
+================================================================================
+
+                            Aplicaciones
+
+              Una plataforma, multiples diagnosticos
+
+  +------------------+ +------------------+ +------------------+
+  |  Cultura         | |  Clima y         | |  Liderazgo y     |
+  |  Organizacional  | |  Bienestar       | |  Direccion       |
+  |                  | |                  | |                  |
+  |  Identifica las  | |  Registra lo que | |  Mapea como se   |
+  |  creencias y     | |  sienten las     | |  experimenta el  |
+  |  narrativas que  | |  personas en sus | |  liderazgo desde |
+  |  operan en tu    | |  propias pala-   | |  cada nivel de   |
+  |  organizacion.   | |  bras, no en una | |  la organizacion.|
+  |                  | |  escala.         | |                  |
+  +------------------+ +------------------+ +------------------+
+
+       +------------------------+ +------------------------+
+       |  Transformacion y      | |  Exploracion de Nuevos |
+       |  Cambio                | |  Negocios              |
+       |                        | |                        |
+       |  Observa como las      | |  Escucha a clientes,   |
+       |  personas procesan un  | |  usuarios y stake-     |
+       |  cambio y donde apa-   | |  holders para detectar |
+       |  recen resistencias.   | |  oportunidades antes   |
+       |                        | |  de invertir.          |
+       +------------------------+ +------------------------+
+
+
+7. COMO FUNCIONA                                    [4 Pasos Horizontales]
+================================================================================
+
+             De la conversacion al insight en 4 pasos
+
+    (1)              (2)              (3)              (4)
+   +----+          +----+          +----+          +----+
+   | ## | -------> | @@ | -------> | :: | -------> | "" |
+   +----+          +----+          +----+          +----+
+   Configura       La IA           Emergen las     Activa el
+   tu investi-     entrevista      narrativas      dialogo
+   gacion
+
+   Defini el       Cada persona    La plataforma   Comparti los
+   tema, las       conversa con    extrae patro-   hallazgos con
+   preguntas       la IA de forma  nes, tensiones  tu equipo y usa
+   semilla y los   individual y    y significados. los datos para
+   participantes.  anonima.                        abrir conversa-
+                                                   ciones.
+
+
+8. DEMO / PRODUCT TOUR                          [Galeria + Social Proof]
+================================================================================
+
+                          Mira por dentro
+
+        Explora la plataforma antes de agendar tu demo
+     Cada modulo muestra como funciona la escucha paso a paso.
+
+   > Entrevistas con IA   > Extraccion de Narrativas   > Mapa Semantico
+     -----------------      -----------------------      --------------
+
+   +----------------------------------------------------------------+
+   |                                                                |
+   |                                                                |
+   |               [ Screenshot Principal del Workspace ]           |
+   |                                                                |
+   |                                                                |
+   +----------------------------------------------------------------+
+
+   +------+  +------+  +------+  +------+  +------+
+   | t1   |  | t2   |  | t3   |  | t4   |  | t5   |  < thumbnails >
+   +------+  +------+  +------+  +------+  +------+
+
+   "La entrevista con IA logro lo que 6 meses de encuestas
+    no pudieron."
+                                        -- VP People, Empresa X
+
+
+9. CTA FINAL                                     [Full Width / Conversion]
+================================================================================
+
+   ####################################################################
+   ##                                                                ##
+   ##    Listo para escuchar lo que tu organizacion                  ##
+   ##                 necesita decir?                                ##
+   ##                                                                ##
+   ##    Agenda una conversacion y te mostramos como funciona.       ##
+   ##                                                                ##
+   ##         [  Agendar Demo ->  ]    Escribinos por WhatsApp      ##
+   ##                                                                ##
+   ####################################################################
+
+
+10. FOOTER                                                       [Bottom]
+================================================================================
+
+  (c) 2026 Voces.ai      Terminos . Privacidad . Sobre      LinkedIn . Contacto
+
+
+================================================================================
+                         NOTAS DE DISENO
+================================================================================
+
+  * Paleta: tonos oscuros/profundos (confianza) + acento purpura (#7B2FF7)
+  * Layout: Desktop-first, responsive
+  * Features journey: 3 bloques izq -> der en desktop, arriba -> abajo en mobile
+  * CTAs de conversion: 4 puntos -- navbar, hero, demos, cierre
+  * Cookie banner: fondo blanco, shadow, fixed bottom, se oculta al interactuar
+  * Navbar: sticky con CTA siempre visible. Hamburguesa en mobile.
+
+--------------------------------------------------------------------------------
+  Documento para feedback temprano -- No representa el diseno visual final
+================================================================================

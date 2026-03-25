@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wireframe - Voces.ai Landing Page</title>
+<style>
+  @page { size: A4; margin: 15mm; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    color: #1a1a2e;
+    background: #fff;
+    line-height: 1.5;
+    font-size: 11px;
+  }
+
+  /* Header del documento */
+  .doc-header {
+    text-align: center;
+    padding: 24px 0 16px;
+    border-bottom: 3px solid #1a1a2e;
+    margin-bottom: 8px;
+  }
+  .doc-header h1 { font-size: 22px; letter-spacing: 1px; }
+  .doc-header p { color: #666; font-size: 11px; margin-top: 4px; }
+  .doc-meta {
+    display: flex; justify-content: space-between;
+    padding: 8px 0; border-bottom: 1px solid #ddd;
+    font-size: 9px; color: #888; margin-bottom: 16px;
+  }
+
+  /* Secciones */
+  .section {
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    page-break-inside: avoid;
+    overflow: hidden;
+  }
+  .section-label {
+    background: #1a1a2e;
+    color: #fff;
+    padding: 5px 12px;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .section-label .position { font-weight: 400; opacity: 0.7; }
+  .section-body { padding: 16px; }
+
+  /* Wireframe boxes */
+  .wire-box {
+    border: 1.5px dashed #aaa;
+    border-radius: 6px;
+    padding: 10px;
+    background: #fafafa;
+    margin: 6px 0;
+  }
+  .wire-box.solid {
+    border-style: solid;
+    border-color: #7B2FF7;
+    background: #f8f4ff;
+  }
+  .wire-box.dark {
+    background: #1a1a2e;
+    color: #fff;
+    border-color: #1a1a2e;
+  }
+
+  /* Grid layouts */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+  .grid-4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 8px; }
+  .grid-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; }
+  .grid-6 { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; }
+
+  /* Navbar wireframe */
+  .navbar-wire {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 8px 12px;
+    border: 1.5px solid #ccc; border-radius: 6px;
+    background: #fafafa;
+  }
+  .navbar-wire .logo { font-weight: 800; font-size: 14px; }
+  .navbar-wire .links { display: flex; gap: 16px; font-size: 10px; color: #555; }
+  .navbar-wire .links span { border-bottom: 1px dashed #aaa; }
+
+  /* Buttons */
+  .btn {
+    display: inline-block; padding: 6px 14px; border-radius: 6px;
+    font-size: 10px; font-weight: 600; text-align: center;
+  }
+  .btn-primary {
+    background: linear-gradient(135deg, #7B2FF7, #A855F7);
+    color: #fff; border: none;
+  }
+  .btn-outline {
+    background: #fff; color: #333;
+    border: 1.5px solid #ccc;
+  }
+  .btn-ghost { background: none; color: #7B2FF7; border: none; text-decoration: underline; }
+
+  /* Tag/badge */
+  .tag {
+    display: inline-block; background: #f0e6ff; color: #7B2FF7;
+    padding: 2px 10px; border-radius: 12px; font-size: 9px;
+    font-weight: 600; margin-bottom: 6px;
+  }
+
+  /* Placeholder image */
+  .img-placeholder {
+    background: repeating-linear-gradient(
+      45deg, #f0f0f0, #f0f0f0 10px, #e8e8e8 10px, #e8e8e8 20px
+    );
+    border: 1.5px dashed #bbb;
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    color: #999; font-size: 10px; font-weight: 600;
+    min-height: 60px;
+  }
+
+  /* Flow arrow */
+  .flow-arrow {
+    display: flex; align-items: center; justify-content: center;
+    color: #7B2FF7; font-size: 18px; font-weight: 700;
+  }
+
+  /* Step */
+  .step-num {
+    width: 24px; height: 24px; border-radius: 50%;
+    background: #7B2FF7; color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 700; margin: 0 auto 6px;
+  }
+
+  /* Helpers */
+  .text-center { text-align: center; }
+  .text-muted { color: #888; font-size: 9px; }
+  .text-small { font-size: 9px; }
+  .mb-8 { margin-bottom: 8px; }
+  .mb-4 { margin-bottom: 4px; }
+  .mt-8 { margin-top: 8px; }
+  .mt-12 { margin-top: 12px; }
+  h2 { font-size: 14px; margin-bottom: 4px; }
+  h3 { font-size: 12px; margin-bottom: 3px; }
+  h4 { font-size: 10px; margin-bottom: 2px; }
+  .divider { border-top: 1px dashed #ddd; margin: 10px 0; }
+
+  /* Logo placeholders */
+  .logo-placeholder {
+    background: #eee; border-radius: 4px;
+    height: 28px; display: flex;
+    align-items: center; justify-content: center;
+    font-size: 8px; color: #aaa; font-weight: 600;
+  }
+
+  /* Mockup panels */
+  .mockup-container {
+    border: 2px solid #7B2FF7;
+    border-radius: 8px; overflow: hidden;
+    background: #1a1a2e;
+  }
+  .mockup-titlebar {
+    background: #2d2d44; padding: 4px 8px;
+    display: flex; gap: 4px;
+  }
+  .mockup-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+  }
+  .mockup-dot.r { background: #ff5f57; }
+  .mockup-dot.y { background: #ffbd2e; }
+  .mockup-dot.g { background: #28c840; }
+  .mockup-panels {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 1px; padding: 8px;
+  }
+  .mockup-panel {
+    background: #2d2d44; border-radius: 4px;
+    padding: 8px; color: #ccc; font-size: 9px;
+  }
+
+  /* Thumbnail */
+  .thumb {
+    background: #eee; border-radius: 4px;
+    height: 36px; display: flex;
+    align-items: center; justify-content: center;
+    font-size: 7px; color: #aaa; border: 1px solid #ddd;
+  }
+
+  /* Cookie banner specific */
+  .cookie-wire {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 16px; background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+    gap: 16px;
+  }
+
+  /* Footer columns */
+  .footer-cols {
+    display: grid; grid-template-columns: 1fr 2fr 1fr;
+    gap: 16px; align-items: center;
+  }
+
+  /* Annotations */
+  .annotation {
+    background: #fffde7; border-left: 3px solid #f9a825;
+    padding: 4px 8px; font-size: 8px; color: #666;
+    margin-top: 6px; border-radius: 0 4px 4px 0;
+  }
+
+  /* Page break helper */
+  .page-break { page-break-before: always; }
+</style>
+</head>
+<body>
+
+<!-- ==================== DOCUMENT HEADER ==================== -->
+<div class="doc-header">
+  <h1>VOCES.AI</h1>
+  <p>Wireframe - Landing Page v1.0</p>
+  <p style="font-size:9px; color:#aaa;">Plataforma de diagnostico cultural y escucha sistemica con IA</p>
+</div>
+<div class="doc-meta">
+  <span>Fecha: 25 marzo 2026</span>
+  <span>Estado: Borrador para feedback</span>
+  <span>Autor: Equipo Voces.ai</span>
+</div>
+
+<!-- ==================== 1. COOKIE BANNER ==================== -->
+<div class="section">
+  <div class="section-label">
+    <span>1. Cookie Banner</span>
+    <span class="position">Flotante / Fixed Bottom</span>
+  </div>
+  <div class="section-body" style="background: #f5f5f5; padding: 20px;">
+    <div class="cookie-wire">
+      <p style="flex:1; font-size: 10px;">Usamos cookies de Google Analytics para entender el uso del sitio y mejorar el producto.</p>
+      <div style="display:flex; gap:8px; flex-shrink:0;">
+        <span class="btn btn-outline">Rechazar</span>
+        <span class="btn btn-primary">Aceptar</span>
+      </div>
+    </div>
+    <div class="annotation">
+      Fondo blanco, bordes redondeados, sombra sutil. "Rechazar" outline, "Aceptar" gradiente purpura. Se oculta al interactuar.
+    </div>
+  </div>
+</div>
+
+<!-- ==================== 2. NAVBAR ==================== -->
+<div class="section">
+  <div class="section-label">
+    <span>2. Navbar</span>
+    <span class="position">Sticky Top</span>
+  </div>
+  <div class="section-body">
+    <div class="navbar-wire">
+      <div class="logo">&#9678; Voces.ai</div>
+      <div class="links">
+        <span>Funcionalidades</span>
+        <span>Casos de Uso</span>
+        <span>Precios</span>
+      </div>
+      <div style="display:flex; gap:8px; align-items:center;">
+        <span class="btn btn-outline" style="padding:3px 8px; font-size:8px;">ES &#9662;</span>
+        <span class="btn btn-primary">Agendar Demo</span>
+      </div>
+    </div>
+    <div class="annotation">
+      Mobile: hamburguesa reemplaza links + idioma dentro del menu. CTA "Agendar Demo" siempre visible.
+    </div>
+  </div>
+</div>
+
+<!-- ==================== 3. HERO ==================== -->
+<div class="section">
+  <div class="section-label">
+    <span>3. Hero</span>
+    <span class="position">Above the fold</span>
+  </div>
+  <div class="section-body text-center">
+    <div class="tag">Nuevo</div>
+    <h2 style="font-size:16px; margin: 8px 0;">Escucha lo que tu organizacion<br>no sabe que esta diciendo</h2>
+    <p style="max-width:420px; margin:6px auto; font-size:10px; color:#555;">
+      Voces.ai convierte conversaciones con IA en un mapa de narrativas, creencias y tensiones que ningun formulario puede capturar.
+    </p>
+    <div style="margin:10px 0; display:flex; gap:12px; justify-content:center; align-items:center;">
+      <span class="btn btn-primary" style="padding:8px 20px;">Agendar una demo &rarr;</span>
+      <span class="btn btn-ghost">Ver como funciona</span>
+    </div>
+
+    <!-- Product Mockup -->
+    <div class="mockup-container" style="max-width:480px; margin:12px auto 0;">
+      <div class="mockup-titlebar">
+        <div class="mockup-dot r"></div>
+        <div class="mockup-dot y"></div>
+        <div class="mockup-dot g"></div>
+      </div>
+      <div class="mockup-panels">
+        <div class="mockup-panel">
+          <div style="font-size:8px; color:#A855F7; margin-bottom:4px; font-weight:600;">ENTREVISTA IA</div>
+          <div style="color:#999; font-size:8px; margin-bottom:6px;">"Como describirias la cultura de tu equipo?"</div>
+          <div style="background:#3d3d5c; border-radius:3px; height:4px; width:62%; margin-bottom:3px;"></div>
+          <div style="font-size:7px; color:#888;">62% completado</div>
+          <div style="margin-top:6px; font-size:8px; color:#A855F7;">&#9654; Siguiente</div>
+        </div>
+        <div class="mockup-panel">
+          <div style="font-size:8px; color:#A855F7; margin-bottom:4px; font-weight:600;">MAPA DE NARRATIVAS</div>
+          <div style="text-align:center; padding:4px 0;">
+            <span style="font-size:8px;">&#9675; Confianza &mdash; &#9675; Liderazgo</span><br>
+            <span style="font-size:8px;">&#9675; Autonomia &harr; &#9675; Innovacion</span><br>
+            <span style="font-size:8px;">&#9675; Bienestar &mdash; &#9675; Cambio</span>
+          </div>
+          <div style="font-size:7px; color:#888; margin-top:4px;">Narrativas emergentes: 12</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== 4. SOCIAL PROOF BAR ==================== -->
+<div class="section">
+  <div class="section-label">
+    <span>4. Social Proof Bar</span>
+    <span class="position">Full Width</span>
+  </div>
+  <div class="section-body text-center">
+    <p class="text-muted mb-8">Empresas que ya escuchan diferente</p>
+    <div class="grid-6">
+      <div class="logo-placeholder">LOGO 1</div>
+      <div class="logo-placeholder">LOGO 2</div>
+      <div class="logo-placeholder">LOGO 3</div>
+      <div class="logo-placeholder">LOGO 4</div>
+      <div class="logo-placeholder">LOGO 5</div>
+      <div class="logo-placeholder">LOGO 6</div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== 5. PROPUESTA DE VALOR + FEATURES ==================== -->
+<div class="section">
+  <div class="section-label">
+    <span>5. Propuesta de Valor + Features</span>
+    <span class="position">3 Bloques / 6 Cards</span>
+  </div>
+  <div class="section-body text-center">
+    <h2>Menos formularios. Mas escucha. Mejores conversaciones.</h2>
+    <p style="max-width:400px; margin:4px auto 12px; font-size:10px; color:#555;">
+      Voces.ai reemplaza encuestas por conversaciones que revelan lo que piensan y sienten las personas.
+    </p>
+
+    <!-- Bloque 1 -->
+    <div class="wire-box mb-8">
+      <h3 style="color:#7B2FF7;">Bloque 1: "Menos Formularios"</h3>
+      <p class="text-small text-muted mb-4">Deja de preguntar lo que ya sabes. Empeza a escuchar lo que no.</p>
+      <div class="grid-2">
+        <div class="wire-box solid">
+          <h4>&#127908; Entrevistas con IA</h4>
+          <p class="text-small">Conversaciones que profundizan en lo que importa, sin guion predefinido.</p>
+        </div>
+        <div class="wire-box solid">
+          <h4>&#128274; Anonimizacion Nativa</h4>
+          <p class="text-small">Las respuestas se desvinculan de identidades desde el momento en que se registran.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bloque 2 -->
+    <div class="wire-box mb-8">
+      <h3 style="color:#7B2FF7;">Bloque 2: "Mas Escucha"</h3>
+      <p class="text-small text-muted mb-4">Lo importante no es lo que preguntas. Es lo que emerge.</p>
+      <div class="grid-2">
+        <div class="wire-box solid">
+          <h4>&#128172; Extraccion de Narrativas</h4>
+          <p class="text-small">La IA identifica patrones, metaforas y creencias que atraviesan las respuestas.</p>
+        </div>
+        <div class="wire-box solid">
+          <h4>&#129504; Analisis Semantico</h4>
+          <p class="text-small">Detecta temas, tensiones y conexiones entre las voces de tu equipo que no aparecen en encuestas.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bloque 3 -->
+    <div class="wire-box">
+      <h3 style="color:#7B2FF7;">Bloque 3: "Mejores Conversaciones"</h3>
+      <p class="text-small text-muted mb-4">Los datos no cambian culturas. Las conversaciones si.</p>
+      <div class="grid-2">
+        <div class="wire-box solid">
+          <h4>&#128161; Hallazgos que Activan Dialogos</h4>
+          <p class="text-small">Hallazgos que se comparten en equipo y activan conversaciones.</p>
+        </div>
+        <div class="wire-box solid">
+          <h4>&#128202; Medicion del Cambio</h4>
+          <p class="text-small">Compara diagnosticos en el tiempo y observa como cambian las narrativas despues de cada intervencion.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="annotation" style="margin-top:8px;">
+      Journey visual izq &rarr; der en desktop. Arriba &rarr; abajo en mobile. Cada bloque es un paso de la propuesta.
+    </div>
+  </div>
+</div>
+
+<!-- Page break for PDF -->
+<div class="page-break"></div>
+
+<!-- ==================== 6. CASOS DE USO ==================== -->
+<div class="section">
+  <div class="section-label">
+    <span>6. Casos de Uso</span>
+    <span class="position">5 Cards / Tabs</span>
+  </div>
+  <div class="section-body text-center">
+    <div class="tag">Aplicaciones</div>
+    <h2>Una plataforma, multiples diagnosticos</h2>
+    <div class="grid-3 mt-8">
+      <div class="wire-box solid">
+        <div style="font-size:18px; margin-bottom:4px;">&#127970;</div>
+        <h4>Cultura Organizacional</h4>
+        <p class="text-small">Identifica las creencias y narrativas que operan en tu organizacion.</p>
+      </div>
+      <div class="wire-box solid">
+        <div style="font-size:18px; margin-bottom:4px;">&#127777;</div>
+        <h4>Clima y Bienestar</h4>
+        <p class="text-small">Registra lo que sienten las personas en sus propias palabras, no en una escala.</p>
+      </div>
+      <div class="wire-box solid">
+        <div style="font-size:18px; margin-bottom:4px;">&#128101;</div>
+        <h4>Liderazgo y Direccion</h4>
+        <p class="text-small">Mapea como se experimenta el liderazgo desde cada nivel de la organizacion.</p>
+      </div>
+    </div>
+    <div class="grid-2 mt-8" style="max-width:66%; margin-left:auto; margin-right:auto;">
+      <div class="wire-box solid">
+        <div style="font-size:18px; margin-bottom:4px;">&#128260;</div>
+        <h4>Transformacion y Cambio</h4>
+        <p class="text-small">Observa como las personas procesan un cambio y donde aparecen resistencias.</p>
+      </div>
+      <div class="wire-box solid">
+        <div style="font-size:18px; margin-bottom:4px;">&#128270;</div>
+        <h4>Exploracion de Nuevos Negocios</h4>
+        <p class="text-small">Escucha a clientes, usuarios y stakeholders para detectar oportunidades antes de invertir.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== 7. COMO FUNCIONA ==================== -->
+<div class="section">
+  <div class="section-label">
+    <span>7. Como Funciona</span>
+    <span class="position">4 Pasos Horizontales</span>
+  </div>
+  <div class="section-body text-center">
+    <h2>De la conversacion al insight en 4 pasos</h2>
+    <div style="display:grid; grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr; gap:6px; align-items:start; margin-top:12px;">
+
+      <div>
+        <div class="step-num">1</div>
+        <h4>Configura tu investigacion</h4>
+        <p class="text-small text-muted">Defini el tema, las preguntas semilla y los participantes.</p>
+      </div>
+      <div class="flow-arrow">&rarr;</div>
+      <div>
+        <div class="step-num">2</div>
+        <h4>La IA entrevista</h4>
+        <p class="text-small text-muted">Cada persona conversa con la IA de forma individual y anonima.</p>
+      </div>
+      <div class="flow-arrow">&rarr;</div>
+      <div>
+        <div class="step-num">3</div>
+        <h4>Emergen las narrativas</h4>
+        <p class="text-small text-muted">La plataforma extrae patrones, tensiones y significados.</p>
+      </div>
+      <div class="flow-arrow">&rarr;</div>
+      <div>
+        <div class="step-num">4</div>
+        <h4>Activa el dialogo</h4>
+        <p class="text-small text-muted">Comparti los hallazgos con tu equipo y usa los datos para abrir conversaciones.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== 8. DEMO / PRODUCT TOUR ==================== -->
+<div class="section">
+  <div class="section-label">
+    <span>8. Demo / Product Tour</span>
+    <span class="position">Galeria + Social Proof</span>
+  </div>
+  <div class="section-body text-center">
+    <div class="tag">Mira por dentro</div>
+    <h2>Explora la plataforma antes de agendar tu demo</h2>
+    <p class="text-small text-muted mb-8">Cada modulo muestra como funciona la escucha paso a paso.</p>
+
+    <div style="display:flex; gap:16px; justify-content:center; margin-bottom:12px;">
+      <span class="btn btn-outline" style="border-color:#7B2FF7; color:#7B2FF7;">&#9654; Entrevistas con IA</span>
+      <span class="btn btn-outline">&#9654; Extraccion de Narrativas</span>
+      <span class="btn btn-outline">&#9654; Mapa Semantico</span>
+    </div>
+
+    <div class="img-placeholder" style="height:100px; margin-bottom:8px;">
+      [ Screenshot Principal del Workspace ]
+    </div>
+
+    <div class="grid-5">
+      <div class="thumb">Thumb 1</div>
+      <div class="thumb">Thumb 2</div>
+      <div class="thumb">Thumb 3</div>
+      <div class="thumb">Thumb 4</div>
+      <div class="thumb">Thumb 5</div>
+    </div>
+
+    <div style="margin-top:12px; padding:8px; background:#f8f4ff; border-radius:6px;">
+      <p style="font-style:italic; font-size:10px; color:#555;">
+        "La entrevista con IA logro lo que 6 meses de encuestas no pudieron."
+      </p>
+      <p class="text-small text-muted">&mdash; VP People, Empresa X</p>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== 9. CTA FINAL ==================== -->
+<div class="section">
+  <div class="section-label">
+    <span>9. CTA Final</span>
+    <span class="position">Full Width / Conversion</span>
+  </div>
+  <div class="section-body text-center" style="background: #1a1a2e; color:#fff; border-radius:0 0 6px 6px; padding:24px;">
+    <h2 style="color:#fff; font-size:15px;">Listo para escuchar lo que tu organizacion necesita decir?</h2>
+    <p style="color:#aaa; font-size:10px; margin:6px 0 12px;">Agenda una conversacion y te mostramos como funciona.</p>
+    <div style="display:flex; gap:12px; justify-content:center; align-items:center;">
+      <span class="btn btn-primary" style="padding:8px 20px;">Agendar Demo &rarr;</span>
+      <span style="color:#A855F7; font-size:10px;">Escribinos por WhatsApp</span>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== 10. FOOTER ==================== -->
+<div class="section">
+  <div class="section-label">
+    <span>10. Footer</span>
+    <span class="position">Bottom</span>
+  </div>
+  <div class="section-body">
+    <div class="footer-cols">
+      <div>
+        <p class="text-small" style="font-weight:600;">&copy; 2026 Voces.ai</p>
+      </div>
+      <div class="text-center">
+        <p class="text-small">Terminos de Uso &middot; Politica de Privacidad &middot; Sobre Voces.ai</p>
+      </div>
+      <div style="text-align:right;">
+        <p class="text-small">LinkedIn &middot; Contacto</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== NOTAS DE DISENO ==================== -->
+<div style="margin-top:16px; padding:12px; border:2px solid #f9a825; border-radius:8px; background:#fffde7;">
+  <h3 style="font-size:11px; color:#f9a825; margin-bottom:6px;">&#9888; Notas de Diseno</h3>
+  <ul style="font-size:9px; color:#666; padding-left:16px; line-height:1.8;">
+    <li><strong>Paleta:</strong> Tonos oscuros/profundos (confianza) + acento calido purpura (#7B2FF7)</li>
+    <li><strong>Layout:</strong> Desktop-first, responsive</li>
+    <li><strong>Features journey:</strong> Los 3 bloques se leen izq &rarr; der en desktop, arriba &rarr; abajo en mobile</li>
+    <li><strong>CTAs de conversion:</strong> 4 puntos estrategicos &mdash; navbar, hero, demos, cierre</li>
+    <li><strong>Cookie banner:</strong> Fondo blanco, shadow, fixed bottom, se oculta al interactuar</li>
+    <li><strong>Navbar:</strong> Sticky con CTA siempre visible. Hamburguesa en mobile.</li>
+  </ul>
+</div>
+
+<div style="text-align:center; margin-top:12px; padding:8px;">
+  <p class="text-muted">Documento generado para feedback temprano &mdash; No representa el diseno visual final</p>
+</div>
+
+</body>
+</html>

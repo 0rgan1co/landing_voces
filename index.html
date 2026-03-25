@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Voces.ai — Diagnostico cultural con inteligencia artificial</title>
+<meta name="description" content="Conduce cientos de entrevistas con IA, descubre narrativas colectivas y activa conversaciones organizacionales que transforman. Agendar demo.">
+<style>
+  /* ===== RESET & BASE ===== */
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; font-size: 16px; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    color: #1a1a2e;
+    background: #fff;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  img { max-width: 100%; display: block; }
+  a { color: inherit; text-decoration: none; }
+  ul { list-style: none; }
+
+  /* ===== VARIABLES ===== */
+  :root {
+    --purple: #7B2FF7;
+    --purple-light: #A855F7;
+    --purple-bg: #f8f4ff;
+    --dark: #0f0f23;
+    --dark-2: #1a1a2e;
+    --dark-3: #2d2d44;
+    --gray-100: #f5f5f7;
+    --gray-200: #e8e8ed;
+    --gray-400: #8e8e93;
+    --gray-600: #636366;
+    --max-w: 1120px;
+    --radius: 12px;
+  }
+
+  /* ===== UTILITIES ===== */
+  .container { max-width: var(--max-w); margin: 0 auto; padding: 0 24px; }
+  .tag {
+    display: inline-block; background: var(--purple-bg); color: var(--purple);
+    padding: 4px 14px; border-radius: 20px; font-size: 0.75rem;
+    font-weight: 600; letter-spacing: 0.5px; margin-bottom: 12px;
+  }
+  .section-pad { padding: 80px 0; }
+  .text-center { text-align: center; }
+
+  /* ===== BUTTONS ===== */
+  .btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 12px 28px; border-radius: 8px; font-size: 0.95rem;
+    font-weight: 600; border: none; cursor: pointer; transition: all 0.2s;
+  }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--purple), var(--purple-light));
+    color: #fff; box-shadow: 0 4px 14px rgba(123,47,247,0.3);
+  }
+  .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(123,47,247,0.4); }
+  .btn-outline {
+    background: transparent; color: var(--dark-2);
+    border: 1.5px solid var(--gray-200);
+  }
+  .btn-outline:hover { border-color: var(--purple); color: var(--purple); }
+  .btn-ghost { background: none; color: var(--purple); border: none; cursor: pointer; font-weight: 600; }
+  .btn-ghost:hover { text-decoration: underline; }
+
+  /* ===== NAVBAR ===== */
+  .navbar {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(255,255,255,0.92); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--gray-200);
+  }
+  .navbar .container {
+    display: flex; align-items: center; justify-content: space-between;
+    height: 64px;
+  }
+  .navbar-logo { font-size: 1.25rem; font-weight: 800; display: flex; align-items: center; gap: 6px; }
+  .navbar-links { display: flex; gap: 32px; }
+  .navbar-links a { font-size: 0.9rem; color: var(--gray-600); font-weight: 500; transition: color 0.2s; }
+  .navbar-links a:hover { color: var(--dark-2); }
+  .navbar-actions { display: flex; align-items: center; gap: 12px; }
+  .lang-select {
+    padding: 4px 8px; border: 1px solid var(--gray-200); border-radius: 6px;
+    font-size: 0.8rem; background: #fff; cursor: pointer; color: var(--gray-600);
+  }
+  .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
+  .hamburger svg { width: 24px; height: 24px; }
+  .mobile-menu {
+    display: none; position: fixed; top: 64px; left: 0; right: 0; bottom: 0;
+    background: #fff; z-index: 99; padding: 24px;
+    flex-direction: column; gap: 16px;
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a { font-size: 1.1rem; padding: 12px 0; border-bottom: 1px solid var(--gray-200); color: var(--dark-2); }
+
+  /* ===== HERO ===== */
+  .hero {
+    padding: 80px 0 60px;
+    background: linear-gradient(180deg, #fff 0%, var(--gray-100) 100%);
+  }
+  .hero-quote {
+    font-size: 0.85rem; color: var(--gray-600); font-style: italic;
+    margin-bottom: 16px;
+  }
+  .hero-quote cite { font-style: normal; font-weight: 600; }
+  .hero h1 {
+    font-size: clamp(2rem, 5vw, 3rem); font-weight: 800;
+    line-height: 1.15; margin-bottom: 20px; max-width: 720px; margin-left: auto; margin-right: auto;
+  }
+  .hero-sub {
+    font-size: 1.05rem; color: var(--gray-600); max-width: 640px;
+    margin: 0 auto 28px; line-height: 1.7;
+  }
+  .hero-ctas { display: flex; gap: 16px; justify-content: center; align-items: center; flex-wrap: wrap; margin-bottom: 48px; }
+
+  /* Product mockup */
+  .mockup {
+    max-width: 720px; margin: 0 auto;
+    background: var(--dark); border-radius: 12px; overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+  }
+  .mockup-bar {
+    background: var(--dark-3); padding: 10px 14px;
+    display: flex; gap: 6px; align-items: center;
+  }
+  .mockup-dot { width: 10px; height: 10px; border-radius: 50%; }
+  .mockup-dot:nth-child(1) { background: #ff5f57; }
+  .mockup-dot:nth-child(2) { background: #ffbd2e; }
+  .mockup-dot:nth-child(3) { background: #28c840; }
+  .mockup-panels { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; padding: 16px; }
+  .mockup-panel {
+    background: var(--dark-3); border-radius: 8px; padding: 20px;
+    color: #ccc; font-size: 0.85rem;
+  }
+  .mockup-panel-title { color: var(--purple-light); font-size: 0.7rem; font-weight: 700; letter-spacing: 1px; margin-bottom: 12px; text-transform: uppercase; }
+  .mockup-bubble {
+    background: rgba(123,47,247,0.15); border-radius: 8px;
+    padding: 10px 12px; font-size: 0.8rem; color: #ddd; margin-bottom: 10px;
+  }
+  .mockup-progress { background: var(--dark); border-radius: 4px; height: 6px; margin: 10px 0 6px; }
+  .mockup-progress-fill { background: var(--purple); height: 100%; border-radius: 4px; width: 62%; }
+  .mockup-node { display: inline-block; background: rgba(123,47,247,0.2); border: 1px solid var(--purple); border-radius: 16px; padding: 4px 10px; font-size: 0.7rem; color: var(--purple-light); margin: 3px; }
+
+  /* ===== SOCIAL PROOF ===== */
+  .social-proof { background: var(--gray-100); padding: 32px 0; border-top: 1px solid var(--gray-200); border-bottom: 1px solid var(--gray-200); }
+  .social-proof p { font-size: 0.85rem; color: var(--gray-400); margin-bottom: 16px; }
+  .logos-row { display: flex; gap: 32px; justify-content: center; align-items: center; flex-wrap: wrap; opacity: 0.4; }
+  .logo-placeholder {
+    width: 100px; height: 36px; background: var(--gray-200); border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.7rem; color: var(--gray-400); font-weight: 600;
+  }
+
+  /* ===== FEATURES ===== */
+  .features { background: #fff; }
+  .features h2 { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 800; margin-bottom: 12px; }
+  .features-sub { font-size: 1rem; color: var(--gray-600); max-width: 640px; margin: 0 auto 48px; line-height: 1.7; }
+
+  .feature-block { margin-bottom: 48px; }
+  .feature-block-header { margin-bottom: 20px; }
+  .feature-block-title { font-size: 1.1rem; font-weight: 700; color: var(--purple); margin-bottom: 6px; }
+  .feature-block-anchor { font-size: 0.9rem; color: var(--gray-600); line-height: 1.6; max-width: 640px; margin: 0 auto; }
+
+  .feature-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .feature-card {
+    border: 1.5px solid var(--gray-200); border-radius: var(--radius);
+    padding: 28px; text-align: left; transition: all 0.2s;
+    background: #fff;
+  }
+  .feature-card:hover { border-color: var(--purple); box-shadow: 0 4px 20px rgba(123,47,247,0.08); }
+  .feature-card h4 { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
+  .feature-card p { font-size: 0.88rem; color: var(--gray-600); line-height: 1.6; }
+
+  /* ===== USE CASES ===== */
+  .use-cases { background: var(--gray-100); }
+  .use-cases h2 { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 800; margin-bottom: 8px; }
+  .use-cases-sub { font-size: 0.95rem; color: var(--gray-600); max-width: 600px; margin: 0 auto 40px; }
+  .use-cases-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .use-case-card {
+    background: #fff; border-radius: var(--radius); padding: 28px;
+    border: 1.5px solid var(--gray-200); text-align: left; transition: all 0.2s;
+  }
+  .use-case-card:hover { border-color: var(--purple); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.06); }
+  .use-case-card h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 8px; }
+  .use-case-card p { font-size: 0.85rem; color: var(--gray-600); line-height: 1.6; }
+
+  /* ===== HOW IT WORKS ===== */
+  .how-it-works { background: #fff; }
+  .how-it-works h2 { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 800; margin-bottom: 48px; }
+  .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+  .step { text-align: center; position: relative; }
+  .step::after {
+    content: ''; position: absolute; top: 24px; right: -12px;
+    width: 24px; height: 2px; background: var(--gray-200);
+  }
+  .step:last-child::after { display: none; }
+  .step-num {
+    width: 48px; height: 48px; border-radius: 50%;
+    background: var(--purple); color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem; font-weight: 700; margin: 0 auto 16px;
+  }
+  .step h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 8px; }
+  .step p { font-size: 0.85rem; color: var(--gray-600); line-height: 1.5; }
+
+  /* ===== DEMO TOUR ===== */
+  .demo-tour { background: var(--gray-100); }
+  .demo-tour h2 { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 800; margin-bottom: 8px; }
+  .demo-tour-sub { font-size: 0.95rem; color: var(--gray-600); margin-bottom: 32px; }
+  .demo-links { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 32px; }
+  .demo-screenshot {
+    max-width: 720px; margin: 0 auto 16px;
+    background: var(--gray-200); border-radius: var(--radius);
+    height: 320px; display: flex; align-items: center; justify-content: center;
+    color: var(--gray-400); font-size: 0.9rem; font-weight: 600;
+    border: 1.5px dashed var(--gray-400);
+  }
+  .demo-thumbs { display: flex; gap: 10px; justify-content: center; margin-bottom: 32px; }
+  .demo-thumb {
+    width: 80px; height: 52px; background: var(--gray-200); border-radius: 6px;
+    border: 1.5px solid var(--gray-200); cursor: pointer; transition: border-color 0.2s;
+  }
+  .demo-thumb:hover { border-color: var(--purple); }
+  .demo-social-proof {
+    background: var(--purple-bg); border-radius: var(--radius);
+    padding: 20px 28px; max-width: 560px; margin: 0 auto;
+    font-size: 0.9rem; color: var(--dark-2); font-style: italic;
+  }
+
+  /* ===== CTA FINAL ===== */
+  .cta-final {
+    background: var(--dark); color: #fff; padding: 80px 0;
+  }
+  .cta-final h2 { font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 800; margin-bottom: 12px; }
+  .cta-final p { color: var(--gray-400); font-size: 1rem; margin-bottom: 28px; }
+  .cta-final-actions { display: flex; gap: 16px; justify-content: center; align-items: center; flex-wrap: wrap; }
+  .cta-final .btn-ghost { color: var(--purple-light); }
+
+  /* ===== FOOTER ===== */
+  .footer { background: var(--dark-2); color: var(--gray-400); padding: 32px 0; font-size: 0.85rem; }
+  .footer .container { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+  .footer-links { display: flex; gap: 24px; }
+  .footer-links a:hover { color: #fff; }
+  .footer-social { display: flex; gap: 16px; }
+  .footer-social a:hover { color: #fff; }
+
+  /* ===== COOKIE BANNER ===== */
+  .cookie-banner {
+    position: fixed; bottom: 24px; left: 24px; right: 24px; z-index: 200;
+    background: #fff; border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+    padding: 16px 24px;
+    display: flex; align-items: center; justify-content: space-between; gap: 20px;
+    max-width: 960px; margin: 0 auto;
+    transition: transform 0.3s, opacity 0.3s;
+  }
+  .cookie-banner.hidden { transform: translateY(120%); opacity: 0; pointer-events: none; }
+  .cookie-banner p { font-size: 0.88rem; color: var(--gray-600); flex: 1; }
+  .cookie-actions { display: flex; gap: 10px; flex-shrink: 0; }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 768px) {
+    .navbar-links { display: none; }
+    .lang-select { display: none; }
+    .hamburger { display: block; }
+    .hero h1 { font-size: 1.75rem; }
+    .hero { padding: 48px 0 40px; }
+    .mockup-panels { grid-template-columns: 1fr; }
+    .feature-cards { grid-template-columns: 1fr; }
+    .use-cases-grid { grid-template-columns: 1fr; }
+    .steps { grid-template-columns: 1fr 1fr; gap: 32px; }
+    .step::after { display: none; }
+    .demo-screenshot { height: 200px; }
+    .cookie-banner { flex-direction: column; text-align: center; bottom: 12px; left: 12px; right: 12px; }
+    .footer .container { flex-direction: column; text-align: center; }
+    .section-pad { padding: 56px 0; }
+  }
+  @media (max-width: 480px) {
+    .steps { grid-template-columns: 1fr; }
+    .hero-ctas { flex-direction: column; }
+    .cta-final-actions { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<nav class="navbar">
+  <div class="container">
+    <a href="#" class="navbar-logo">&#9678; Voces.ai</a>
+    <div class="navbar-links">
+      <a href="#funcionalidades">Funcionalidades</a>
+      <a href="#casos-de-uso">Casos de Uso</a>
+      <a href="#precios">Precios</a>
+    </div>
+    <div class="navbar-actions">
+      <select class="lang-select" aria-label="Idioma">
+        <option>ES</option>
+        <option>EN</option>
+        <option>PT</option>
+      </select>
+      <a href="#agendar" class="btn btn-primary" style="padding:8px 20px; font-size:0.85rem;">Agendar Demo</a>
+      <button class="hamburger" onclick="document.getElementById('mobile-menu').classList.toggle('open')" aria-label="Menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile menu -->
+<div id="mobile-menu" class="mobile-menu">
+  <a href="#funcionalidades" onclick="this.parentElement.classList.remove('open')">Funcionalidades</a>
+  <a href="#casos-de-uso" onclick="this.parentElement.classList.remove('open')">Casos de Uso</a>
+  <a href="#precios" onclick="this.parentElement.classList.remove('open')">Precios</a>
+  <select class="lang-select" style="width:fit-content;" aria-label="Idioma">
+    <option>ES</option><option>EN</option><option>PT</option>
+  </select>
+</div>
+
+<!-- ===== HERO ===== -->
+<section class="hero text-center">
+  <div class="container">
+    <span class="tag">Nuevo</span>
+    <p class="hero-quote">"Nothing is as fast as the speed of trust." &mdash; <cite>Stephen M.R. Covey</cite></p>
+    <h1>Tu negocio avanza a la velocidad de la confianza que tiene adentro</h1>
+    <p class="hero-sub">
+      Voces.ai conduce cientos de entrevistas con IA, anonimiza cada respuesta y muestra que esta pasando en tu organizacion &mdash; lo que frena los resultados, lo que la gente no dice en reuniones, y lo que necesitas ver antes de tomar la proxima decision.
+    </p>
+    <div class="hero-ctas">
+      <a href="#agendar" class="btn btn-primary">Agendar una demo &rarr;</a>
+      <a href="#como-funciona" class="btn btn-ghost">Ver como funciona</a>
+    </div>
+
+    <!-- Product Mockup -->
+    <div class="mockup">
+      <div class="mockup-bar">
+        <div class="mockup-dot"></div>
+        <div class="mockup-dot"></div>
+        <div class="mockup-dot"></div>
+      </div>
+      <div class="mockup-panels">
+        <div class="mockup-panel">
+          <div class="mockup-panel-title">Entrevista en curso</div>
+          <div class="mockup-bubble">Como describirias la cultura de tu equipo en el dia a dia?</div>
+          <div class="mockup-bubble" style="background:rgba(255,255,255,0.05); text-align:right;">
+            Hay buena onda pero las decisiones se toman arriba y nos enteramos despues...
+          </div>
+          <div class="mockup-progress"><div class="mockup-progress-fill"></div></div>
+          <div style="font-size:0.7rem; color:var(--gray-400);">62% completado</div>
+        </div>
+        <div class="mockup-panel">
+          <div class="mockup-panel-title">Mapa de narrativas</div>
+          <div style="text-align:center; padding:12px 0;">
+            <span class="mockup-node">Confianza</span>
+            <span class="mockup-node">Liderazgo</span>
+            <span class="mockup-node">Autonomia</span>
+            <span class="mockup-node">Innovacion</span>
+            <span class="mockup-node">Bienestar</span>
+            <span class="mockup-node">Comunicacion</span>
+          </div>
+          <div style="font-size:0.7rem; color:var(--gray-400); margin-top:8px;">12 narrativas emergentes &middot; 3 clusters</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SOCIAL PROOF ===== -->
+<section class="social-proof text-center">
+  <div class="container">
+    <p>Para CEOs, directorios y lideres que necesitan ver que pasa adentro antes de decidir que hacer afuera.</p>
+    <div class="logos-row">
+      <div class="logo-placeholder">LOGO 1</div>
+      <div class="logo-placeholder">LOGO 2</div>
+      <div class="logo-placeholder">LOGO 3</div>
+      <div class="logo-placeholder">LOGO 4</div>
+      <div class="logo-placeholder">LOGO 5</div>
+      <div class="logo-placeholder">LOGO 6</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FEATURES ===== -->
+<section id="funcionalidades" class="features section-pad">
+  <div class="container text-center">
+    <h2>Menos formularios. Mas escucha. Mejores conversaciones.</h2>
+    <p class="features-sub">
+      La mayoria de los diagnosticos empiezan con un formulario y terminan en un PDF que nadie discute. Voces.ai invierte esa logica: empieza escuchando, y termina donde importa &mdash; en las conversaciones que mueven resultados.
+    </p>
+
+    <!-- Bloque 1 -->
+    <div class="feature-block">
+      <div class="feature-block-header text-center">
+        <div class="feature-block-title">Menos Formularios</div>
+        <p class="feature-block-anchor">Una encuesta de clima tarda 3 meses, mide satisfaccion en escala del 1 al 5 y no explica por que. Voces.ai conduce 500 entrevistas en semanas y muestra que esta pasando, contado por las personas que lo viven.</p>
+      </div>
+      <div class="feature-cards">
+        <div class="feature-card">
+          <h4>500 entrevistas. Cero coordinacion.</h4>
+          <p>Un agente de IA conduce entrevistas uno a uno con cada persona. Sin formularios, sin agendar horarios, sin entrevistadores. Cada persona habla a su ritmo, desde su dispositivo. El agente repregunta, profundiza y captura lo que un formulario de opciones multiples no puede: que paso, con quien, en que contexto y que consecuencias tuvo.</p>
+        </div>
+        <div class="feature-card">
+          <h4>La identidad se elimina antes de cualquier analisis.</h4>
+          <p>Cada respuesta se transforma antes de ser procesada: se remueven nombres, cargos, fechas y cualquier dato que permita identificar a la persona. No es una politica de privacidad &mdash; es una decision de arquitectura. El resultado: las personas dicen lo que en reuniones no dicen.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bloque 2 -->
+    <div class="feature-block">
+      <div class="feature-block-header text-center">
+        <div class="feature-block-title">Mas Escucha</div>
+        <p class="feature-block-anchor">500 entrevistas generan miles de fragmentos. Sin un sistema, eso es ruido. Voces.ai los convierte en unidades de significado etiquetadas y conectadas.</p>
+      </div>
+      <div class="feature-cards">
+        <div class="feature-card">
+          <h4>De conversaciones a unidades de significado.</h4>
+          <p>Voces.ai recorta cada entrevista en narrativas: fragmentos que contienen un hecho, un contexto y una consecuencia. Cada narrativa se etiqueta por tema, tono y nivel de concrecion. No hay interpretacion manual ni sesgo del entrevistador. Lo que sale es un mapa de lo que la organizacion vive &mdash; no de lo que opina.</p>
+        </div>
+        <div class="feature-card">
+          <h4>Que se repite, que se contradice, que nadie puso en agenda.</h4>
+          <p>Un motor semantico agrupa narrativas por similitud de significado y detecta: temas que aparecen en 8 de cada 10 entrevistas, tensiones entre lo que dice la direccion y lo que vive la operacion, y senales que ningun formulario pregunto. Clusters, conexiones y frecuencias &mdash; no promedios.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bloque 3 -->
+    <div class="feature-block">
+      <div class="feature-block-header text-center">
+        <div class="feature-block-title">Mejores Conversaciones</div>
+        <p class="feature-block-anchor">Voces.ai no entrega un diagnostico para archivar. Entrega lo que tu equipo directivo necesita para tener la conversacion que viene postergando &mdash; sin IA, con inteligencia colectiva.</p>
+      </div>
+      <div class="feature-cards">
+        <div class="feature-card">
+          <h4>El dato llega a la mesa donde se toman las decisiones.</h4>
+          <p>Los resultados se comparten en dashboards con acceso por rol. Cada stakeholder explora los hallazgos, filtra por area o tema y formula preguntas desde el dashboard. No es un informe que se envia y se archiva &mdash; es una herramienta de conversacion para el directorio, el comite o el equipo que necesita decidir.</p>
+        </div>
+        <div class="feature-card">
+          <h4>Antes y despues. Con evidencia, no con percepciones.</h4>
+          <p>Voces.ai permite comparar narrativas de dos momentos: antes y despues de una intervencion, un cambio de liderazgo o una decision de negocio. Lo que se mide no es si la gente "esta mas contenta" &mdash; es si las historias que la organizacion se cuenta a si misma cambiaron. Eso es evidencia de que algo se movio.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CASOS DE USO ===== -->
+<section id="casos-de-uso" class="use-cases section-pad">
+  <div class="container text-center">
+    <span class="tag">Aplicaciones</span>
+    <h2>Una plataforma. Seis territorios donde escuchar cambia los resultados.</h2>
+    <p class="use-cases-sub">Voces.ai no es solo para RRHH. Es para cualquier lider que necesite entender que esta pasando adentro antes de tomar una decision que afecta afuera.</p>
+    <div class="use-cases-grid">
+      <div class="use-case-card">
+        <h4>Cultura organizacional</h4>
+        <p>Muestra que valores se practican y cuales solo se declaran. Compara lo que dice el deck corporativo con lo que cuentan las 500 personas que operan el negocio cada dia.</p>
+      </div>
+      <div class="use-case-card">
+        <h4>Clima y operacion diaria</h4>
+        <p>Reemplaza la encuesta anual de clima. En vez de un score del 1 al 5, muestra que frena a los equipos, que funciona y que nadie se anima a decir en una reunion.</p>
+      </div>
+      <div class="use-case-card">
+        <h4>Liderazgo y direccion</h4>
+        <p>Muestra como se percibe el liderazgo desde la operacion. Identifica la brecha entre lo que la direccion cree que comunica y lo que los equipos reciben.</p>
+      </div>
+      <div class="use-case-card">
+        <h4>Transformacion y cambio</h4>
+        <p>Compara narrativas antes y despues de una intervencion. Muestra si el cambio ocurrio o si solo cambio el discurso.</p>
+      </div>
+      <div class="use-case-card">
+        <h4>Exploracion de nuevos negocios</h4>
+        <p>Antes de lanzar un producto, abrir un mercado o hacer una adquisicion: escucha a las personas que van a ejecutar esa estrategia. Voces.ai muestra si la organizacion esta lista para lo que viene &mdash; o que necesita resolver primero.</p>
+      </div>
+      <div class="use-case-card">
+        <h4>Claridad comercial y ruta al mercado</h4>
+        <p>Cuando las ventas no cierran, el problema no siempre es el producto o el precio. Voces.ai entrevista a equipos comerciales, partners y canales para mostrar donde se pierde la claridad: en el mensaje, en el proceso o en la coordinacion entre areas.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== COMO FUNCIONA ===== -->
+<section id="como-funciona" class="how-it-works section-pad">
+  <div class="container text-center">
+    <h2>De la conversacion al insight en 4 pasos</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h4>Configura tu investigacion</h4>
+        <p>Define las preguntas clave, el alcance y los segmentos de tu organizacion.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h4>La IA entrevista</h4>
+        <p>Cada persona tiene una conversacion privada y anonimizada con el agente de IA. Sin agendar, sin coordinar, sin limite de participantes.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h4>Emergen las narrativas</h4>
+        <p>Voces.ai extrae, clasifica y conecta las narrativas automaticamente. Patrones, clusters y hallazgos se hacen visibles.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <h4>Activa el dialogo</h4>
+        <p>Comparte los resultados con stakeholders y usa los hallazgos como punto de partida para conversaciones organizacionales.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== DEMO / PRODUCT TOUR ===== -->
+<section id="demo" class="demo-tour section-pad">
+  <div class="container text-center">
+    <span class="tag">Mira por dentro</span>
+    <h2>Explora Voces.ai antes de agendar</h2>
+    <p class="demo-tour-sub">Recorre tres demos guiadas y descubri una forma de diagnosticar organizaciones.</p>
+    <div class="demo-links">
+      <a href="#" class="btn btn-outline" style="border-color:var(--purple); color:var(--purple);">Entrevistas con IA</a>
+      <a href="#" class="btn btn-outline">Extraccion de Narrativas</a>
+      <a href="#" class="btn btn-outline">Mapa Semantico</a>
+    </div>
+    <div class="demo-screenshot">[ Screenshot del Workspace ]</div>
+    <div class="demo-thumbs">
+      <div class="demo-thumb"></div>
+      <div class="demo-thumb"></div>
+      <div class="demo-thumb"></div>
+      <div class="demo-thumb"></div>
+      <div class="demo-thumb"></div>
+    </div>
+    <div class="demo-social-proof">
+      "Disenado para quienes creen que escuchar es el primer acto de liderazgo."
+    </div>
+  </div>
+</section>
+
+<!-- ===== CTA FINAL ===== -->
+<section id="agendar" class="cta-final text-center">
+  <div class="container">
+    <h2>Listo para escuchar lo que tu organizacion necesita decir?</h2>
+    <p>Agenda una demo de 30 minutos y descubri como Voces.ai puede transformar tu proximo diagnostico.</p>
+    <div class="cta-final-actions">
+      <a href="#" class="btn btn-primary">Agendar Demo &rarr;</a>
+      <a href="#" class="btn btn-ghost">Escribinos por WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="container">
+    <span>&copy; 2026 Voces.ai</span>
+    <div class="footer-links">
+      <a href="#">Terminos de Uso</a>
+      <a href="#">Politica de Privacidad</a>
+      <a href="#">Sobre Voces.ai</a>
+    </div>
+    <div class="footer-social">
+      <a href="#">LinkedIn</a>
+      <a href="#">Contacto</a>
+    </div>
+  </div>
+</footer>
+
+<!-- ===== COOKIE BANNER ===== -->
+<div id="cookie-banner" class="cookie-banner">
+  <p>Usamos cookies de Google Analytics para entender el uso del sitio y mejorar el producto.</p>
+  <div class="cookie-actions">
+    <button class="btn btn-outline" onclick="closeCookie()" style="padding:8px 18px; font-size:0.85rem;">Rechazar</button>
+    <button class="btn btn-primary" onclick="closeCookie()" style="padding:8px 18px; font-size:0.85rem;">Aceptar</button>
+  </div>
+</div>
+
+<script>
+function closeCookie() {
+  document.getElementById('cookie-banner').classList.add('hidden');
+}
+</script>
+
+</body>
+</html>
