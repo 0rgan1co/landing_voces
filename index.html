@@ -559,7 +559,7 @@ function closeLogin() { document.getElementById('login-modal').classList.remove(
 async function loginWithGoogle() {
   const { error } = await _supabase.auth.signInWithOAuth({
     provider: 'google',
-    options: { redirectTo: window.location.origin }
+    options: { redirectTo: 'https://0rgan1co.github.io/landing_voces/' }
   });
   if (error) alert('Error al iniciar sesion: ' + error.message);
 }
