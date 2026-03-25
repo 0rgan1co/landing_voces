@@ -130,6 +130,8 @@
   /* === SOCIAL PROOF === */
   .social-proof { padding: 28px 0; border-bottom: 1px solid var(--gray-200); }
   .logos-row { display: flex; gap: 40px; justify-content: center; align-items: center; flex-wrap: wrap; opacity: 0.35; }
+  .logos-row img { height: 28px; width: auto; filter: grayscale(100%); opacity: 0.5; transition: opacity 0.2s; }
+  .logos-row img:hover { opacity: 0.8; }
   .logo-placeholder {
     height: 28px; display: flex; align-items: center;
     font-size: 0.85rem; color: var(--dark-2); font-weight: 700; letter-spacing: 0.5px;
@@ -344,8 +346,8 @@
 <section class="social-proof">
   <div class="container">
     <div class="logos-row">
-      <div class="logo-placeholder">Gobierno de la Ciudad de Buenos Aires</div>
-      <a href="https://crea.org.ar/" target="_blank" rel="noopener"><div class="logo-placeholder">CREA</div></a>
+      <img src="assets/logos/gcba.png" alt="Gobierno de la Ciudad de Buenos Aires" height="32">
+      <a href="https://crea.org.ar/" target="_blank" rel="noopener"><img src="assets/logos/crea.svg" alt="CREA" height="28"></a>
       <a href="https://www.climatech.ar/" target="_blank" rel="noopener"><div class="logo-placeholder">ClimaTech</div></a>
       <a href="https://akapol.com/" target="_blank" rel="noopener"><div class="logo-placeholder">AKAPOL</div></a>
     </div>
