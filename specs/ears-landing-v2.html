@@ -317,7 +317,18 @@ function updateSummary() {
 
 // Default compliance state based on current implementation (2026-03-25)
 const DEFAULT_STATE = {
-  '032': { checked: true, status: 'ok' }  // Inter font loaded from Google Fonts
+  '001': { checked: true, status: 'ok' },  // Entrar button in navbar
+  '002': { checked: true, status: 'ok' },  // Sign-in modal with Google button
+  '013': { checked: true, status: 'ok' },  // Cookie accept -> localStorage
+  '014': { checked: true, status: 'ok' },  // Cookie reject -> localStorage
+  '015': { checked: true, status: 'ok' },  // Hide banner if consent exists
+  '016': { checked: true, status: 'ok' },  // Load GA if accepted
+  '017': { checked: true, status: 'ok' },  // No tracking if rejected
+  '021': { checked: true, status: 'ok' },  // html lang attribute
+  '029': { checked: true, status: 'ok' },  // OG meta tags
+  '030': { checked: true, status: 'ok' },  // Favicon SVG
+  '031': { checked: true, status: 'ok' },  // JSON-LD structured data
+  '032': { checked: true, status: 'ok' }   // Inter font from Google Fonts
 };
 
 // Restore state on load
