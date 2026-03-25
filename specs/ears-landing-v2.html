@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>EARS Requirements — Voces.ai Landing Page v2</title>
+<style>
+  body { font-family: 'Google Sans', Arial, sans-serif; max-width: 816px; margin: 40px auto; padding: 0 40px; color: #1a1a2e; line-height: 1.7; font-size: 11pt; }
+  h1 { font-size: 20pt; border-bottom: 3px solid #7B2FF7; padding-bottom: 8px; margin-bottom: 4px; }
+  h2 { font-size: 14pt; color: #7B2FF7; margin-top: 28px; border-bottom: 1px solid #e0e0e0; padding-bottom: 4px; }
+  h3 { font-size: 12pt; margin-top: 20px; }
+  p.meta { color: #888; font-size: 9pt; margin-bottom: 24px; }
+  table { width: 100%; border-collapse: collapse; margin: 12px 0 24px; font-size: 10pt; }
+  th { background: #1a1a2e; color: #fff; padding: 8px 10px; text-align: left; font-weight: 600; }
+  td { padding: 8px 10px; border-bottom: 1px solid #e8e8e8; vertical-align: top; }
+  tr:nth-child(even) { background: #fafafa; }
+  .tag { display: inline-block; background: #f0e6ff; color: #7B2FF7; padding: 2px 8px; border-radius: 4px; font-size: 8pt; font-weight: 600; }
+  .gap { background: #fff3e0; border-left: 3px solid #ff9800; padding: 8px 12px; margin: 8px 0; font-size: 10pt; }
+  .ok { background: #e8f5e9; border-left: 3px solid #4caf50; padding: 8px 12px; margin: 8px 0; font-size: 10pt; }
+  .priority { background: #f3e5f5; border-left: 3px solid #7B2FF7; padding: 10px 14px; margin: 12px 0; font-size: 10pt; }
+  .priority ol { margin: 6px 0 0 18px; }
+  .comment-box { background: #fffde7; border: 1px dashed #f9a825; padding: 12px; margin: 20px 0; border-radius: 6px; font-size: 10pt; }
+  .comment-box p { margin: 0; font-weight: 600; color: #f57f17; }
+  code { background: #f5f5f5; padding: 1px 4px; border-radius: 3px; font-size: 9pt; }
+  footer { margin-top: 40px; padding-top: 12px; border-top: 1px solid #e0e0e0; font-size: 8pt; color: #aaa; }
+</style>
+</head>
+<body>
+
+<h1>EARS Requirements — Voces.ai Landing Page v2</h1>
+<p class="meta">
+  Estado: <strong>Borrador para review</strong> &nbsp;|&nbsp; Fecha: 25 marzo 2026 &nbsp;|&nbsp; Autor: Equipo Voces.ai<br>
+  Landing actual: <a href="https://0rgan1co.github.io/landing_voces/">https://0rgan1co.github.io/landing_voces/</a> &nbsp;|&nbsp;
+  Repo: <a href="https://github.com/0rgan1co/landing_voces">github.com/0rgan1co/landing_voces</a>
+</p>
+
+<h2>Estado actual (v1)</h2>
+
+<h3>Lo que funciona</h3>
+<div class="ok">
+  Estructura completa (10 secciones) · Copy sin adjetivos, orientado a comportamientos · Responsive mobile · 4 puntos de conversion (navbar, hero, demos, cierre) · Logos reales en social proof (GCBA, CREA, ClimaTech, AKAPOL)
+</div>
+
+<h3>Gaps detectados</h3>
+<div class="gap">
+  <ul style="margin:0; padding-left:18px;">
+    <li>Cookie banner no persiste la decision (sin localStorage)</li>
+    <li>Selector de idioma no funciona</li>
+    <li>Link "Precios" no lleva a ninguna seccion</li>
+    <li>No hay boton "Entrar" en navbar para usuarios existentes</li>
+    <li>No hay Google Analytics integrado (el cookie banner lo menciona pero no lo carga)</li>
+    <li>Demo section tiene placeholders (screenshots vacios)</li>
+    <li>No hay favicon, OG tags ni structured data</li>
+    <li>No hay autenticacion ni acceso a dashboard</li>
+    <li>CTAs de "Agendar Demo" no conectan a Calendly/Cal.com</li>
+    <li>WhatsApp CTA no tiene link real</li>
+  </ul>
+</div>
+
+<!-- ============================================================ -->
+<h2>A. Autenticacion y Acceso al Dashboard</h2>
+
+<table>
+  <tr><th style="width:80px;">ID</th><th style="width:100px;">Pattern</th><th>Requirement</th></tr>
+  <tr><td>EARS-001</td><td><span class="tag">Ubiquitous</span></td><td>The landing page shall display a "Entrar" button in the navbar, positioned before the CTA "Agendar Demo".</td></tr>
+  <tr><td>EARS-002</td><td><span class="tag">Event-Driven</span></td><td>When the user clicks "Entrar", the system shall display a sign-in modal with a "Continuar con Google" button as the only authentication method.</td></tr>
+  <tr><td>EARS-003</td><td><span class="tag">Event-Driven</span></td><td>When the user clicks "Continuar con Google", the system shall initiate the Google OAuth 2.0 authorization flow using the Authorization Code grant type with PKCE.</td></tr>
+  <tr><td>EARS-004</td><td><span class="tag">Event-Driven</span></td><td>When Google returns a valid authorization code, the system shall exchange it for access and refresh tokens via the backend token endpoint.</td></tr>
+  <tr><td>EARS-005</td><td><span class="tag">Event-Driven</span></td><td>When the token exchange succeeds, the system shall store the session token in an HttpOnly secure cookie and redirect the user to <code>/dashboard</code>.</td></tr>
+  <tr><td>EARS-006</td><td><span class="tag">Unwanted</span></td><td>If the Google OAuth flow fails or the user cancels, then the system shall display the message "No se pudo iniciar sesion. Intenta de nuevo." and return the user to the landing page.</td></tr>
+  <tr><td>EARS-007</td><td><span class="tag">Unwanted</span></td><td>If the user's email domain is not in the authorized organizations list, then the system shall display "Tu organizacion no tiene acceso. Contacta a tu administrador." and deny access to the dashboard.</td></tr>
+  <tr><td>EARS-008</td><td><span class="tag">State-Driven</span></td><td>While the user has an active session, the navbar shall replace the "Entrar" button with the user's avatar and name, and link to <code>/dashboard</code>.</td></tr>
+  <tr><td>EARS-009</td><td><span class="tag">Event-Driven</span></td><td>When the user clicks their avatar in the navbar, the system shall display a dropdown with "Ir al Dashboard" and "Cerrar sesion" options.</td></tr>
+  <tr><td>EARS-010</td><td><span class="tag">Event-Driven</span></td><td>When the user clicks "Cerrar sesion", the system shall revoke the Google token, delete the session cookie, and redirect to the landing page.</td></tr>
+  <tr><td>EARS-011</td><td><span class="tag">State-Driven</span></td><td>While the user's session token has expired, the system shall attempt a silent token refresh using the stored refresh token before prompting re-authentication.</td></tr>
+  <tr><td>EARS-012</td><td><span class="tag">Unwanted</span></td><td>If the silent token refresh fails, then the system shall clear the session and redirect the user to the landing page with the sign-in modal open.</td></tr>
+</table>
+
+<div class="comment-box">
+  <p>Espacio para comentarios del equipo:</p>
+  <br><br><br>
+</div>
+
+<!-- ============================================================ -->
+<h2>B. Cookie Banner y Consentimiento</h2>
+
+<table>
+  <tr><th style="width:80px;">ID</th><th style="width:100px;">Pattern</th><th>Requirement</th></tr>
+  <tr><td>EARS-013</td><td><span class="tag">Event-Driven</span></td><td>When the user clicks "Aceptar" on the cookie banner, the system shall store the consent preference in localStorage with key <code>voces_cookie_consent</code> and value <code>accepted</code>.</td></tr>
+  <tr><td>EARS-014</td><td><span class="tag">Event-Driven</span></td><td>When the user clicks "Rechazar" on the cookie banner, the system shall store the consent preference in localStorage with key <code>voces_cookie_consent</code> and value <code>rejected</code>.</td></tr>
+  <tr><td>EARS-015</td><td><span class="tag">Complex</span></td><td>While <code>voces_cookie_consent</code> exists in localStorage, when the page loads, the system shall hide the cookie banner.</td></tr>
+  <tr><td>EARS-016</td><td><span class="tag">Complex</span></td><td>While <code>voces_cookie_consent</code> equals <code>accepted</code>, when the page loads, the system shall load the Google Analytics gtag.js script with the configured measurement ID.</td></tr>
+  <tr><td>EARS-017</td><td><span class="tag">Complex</span></td><td>While <code>voces_cookie_consent</code> equals <code>rejected</code>, when the page loads, the system shall not load any tracking scripts.</td></tr>
+</table>
+
+<div class="comment-box">
+  <p>Espacio para comentarios del equipo:</p>
+  <br><br><br>
+</div>
+
+<!-- ============================================================ -->
+<h2>C. Internacionalizacion (i18n)</h2>
+
+<table>
+  <tr><th style="width:80px;">ID</th><th style="width:100px;">Pattern</th><th>Requirement</th></tr>
+  <tr><td>EARS-018</td><td><span class="tag">Event-Driven</span></td><td>When the user selects a language from the language selector, the system shall reload the page content in the selected language (ES, EN, or PT).</td></tr>
+  <tr><td>EARS-019</td><td><span class="tag">Event-Driven</span></td><td>When the user selects a language, the system shall store the preference in localStorage with key <code>voces_lang</code>.</td></tr>
+  <tr><td>EARS-020</td><td><span class="tag">Complex</span></td><td>While <code>voces_lang</code> exists in localStorage, when the page loads, the system shall render content in the stored language.</td></tr>
+  <tr><td>EARS-021</td><td><span class="tag">Ubiquitous</span></td><td>The system shall set the <code>&lt;html lang&gt;</code> attribute to match the active language.</td></tr>
+</table>
+
+<div class="comment-box">
+  <p>Espacio para comentarios del equipo:</p>
+  <br><br><br>
+</div>
+
+<!-- ============================================================ -->
+<h2>D. Navegacion y CTAs Funcionales</h2>
+
+<table>
+  <tr><th style="width:80px;">ID</th><th style="width:100px;">Pattern</th><th>Requirement</th></tr>
+  <tr><td>EARS-022</td><td><span class="tag">Event-Driven</span></td><td>When the user clicks "Agendar Demo" (any instance), the system shall open a scheduling widget (Calendly or Cal.com) in a modal overlay.</td></tr>
+  <tr><td>EARS-023</td><td><span class="tag">Event-Driven</span></td><td>When the user clicks "Escribinos por WhatsApp", the system shall open <code>https://wa.me/{numero}</code> with a pre-filled message in a new tab.</td></tr>
+  <tr><td>EARS-024</td><td><span class="tag">Event-Driven</span></td><td>When the user clicks the "Precios" nav link, the system shall scroll to the pricing section of the page.</td></tr>
+  <tr><td>EARS-025</td><td><span class="tag">Ubiquitous</span></td><td>The landing page shall include a pricing section (<code>#precios</code>) with plan comparison between the "Agendar Demo" and "Entrar" CTAs.</td></tr>
+</table>
+
+<div class="comment-box">
+  <p>Espacio para comentarios del equipo:</p>
+  <br><br><br>
+</div>
+
+<!-- ============================================================ -->
+<h2>E. Demo / Product Tour</h2>
+
+<table>
+  <tr><th style="width:80px;">ID</th><th style="width:100px;">Pattern</th><th>Requirement</th></tr>
+  <tr><td>EARS-026</td><td><span class="tag">Event-Driven</span></td><td>When the user clicks a demo link ("Entrevistas con IA", "Extraccion de Narrativas", or "Mapa Semantico"), the system shall display the corresponding screenshot in the main gallery area.</td></tr>
+  <tr><td>EARS-027</td><td><span class="tag">Event-Driven</span></td><td>When the user clicks a thumbnail in the demo gallery, the system shall replace the main screenshot with the selected thumbnail's full-size image.</td></tr>
+  <tr><td>EARS-028</td><td><span class="tag">Ubiquitous</span></td><td>The demo section shall display real product screenshots, not placeholder elements.</td></tr>
+</table>
+
+<div class="comment-box">
+  <p>Espacio para comentarios del equipo:</p>
+  <br><br><br>
+</div>
+
+<!-- ============================================================ -->
+<h2>F. SEO, Performance y Metadata</h2>
+
+<table>
+  <tr><th style="width:80px;">ID</th><th style="width:100px;">Pattern</th><th>Requirement</th></tr>
+  <tr><td>EARS-029</td><td><span class="tag">Ubiquitous</span></td><td>The landing page shall include Open Graph meta tags (<code>og:title</code>, <code>og:description</code>, <code>og:image</code>, <code>og:url</code>) for link previews on social platforms.</td></tr>
+  <tr><td>EARS-030</td><td><span class="tag">Ubiquitous</span></td><td>The landing page shall include a favicon in SVG and PNG formats.</td></tr>
+  <tr><td>EARS-031</td><td><span class="tag">Ubiquitous</span></td><td>The landing page shall include structured data (JSON-LD) with Organization and SoftwareApplication schema types.</td></tr>
+  <tr><td>EARS-032</td><td><span class="tag">Ubiquitous</span></td><td>The landing page shall load the Inter font from Google Fonts or serve it as a self-hosted WOFF2 file.</td></tr>
+  <tr><td>EARS-033</td><td><span class="tag">Ubiquitous</span></td><td>The landing page shall achieve a Lighthouse Performance score of 90 or higher on mobile.</td></tr>
+</table>
+
+<div class="comment-box">
+  <p>Espacio para comentarios del equipo:</p>
+  <br><br><br>
+</div>
+
+<!-- ============================================================ -->
+<h2>G. Seguridad</h2>
+
+<table>
+  <tr><th style="width:80px;">ID</th><th style="width:100px;">Pattern</th><th>Requirement</th></tr>
+  <tr><td>EARS-034</td><td><span class="tag">Ubiquitous</span></td><td>The system shall set the following HTTP headers on all responses: <code>X-Content-Type-Options: nosniff</code>, <code>X-Frame-Options: DENY</code>, <code>Referrer-Policy: strict-origin-when-cross-origin</code>.</td></tr>
+  <tr><td>EARS-035</td><td><span class="tag">Ubiquitous</span></td><td>The Google OAuth client ID shall be stored as an environment variable, not hardcoded in client-side code.</td></tr>
+  <tr><td>EARS-036</td><td><span class="tag">Ubiquitous</span></td><td>The system shall validate the Google ID token's <code>iss</code>, <code>aud</code>, and <code>exp</code> claims on the backend before creating a session.</td></tr>
+</table>
+
+<div class="comment-box">
+  <p>Espacio para comentarios del equipo:</p>
+  <br><br><br>
+</div>
+
+<!-- ============================================================ -->
+<h2>Priorizacion sugerida</h2>
+
+<div class="priority">
+  <ol>
+    <li><strong>Bloque A</strong> — Auth + Google OAuth (habilita acceso al dashboard)</li>
+    <li><strong>Bloque B</strong> — Cookie banner (compliance basico)</li>
+    <li><strong>Bloque D</strong> — CTAs funcionales (conectar Calendly + WhatsApp)</li>
+    <li><strong>Bloque F</strong> — SEO/metadata (visibilidad)</li>
+    <li><strong>Bloque E</strong> — Demo tour (requiere screenshots reales)</li>
+    <li><strong>Bloque C</strong> — i18n (expansion regional)</li>
+    <li><strong>Bloque G</strong> — Seguridad (antes de produccion)</li>
+  </ol>
+</div>
+
+<div class="comment-box">
+  <p>Comentarios generales / Prioridades alternativas:</p>
+  <br><br><br>
+</div>
+
+<footer>
+  Voces.ai — EARS Requirements v2 — Documento para feedback interno — 25 marzo 2026
+</footer>
+
+</body>
+</html>
