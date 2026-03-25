@@ -8,7 +8,7 @@
 <!-- EARS-029: Open Graph -->
 <meta property="og:type" content="website">
 <meta property="og:title" content="Voces.ai — Diagnostico cultural con IA">
-<meta property="og:description" content="Cientos de entrevistas con IA. Anonimas. En semanas, no meses. Descubre lo que tu organizacion no sabe que esta diciendo.">
+<meta property="og:description" content="Cientos de entrevistas con IA. Anonimas. En semanas, no meses. Escuchar a tu organización para mejorar los resultados.">
 <meta property="og:url" content="https://0rgan1co.github.io/landing_voces/">
 <meta property="og:image" content="https://0rgan1co.github.io/landing_voces/og-image.png">
 <meta property="og:locale" content="es_AR">
@@ -95,7 +95,7 @@
   .mobile-menu a { font-size: 1rem; padding: 16px 0; border-bottom: 1px solid var(--gray-200); color: var(--dark-2); font-weight: 500; }
 
   /* === HERO === */
-  .hero { padding: 72px 0 56px; background: linear-gradient(180deg, #fff 0%, var(--gray-50) 100%); text-align: center; }
+  .hero { padding: 72px 0 56px; background: linear-gradient(180deg, var(--purple-bg) 0%, #fff 100%); text-align: center; }
   .hero .tag { margin-bottom: 20px; }
   .hero h1 {
     font-size: clamp(2rem, 4.5vw, 2.75rem); font-weight: 800;
@@ -128,7 +128,7 @@
   .mockup-node { display: inline-block; background: rgba(123,47,247,0.15); border: 1px solid rgba(123,47,247,0.4); border-radius: 16px; padding: 4px 10px; font-size: 0.7rem; color: var(--purple-light); margin: 3px; }
 
   /* === SOCIAL PROOF === */
-  .social-proof { padding: 28px 0; border-bottom: 1px solid var(--gray-200); }
+  .social-proof { padding: 28px 0; background: #fff; border-top: 1px solid var(--gray-200); border-bottom: 1px solid var(--gray-200); }
   .logos-row { display: flex; gap: 40px; justify-content: center; align-items: center; flex-wrap: wrap; opacity: 0.35; }
   .logos-row img { height: 28px; width: auto; filter: grayscale(100%); opacity: 0.5; transition: opacity 0.2s; }
   .logos-row img:hover { opacity: 0.8; }
@@ -138,7 +138,7 @@
   }
 
   /* === FEATURES === */
-  .features { padding: 80px 0; text-align: center; }
+  .features { padding: 80px 0; text-align: center; background: var(--gray-50); }
   .features h2 { font-size: clamp(1.4rem, 3vw, 1.85rem); font-weight: 800; margin-bottom: 48px; letter-spacing: -0.01em; }
   .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
   .feature-card {
@@ -156,7 +156,7 @@
   .feature-card p { font-size: 0.85rem; color: var(--gray-600); line-height: 1.5; }
 
   /* === HOW IT WORKS === */
-  .how-it-works { padding: 80px 0; background: var(--gray-50); text-align: center; }
+  .how-it-works { padding: 80px 0; background: #fff; text-align: center; }
   .how-it-works h2 { font-size: clamp(1.4rem, 3vw, 1.85rem); font-weight: 800; margin-bottom: 48px; letter-spacing: -0.01em; }
   .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; position: relative; }
   .steps::before {
@@ -175,7 +175,7 @@
   .step p { font-size: 0.82rem; color: var(--gray-600); line-height: 1.5; max-width: 200px; margin: 0 auto; }
 
   /* === USE CASES (tabs) === */
-  .use-cases { padding: 80px 0; text-align: center; }
+  .use-cases { padding: 80px 0; text-align: center; background: var(--purple-bg); }
   .use-cases h2 { font-size: clamp(1.4rem, 3vw, 1.85rem); font-weight: 800; margin-bottom: 8px; letter-spacing: -0.01em; }
   .use-cases-sub { font-size: 0.95rem; color: var(--gray-600); margin-bottom: 32px; }
   .tabs { display: flex; gap: 4px; justify-content: center; flex-wrap: wrap; margin-bottom: 28px; }
@@ -188,8 +188,8 @@
   .tab-btn.active { background: var(--purple); color: #fff; border-color: var(--purple); }
   .tab-panel {
     display: none; text-align: left; max-width: 600px; margin: 0 auto;
-    padding: 28px 32px; background: var(--gray-50); border-radius: var(--radius);
-    border: 1px solid var(--gray-200);
+    padding: 28px 32px; background: #fff; border-radius: var(--radius);
+    border: 1px solid var(--gray-200); box-shadow: 0 2px 8px rgba(0,0,0,0.04);
   }
   .tab-panel.active { display: block; }
   .tab-panel h4 { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
@@ -312,7 +312,7 @@
 <section class="hero">
   <div class="container">
     <span class="tag">Nuevo</span>
-    <h1>Escucha lo que tu organizacion no sabe que esta diciendo</h1>
+    <h1>Escuchar a tu organización para mejorar los resultados</h1>
     <p class="hero-sub">Cientos de entrevistas con IA. Anonimas. En semanas, no meses.</p>
     <div class="hero-ctas">
       <a href="#agendar" class="btn btn-primary">Agendar una demo &rarr;</a>
@@ -516,7 +516,14 @@
   </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
+// Supabase Auth
+const _supabase = supabase.createClient(
+  'https://efprxfxvuyniqixugixz.supabase.co',
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVmcHJ4Znh2dXluaXFpeHVnaXh6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ0NzI1MzAsImV4cCI6MjA5MDA0ODUzMH0.8qvRplB2EntMzaygeae1QsSqo1VkG5IW-ZXN18GjM8I'
+);
+
 // Cookie consent (EARS-013 to 017)
 function handleCookie(accepted) {
   var value = accepted ? 'accepted' : 'rejected';
@@ -549,10 +556,25 @@ function loadGA() {
 // Login modal (EARS-001, EARS-002)
 function openLogin() { document.getElementById('login-modal').classList.add('open'); }
 function closeLogin() { document.getElementById('login-modal').classList.remove('open'); }
-function loginWithGoogle() {
-  // TODO: Replace with actual Google OAuth flow (EARS-003 to 005)
-  alert('Google OAuth no configurado. Contacta al administrador.');
+async function loginWithGoogle() {
+  const { error } = await _supabase.auth.signInWithOAuth({
+    provider: 'google',
+    options: { redirectTo: window.location.origin }
+  });
+  if (error) alert('Error al iniciar sesion: ' + error.message);
 }
+
+// Check auth state on load
+_supabase.auth.onAuthStateChange(function(event, session) {
+  var enterBtn = document.querySelector('.btn-enter');
+  if (session) {
+    enterBtn.textContent = 'Mi cuenta';
+    enterBtn.onclick = function() { window.location.href = '/dashboard'; };
+  } else {
+    enterBtn.textContent = 'Entrar';
+    enterBtn.onclick = openLogin;
+  }
+});
 
 // Tabs
 function showTab(index) {
