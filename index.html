@@ -276,6 +276,44 @@
     cursor: pointer; transition: all 0.15s; font-family: inherit;
   }
   .btn-enter:hover { border-color: var(--purple); color: var(--purple); }
+
+  /* === USER MENU (post-login) === */
+  .user-menu { position: relative; }
+  .user-avatar-btn {
+    display: flex; align-items: center; gap: 8px; padding: 4px 10px 4px 4px;
+    border-radius: 8px; border: 1.5px solid var(--gray-200); background: #fff;
+    cursor: pointer; transition: all 0.15s; font-family: inherit;
+  }
+  .user-avatar-btn:hover { border-color: var(--purple); }
+  .user-avatar-btn img {
+    width: 28px; height: 28px; border-radius: 50%; object-fit: cover;
+  }
+  .user-avatar-btn .user-name {
+    font-size: 0.82rem; font-weight: 600; color: var(--dark-2); max-width: 120px;
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+  .user-avatar-btn svg { width: 14px; height: 14px; color: var(--gray-400); flex-shrink: 0; }
+  .user-dropdown {
+    display: none; position: absolute; top: calc(100% + 6px); right: 0;
+    background: #fff; border: 1px solid var(--gray-200); border-radius: 10px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1); min-width: 200px; z-index: 110;
+    overflow: hidden;
+  }
+  .user-dropdown.open { display: block; }
+  .user-dropdown-header {
+    padding: 12px 14px; border-bottom: 1px solid var(--gray-200);
+    font-size: 0.78rem; color: var(--gray-600);
+  }
+  .user-dropdown a, .user-dropdown button {
+    display: flex; align-items: center; gap: 8px; width: 100%; padding: 10px 14px;
+    font-size: 0.85rem; font-weight: 500; color: var(--dark-2); background: none;
+    border: none; cursor: pointer; font-family: inherit; text-align: left;
+    transition: background 0.1s;
+  }
+  .user-dropdown a:hover, .user-dropdown button:hover { background: var(--gray-50); }
+  .user-dropdown svg { width: 16px; height: 16px; color: var(--gray-400); }
+  .user-dropdown .logout-btn { color: #dc2626; border-top: 1px solid var(--gray-200); }
+  .user-dropdown .logout-btn svg { color: #dc2626; }
 </style>
 </head>
 <body>
@@ -294,7 +332,25 @@
     </div>
     <div class="navbar-actions">
       <select class="lang-select" aria-label="Idioma"><option>ES</option><option>EN</option><option>PT</option></select>
-      <button class="btn-enter" onclick="openLogin()">Entrar</button>
+      <button class="btn-enter" id="btn-enter" onclick="openLogin()">Entrar</button>
+      <div class="user-menu" id="user-menu" style="display:none;">
+        <button class="user-avatar-btn" onclick="toggleUserDropdown()">
+          <img id="user-avatar" src="" alt="Avatar">
+          <span class="user-name" id="user-name"></span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="user-dropdown" id="user-dropdown">
+          <div class="user-dropdown-header" id="user-email"></div>
+          <a href="proximamente.html">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>
+            Ir al Dashboard
+          </a>
+          <button class="logout-btn" onclick="logoutUser()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" x2="9" y1="12" y2="12"/></svg>
+            Cerrar sesion
+          </button>
+        </div>
+      </div>
       <a href="#agendar" class="btn btn-primary" style="padding:8px 20px; font-size:0.85rem;">Agendar Demo</a>
       <button class="hamburger" onclick="document.getElementById('mobile-menu').classList.toggle('open')" aria-label="Menu">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
@@ -564,17 +620,43 @@ async function loginWithGoogle() {
   if (error) alert('Error al iniciar sesion: ' + error.message);
 }
 
-// Check auth state on load
-_supabase.auth.onAuthStateChange(function(event, session) {
-  var enterBtn = document.querySelector('.btn-enter');
+// Auth state management
+function updateAuthUI(session) {
+  var enterBtn = document.getElementById('btn-enter');
+  var userMenu = document.getElementById('user-menu');
   if (session) {
-    enterBtn.textContent = 'Mi cuenta';
-    enterBtn.onclick = function() { window.location.href = 'proximamente.html'; };
+    var user = session.user;
+    var meta = user.user_metadata || {};
+    enterBtn.style.display = 'none';
+    userMenu.style.display = 'block';
+    document.getElementById('user-avatar').src = meta.avatar_url || meta.picture || '';
+    document.getElementById('user-name').textContent = (meta.full_name || meta.name || user.email).split(' ')[0];
+    document.getElementById('user-email').textContent = user.email;
   } else {
-    enterBtn.textContent = 'Entrar';
-    enterBtn.onclick = openLogin;
+    enterBtn.style.display = '';
+    userMenu.style.display = 'none';
+  }
+}
+
+_supabase.auth.onAuthStateChange(function(event, session) { updateAuthUI(session); });
+_supabase.auth.getSession().then(function(res) { updateAuthUI(res.data.session); });
+
+function toggleUserDropdown() {
+  document.getElementById('user-dropdown').classList.toggle('open');
+}
+// Close dropdown on outside click
+document.addEventListener('click', function(e) {
+  var menu = document.getElementById('user-menu');
+  if (!menu.contains(e.target)) {
+    document.getElementById('user-dropdown').classList.remove('open');
   }
 });
+
+async function logoutUser() {
+  await _supabase.auth.signOut();
+  closeLogin();
+  window.location.reload();
+}
 
 // Tabs
 function showTab(index) {
