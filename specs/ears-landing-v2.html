@@ -22,9 +22,60 @@
   .comment-box p { margin: 0; font-weight: 600; color: #f57f17; }
   code { background: #f5f5f5; padding: 1px 4px; border-radius: 3px; font-size: 9pt; }
   footer { margin-top: 40px; padding-top: 12px; border-top: 1px solid #e0e0e0; font-size: 8pt; color: #aaa; }
+
+  /* Checkbox & status buttons */
+  .check-col { width: 36px; text-align: center; }
+  .status-col { width: 90px; text-align: center; }
+  input[type="checkbox"] { width: 16px; height: 16px; accent-color: #7B2FF7; cursor: pointer; }
+  .status-btns { display: flex; gap: 4px; justify-content: center; }
+  .status-btn {
+    padding: 3px 8px; border-radius: 4px; font-size: 7.5pt; font-weight: 700;
+    border: none; cursor: pointer; transition: all 0.15s; text-transform: uppercase; letter-spacing: 0.5px;
+  }
+  .status-btn.ok-btn { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+  .status-btn.ok-btn:hover { background: #c8e6c9; }
+  .status-btn.ok-btn.active { background: #2e7d32; color: #fff; }
+  .status-btn.rev-btn { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
+  .status-btn.rev-btn:hover { background: #ffe0b2; }
+  .status-btn.rev-btn.active { background: #e65100; color: #fff; }
+
+  /* Row states */
+  tr.row-ok { background: #f1f8e9 !important; }
+  tr.row-rev { background: #fff8e1 !important; }
+  tr.row-done td:first-child { position: relative; }
+  tr.row-done td:first-child::after { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: #2e7d32; }
+
+  /* Summary bar */
+  .summary-bar {
+    position: sticky; top: 64px; z-index: 50; background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(8px); border-bottom: 1px solid #e0e0e0;
+    padding: 8px 0; margin-bottom: 16px; display: none;
+  }
+  .summary-bar.visible { display: block; }
+  .summary-inner {
+    max-width: 816px; margin: 0 auto; padding: 0 40px;
+    display: flex; align-items: center; gap: 20px; font-size: 9pt;
+  }
+  .summary-inner .count { font-weight: 700; }
+  .summary-inner .count.green { color: #2e7d32; }
+  .summary-inner .count.orange { color: #e65100; }
+  .summary-inner .count.gray { color: #888; }
+  .progress-bar { flex: 1; height: 6px; background: #e0e0e0; border-radius: 3px; overflow: hidden; }
+  .progress-fill { height: 100%; background: #2e7d32; border-radius: 3px; transition: width 0.3s; }
 </style>
 </head>
 <body>
+
+<!-- Summary bar -->
+<div id="summary-bar" class="summary-bar">
+  <div class="summary-inner">
+    <span><strong>Progreso:</strong></span>
+    <span class="count green" id="count-ok">0 OK</span>
+    <span class="count orange" id="count-rev">0 Revision</span>
+    <span class="count gray" id="count-pending">36 Pendientes</span>
+    <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
+  </div>
+</div>
 
 <h1>EARS Requirements — Voces.ai Landing Page v2</h1>
 <p class="meta">
@@ -60,19 +111,19 @@
 <h2>A. Autenticacion y Acceso al Dashboard</h2>
 
 <table>
-  <tr><th style="width:80px;">ID</th><th style="width:100px;">Pattern</th><th>Requirement</th></tr>
-  <tr><td>EARS-001</td><td><span class="tag">Ubiquitous</span></td><td>The landing page shall display a "Entrar" button in the navbar, positioned before the CTA "Agendar Demo".</td></tr>
-  <tr><td>EARS-002</td><td><span class="tag">Event-Driven</span></td><td>When the user clicks "Entrar", the system shall display a sign-in modal with a "Continuar con Google" button as the only authentication method.</td></tr>
-  <tr><td>EARS-003</td><td><span class="tag">Event-Driven</span></td><td>When the user clicks "Continuar con Google", the system shall initiate the Google OAuth 2.0 authorization flow using the Authorization Code grant type with PKCE.</td></tr>
-  <tr><td>EARS-004</td><td><span class="tag">Event-Driven</span></td><td>When Google returns a valid authorization code, the system shall exchange it for access and refresh tokens via the backend token endpoint.</td></tr>
-  <tr><td>EARS-005</td><td><span class="tag">Event-Driven</span></td><td>When the token exchange succeeds, the system shall store the session token in an HttpOnly secure cookie and redirect the user to <code>/dashboard</code>.</td></tr>
-  <tr><td>EARS-006</td><td><span class="tag">Unwanted</span></td><td>If the Google OAuth flow fails or the user cancels, then the system shall display the message "No se pudo iniciar sesion. Intenta de nuevo." and return the user to the landing page.</td></tr>
-  <tr><td>EARS-007</td><td><span class="tag">Unwanted</span></td><td>If the user's email domain is not in the authorized organizations list, then the system shall display "Tu organizacion no tiene acceso. Contacta a tu administrador." and deny access to the dashboard.</td></tr>
-  <tr><td>EARS-008</td><td><span class="tag">State-Driven</span></td><td>While the user has an active session, the navbar shall replace the "Entrar" button with the user's avatar and name, and link to <code>/dashboard</code>.</td></tr>
-  <tr><td>EARS-009</td><td><span class="tag">Event-Driven</span></td><td>When the user clicks their avatar in the navbar, the system shall display a dropdown with "Ir al Dashboard" and "Cerrar sesion" options.</td></tr>
-  <tr><td>EARS-010</td><td><span class="tag">Event-Driven</span></td><td>When the user clicks "Cerrar sesion", the system shall revoke the Google token, delete the session cookie, and redirect to the landing page.</td></tr>
-  <tr><td>EARS-011</td><td><span class="tag">State-Driven</span></td><td>While the user's session token has expired, the system shall attempt a silent token refresh using the stored refresh token before prompting re-authentication.</td></tr>
-  <tr><td>EARS-012</td><td><span class="tag">Unwanted</span></td><td>If the silent token refresh fails, then the system shall clear the session and redirect the user to the landing page with the sign-in modal open.</td></tr>
+  <tr><th class="check-col">Cumple</th><th style="width:80px;">ID</th><th style="width:100px;">Pattern</th><th>Requirement</th><th class="status-col">Estado</th></tr>
+  <tr data-id="001"><td class="check-col"><input type="checkbox" onchange="updateRow(this)"></td><td>EARS-001</td><td><span class="tag">Ubiquitous</span></td><td>The landing page shall display a "Entrar" button in the navbar, positioned before the CTA "Agendar Demo".</td><td class="status-col"><div class="status-btns"><button class="status-btn ok-btn" onclick="setStatus(this,'ok')">OK</button><button class="status-btn rev-btn" onclick="setStatus(this,'rev')">Revision</button></div></td></tr>
+  <tr data-id="002"><td class="check-col"><input type="checkbox" onchange="updateRow(this)"></td><td>EARS-002</td><td><span class="tag">Event-Driven</span></td><td>When the user clicks "Entrar", the system shall display a sign-in modal with a "Continuar con Google" button as the only authentication method.</td><td class="status-col"><div class="status-btns"><button class="status-btn ok-btn" onclick="setStatus(this,'ok')">OK</button><button class="status-btn rev-btn" onclick="setStatus(this,'rev')">Revision</button></div></td></tr>
+  <tr data-id="003"><td class="check-col"><input type="checkbox" onchange="updateRow(this)"></td><td>EARS-003</td><td><span class="tag">Event-Driven</span></td><td>When the user clicks "Continuar con Google", the system shall initiate the Google OAuth 2.0 authorization flow using the Authorization Code grant type with PKCE.</td><td class="status-col"><div class="status-btns"><button class="status-btn ok-btn" onclick="setStatus(this,'ok')">OK</button><button class="status-btn rev-btn" onclick="setStatus(this,'rev')">Revision</button></div></td></tr>
+  <tr data-id="004"><td class="check-col"><input type="checkbox" onchange="updateRow(this)"></td><td>EARS-004</td><td><span class="tag">Event-Driven</span></td><td>When Google returns a valid authorization code, the system shall exchange it for access and refresh tokens via the backend token endpoint.</td><td class="status-col"><div class="status-btns"><button class="status-btn ok-btn" onclick="setStatus(this,'ok')">OK</button><button class="status-btn rev-btn" onclick="setStatus(this,'rev')">Revision</button></div></td></tr>
+  <tr data-id="005"><td class="check-col"><input type="checkbox" onchange="updateRow(this)"></td><td>EARS-005</td><td><span class="tag">Event-Driven</span></td><td>When the token exchange succeeds, the system shall store the session token in an HttpOnly secure cookie and redirect the user to <code>/dashboard</code>.</td><td class="status-col"><div class="status-btns"><button class="status-btn ok-btn" onclick="setStatus(this,'ok')">OK</button><button class="status-btn rev-btn" onclick="setStatus(this,'rev')">Revision</button></div></td></tr>
+  <tr data-id="006"><td class="check-col"><input type="checkbox" onchange="updateRow(this)"></td><td>EARS-006</td><td><span class="tag">Unwanted</span></td><td>If the Google OAuth flow fails or the user cancels, then the system shall display the message "No se pudo iniciar sesion. Intenta de nuevo." and return the user to the landing page.</td><td class="status-col"><div class="status-btns"><button class="status-btn ok-btn" onclick="setStatus(this,'ok')">OK</button><button class="status-btn rev-btn" onclick="setStatus(this,'rev')">Revision</button></div></td></tr>
+  <tr data-id="007"><td class="check-col"><input type="checkbox" onchange="updateRow(this)"></td><td>EARS-007</td><td><span class="tag">Unwanted</span></td><td>If the user's email domain is not in the authorized organizations list, then the system shall display "Tu organizacion no tiene acceso. Contacta a tu administrador." and deny access to the dashboard.</td><td class="status-col"><div class="status-btns"><button class="status-btn ok-btn" onclick="setStatus(this,'ok')">OK</button><button class="status-btn rev-btn" onclick="setStatus(this,'rev')">Revision</button></div></td></tr>
+  <tr data-id="008"><td class="check-col"><input type="checkbox" onchange="updateRow(this)"></td><td>EARS-008</td><td><span class="tag">State-Driven</span></td><td>While the user has an active session, the navbar shall replace the "Entrar" button with the user's avatar and name, and link to <code>/dashboard</code>.</td><td class="status-col"><div class="status-btns"><button class="status-btn ok-btn" onclick="setStatus(this,'ok')">OK</button><button class="status-btn rev-btn" onclick="setStatus(this,'rev')">Revision</button></div></td></tr>
+  <tr data-id="009"><td class="check-col"><input type="checkbox" onchange="updateRow(this)"></td><td>EARS-009</td><td><span class="tag">Event-Driven</span></td><td>When the user clicks their avatar in the navbar, the system shall display a dropdown with "Ir al Dashboard" and "Cerrar sesion" options.</td><td class="status-col"><div class="status-btns"><button class="status-btn ok-btn" onclick="setStatus(this,'ok')">OK</button><button class="status-btn rev-btn" onclick="setStatus(this,'rev')">Revision</button></div></td></tr>
+  <tr data-id="010"><td class="check-col"><input type="checkbox" onchange="updateRow(this)"></td><td>EARS-010</td><td><span class="tag">Event-Driven</span></td><td>When the user clicks "Cerrar sesion", the system shall revoke the Google token, delete the session cookie, and redirect to the landing page.</td><td class="status-col"><div class="status-btns"><button class="status-btn ok-btn" onclick="setStatus(this,'ok')">OK</button><button class="status-btn rev-btn" onclick="setStatus(this,'rev')">Revision</button></div></td></tr>
+  <tr data-id="011"><td class="check-col"><input type="checkbox" onchange="updateRow(this)"></td><td>EARS-011</td><td><span class="tag">State-Driven</span></td><td>While the user's session token has expired, the system shall attempt a silent token refresh using the stored refresh token before prompting re-authentication.</td><td class="status-col"><div class="status-btns"><button class="status-btn ok-btn" onclick="setStatus(this,'ok')">OK</button><button class="status-btn rev-btn" onclick="setStatus(this,'rev')">Revision</button></div></td></tr>
+  <tr data-id="012"><td class="check-col"><input type="checkbox" onchange="updateRow(this)"></td><td>EARS-012</td><td><span class="tag">Unwanted</span></td><td>If the silent token refresh fails, then the system shall clear the session and redirect the user to the landing page with the sign-in modal open.</td><td class="status-col"><div class="status-btns"><button class="status-btn ok-btn" onclick="setStatus(this,'ok')">OK</button><button class="status-btn rev-btn" onclick="setStatus(this,'rev')">Revision</button></div></td></tr>
 </table>
 
 <div class="comment-box">
@@ -84,12 +135,12 @@
 <h2>B. Cookie Banner y Consentimiento</h2>
 
 <table>
-  <tr><th style="width:80px;">ID</th><th style="width:100px;">Pattern</th><th>Requirement</th></tr>
-  <tr><td>EARS-013</td><td><span class="tag">Event-Driven</span></td><td>When the user clicks "Aceptar" on the cookie banner, the system shall store the consent preference in localStorage with key <code>voces_cookie_consent</code> and value <code>accepted</code>.</td></tr>
-  <tr><td>EARS-014</td><td><span class="tag">Event-Driven</span></td><td>When the user clicks "Rechazar" on the cookie banner, the system shall store the consent preference in localStorage with key <code>voces_cookie_consent</code> and value <code>rejected</code>.</td></tr>
-  <tr><td>EARS-015</td><td><span class="tag">Complex</span></td><td>While <code>voces_cookie_consent</code> exists in localStorage, when the page loads, the system shall hide the cookie banner.</td></tr>
-  <tr><td>EARS-016</td><td><span class="tag">Complex</span></td><td>While <code>voces_cookie_consent</code> equals <code>accepted</code>, when the page loads, the system shall load the Google Analytics gtag.js script with the configured measurement ID.</td></tr>
-  <tr><td>EARS-017</td><td><span class="tag">Complex</span></td><td>While <code>voces_cookie_consent</code> equals <code>rejected</code>, when the page loads, the system shall not load any tracking scripts.</td></tr>
+  <tr><th class="check-col">Cumple</th><th style="width:80px;">ID</th><th style="width:100px;">Pattern</th><th>Requirement</th><th class="status-col">Estado</th></tr>
+  <tr data-id="013"><td class="check-col"><input type="checkbox" onchange="updateRow(this)"></td><td>EARS-013</td><td><span class="tag">Event-Driven</span></td><td>When the user clicks "Aceptar" on the cookie banner, the system shall store the consent preference in localStorage with key <code>voces_cookie_consent</code> and value <code>accepted</code>.</td><td class="status-col"><div class="status-btns"><button class="status-btn ok-btn" onclick="setStatus(this,'ok')">OK</button><button class="status-btn rev-btn" onclick="setStatus(this,'rev')">Revision</button></div></td></tr>
+  <tr data-id="014"><td class="check-col"><input type="checkbox" onchange="updateRow(this)"></td><td>EARS-014</td><td><span class="tag">Event-Driven</span></td><td>When the user clicks "Rechazar" on the cookie banner, the system shall store the consent preference in localStorage with key <code>voces_cookie_consent</code> and value <code>rejected</code>.</td><td class="status-col"><div class="status-btns"><button class="status-btn ok-btn" onclick="setStatus(this,'ok')">OK</button><button class="status-btn rev-btn" onclick="setStatus(this,'rev')">Revision</button></div></td></tr>
+  <tr data-id="015"><td class="check-col"><input type="checkbox" onchange="updateRow(this)"></td><td>EARS-015</td><td><span class="tag">Complex</span></td><td>While <code>voces_cookie_consent</code> exists in localStorage, when the page loads, the system shall hide the cookie banner.</td><td class="status-col"><div class="status-btns"><button class="status-btn ok-btn" onclick="setStatus(this,'ok')">OK</button><button class="status-btn rev-btn" onclick="setStatus(this,'rev')">Revision</button></div></td></tr>
+  <tr data-id="016"><td class="check-col"><input type="checkbox" onchange="updateRow(this)"></td><td>EARS-016</td><td><span class="tag">Complex</span></td><td>While <code>voces_cookie_consent</code> equals <code>accepted</code>, when the page loads, the system shall load the Google Analytics gtag.js script with the configured measurement ID.</td><td class="status-col"><div class="status-btns"><button class="status-btn ok-btn" onclick="setStatus(this,'ok')">OK</button><button class="status-btn rev-btn" onclick="setStatus(this,'rev')">Revision</button></div></td></tr>
+  <tr data-id="017"><td class="check-col"><input type="checkbox" onchange="updateRow(this)"></td><td>EARS-017</td><td><span class="tag">Complex</span></td><td>While <code>voces_cookie_consent</code> equals <code>rejected</code>, when the page loads, the system shall not load any tracking scripts.</td><td class="status-col"><div class="status-btns"><button class="status-btn ok-btn" onclick="setStatus(this,'ok')">OK</button><button class="status-btn rev-btn" onclick="setStatus(this,'rev')">Revision</button></div></td></tr>
 </table>
 
 <div class="comment-box">
@@ -101,11 +152,11 @@
 <h2>C. Internacionalizacion (i18n)</h2>
 
 <table>
-  <tr><th style="width:80px;">ID</th><th style="width:100px;">Pattern</th><th>Requirement</th></tr>
-  <tr><td>EARS-018</td><td><span class="tag">Event-Driven</span></td><td>When the user selects a language from the language selector, the system shall reload the page content in the selected language (ES, EN, or PT).</td></tr>
-  <tr><td>EARS-019</td><td><span class="tag">Event-Driven</span></td><td>When the user selects a language, the system shall store the preference in localStorage with key <code>voces_lang</code>.</td></tr>
-  <tr><td>EARS-020</td><td><span class="tag">Complex</span></td><td>While <code>voces_lang</code> exists in localStorage, when the page loads, the system shall render content in the stored language.</td></tr>
-  <tr><td>EARS-021</td><td><span class="tag">Ubiquitous</span></td><td>The system shall set the <code>&lt;html lang&gt;</code> attribute to match the active language.</td></tr>
+  <tr><th class="check-col">Cumple</th><th style="width:80px;">ID</th><th style="width:100px;">Pattern</th><th>Requirement</th><th class="status-col">Estado</th></tr>
+  <tr data-id="018"><td class="check-col"><input type="checkbox" onchange="updateRow(this)"></td><td>EARS-018</td><td><span class="tag">Event-Driven</span></td><td>When the user selects a language from the language selector, the system shall reload the page content in the selected language (ES, EN, or PT).</td><td class="status-col"><div class="status-btns"><button class="status-btn ok-btn" onclick="setStatus(this,'ok')">OK</button><button class="status-btn rev-btn" onclick="setStatus(this,'rev')">Revision</button></div></td></tr>
+  <tr data-id="019"><td class="check-col"><input type="checkbox" onchange="updateRow(this)"></td><td>EARS-019</td><td><span class="tag">Event-Driven</span></td><td>When the user selects a language, the system shall store the preference in localStorage with key <code>voces_lang</code>.</td><td class="status-col"><div class="status-btns"><button class="status-btn ok-btn" onclick="setStatus(this,'ok')">OK</button><button class="status-btn rev-btn" onclick="setStatus(this,'rev')">Revision</button></div></td></tr>
+  <tr data-id="020"><td class="check-col"><input type="checkbox" onchange="updateRow(this)"></td><td>EARS-020</td><td><span class="tag">Complex</span></td><td>While <code>voces_lang</code> exists in localStorage, when the page loads, the system shall render content in the stored language.</td><td class="status-col"><div class="status-btns"><button class="status-btn ok-btn" onclick="setStatus(this,'ok')">OK</button><button class="status-btn rev-btn" onclick="setStatus(this,'rev')">Revision</button></div></td></tr>
+  <tr data-id="021"><td class="check-col"><input type="checkbox" onchange="updateRow(this)"></td><td>EARS-021</td><td><span class="tag">Ubiquitous</span></td><td>The system shall set the <code>&lt;html lang&gt;</code> attribute to match the active language.</td><td class="status-col"><div class="status-btns"><button class="status-btn ok-btn" onclick="setStatus(this,'ok')">OK</button><button class="status-btn rev-btn" onclick="setStatus(this,'rev')">Revision</button></div></td></tr>
 </table>
 
 <div class="comment-box">
@@ -117,11 +168,11 @@
 <h2>D. Navegacion y CTAs Funcionales</h2>
 
 <table>
-  <tr><th style="width:80px;">ID</th><th style="width:100px;">Pattern</th><th>Requirement</th></tr>
-  <tr><td>EARS-022</td><td><span class="tag">Event-Driven</span></td><td>When the user clicks "Agendar Demo" (any instance), the system shall open a scheduling widget (Calendly or Cal.com) in a modal overlay.</td></tr>
-  <tr><td>EARS-023</td><td><span class="tag">Event-Driven</span></td><td>When the user clicks "Escribinos por WhatsApp", the system shall open <code>https://wa.me/{numero}</code> with a pre-filled message in a new tab.</td></tr>
-  <tr><td>EARS-024</td><td><span class="tag">Event-Driven</span></td><td>When the user clicks the "Precios" nav link, the system shall scroll to the pricing section of the page.</td></tr>
-  <tr><td>EARS-025</td><td><span class="tag">Ubiquitous</span></td><td>The landing page shall include a pricing section (<code>#precios</code>) with plan comparison between the "Agendar Demo" and "Entrar" CTAs.</td></tr>
+  <tr><th class="check-col">Cumple</th><th style="width:80px;">ID</th><th style="width:100px;">Pattern</th><th>Requirement</th><th class="status-col">Estado</th></tr>
+  <tr data-id="022"><td class="check-col"><input type="checkbox" onchange="updateRow(this)"></td><td>EARS-022</td><td><span class="tag">Event-Driven</span></td><td>When the user clicks "Agendar Demo" (any instance), the system shall open a scheduling widget (Calendly or Cal.com) in a modal overlay.</td><td class="status-col"><div class="status-btns"><button class="status-btn ok-btn" onclick="setStatus(this,'ok')">OK</button><button class="status-btn rev-btn" onclick="setStatus(this,'rev')">Revision</button></div></td></tr>
+  <tr data-id="023"><td class="check-col"><input type="checkbox" onchange="updateRow(this)"></td><td>EARS-023</td><td><span class="tag">Event-Driven</span></td><td>When the user clicks "Escribinos por WhatsApp", the system shall open <code>https://wa.me/{numero}</code> with a pre-filled message in a new tab.</td><td class="status-col"><div class="status-btns"><button class="status-btn ok-btn" onclick="setStatus(this,'ok')">OK</button><button class="status-btn rev-btn" onclick="setStatus(this,'rev')">Revision</button></div></td></tr>
+  <tr data-id="024"><td class="check-col"><input type="checkbox" onchange="updateRow(this)"></td><td>EARS-024</td><td><span class="tag">Event-Driven</span></td><td>When the user clicks the "Precios" nav link, the system shall scroll to the pricing section of the page.</td><td class="status-col"><div class="status-btns"><button class="status-btn ok-btn" onclick="setStatus(this,'ok')">OK</button><button class="status-btn rev-btn" onclick="setStatus(this,'rev')">Revision</button></div></td></tr>
+  <tr data-id="025"><td class="check-col"><input type="checkbox" onchange="updateRow(this)"></td><td>EARS-025</td><td><span class="tag">Ubiquitous</span></td><td>The landing page shall include a pricing section (<code>#precios</code>) with plan comparison between the "Agendar Demo" and "Entrar" CTAs.</td><td class="status-col"><div class="status-btns"><button class="status-btn ok-btn" onclick="setStatus(this,'ok')">OK</button><button class="status-btn rev-btn" onclick="setStatus(this,'rev')">Revision</button></div></td></tr>
 </table>
 
 <div class="comment-box">
@@ -133,10 +184,10 @@
 <h2>E. Demo / Product Tour</h2>
 
 <table>
-  <tr><th style="width:80px;">ID</th><th style="width:100px;">Pattern</th><th>Requirement</th></tr>
-  <tr><td>EARS-026</td><td><span class="tag">Event-Driven</span></td><td>When the user clicks a demo link ("Entrevistas con IA", "Extraccion de Narrativas", or "Mapa Semantico"), the system shall display the corresponding screenshot in the main gallery area.</td></tr>
-  <tr><td>EARS-027</td><td><span class="tag">Event-Driven</span></td><td>When the user clicks a thumbnail in the demo gallery, the system shall replace the main screenshot with the selected thumbnail's full-size image.</td></tr>
-  <tr><td>EARS-028</td><td><span class="tag">Ubiquitous</span></td><td>The demo section shall display real product screenshots, not placeholder elements.</td></tr>
+  <tr><th class="check-col">Cumple</th><th style="width:80px;">ID</th><th style="width:100px;">Pattern</th><th>Requirement</th><th class="status-col">Estado</th></tr>
+  <tr data-id="026"><td class="check-col"><input type="checkbox" onchange="updateRow(this)"></td><td>EARS-026</td><td><span class="tag">Event-Driven</span></td><td>When the user clicks a demo link ("Entrevistas con IA", "Extraccion de Narrativas", or "Mapa Semantico"), the system shall display the corresponding screenshot in the main gallery area.</td><td class="status-col"><div class="status-btns"><button class="status-btn ok-btn" onclick="setStatus(this,'ok')">OK</button><button class="status-btn rev-btn" onclick="setStatus(this,'rev')">Revision</button></div></td></tr>
+  <tr data-id="027"><td class="check-col"><input type="checkbox" onchange="updateRow(this)"></td><td>EARS-027</td><td><span class="tag">Event-Driven</span></td><td>When the user clicks a thumbnail in the demo gallery, the system shall replace the main screenshot with the selected thumbnail's full-size image.</td><td class="status-col"><div class="status-btns"><button class="status-btn ok-btn" onclick="setStatus(this,'ok')">OK</button><button class="status-btn rev-btn" onclick="setStatus(this,'rev')">Revision</button></div></td></tr>
+  <tr data-id="028"><td class="check-col"><input type="checkbox" onchange="updateRow(this)"></td><td>EARS-028</td><td><span class="tag">Ubiquitous</span></td><td>The demo section shall display real product screenshots, not placeholder elements.</td><td class="status-col"><div class="status-btns"><button class="status-btn ok-btn" onclick="setStatus(this,'ok')">OK</button><button class="status-btn rev-btn" onclick="setStatus(this,'rev')">Revision</button></div></td></tr>
 </table>
 
 <div class="comment-box">
@@ -148,12 +199,12 @@
 <h2>F. SEO, Performance y Metadata</h2>
 
 <table>
-  <tr><th style="width:80px;">ID</th><th style="width:100px;">Pattern</th><th>Requirement</th></tr>
-  <tr><td>EARS-029</td><td><span class="tag">Ubiquitous</span></td><td>The landing page shall include Open Graph meta tags (<code>og:title</code>, <code>og:description</code>, <code>og:image</code>, <code>og:url</code>) for link previews on social platforms.</td></tr>
-  <tr><td>EARS-030</td><td><span class="tag">Ubiquitous</span></td><td>The landing page shall include a favicon in SVG and PNG formats.</td></tr>
-  <tr><td>EARS-031</td><td><span class="tag">Ubiquitous</span></td><td>The landing page shall include structured data (JSON-LD) with Organization and SoftwareApplication schema types.</td></tr>
-  <tr><td>EARS-032</td><td><span class="tag">Ubiquitous</span></td><td>The landing page shall load the Inter font from Google Fonts or serve it as a self-hosted WOFF2 file.</td></tr>
-  <tr><td>EARS-033</td><td><span class="tag">Ubiquitous</span></td><td>The landing page shall achieve a Lighthouse Performance score of 90 or higher on mobile.</td></tr>
+  <tr><th class="check-col">Cumple</th><th style="width:80px;">ID</th><th style="width:100px;">Pattern</th><th>Requirement</th><th class="status-col">Estado</th></tr>
+  <tr data-id="029"><td class="check-col"><input type="checkbox" onchange="updateRow(this)"></td><td>EARS-029</td><td><span class="tag">Ubiquitous</span></td><td>The landing page shall include Open Graph meta tags (<code>og:title</code>, <code>og:description</code>, <code>og:image</code>, <code>og:url</code>) for link previews on social platforms.</td><td class="status-col"><div class="status-btns"><button class="status-btn ok-btn" onclick="setStatus(this,'ok')">OK</button><button class="status-btn rev-btn" onclick="setStatus(this,'rev')">Revision</button></div></td></tr>
+  <tr data-id="030"><td class="check-col"><input type="checkbox" onchange="updateRow(this)"></td><td>EARS-030</td><td><span class="tag">Ubiquitous</span></td><td>The landing page shall include a favicon in SVG and PNG formats.</td><td class="status-col"><div class="status-btns"><button class="status-btn ok-btn" onclick="setStatus(this,'ok')">OK</button><button class="status-btn rev-btn" onclick="setStatus(this,'rev')">Revision</button></div></td></tr>
+  <tr data-id="031"><td class="check-col"><input type="checkbox" onchange="updateRow(this)"></td><td>EARS-031</td><td><span class="tag">Ubiquitous</span></td><td>The landing page shall include structured data (JSON-LD) with Organization and SoftwareApplication schema types.</td><td class="status-col"><div class="status-btns"><button class="status-btn ok-btn" onclick="setStatus(this,'ok')">OK</button><button class="status-btn rev-btn" onclick="setStatus(this,'rev')">Revision</button></div></td></tr>
+  <tr data-id="032"><td class="check-col"><input type="checkbox" onchange="updateRow(this)"></td><td>EARS-032</td><td><span class="tag">Ubiquitous</span></td><td>The landing page shall load the Inter font from Google Fonts or serve it as a self-hosted WOFF2 file.</td><td class="status-col"><div class="status-btns"><button class="status-btn ok-btn" onclick="setStatus(this,'ok')">OK</button><button class="status-btn rev-btn" onclick="setStatus(this,'rev')">Revision</button></div></td></tr>
+  <tr data-id="033"><td class="check-col"><input type="checkbox" onchange="updateRow(this)"></td><td>EARS-033</td><td><span class="tag">Ubiquitous</span></td><td>The landing page shall achieve a Lighthouse Performance score of 90 or higher on mobile.</td><td class="status-col"><div class="status-btns"><button class="status-btn ok-btn" onclick="setStatus(this,'ok')">OK</button><button class="status-btn rev-btn" onclick="setStatus(this,'rev')">Revision</button></div></td></tr>
 </table>
 
 <div class="comment-box">
@@ -165,10 +216,10 @@
 <h2>G. Seguridad</h2>
 
 <table>
-  <tr><th style="width:80px;">ID</th><th style="width:100px;">Pattern</th><th>Requirement</th></tr>
-  <tr><td>EARS-034</td><td><span class="tag">Ubiquitous</span></td><td>The system shall set the following HTTP headers on all responses: <code>X-Content-Type-Options: nosniff</code>, <code>X-Frame-Options: DENY</code>, <code>Referrer-Policy: strict-origin-when-cross-origin</code>.</td></tr>
-  <tr><td>EARS-035</td><td><span class="tag">Ubiquitous</span></td><td>The Google OAuth client ID shall be stored as an environment variable, not hardcoded in client-side code.</td></tr>
-  <tr><td>EARS-036</td><td><span class="tag">Ubiquitous</span></td><td>The system shall validate the Google ID token's <code>iss</code>, <code>aud</code>, and <code>exp</code> claims on the backend before creating a session.</td></tr>
+  <tr><th class="check-col">Cumple</th><th style="width:80px;">ID</th><th style="width:100px;">Pattern</th><th>Requirement</th><th class="status-col">Estado</th></tr>
+  <tr data-id="034"><td class="check-col"><input type="checkbox" onchange="updateRow(this)"></td><td>EARS-034</td><td><span class="tag">Ubiquitous</span></td><td>The system shall set the following HTTP headers on all responses: <code>X-Content-Type-Options: nosniff</code>, <code>X-Frame-Options: DENY</code>, <code>Referrer-Policy: strict-origin-when-cross-origin</code>.</td><td class="status-col"><div class="status-btns"><button class="status-btn ok-btn" onclick="setStatus(this,'ok')">OK</button><button class="status-btn rev-btn" onclick="setStatus(this,'rev')">Revision</button></div></td></tr>
+  <tr data-id="035"><td class="check-col"><input type="checkbox" onchange="updateRow(this)"></td><td>EARS-035</td><td><span class="tag">Ubiquitous</span></td><td>The Google OAuth client ID shall be stored as an environment variable, not hardcoded in client-side code.</td><td class="status-col"><div class="status-btns"><button class="status-btn ok-btn" onclick="setStatus(this,'ok')">OK</button><button class="status-btn rev-btn" onclick="setStatus(this,'rev')">Revision</button></div></td></tr>
+  <tr data-id="036"><td class="check-col"><input type="checkbox" onchange="updateRow(this)"></td><td>EARS-036</td><td><span class="tag">Ubiquitous</span></td><td>The system shall validate the Google ID token's <code>iss</code>, <code>aud</code>, and <code>exp</code> claims on the backend before creating a session.</td><td class="status-col"><div class="status-btns"><button class="status-btn ok-btn" onclick="setStatus(this,'ok')">OK</button><button class="status-btn rev-btn" onclick="setStatus(this,'rev')">Revision</button></div></td></tr>
 </table>
 
 <div class="comment-box">
@@ -199,6 +250,93 @@
 <footer>
   Voces.ai — EARS Requirements v2 — Documento para feedback interno — 25 marzo 2026
 </footer>
+
+<script>
+const STORAGE_KEY = 'voces_ears_state';
+
+function loadState() {
+  try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; } catch { return {}; }
+}
+function saveState(state) { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
+
+function setStatus(btn, type) {
+  const row = btn.closest('tr');
+  const id = row.dataset.id;
+  const state = loadState();
+  const current = state[id]?.status;
+
+  // Toggle off if same button clicked
+  if (current === type) {
+    delete state[id];
+    row.classList.remove('row-ok', 'row-rev');
+    btn.classList.remove('active');
+  } else {
+    state[id] = state[id] || {};
+    state[id].status = type;
+    row.classList.remove('row-ok', 'row-rev');
+    row.classList.add(type === 'ok' ? 'row-ok' : 'row-rev');
+    row.querySelectorAll('.status-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+  saveState(state);
+  updateSummary();
+}
+
+function updateRow(checkbox) {
+  const row = checkbox.closest('tr');
+  const id = row.dataset.id;
+  const state = loadState();
+  state[id] = state[id] || {};
+  state[id].checked = checkbox.checked;
+  row.classList.toggle('row-done', checkbox.checked);
+  saveState(state);
+  updateSummary();
+}
+
+function updateSummary() {
+  const state = loadState();
+  const rows = document.querySelectorAll('tr[data-id]');
+  let ok = 0, rev = 0, pending = 0;
+  rows.forEach(r => {
+    const id = r.dataset.id;
+    const s = state[id]?.status;
+    if (s === 'ok') ok++;
+    else if (s === 'rev') rev++;
+    else pending++;
+  });
+  document.getElementById('count-ok').textContent = ok + ' OK';
+  document.getElementById('count-rev').textContent = rev + ' Revision';
+  document.getElementById('count-pending').textContent = pending + ' Pendientes';
+  const total = rows.length;
+  const pct = total > 0 ? Math.round((ok / total) * 100) : 0;
+  document.getElementById('progress-fill').style.width = pct + '%';
+
+  const bar = document.getElementById('summary-bar');
+  bar.classList.toggle('visible', ok > 0 || rev > 0);
+}
+
+// Restore state on load
+document.addEventListener('DOMContentLoaded', function() {
+  const state = loadState();
+  document.querySelectorAll('tr[data-id]').forEach(row => {
+    const id = row.dataset.id;
+    const s = state[id];
+    if (!s) return;
+    if (s.checked) {
+      row.querySelector('input[type="checkbox"]').checked = true;
+      row.classList.add('row-done');
+    }
+    if (s.status === 'ok') {
+      row.classList.add('row-ok');
+      row.querySelector('.ok-btn').classList.add('active');
+    } else if (s.status === 'rev') {
+      row.classList.add('row-rev');
+      row.querySelector('.rev-btn').classList.add('active');
+    }
+  });
+  updateSummary();
+});
+</script>
 
 </body>
 </html>
