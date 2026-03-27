@@ -83,7 +83,7 @@
   .navbar-logo { font-size: 1.15rem; font-weight: 800; display: flex; align-items: center; gap: 8px; }
   .navbar-logo svg { color: var(--purple); }
   .navbar-links { display: flex; gap: 32px; }
-  .navbar-links a { font-size: 0.88rem; color: var(--gray-600); font-weight: 500; transition: color 0.15s; }
+  .navbar-links a { font-size: 0.88rem; color: var(--gray-600); font-weight: 400; transition: color 0.15s; }
   .navbar-links a:hover { color: var(--dark-2); }
   .navbar-actions { display: flex; align-items: center; gap: 10px; }
   .lang-select {
@@ -98,7 +98,7 @@
     background: #fff; z-index: 99; padding: 24px; flex-direction: column; gap: 0;
   }
   .mobile-menu.open { display: flex; }
-  .mobile-menu a { font-size: 1rem; padding: 16px 0; border-bottom: 1px solid var(--gray-200); color: var(--dark-2); font-weight: 500; }
+  .mobile-menu a { font-size: 1rem; padding: 16px 0; border-bottom: 1px solid var(--gray-200); color: var(--dark-2); font-weight: 600; }
 
   /* === HERO === */
   .hero { padding: 72px 0 56px; background: linear-gradient(180deg, var(--purple-bg) 0%, #fff 100%); text-align: center; }
@@ -265,7 +265,7 @@
   }
   .pricing-card h4 { font-size: 1.05rem; font-weight: 700; margin-bottom: 4px; }
   .pricing-card .price { font-size: 1.75rem; font-weight: 800; margin: 12px 0 4px; }
-  .pricing-card .price span { font-size: 0.85rem; font-weight: 500; color: var(--gray-600); }
+  .pricing-card .price span { font-size: 0.85rem; font-weight: 400; color: var(--gray-600); }
   .pricing-card .price-note { font-size: 0.78rem; color: var(--gray-400); margin-bottom: 20px; }
   .pricing-card ul { list-style: none; margin-bottom: 24px; flex: 1; }
   .pricing-card ul li {
@@ -349,7 +349,7 @@
   }
   .user-dropdown a, .user-dropdown button {
     display: flex; align-items: center; gap: 8px; width: 100%; padding: 10px 14px;
-    font-size: 0.85rem; font-weight: 500; color: var(--dark-2); background: none;
+    font-size: 0.85rem; font-weight: 400; color: var(--dark-2); background: none;
     border: none; cursor: pointer; font-family: inherit; text-align: left;
     transition: background 0.1s;
   }
@@ -370,6 +370,8 @@
 </style>
 </head>
 <body>
+
+<noscript><p style="text-align:center;padding:20px;font-family:sans-serif;">Este sitio requiere JavaScript para funcionar correctamente.</p></noscript>
 
 <!-- NAVBAR -->
 <nav class="navbar">
@@ -682,10 +684,10 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.4"></script>
 <script>
 // Supabase Auth
-const _supabase = supabase.createClient(
+var _supabase = typeof supabase !== 'undefined' ? supabase.createClient(
   'https://efprxfxvuyniqixugixz.supabase.co',
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVmcHJ4Znh2dXluaXFpeHVnaXh6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ0NzI1MzAsImV4cCI6MjA5MDA0ODUzMH0.8qvRplB2EntMzaygeae1QsSqo1VkG5IW-ZXN18GjM8I'
-);
+) : null;
 
 // Cookie consent (EARS-013 to 017)
 function handleCookie(accepted) {
@@ -721,6 +723,7 @@ function openLogin() { document.getElementById('login-modal').classList.add('ope
 function closeLogin() { document.getElementById('login-modal').classList.remove('open'); }
 document.addEventListener('keydown', function(e) { if (e.key === 'Escape') { closeLogin(); document.getElementById('user-dropdown').classList.remove('open'); } });
 async function loginWithGoogle() {
+  if (!_supabase) { alert('Servicio no disponible. Intenta mas tarde.'); return; }
   const { error } = await _supabase.auth.signInWithOAuth({
     provider: 'google',
     options: { redirectTo: 'https://0rgan1co.github.io/landing_voces/' }
@@ -749,8 +752,28 @@ function updateAuthUI(session) {
   }
 }
 
-_supabase.auth.onAuthStateChange(function(event, session) { updateAuthUI(session); });
-_supabase.auth.getSession().then(function(res) { updateAuthUI(res.data.session); });
+if (_supabase) _supabase.auth.onAuthStateChange(function(event, session) {
+  // EARS-012: if refresh fails, clear session and show login modal
+  if (event === 'TOKEN_REFRESHED' && !session) {
+    _supabase.auth.signOut();
+    openLogin();
+    return;
+  }
+  if (event === 'SIGNED_OUT') {
+    updateAuthUI(null);
+    return;
+  }
+  updateAuthUI(session);
+});
+if (_supabase) _supabase.auth.getSession().then(function(res) {
+  if (res.error) {
+    // EARS-012: session expired and refresh failed
+    _supabase.auth.signOut();
+    openLogin();
+    return;
+  }
+  updateAuthUI(res.data.session);
+});
 
 function toggleUserDropdown() {
   document.getElementById('user-dropdown').classList.toggle('open');
@@ -764,7 +787,7 @@ document.addEventListener('click', function(e) {
 });
 
 async function logoutUser() {
-  await _supabase.auth.signOut();
+  if (_supabase) await _supabase.auth.signOut();
   closeLogin();
   window.location.reload();
 }
