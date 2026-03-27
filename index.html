@@ -8,11 +8,14 @@
 <!-- EARS-029: Open Graph -->
 <meta property="og:type" content="website">
 <meta property="og:title" content="Voces.ai — Diagnostico cultural con IA">
-<meta property="og:description" content="Cientos de entrevistas con IA. Anonimas. En semanas, no meses. Escuchar a tu organización para mejorar los resultados.">
+<meta property="og:description" content="Entrevistas individuales con IA. Anonimas. Revela las narrativas que nadie pone en agenda.">
 <meta property="og:url" content="https://0rgan1co.github.io/landing_voces/">
 <meta property="og:image" content="https://0rgan1co.github.io/landing_voces/og-image.png">
 <meta property="og:locale" content="es_AR">
 <meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://0rgan1co.github.io/landing_voces/">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#7B2FF7">
 <!-- EARS-030: Favicon -->
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%237B2FF7' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z'/%3E%3Cpath d='M19 10v2a7 7 0 0 1-14 0v-2'/%3E%3Cline x1='12' x2='12' y1='19' y2='22'/%3E%3C/svg%3E">
 <link rel="icon" type="image/png" sizes="32x32" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAYRJREFUWEftlrFOwzAQhn+nSExMbEi8AC/AwMrEyMbCxMTKxsjIyMgb8AIMTExITExMSIgFCaHc6ey4TuLYSZoW1FNk+/7v7v87O8QWf7TF+vEPYOMZ2PoMxLpg2xtIBUBEJwG8BXCKiA6UX7IOkLkDZInonIjeA7gB4JaZX1e1I+sAGQEg0yPiYwCPiOg5ET0C8IKZ71a1I+sAaQeIaJqIPgN4DOAxEb0E8JSZ71e1I8sOkBkAkgMxzzPzc2b+vKodWXaAjACQGQDZCzE/I6IXRPSMme9WtSPLDpAZADIDQHIg5jlmfs7MX1a1I8sOEFkPSGeA6BSAPcw8T0QPmfmBiBaI6NWKM5BlB8gcAJkB8HcAJHtgfkrMj5j54Yp25L8ByD8gsgfILAB/B0DyIORZZn7EzA+Y+T4z3xPRqxVnIKvugIwBkOyBeZaZHzHzfWa+y8x3RPSGRF+Z+fuqduS/AcjGb8G/HSDrAXIZoDsb/J9fQ7IJZBKAdRswAd8Bz3lfMAVPHocAAAAASUVORK5CYII=">
@@ -25,7 +28,9 @@
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap"></noscript>
 <style>
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; }
@@ -153,7 +158,7 @@
     display: flex; align-items: center; justify-content: center; margin-bottom: 16px;
   }
   .feature-icon svg { width: 20px; height: 20px; color: var(--purple); }
-  .feature-card h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 6px; line-height: 1.3; }
+  .feature-card h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 6px; line-height: 1.3; }
   .feature-card p { font-size: 0.85rem; color: var(--gray-600); line-height: 1.5; }
 
   /* === HOW IT WORKS === */
@@ -172,7 +177,7 @@
     font-size: 1rem; font-weight: 700; margin: 0 auto 14px;
     box-shadow: 0 2px 8px rgba(123,47,247,0.25);
   }
-  .step h4 { font-size: 0.9rem; font-weight: 700; margin-bottom: 6px; }
+  .step h3 { font-size: 0.9rem; font-weight: 700; margin-bottom: 6px; }
   .step p { font-size: 0.82rem; color: var(--gray-600); line-height: 1.5; max-width: 200px; margin: 0 auto; }
 
   /* === USE CASES (tabs) === */
@@ -193,7 +198,7 @@
     border: 1px solid var(--gray-200); box-shadow: 0 2px 8px rgba(0,0,0,0.04);
   }
   .tab-panel.active { display: block; }
-  .tab-panel h4 { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
+  .tab-panel h3 { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
   .tab-panel p { font-size: 0.9rem; color: var(--gray-600); line-height: 1.6; }
 
   /* === CTA FINAL === */
@@ -353,6 +358,9 @@
   .user-dropdown .logout-btn { color: #dc2626; border-top: 1px solid var(--gray-200); }
   .user-dropdown .logout-btn svg { color: #dc2626; }
 
+  /* === SR-ONLY (accessibility) === */
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+
   /* === SCROLL REVEAL === */
   .reveal {
     opacity: 0; transform: translateY(24px);
@@ -412,9 +420,9 @@
 <!-- HERO -->
 <section class="hero">
   <div class="container">
-    <span class="tag">Nuevo</span>
-    <h1>Escuchar a tu organización para mejorar los resultados</h1>
-    <p class="hero-sub">Cientos de entrevistas con IA. Anonimas. En semanas, no meses.</p>
+    <span class="tag">Diagnostico cultural con IA</span>
+    <h1>Lo que tu organizacion no dice en voz alta esta frenando los resultados</h1>
+    <p class="hero-sub">Voces.ai conduce entrevistas individuales con IA, anonimiza cada respuesta y revela las narrativas que nadie pone en agenda.</p>
     <div class="hero-ctas">
       <a href="https://tidycal.com/roldanjorgex" target="_blank" rel="noopener" class="btn btn-primary">Agendar una demo &rarr;</a>
       <a href="#como-funciona" class="btn btn-ghost">Ver como funciona</a>
@@ -446,11 +454,12 @@
 <!-- SOCIAL PROOF -->
 <section class="social-proof">
   <div class="container">
+    <p class="sr-only">Organizaciones que confian en Voces.ai</p>
     <div class="logos-row">
-      <img src="assets/logos/gcba.png" alt="Gobierno de la Ciudad de Buenos Aires" height="32">
-      <a href="https://crea.org.ar/" target="_blank" rel="noopener"><img src="assets/logos/crea.svg" alt="CREA" height="28"></a>
-      <a href="https://www.climatech.ar/" target="_blank" rel="noopener"><img src="assets/logos/climatech.png" alt="ClimaTech" height="24"></a>
-      <a href="https://akapol.com/" target="_blank" rel="noopener"><img src="assets/logos/akapol.png" alt="AKAPOL" height="26"></a>
+      <img src="assets/logos/gcba.png" alt="Gobierno de la Ciudad de Buenos Aires" height="32" width="auto" loading="lazy">
+      <a href="https://crea.org.ar/" target="_blank" rel="noopener noreferrer"><img src="assets/logos/crea.svg" alt="CREA" height="28" width="auto" loading="lazy"></a>
+      <a href="https://www.climatech.ar/" target="_blank" rel="noopener noreferrer"><img src="assets/logos/climatech.png" alt="ClimaTech" height="24" width="auto" loading="lazy"></a>
+      <a href="https://akapol.com/" target="_blank" rel="noopener noreferrer"><img src="assets/logos/akapol.png" alt="AKAPOL" height="26" width="auto" loading="lazy"></a>
     </div>
   </div>
 </section>
@@ -458,48 +467,48 @@
 <!-- FEATURES -->
 <section id="funcionalidades" class="features reveal">
   <div class="container">
-    <h2>Menos formularios. Mas escucha. Mejores conversaciones.</h2>
+    <h2>Que pasa cuando 500 personas hablan sin filtro?</h2>
     <div class="features-grid">
       <div class="feature-card">
         <div class="feature-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/></svg>
         </div>
-        <h4>Entrevistas con IA</h4>
+        <h3>Entrevistas con IA</h3>
         <p>500 entrevistas uno a uno, sin coordinar una sola. Cada persona habla a su ritmo, desde su dispositivo.</p>
       </div>
       <div class="feature-card">
         <div class="feature-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
         </div>
-        <h4>Anonimizacion por diseno</h4>
+        <h3>Anonimizacion por diseno</h3>
         <p>La identidad se elimina antes de cualquier analisis. No es una politica: es arquitectura.</p>
       </div>
       <div class="feature-card">
         <div class="feature-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
         </div>
-        <h4>Extraccion de narrativas</h4>
+        <h3>Extraccion de narrativas</h3>
         <p>Cada entrevista se recorta en fragmentos con hecho, contexto y consecuencia. Sin interpretacion manual.</p>
       </div>
       <div class="feature-card">
         <div class="feature-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><path d="M13 6h3a2 2 0 0 1 2 2v7"/><path d="M11 18H8a2 2 0 0 1-2-2V9"/></svg>
         </div>
-        <h4>Patrones y tensiones</h4>
+        <h3>Patrones y tensiones</h3>
         <p>Detecta que se repite, que se contradice y que nadie puso en agenda. Clusters, no promedios.</p>
       </div>
       <div class="feature-card">
         <div class="feature-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" x2="18" y1="20" y2="10"/><line x1="12" x2="12" y1="20" y2="4"/><line x1="6" x2="6" y1="20" y2="14"/></svg>
         </div>
-        <h4>Medicion del cambio</h4>
+        <h3>Medicion del cambio</h3>
         <p>Compara narrativas antes y despues. Mide si algo se movio con evidencia, no con percepciones.</p>
       </div>
       <div class="feature-card">
         <div class="feature-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
         </div>
-        <h4>Hallazgos que activan dialogos</h4>
+        <h3>Hallazgos que activan dialogos</h3>
         <p>El dato llega a la mesa donde se toman las decisiones. No es un PDF: es una herramienta de conversacion.</p>
       </div>
     </div>
@@ -509,26 +518,26 @@
 <!-- HOW IT WORKS -->
 <section id="como-funciona" class="how-it-works reveal">
   <div class="container">
-    <h2>De la escucha a insights accionables de mejora continua</h2>
+    <h2>De silencio organizacional a conversaciones que transforman</h2>
     <div class="steps">
       <div class="step">
         <div class="step-num">1</div>
-        <h4>Configura</h4>
+        <h3>Configura</h3>
         <p>Define preguntas, alcance y segmentos de tu organizacion.</p>
       </div>
       <div class="step">
         <div class="step-num">2</div>
-        <h4>La IA entrevista</h4>
+        <h3>La IA entrevista</h3>
         <p>Cada persona conversa de forma individual y anonima. Sin agendar.</p>
       </div>
       <div class="step">
         <div class="step-num">3</div>
-        <h4>Emergen narrativas</h4>
+        <h3>Emergen narrativas</h3>
         <p>Patrones, clusters y hallazgos se hacen visibles automaticamente.</p>
       </div>
       <div class="step">
         <div class="step-num">4</div>
-        <h4>Activa el dialogo</h4>
+        <h3>Activa el dialogo</h3>
         <p>Comparte hallazgos con tu equipo y abre las conversaciones que importan.</p>
       </div>
     </div>
@@ -540,28 +549,28 @@
   <div class="container">
     <span class="tag">Aplicaciones</span>
     <h2>Una plataforma, multiples diagnosticos</h2>
-    <p class="use-cases-sub">Para cualquier lider que necesite entender que pasa adentro antes de decidir que hacer afuera.</p>
-    <div class="tabs">
-      <button class="tab-btn active" onclick="showTab(0)">Negocios</button>
-      <button class="tab-btn" onclick="showTab(1)">Personas</button>
-      <button class="tab-btn" onclick="showTab(2)">Procesos</button>
-      <button class="tab-btn" onclick="showTab(3)">Cambio</button>
+    <p class="use-cases-sub">Cada organizacion tiene una conversacion pendiente. Cual es la tuya?</p>
+    <div class="tabs" role="tablist">
+      <button class="tab-btn active" role="tab" aria-selected="true" onclick="showTab(0)">Negocios</button>
+      <button class="tab-btn" role="tab" aria-selected="false" onclick="showTab(1)">Personas</button>
+      <button class="tab-btn" role="tab" aria-selected="false" onclick="showTab(2)">Procesos</button>
+      <button class="tab-btn" role="tab" aria-selected="false" onclick="showTab(3)">Cambio</button>
     </div>
-    <div class="tab-panel active" data-tab="0">
-      <h4>Negocios</h4>
-      <p>Antes de lanzar un producto, abrir un mercado o cerrar una adquisicion: escucha a quienes van a ejecutar. Entrevista a equipos comerciales, partners y canales para ver donde se pierde claridad y donde hay oportunidad.</p>
+    <div class="tab-panel active" role="tabpanel" data-tab="0">
+      <h3>Negocios</h3>
+      <p>Vas a abrir un mercado, lanzar un producto o cerrar una adquisicion. Escuchaste a quienes van a ejecutar? Voces.ai te muestra donde se pierde claridad antes de que cueste plata.</p>
     </div>
-    <div class="tab-panel" data-tab="1">
-      <h4>Personas</h4>
-      <p>Reemplaza la encuesta anual por conversaciones que muestran que frena a los equipos, como se vive el liderazgo desde cada nivel y que valores se practican vs. cuales solo se declaran.</p>
+    <div class="tab-panel" role="tabpanel" data-tab="1">
+      <h3>Personas</h3>
+      <p>La encuesta anual te dice que "el clima es 7.2". Voces.ai te dice por que la gente se va, que frena a los equipos y que valores se practican vs. cuales solo se declaran.</p>
     </div>
-    <div class="tab-panel" data-tab="2">
-      <h4>Procesos</h4>
-      <p>Identifica donde se traba la operacion, que coordinacion falla entre areas y que nadie se anima a poner en agenda. Muestra la brecha entre como se disenaron los procesos y como se viven.</p>
+    <div class="tab-panel" role="tabpanel" data-tab="2">
+      <h3>Procesos</h3>
+      <p>Hay procesos disenados en una sala y vividos de otra forma en los pasillos. Voces.ai muestra la brecha — y quien se anima a ponerla en agenda.</p>
     </div>
-    <div class="tab-panel" data-tab="3">
-      <h4>Cambio</h4>
-      <p>Compara narrativas antes y despues de una intervencion. Muestra si el cambio ocurrio o si solo cambio el discurso. Mide si la organizacion esta lista para lo que viene.</p>
+    <div class="tab-panel" role="tabpanel" data-tab="3">
+      <h3>Cambio</h3>
+      <p>Hiciste la transformacion. Cambio algo de verdad o solo cambio el discurso? Compara narrativas antes y despues con evidencia, no con percepciones.</p>
     </div>
   </div>
 </section>
@@ -570,11 +579,11 @@
 <section id="precios" class="pricing reveal">
   <div class="container">
     <span class="tag">Precios</span>
-    <h2>Simple, transparente, sin sorpresas</h2>
+    <h2>Elegi como empezar a escuchar</h2>
     <p class="pricing-sub">Cada plan incluye entrevistas con IA, anonimizacion y extraccion de narrativas.</p>
     <div class="pricing-grid">
       <div class="pricing-card">
-        <h4>Piloto</h4>
+        <h3>Piloto</h3>
         <div class="price">Gratis</div>
         <div class="price-note">Hasta 30 entrevistas</div>
         <ul>
@@ -588,7 +597,7 @@
       </div>
       <div class="pricing-card featured">
         <div class="pricing-badge">Mas popular</div>
-        <h4>Profesional</h4>
+        <h3>Profesional</h3>
         <div class="price">Consultar <span></span></div>
         <div class="price-note">Hasta 500 entrevistas por proyecto</div>
         <ul>
@@ -602,7 +611,7 @@
         <a href="https://tidycal.com/roldanjorgex" target="_blank" rel="noopener" class="btn btn-primary">Agendar Demo</a>
       </div>
       <div class="pricing-card">
-        <h4>Enterprise</h4>
+        <h3>Enterprise</h3>
         <div class="price">A medida</div>
         <div class="price-note">Para organizaciones grandes</div>
         <ul>
@@ -622,7 +631,7 @@
 <!-- CTA FINAL -->
 <section id="agendar" class="cta-final reveal">
   <div class="container">
-    <h2>Listo para escuchar?</h2>
+    <h2>Tu organizacion ya esta hablando. La pregunta es si estas escuchando.</h2>
     <div class="cta-final-actions">
       <a href="https://tidycal.com/roldanjorgex" target="_blank" rel="noopener" class="btn btn-primary">Agendar Demo &rarr;</a>
       <a href="https://wa.me/541160135064?text=Hola!%20Quiero%20saber%20m%C3%A1s%20sobre%20Voces.ai" target="_blank" rel="noopener" class="btn btn-ghost">Escribinos por WhatsApp</a>
@@ -662,7 +671,7 @@
 </div>
 
 <!-- COOKIE BANNER -->
-<div id="cookie-banner" class="cookie-banner">
+<div id="cookie-banner" class="cookie-banner" role="dialog" aria-label="Consentimiento de cookies">
   <p>Usamos cookies de Google Analytics para entender el uso del sitio y mejorar el producto.</p>
   <div class="cookie-actions">
     <button class="btn btn-outline" onclick="handleCookie(false)" style="padding:7px 16px; font-size:0.82rem;">Rechazar</button>
@@ -670,7 +679,7 @@
   </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.4"></script>
 <script>
 // Supabase Auth
 const _supabase = supabase.createClient(
@@ -710,6 +719,7 @@ function loadGA() {
 // Login modal (EARS-001, EARS-002)
 function openLogin() { document.getElementById('login-modal').classList.add('open'); }
 function closeLogin() { document.getElementById('login-modal').classList.remove('open'); }
+document.addEventListener('keydown', function(e) { if (e.key === 'Escape') { closeLogin(); document.getElementById('user-dropdown').classList.remove('open'); } });
 async function loginWithGoogle() {
   const { error } = await _supabase.auth.signInWithOAuth({
     provider: 'google',
@@ -783,7 +793,7 @@ document.querySelectorAll('.reveal').forEach(function(el) { revealObserver.obser
 
 // Tabs
 function showTab(index) {
-  document.querySelectorAll('.tab-btn').forEach(function(btn, i) { btn.classList.toggle('active', i === index); });
+  document.querySelectorAll('.tab-btn').forEach(function(btn, i) { btn.classList.toggle('active', i === index); btn.setAttribute('aria-selected', i === index ? 'true' : 'false'); });
   document.querySelectorAll('.tab-panel').forEach(function(panel, i) { panel.classList.toggle('active', i === index); });
 }
 </script>
