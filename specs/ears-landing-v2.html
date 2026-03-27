@@ -79,31 +79,29 @@
 
 <h1>EARS Requirements — Voces.ai Landing Page v2</h1>
 <p class="meta">
-  Estado: <strong>Borrador para review</strong> &nbsp;|&nbsp; Fecha: 25 marzo 2026 &nbsp;|&nbsp; Autor: Equipo Voces.ai<br>
+  Estado: <strong>En progreso — 24/36 OK</strong> &nbsp;|&nbsp; Actualizado: 26 marzo 2026 &nbsp;|&nbsp; Autor: Equipo Voces.ai<br>
   Landing actual: <a href="https://0rgan1co.github.io/landing_voces/">https://0rgan1co.github.io/landing_voces/</a> &nbsp;|&nbsp;
   Repo: <a href="https://github.com/0rgan1co/landing_voces">github.com/0rgan1co/landing_voces</a>
 </p>
 
 <h2>Estado actual (v1)</h2>
 
-<h3>Lo que funciona</h3>
+<h3>Lo que funciona (24/36 OK)</h3>
 <div class="ok">
-  Estructura completa (10 secciones) · Copy sin adjetivos, orientado a comportamientos · Responsive mobile · 4 puntos de conversion (navbar, hero, demos, cierre) · Logos reales en social proof (GCBA, CREA, ClimaTech, AKAPOL)
+  Estructura completa (11 secciones inc. pricing) · Google OAuth via Supabase (sa-east-1) · Avatar + dropdown post-login con logout · Cookie banner con persistencia localStorage · GA condicional (placeholder ID) · OG tags, favicon SVG+PNG, JSON-LD · Inter font · Seccion de precios (3 planes) · CTAs conectados a TidyCal y WhatsApp · Scroll-reveal animations · Logos reales en social proof (GCBA, CREA, ClimaTech, AKAPOL)
 </div>
 
-<h3>Gaps detectados</h3>
+<h3>Gaps pendientes (12 restantes)</h3>
 <div class="gap">
   <ul style="margin:0; padding-left:18px;">
-    <li>Cookie banner no persiste la decision (sin localStorage)</li>
-    <li>Selector de idioma no funciona</li>
-    <li>Link "Precios" no lleva a ninguna seccion</li>
-    <li>No hay boton "Entrar" en navbar para usuarios existentes</li>
-    <li>No hay Google Analytics integrado (el cookie banner lo menciona pero no lo carga)</li>
-    <li>Demo section tiene placeholders (screenshots vacios)</li>
-    <li>No hay favicon, OG tags ni structured data</li>
-    <li>No hay autenticacion ni acceso a dashboard</li>
-    <li>CTAs de "Agendar Demo" no conectan a Calendly/Cal.com</li>
-    <li>WhatsApp CTA no tiene link real</li>
+    <li><strong>EARS-005:</strong> Redirect post-login a /dashboard (dashboard no existe aun)</li>
+    <li><strong>EARS-007:</strong> Restriccion por dominio de email</li>
+    <li><strong>EARS-012:</strong> Redirect a modal si refresh token falla</li>
+    <li><strong>EARS-018/019/020:</strong> Selector de idioma no funciona (i18n)</li>
+    <li><strong>EARS-026/027/028:</strong> Demo tour con screenshots reales</li>
+    <li><strong>EARS-033:</strong> Lighthouse score &ge; 90 (sin verificar)</li>
+    <li><strong>EARS-034:</strong> HTTP security headers (GitHub Pages no lo permite)</li>
+    <li><strong>EARS-035:</strong> OAuth client ID como env var (anon key es publica por diseno)</li>
   </ul>
 </div>
 
@@ -231,14 +229,15 @@
 <h2>Priorizacion sugerida</h2>
 
 <div class="priority">
+  <p><strong>Completados:</strong> Bloque A (parcial), B, D, F (parcial)</p>
+  <p><strong>Proximos pasos sugeridos:</strong></p>
   <ol>
-    <li><strong>Bloque A</strong> — Auth + Google OAuth (habilita acceso al dashboard)</li>
-    <li><strong>Bloque B</strong> — Cookie banner (compliance basico)</li>
-    <li><strong>Bloque D</strong> — CTAs funcionales (conectar Calendly + WhatsApp)</li>
-    <li><strong>Bloque F</strong> — SEO/metadata (visibilidad)</li>
-    <li><strong>Bloque E</strong> — Demo tour (requiere screenshots reales)</li>
-    <li><strong>Bloque C</strong> — i18n (expansion regional)</li>
-    <li><strong>Bloque G</strong> — Seguridad (antes de produccion)</li>
+    <li><strong>EARS-033</strong> — Verificar Lighthouse score (rapido)</li>
+    <li><strong>EARS-005</strong> — Dashboard basico o redirect post-login (requiere webapp)</li>
+    <li><strong>Bloque E</strong> — Demo tour con screenshots reales (requiere producto)</li>
+    <li><strong>Bloque C</strong> — i18n (expansion regional, requiere traducciones)</li>
+    <li><strong>EARS-007</strong> — Restriccion por dominio (Supabase RLS o middleware)</li>
+    <li><strong>Bloque G</strong> — Security headers (requiere migrar de GitHub Pages)</li>
   </ol>
 </div>
 
@@ -315,20 +314,38 @@ function updateSummary() {
   bar.classList.toggle('visible', ok > 0 || rev > 0);
 }
 
-// Default compliance state based on current implementation (2026-03-25)
+// Default compliance state based on current implementation (2026-03-26)
 const DEFAULT_STATE = {
+  // A. Auth
   '001': { checked: true, status: 'ok' },  // Entrar button in navbar
   '002': { checked: true, status: 'ok' },  // Sign-in modal with Google button
+  '003': { checked: true, status: 'ok' },  // Google OAuth flow via Supabase
+  '004': { checked: true, status: 'ok' },  // Token exchange (Supabase handles)
+  '006': { checked: true, status: 'ok' },  // OAuth error message + return to landing
+  '008': { checked: true, status: 'ok' },  // Avatar + name in navbar when logged in
+  '009': { checked: true, status: 'ok' },  // Dropdown with Dashboard + Logout
+  '010': { checked: true, status: 'ok' },  // Logout revokes session + reload
+  '011': { checked: true, status: 'ok' },  // Silent token refresh (Supabase)
+  // B. Cookie
   '013': { checked: true, status: 'ok' },  // Cookie accept -> localStorage
   '014': { checked: true, status: 'ok' },  // Cookie reject -> localStorage
   '015': { checked: true, status: 'ok' },  // Hide banner if consent exists
-  '016': { checked: true, status: 'ok' },  // Load GA if accepted
+  '016': { checked: true, status: 'ok' },  // Load GA if accepted (placeholder ID)
   '017': { checked: true, status: 'ok' },  // No tracking if rejected
+  // C. i18n
   '021': { checked: true, status: 'ok' },  // html lang attribute
+  // D. Navigation
+  '022': { checked: true, status: 'ok' },  // Agendar Demo -> TidyCal
+  '023': { checked: true, status: 'ok' },  // WhatsApp -> wa.me
+  '024': { checked: true, status: 'ok' },  // Precios nav -> #precios section
+  '025': { checked: true, status: 'ok' },  // Pricing section with 3 plans
+  // F. SEO
   '029': { checked: true, status: 'ok' },  // OG meta tags
-  '030': { checked: true, status: 'ok' },  // Favicon SVG
+  '030': { checked: true, status: 'ok' },  // Favicon SVG + PNG
   '031': { checked: true, status: 'ok' },  // JSON-LD structured data
-  '032': { checked: true, status: 'ok' }   // Inter font from Google Fonts
+  '032': { checked: true, status: 'ok' },  // Inter font from Google Fonts
+  // G. Security
+  '036': { checked: true, status: 'ok' }   // Token validation (Supabase server-side)
 };
 
 // Restore state on load
