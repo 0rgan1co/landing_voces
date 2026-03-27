@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Application Spec: Voces.ai — v1.0</title>
+<style>
+  body { font-family: 'Inter', -apple-system, Arial, sans-serif; max-width: 816px; margin: 40px auto; padding: 0 40px; color: #1a1a2e; line-height: 1.8; font-size: 11pt; }
+  h1 { font-size: 22pt; border-bottom: 3px solid #7B2FF7; padding-bottom: 8px; margin-bottom: 4px; }
+  h2 { font-size: 15pt; color: #7B2FF7; margin-top: 36px; border-bottom: 1px solid #e0e0e0; padding-bottom: 6px; }
+  h3 { font-size: 12pt; margin-top: 24px; color: #2d2d44; }
+  p.meta { color: #888; font-size: 9pt; margin-bottom: 28px; }
+  table { width: 100%; border-collapse: collapse; margin: 14px 0 24px; font-size: 10pt; }
+  th { background: #1a1a2e; color: #fff; padding: 8px 12px; text-align: left; font-weight: 600; }
+  td { padding: 8px 12px; border-bottom: 1px solid #e8e8e8; vertical-align: top; }
+  tr:nth-child(even) { background: #fafafa; }
+  ul, ol { margin: 8px 0 16px 20px; }
+  li { margin-bottom: 4px; font-size: 10.5pt; }
+  .tag { display: inline-block; background: #f0e6ff; color: #7B2FF7; padding: 2px 8px; border-radius: 4px; font-size: 8pt; font-weight: 600; }
+  .must { font-weight: 700; color: #1a1a2e; }
+  .must-not { font-weight: 700; color: #dc2626; }
+  .should { font-weight: 700; color: #e65100; }
+  code { background: #f5f5f5; padding: 1px 5px; border-radius: 3px; font-size: 9pt; }
+  hr { border: none; border-top: 1px solid #e0e0e0; margin: 32px 0; }
+  .comment-box { background: #fffde7; border: 1px dashed #f9a825; padding: 14px; margin: 20px 0; border-radius: 6px; font-size: 10pt; }
+  .comment-box p { margin: 0; font-weight: 600; color: #f57f17; }
+  .decision-table td:first-child { font-weight: 700; width: 200px; }
+  .scope-out { background: #fafafa; border-left: 3px solid #e0e0e0; padding: 10px 14px; margin: 12px 0; font-size: 10pt; color: #636366; }
+  footer { margin-top: 40px; padding-top: 14px; border-top: 1px solid #e0e0e0; font-size: 8pt; color: #aaa; }
+  @media print { body { margin: 20px; padding: 0 20px; } }
+</style>
+</head>
+<body>
+
+<h1>Application Spec: Voces.ai</h1>
+<p class="meta">
+  <strong>Version:</strong> 1.0 &nbsp;|&nbsp;
+  <strong>Fecha:</strong> 27 marzo 2026 &nbsp;|&nbsp;
+  <strong>Estado:</strong> Borrador para review del equipo<br>
+  <strong>Target Users:</strong> Equipos de RRHH, consultores organizacionales, lideres de transformacion (3-20 usuarios por organizacion)<br>
+  <strong>Landing:</strong> <a href="https://0rgan1co.github.io/landing_voces/">0rgan1co.github.io/landing_voces</a> &nbsp;|&nbsp;
+  <strong>Repo:</strong> <a href="https://github.com/0rgan1co/landing_voces">github.com/0rgan1co/landing_voces</a> &nbsp;|&nbsp;
+  <strong>EARS Detallados:</strong> <a href="ears-landing-v2.html">ears-landing-v2.html</a>
+</p>
+
+<!-- ============================================================ -->
+<h2>1. Overview</h2>
+
+<p>Voces.ai es una plataforma de diagnostico cultural organizacional que usa inteligencia artificial para conducir entrevistas individuales masivas, anonimizar respuestas automaticamente y extraer narrativas colectivas accionables.</p>
+
+<p>El sistema transforma experiencias cualitativas en datos estructurados para identificar patrones culturales mediante IA y analisis semantico avanzado. Reemplaza encuestas de clima, focus groups y entrevistas manuales con un proceso que toma semanas en lugar de meses.</p>
+
+<!-- ============================================================ -->
+<h2>2. Objetivos</h2>
+
+<ul>
+  <li>Conducir cientos de entrevistas individuales con IA sin coordinar agendas</li>
+  <li>Garantizar anonimato por arquitectura, no por politica</li>
+  <li>Extraer narrativas estructuradas (hecho, contexto, consecuencia) de cada entrevista</li>
+  <li>Agrupar narrativas en clusters tematicos y visualizarlas en un mapa semantico</li>
+  <li>Generar hallazgos accionables que activen conversaciones de cambio</li>
+  <li>Mantenerlo simple — no es un HRIS ni un CRM, es una herramienta de escucha</li>
+</ul>
+
+<hr>
+
+<!-- ============================================================ -->
+<h2>3. Usuarios y Roles</h2>
+
+<table>
+  <tr><th>Rol</th><th>Descripcion</th></tr>
+  <tr><td><strong>Admin</strong></td><td>Control total: crear proyectos, configurar entrevistas, gestionar usuarios, ver todos los datos, exportar reportes. Puede invitar y desactivar usuarios.</td></tr>
+  <tr><td><strong>Investigador</strong></td><td>Acceso a proyectos asignados: ver entrevistas, editar narrativas, asignar tags, generar clusters. No puede gestionar usuarios ni configuracion global.</td></tr>
+  <tr><td><strong>Lector</strong></td><td>Acceso de solo lectura al dashboard de un proyecto: ver visualizaciones, clusters, hallazgos. Puede usar Voces Chat para consultar datos. No puede editar.</td></tr>
+</table>
+
+<h3>3.1 Autenticacion</h3>
+
+<ul>
+  <li>Login exclusivamente via <strong>Google OAuth</strong> (sin opcion email/password)</li>
+  <li>Solo usuarios provisioned por un Admin pueden acceder</li>
+  <li>No hay acceso de invitados ni registro publico</li>
+  <li>Los participantes de entrevistas acceden via link unico sin necesidad de cuenta</li>
+</ul>
+
+<h3>3.2 Sign Up / Primer acceso</h3>
+
+<ul>
+  <li>No existe registro publico. El flujo es:
+    <ol>
+      <li>Un Admin invita a un usuario por email desde el dashboard</li>
+      <li>El usuario recibe un email con link de invitacion</li>
+      <li>Al hacer clic, el sistema verifica que el email coincide con la invitacion</li>
+      <li>El usuario completa el login con Google OAuth</li>
+      <li>Si el email de Google coincide con el email invitado, se activa la cuenta con el rol asignado</li>
+    </ol>
+  </li>
+  <li>Si un usuario no invitado intenta hacer login, el sistema muestra: "Tu organizacion no tiene acceso. Contacta a tu administrador."</li>
+</ul>
+
+<h3>3.3 Gestion de cuentas</h3>
+
+<ul>
+  <li>Los Admins pueden <strong>desactivar</strong> cuentas (no eliminar)</li>
+  <li>Usuarios desactivados no pueden hacer login</li>
+  <li>Todos los datos y logs creados por un usuario desactivado se preservan</li>
+  <li>Usuarios desactivados se muestran como "(Desactivado) Nombre" en el sistema</li>
+  <li>Un Admin puede reactivar una cuenta en cualquier momento</li>
+</ul>
+
+<h3>3.4 Constraints de autenticacion</h3>
+
+<ul>
+  <li><span class="must">MUST:</span> Todo usuario debe estar autenticado para acceder a cualquier parte de la app.</li>
+  <li><span class="must">MUST:</span> Requests no autenticados deben redirigir al flujo de Google OAuth.</li>
+  <li><span class="must">MUST:</span> Solo cuentas explicitamente provisioned por un Admin pueden hacer login, aun si la cuenta de Google es valida.</li>
+  <li><span class="must-not">MUST NOT:</span> La app no debe soportar login con email/password.</li>
+  <li><span class="must">MUST:</span> Desactivar un usuario no debe eliminar ni alterar ningun registro que haya creado.</li>
+  <li><span class="must">MUST:</span> Usuarios desactivados no deben aparecer como opciones seleccionables al asignar roles en proyectos.</li>
+</ul>
+
+<div class="comment-box">
+  <p>Comentarios del equipo:</p>
+  <br><br>
+</div>
+
+<hr>
+
+<!-- ============================================================ -->
+<h2>4. Modulos Core</h2>
+
+<p>Los modulos core estan documentados en detalle en los <a href="ears-landing-v2.html">EARS Requirements</a> (bloques K a U). A continuacion un resumen ejecutivo:</p>
+
+<h3>4.1 Proyectos</h3>
+<p>Unidad organizativa central. Cada diagnostico es un proyecto con sus propias entrevistas, narrativas, clusters y hallazgos. Un usuario puede tener multiples proyectos.</p>
+<p><em>EARS: 050-054</em></p>
+
+<h3>4.2 Entrevistas</h3>
+<p>El agente de IA conduce entrevistas individuales y anonimas. Cada participante accede via link unico. La IA solicita narrativas concretas (lugar, tiempo, consecuencias), gestiona silencios y recuerda la garantia de anonimato.</p>
+<p><em>EARS: 055-059, 076-079</em></p>
+
+<h3>4.3 Narrativas</h3>
+<p>Fragmentos estructurados extraidos de cada entrevista (hecho + contexto + consecuencia). Cada narrativa tiene puntaje de sentimiento (-2 a +2), nivel de abstraccion (1-4) y nivel de confianza (0-100%).</p>
+<p><em>EARS: 060-064, 080-082</em></p>
+
+<h3>4.4 Clusters</h3>
+<p>Agrupaciones automaticas de narrativas por similitud semantica. Cada cluster tiene nombre y resumen generado por IA, popularidad y sentimiento promedio. Parametros ajustables: min_cluster_size y threshold.</p>
+<p><em>EARS: 064, 082, 086-088</em></p>
+
+<h3>4.5 Visualizaciones</h3>
+<p>Mapa semantico interactivo (scatter plot con UMAP), grafico de distribucion de sentimiento y heatmap de temas por categoria. Parametros ajustables: n_neighbors, min_dist. Narrativas atipicas se muestran en gris.</p>
+<p><em>EARS: 065-069, 083-085</em></p>
+
+<h3>4.6 Hallazgos y Exportacion</h3>
+<p>Resumenes generados por IA por cluster y por tag. Exportacion a PDF con resumen ejecutivo, narrativas clave, mapa y hallazgos. Chat conversacional ("Voces Chat") para consultar datos en lenguaje natural.</p>
+<p><em>EARS: 070-072</em></p>
+
+<hr>
+
+<!-- ============================================================ -->
+<h2>5. Dashboard (Pantalla de Inicio)</h2>
+
+<h3>5.1 Dashboard Personal</h3>
+<p>Cada usuario aterriza en su dashboard personal despues del login. Muestra:</p>
+<ul>
+  <li>Mis proyectos activos con metricas resumen</li>
+  <li>Entrevistas recientes y su estado</li>
+  <li>Narrativas nuevas pendientes de revision</li>
+  <li>Actividad reciente en proyectos donde soy admin o investigador</li>
+  <li>Metricas clave: total entrevistas, duracion media, % con narrativas, clusters activos</li>
+  <li><strong>Alertas:</strong> proyectos sin actividad en los ultimos 7 dias</li>
+</ul>
+
+<h3>5.2 Constraints del Dashboard</h3>
+<ul>
+  <li><span class="must">MUST:</span> "Mis proyectos" muestra solo proyectos donde el usuario es admin o miembro.</li>
+  <li><span class="must">MUST:</span> Todas las metricas se calculan en tiempo real desde datos vivos, sin cache.</li>
+  <li><span class="must">MUST:</span> Un proyecto se considera "sin actividad" si no tiene entrevistas nuevas ni cambios en los ultimos 7 dias.</li>
+</ul>
+
+<p><em>EARS: 089-090</em></p>
+
+<div class="comment-box">
+  <p>Comentarios del equipo:</p>
+  <br><br>
+</div>
+
+<hr>
+
+<!-- ============================================================ -->
+<h2>6. Notificaciones</h2>
+
+<h3>6.1 Notificaciones por Email</h3>
+
+<table>
+  <tr><th>Trigger</th><th>Destinatario(s)</th></tr>
+  <tr><td>Una entrevista se completa</td><td>Admin del proyecto</td></tr>
+  <tr><td>Se generan clusters nuevos</td><td>Admin + Investigadores del proyecto</td></tr>
+  <tr><td>Un usuario es invitado a un proyecto</td><td>Usuario invitado</td></tr>
+  <tr><td>Un proyecto lleva 7 dias sin actividad</td><td>Admin del proyecto</td></tr>
+</table>
+
+<h3>6.2 Notificacion In-App (campana)</h3>
+<p>Muestra actividad reciente en proyectos donde el usuario participa. Muestra los ultimos 30 dias de actividad.</p>
+
+<h3>6.3 Constraints</h3>
+<ul>
+  <li><span class="must">MUST:</span> Los emails se envian al correo de la cuenta Google del usuario.</li>
+  <li><span class="must-not">MUST NOT:</span> Los emails no deben incluir contenido de narrativas ni datos sensibles.</li>
+  <li><span class="should">SHOULD:</span> Los usuarios deben poder desactivar tipos individuales de notificacion desde su perfil.</li>
+  <li><span class="must">MUST:</span> La campana in-app muestra solo los ultimos 30 dias; actividad anterior se accede desde el log del proyecto.</li>
+</ul>
+
+<div class="comment-box">
+  <p>Comentarios del equipo:</p>
+  <br><br>
+</div>
+
+<hr>
+
+<!-- ============================================================ -->
+<h2>7. Log de Actividad</h2>
+
+<p>Cada proyecto mantiene un log cronologico de actividad en su pagina de detalle.</p>
+
+<h3>Tipos de entrada:</h3>
+
+<table>
+  <tr><th>Tipo</th><th>Disparador</th></tr>
+  <tr><td>Evento del sistema</td><td>Cambios de estado, creacion de registros, asignacion de roles, generacion de clusters</td></tr>
+  <tr><td>Entrevista</td><td>Inicio, completado, extraccion de narrativas</td></tr>
+  <tr><td>Nota manual</td><td>Entrada manual por admin o investigador</td></tr>
+</table>
+
+<p><strong>Cada entrada muestra:</strong> timestamp, usuario, tipo de evento, descripcion.</p>
+
+<h3>Constraints</h3>
+<ul>
+  <li><span class="must">MUST:</span> Las entradas del log son inmutables — ningun usuario puede editarlas o eliminarlas.</li>
+  <li><span class="must">MUST:</span> Todos los eventos del sistema se registran automaticamente.</li>
+  <li><span class="must">MUST:</span> Las notas manuales requieren una descripcion no vacia.</li>
+</ul>
+
+<hr>
+
+<!-- ============================================================ -->
+<h2>8. Busqueda y Filtros</h2>
+
+<ul>
+  <li><strong>Busqueda global:</strong> Busca en proyectos, entrevistas y narrativas por texto; los resultados muestran el tipo de registro y el proyecto al que pertenecen.</li>
+  <li><strong>Filtros por modulo:</strong> Cada vista de lista soporta filtrado por cualquier campo y ordenamiento por cualquier columna.</li>
+  <li><strong>Filtros guardados:</strong> Fuera de alcance para v1.</li>
+</ul>
+
+<h3>Constraints</h3>
+<ul>
+  <li><span class="must">MUST:</span> La busqueda global debe retornar resultados de todos los tipos de entidad simultaneamente.</li>
+  <li><span class="must">MUST:</span> La busqueda debe matchear strings parciales (ej: "lid" matchea "Liderazgo").</li>
+  <li><span class="must">MUST:</span> Los resultados deben indicar claramente el tipo de registro (Proyecto, Entrevista, Narrativa).</li>
+  <li><span class="must">MUST:</span> Los filtros deben ser combinables (logica AND).</li>
+</ul>
+
+<hr>
+
+<!-- ============================================================ -->
+<h2>9. Exportacion y Reportes</h2>
+
+<h3>Reportes disponibles en v1:</h3>
+
+<table>
+  <tr><th>Reporte</th><th>Descripcion</th></tr>
+  <tr><td>Resumen ejecutivo</td><td>PDF con hallazgos clave, clusters principales, distribucion de sentimiento y narrativas destacadas</td></tr>
+  <tr><td>Narrativas por cluster</td><td>Listado completo de narrativas agrupadas por cluster, exportable a CSV</td></tr>
+  <tr><td>Distribucion de sentimiento</td><td>Grafico + datos de sentimiento por cluster, filterable por categoria</td></tr>
+  <tr><td>Comparacion pre/post</td><td>Si hay dos mediciones del mismo proyecto, comparacion de narrativas y clusters entre ambas</td></tr>
+</table>
+
+<h3>Constraints</h3>
+<ul>
+  <li><span class="must">MUST:</span> Todos los reportes deben ser exportables a PDF y/o CSV.</li>
+  <li><span class="must">MUST:</span> Todos los reportes deben soportar filtrado por fecha como minimo.</li>
+  <li><span class="must">MUST:</span> Los datos del reporte reflejan el estado actual de la base de datos al momento de generacion.</li>
+  <li><span class="must-not">MUST NOT:</span> Ningun reporte debe contener informacion que permita identificar participantes individuales.</li>
+</ul>
+
+<div class="comment-box">
+  <p>Comentarios del equipo:</p>
+  <br><br>
+</div>
+
+<hr>
+
+<!-- ============================================================ -->
+<h2>10. Consideraciones Tecnicas</h2>
+
+<table class="decision-table">
+  <tr><th>Aspecto</th><th>Decision</th></tr>
+  <tr><td>Arquitectura</td><td>Web app (browser-based); mobile-responsive. No native mobile app.</td></tr>
+  <tr><td>Autenticacion</td><td>Google OAuth exclusivo via Supabase Auth.</td></tr>
+  <tr><td>Base de datos</td><td>Supabase (PostgreSQL) en region sa-east-1 (Sao Paulo).</td></tr>
+  <tr><td>IA / LLM</td><td>Modelos de lenguaje para entrevistas, extraccion de narrativas, clustering, generacion de hallazgos. Proveedor TBD.</td></tr>
+  <tr><td>Embeddings</td><td>Vector embeddings (1536 dim) para similitud semantica. Almacenados en Supabase con pgvector.</td></tr>
+  <tr><td>Reduccion de dimensionalidad</td><td>UMAP para mapa semantico 2D. Parametros configurables por el usuario.</td></tr>
+  <tr><td>Hosting (landing)</td><td>GitHub Pages (0rgan1co.github.io/landing_voces/).</td></tr>
+  <tr><td>Hosting (app)</td><td>TBD — evaluar Vercel, Supabase Edge Functions, o similar.</td></tr>
+  <tr><td>Usuarios concurrentes</td><td>Hasta 20 usuarios internos + cientos de participantes de entrevistas simultaneos.</td></tr>
+  <tr><td>Idiomas</td><td>Interfaz en espanol (v1). Entrevistas en ES, EN, PT.</td></tr>
+</table>
+
+<hr>
+
+<!-- ============================================================ -->
+<h2>11. Fuera de Alcance (v1)</h2>
+
+<div class="scope-out">
+<ul>
+  <li>Login con email/password</li>
+  <li>App mobile nativa</li>
+  <li>Integracion con HRIS o plataformas de RRHH</li>
+  <li>Transcripcion de audio/video en tiempo real</li>
+  <li>Multi-tenant (cada organizacion tiene su propia instancia)</li>
+  <li>Facturacion y pagos dentro de la app</li>
+  <li>Analitica avanzada predictiva</li>
+  <li>Integracion con Slack, Teams u otras herramientas de comunicacion</li>
+  <li>Filtros guardados / vistas personalizadas</li>
+  <li>Internacionalizacion de la interfaz (EN, PT)</li>
+  <li>Migracion de datos desde otras plataformas</li>
+</ul>
+</div>
+
+<hr>
+
+<!-- ============================================================ -->
+<h2>12. Referencia EARS</h2>
+
+<p>Los requisitos funcionales detallados estan documentados en notacion EARS en <a href="ears-landing-v2.html">ears-landing-v2.html</a>. Este documento es un resumen ejecutivo para alinear al equipo antes de entrar en detalle.</p>
+
+<table>
+  <tr><th>Bloque</th><th>EARS IDs</th><th>Tema</th><th>Estado</th></tr>
+  <tr><td>A-G</td><td>001-036</td><td>Landing (auth, cookies, i18n, nav, demo, SEO, seguridad)</td><td>39/48</td></tr>
+  <tr><td>H-J</td><td>037-048</td><td>AEO / GEO / LLMO</td><td>12/12</td></tr>
+  <tr><td>K</td><td>050-054</td><td>Dashboard estructura</td><td>5/5</td></tr>
+  <tr><td>L</td><td>055-059</td><td>Gestion de entrevistas</td><td>5/5</td></tr>
+  <tr><td>M</td><td>060-064</td><td>Narrativas y analisis</td><td>0/5</td></tr>
+  <tr><td>N</td><td>065-069</td><td>Visualizaciones</td><td>0/5</td></tr>
+  <tr><td>O</td><td>070-072</td><td>Hallazgos y exportacion</td><td>0/3</td></tr>
+  <tr><td>P</td><td>073-075</td><td>Acceso y roles</td><td>0/3</td></tr>
+  <tr><td>Q</td><td>076-079</td><td>Agente IA (RTI)</td><td>0/4</td></tr>
+  <tr><td>R</td><td>080-082</td><td>Metricas avanzadas</td><td>0/3</td></tr>
+  <tr><td>S</td><td>083-085</td><td>Mapa semantico params</td><td>0/3</td></tr>
+  <tr><td>T</td><td>086-088</td><td>Clustering params</td><td>0/3</td></tr>
+  <tr><td>U</td><td>089-090</td><td>Admin metricas</td><td>0/2</td></tr>
+</table>
+
+<footer>
+  Voces.ai — Application Spec v1.0 — Documento para review interno — 27 marzo 2026
+</footer>
+
+</body>
+</html>
