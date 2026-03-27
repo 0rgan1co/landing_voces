@@ -241,6 +241,43 @@
     .features-grid { gap: 12px; }
   }
 
+  /* === PRICING === */
+  .pricing { padding: 80px 0; text-align: center; background: var(--gray-50); }
+  .pricing h2 { font-size: clamp(1.4rem, 3vw, 1.85rem); font-weight: 800; margin-bottom: 8px; letter-spacing: -0.01em; }
+  .pricing-sub { font-size: 0.95rem; color: var(--gray-600); margin-bottom: 40px; }
+  .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 920px; margin: 0 auto; }
+  .pricing-card {
+    background: #fff; border: 1.5px solid var(--gray-200); border-radius: var(--radius);
+    padding: 32px 24px; text-align: left; transition: border-color 0.15s, box-shadow 0.15s;
+    display: flex; flex-direction: column;
+  }
+  .pricing-card.featured { border-color: var(--purple); box-shadow: 0 4px 24px rgba(123,47,247,0.1); position: relative; }
+  .pricing-badge {
+    position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+    background: var(--purple); color: #fff; padding: 3px 14px; border-radius: 20px;
+    font-size: 0.7rem; font-weight: 700; letter-spacing: 0.3px;
+  }
+  .pricing-card h4 { font-size: 1.05rem; font-weight: 700; margin-bottom: 4px; }
+  .pricing-card .price { font-size: 1.75rem; font-weight: 800; margin: 12px 0 4px; }
+  .pricing-card .price span { font-size: 0.85rem; font-weight: 500; color: var(--gray-600); }
+  .pricing-card .price-note { font-size: 0.78rem; color: var(--gray-400); margin-bottom: 20px; }
+  .pricing-card ul { list-style: none; margin-bottom: 24px; flex: 1; }
+  .pricing-card ul li {
+    font-size: 0.85rem; color: var(--gray-600); padding: 6px 0; padding-left: 22px;
+    position: relative; line-height: 1.4;
+  }
+  .pricing-card ul li::before {
+    content: ''; position: absolute; left: 0; top: 10px;
+    width: 14px; height: 14px; border-radius: 50%;
+    background: var(--purple-bg); display: flex; align-items: center; justify-content: center;
+  }
+  .pricing-card ul li::after {
+    content: '\2713'; position: absolute; left: 2px; top: 6px;
+    font-size: 0.7rem; color: var(--purple); font-weight: 700;
+  }
+  .pricing-card .btn { width: 100%; justify-content: center; text-align: center; }
+  @media (max-width: 768px) { .pricing-grid { grid-template-columns: 1fr; max-width: 400px; } }
+
   /* === LOGIN MODAL === */
   .modal-overlay {
     display: none; position: fixed; inset: 0; z-index: 300;
@@ -328,7 +365,7 @@
     <div class="navbar-links">
       <a href="#funcionalidades">Funcionalidades</a>
       <a href="#casos-de-uso">Casos de Uso</a>
-      <a href="proximamente.html">Precios</a>
+      <a href="#precios">Precios</a>
     </div>
     <div class="navbar-actions">
       <select class="lang-select" aria-label="Idioma"><option>ES</option><option>EN</option><option>PT</option></select>
@@ -351,7 +388,8 @@
           </button>
         </div>
       </div>
-      <a href="#agendar" class="btn btn-primary" style="padding:8px 20px; font-size:0.85rem;">Agendar Demo</a>
+      <!-- TODO: reemplazar TU-LINK-CALENDLY con tu URL real -->
+      <a href="https://cal.com/TU-LINK-CALENDLY" target="_blank" rel="noopener" class="btn btn-primary" style="padding:8px 20px; font-size:0.85rem;">Agendar Demo</a>
       <button class="hamburger" onclick="document.getElementById('mobile-menu').classList.toggle('open')" aria-label="Menu">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
       </button>
@@ -371,7 +409,7 @@
     <h1>Escuchar a tu organización para mejorar los resultados</h1>
     <p class="hero-sub">Cientos de entrevistas con IA. Anonimas. En semanas, no meses.</p>
     <div class="hero-ctas">
-      <a href="#agendar" class="btn btn-primary">Agendar una demo &rarr;</a>
+      <a href="https://cal.com/TU-LINK-CALENDLY" target="_blank" rel="noopener" class="btn btn-primary">Agendar una demo &rarr;</a>
       <a href="#como-funciona" class="btn btn-ghost">Ver como funciona</a>
     </div>
     <div class="mockup">
@@ -521,13 +559,67 @@
   </div>
 </section>
 
+<!-- PRICING -->
+<section id="precios" class="pricing">
+  <div class="container">
+    <span class="tag">Precios</span>
+    <h2>Simple, transparente, sin sorpresas</h2>
+    <p class="pricing-sub">Cada plan incluye entrevistas con IA, anonimizacion y extraccion de narrativas.</p>
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <h4>Piloto</h4>
+        <div class="price">Gratis</div>
+        <div class="price-note">Hasta 30 entrevistas</div>
+        <ul>
+          <li>1 proyecto activo</li>
+          <li>Entrevistas con IA</li>
+          <li>Anonimizacion automatica</li>
+          <li>Reporte basico de narrativas</li>
+          <li>Soporte por email</li>
+        </ul>
+        <a href="https://cal.com/TU-LINK-CALENDLY" target="_blank" rel="noopener" class="btn btn-outline">Empezar gratis</a>
+      </div>
+      <div class="pricing-card featured">
+        <div class="pricing-badge">Mas popular</div>
+        <h4>Profesional</h4>
+        <div class="price">Consultar <span></span></div>
+        <div class="price-note">Hasta 500 entrevistas por proyecto</div>
+        <ul>
+          <li>Proyectos ilimitados</li>
+          <li>Mapa de narrativas completo</li>
+          <li>Clusters y tensiones</li>
+          <li>Comparacion pre/post</li>
+          <li>Export PDF e integraciones</li>
+          <li>Soporte prioritario</li>
+        </ul>
+        <a href="https://cal.com/TU-LINK-CALENDLY" target="_blank" rel="noopener" class="btn btn-primary">Agendar Demo</a>
+      </div>
+      <div class="pricing-card">
+        <h4>Enterprise</h4>
+        <div class="price">A medida</div>
+        <div class="price-note">Para organizaciones grandes</div>
+        <ul>
+          <li>Entrevistas ilimitadas</li>
+          <li>Multi-idioma (ES, EN, PT)</li>
+          <li>SSO y compliance</li>
+          <li>API dedicada</li>
+          <li>Customer success manager</li>
+          <li>SLA garantizado</li>
+        </ul>
+        <a href="https://cal.com/TU-LINK-CALENDLY" target="_blank" rel="noopener" class="btn btn-outline">Contactar ventas</a>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- CTA FINAL -->
 <section id="agendar" class="cta-final">
   <div class="container">
     <h2>Listo para escuchar?</h2>
     <div class="cta-final-actions">
-      <a href="proximamente.html" class="btn btn-primary">Agendar Demo &rarr;</a>
-      <a href="proximamente.html" class="btn btn-ghost">Escribinos por WhatsApp</a>
+      <!-- TODO: reemplazar TU-LINK-CALENDLY y TU-NUMERO-WHATSAPP -->
+      <a href="https://cal.com/TU-LINK-CALENDLY" target="_blank" rel="noopener" class="btn btn-primary">Agendar Demo &rarr;</a>
+      <a href="https://wa.me/5491100000000?text=Hola!%20Quiero%20saber%20m%C3%A1s%20sobre%20Voces.ai" target="_blank" rel="noopener" class="btn btn-ghost">Escribinos por WhatsApp</a>
     </div>
   </div>
 </section>
