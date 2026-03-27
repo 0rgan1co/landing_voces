@@ -15,6 +15,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <!-- EARS-030: Favicon -->
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%237B2FF7' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z'/%3E%3Cpath d='M19 10v2a7 7 0 0 1-14 0v-2'/%3E%3Cline x1='12' x2='12' y1='19' y2='22'/%3E%3C/svg%3E">
+<link rel="icon" type="image/png" sizes="32x32" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAYRJREFUWEftlrFOwzAQhn+nSExMbEi8AC/AwMrEyMbCxMTKxsjIyMgb8AIMTExITExMSIgFCaHc6ey4TuLYSZoW1FNk+/7v7v87O8QWf7TF+vEPYOMZ2PoMxLpg2xtIBUBEJwG8BXCKiA6UX7IOkLkDZInonIjeA7gB4JaZX1e1I+sAGQEg0yPiYwCPiOg5ET0C8IKZ71a1I+sAaQeIaJqIPgN4DOAxEb0E8JSZ71e1I8sOkBkAkgMxzzPzc2b+vKodWXaAjACQGQDZCzE/I6IXRPSMme9WtSPLDpAZADIDQHIg5jlmfs7MX1a1I8sOEFkPSGeA6BSAPcw8T0QPmfmBiBaI6NWKM5BlB8gcAJkB8HcAJHtgfkrMj5j54Yp25L8ByD8gsgfILAB/B0DyIORZZn7EzA+Y+T4z3xPRqxVnIKvugIwBkOyBeZaZHzHzfWa+y8x3RPSGRF+Z+fuqduS/AcjGb8G/HSDrAXIZoDsb/J9fQ7IJZBKAdRswAd8Bz3lfMAVPHocAAAAASUVORK5CYII=">
 <!-- EARS-031: JSON-LD -->
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Organization","name":"Voces.ai","url":"https://0rgan1co.github.io/landing_voces/","description":"Plataforma de diagnostico cultural y escucha sistemica con IA","logo":"https://0rgan1co.github.io/landing_voces/og-image.png"}
@@ -351,6 +352,13 @@
   .user-dropdown svg { width: 16px; height: 16px; color: var(--gray-400); }
   .user-dropdown .logout-btn { color: #dc2626; border-top: 1px solid var(--gray-200); }
   .user-dropdown .logout-btn svg { color: #dc2626; }
+
+  /* === SCROLL REVEAL === */
+  .reveal {
+    opacity: 0; transform: translateY(24px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
 </style>
 </head>
 <body>
@@ -398,7 +406,7 @@
 <div id="mobile-menu" class="mobile-menu">
   <a href="#funcionalidades" onclick="this.parentElement.classList.remove('open')">Funcionalidades</a>
   <a href="#casos-de-uso" onclick="this.parentElement.classList.remove('open')">Casos de Uso</a>
-  <a href="proximamente.html" onclick="this.parentElement.classList.remove('open')">Precios</a>
+  <a href="#precios" onclick="this.parentElement.classList.remove('open')">Precios</a>
 </div>
 
 <!-- HERO -->
@@ -448,7 +456,7 @@
 </section>
 
 <!-- FEATURES -->
-<section id="funcionalidades" class="features">
+<section id="funcionalidades" class="features reveal">
   <div class="container">
     <h2>Menos formularios. Mas escucha. Mejores conversaciones.</h2>
     <div class="features-grid">
@@ -499,7 +507,7 @@
 </section>
 
 <!-- HOW IT WORKS -->
-<section id="como-funciona" class="how-it-works">
+<section id="como-funciona" class="how-it-works reveal">
   <div class="container">
     <h2>De la escucha a insights accionables de mejora continua</h2>
     <div class="steps">
@@ -528,7 +536,7 @@
 </section>
 
 <!-- USE CASES -->
-<section id="casos-de-uso" class="use-cases">
+<section id="casos-de-uso" class="use-cases reveal">
   <div class="container">
     <span class="tag">Aplicaciones</span>
     <h2>Una plataforma, multiples diagnosticos</h2>
@@ -559,7 +567,7 @@
 </section>
 
 <!-- PRICING -->
-<section id="precios" class="pricing">
+<section id="precios" class="pricing reveal">
   <div class="container">
     <span class="tag">Precios</span>
     <h2>Simple, transparente, sin sorpresas</h2>
@@ -612,7 +620,7 @@
 </section>
 
 <!-- CTA FINAL -->
-<section id="agendar" class="cta-final">
+<section id="agendar" class="cta-final reveal">
   <div class="container">
     <h2>Listo para escuchar?</h2>
     <div class="cta-final-actions">
@@ -707,7 +715,10 @@ async function loginWithGoogle() {
     provider: 'google',
     options: { redirectTo: 'https://0rgan1co.github.io/landing_voces/' }
   });
-  if (error) alert('Error al iniciar sesion: ' + error.message);
+  if (error) {
+    closeLogin();
+    alert('No se pudo iniciar sesion. Intenta de nuevo.');
+  }
 }
 
 // Auth state management
@@ -747,6 +758,28 @@ async function logoutUser() {
   closeLogin();
   window.location.reload();
 }
+
+// Handle OAuth error in URL hash (EARS-006)
+(function() {
+  var hash = window.location.hash;
+  if (hash && hash.includes('error_description')) {
+    var params = new URLSearchParams(hash.substring(1));
+    var desc = params.get('error_description');
+    if (desc) alert('No se pudo iniciar sesion. Intenta de nuevo.');
+    history.replaceState(null, '', window.location.pathname);
+  }
+})();
+
+// Scroll reveal
+var revealObserver = new IntersectionObserver(function(entries) {
+  entries.forEach(function(entry) {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(function(el) { revealObserver.observe(el); });
 
 // Tabs
 function showTab(index) {
