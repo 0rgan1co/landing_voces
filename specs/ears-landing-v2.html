@@ -79,7 +79,7 @@
 
 <h1>EARS Requirements — Voces.ai Landing Page v2</h1>
 <p class="meta">
-  Estado: <strong>Landing 36/48 OK — Dashboard 0/26</strong> &nbsp;|&nbsp; Actualizado: 26 marzo 2026 &nbsp;|&nbsp; Autor: Equipo Voces.ai<br>
+  Estado: <strong>Landing 36/48 — Dashboard 5/41</strong> &nbsp;|&nbsp; Actualizado: 26 marzo 2026 &nbsp;|&nbsp; Autor: Equipo Voces.ai<br>
   Landing actual: <a href="https://0rgan1co.github.io/landing_voces/">https://0rgan1co.github.io/landing_voces/</a> &nbsp;|&nbsp;
   Repo: <a href="https://github.com/0rgan1co/landing_voces">github.com/0rgan1co/landing_voces</a>
 </p>
@@ -349,6 +349,61 @@
 
 <div class="comment-box">
   <p>Comentarios Dashboard:</p>
+  <br><br><br>
+</div>
+
+<!-- ============================================================ -->
+<h2>Q. Entrevistas — Comportamiento del Agente IA (RTI)</h2>
+
+<table>
+  <tr><th class="check-col">Cumple</th><th style="width:80px;">ID</th><th style="width:100px;">Pattern</th><th>Requirement</th><th class="status-col">Estado</th></tr>
+  <tr data-id="076"><td class="check-col"><input type="checkbox" onchange="updateRow(this)"></td><td>EARS-076</td><td><span class="tag">Event-Driven</span></td><td>Cuando el usuario inicie una sesion de entrevista, el agente IA debera informar que toda la informacion sera anonimizada y no se asociara a su identidad.</td><td class="status-col"><div class="status-btns"><button class="status-btn ok-btn" onclick="setStatus(this,'ok')">OK</button><button class="status-btn rev-btn" onclick="setStatus(this,'rev')">Revision</button></div></td></tr>
+  <tr data-id="077"><td class="check-col"><input type="checkbox" onchange="updateRow(this)"></td><td>EARS-077</td><td><span class="tag">State-Driven</span></td><td>Mientras el usuario proporcione respuestas abstractas, el agente IA debera solicitar una narrativa especifica que incluya lugar, tiempo, personas involucradas y consecuencias.</td><td class="status-col"><div class="status-btns"><button class="status-btn ok-btn" onclick="setStatus(this,'ok')">OK</button><button class="status-btn rev-btn" onclick="setStatus(this,'rev')">Revision</button></div></td></tr>
+  <tr data-id="078"><td class="check-col"><input type="checkbox" onchange="updateRow(this)"></td><td>EARS-078</td><td><span class="tag">Event-Driven</span></td><td>Cuando el sistema detecte ausencia de entrada por 6 segundos o mas, el agente IA debera informar al usuario que dispone de tiempo para reflexionar.</td><td class="status-col"><div class="status-btns"><button class="status-btn ok-btn" onclick="setStatus(this,'ok')">OK</button><button class="status-btn rev-btn" onclick="setStatus(this,'rev')">Revision</button></div></td></tr>
+  <tr data-id="079"><td class="check-col"><input type="checkbox" onchange="updateRow(this)"></td><td>EARS-079</td><td><span class="tag">Ubiquitous</span></td><td>El agente IA debera recordar la garantia de anonimato al inicio y al menos dos veces adicionales durante la entrevista.</td><td class="status-col"><div class="status-btns"><button class="status-btn ok-btn" onclick="setStatus(this,'ok')">OK</button><button class="status-btn rev-btn" onclick="setStatus(this,'rev')">Revision</button></div></td></tr>
+</table>
+
+<!-- ============================================================ -->
+<h2>R. Narrativas — Metricas Avanzadas</h2>
+
+<table>
+  <tr><th class="check-col">Cumple</th><th style="width:80px;">ID</th><th style="width:100px;">Pattern</th><th>Requirement</th><th class="status-col">Estado</th></tr>
+  <tr data-id="080"><td class="check-col"><input type="checkbox" onchange="updateRow(this)"></td><td>EARS-080</td><td><span class="tag">Ubiquitous</span></td><td>El sistema debera asignar a cada narrativa un valor de Abstraccion en el rango de 1 (hechos concretos) a 4 (conceptos abstractos) mediante IA.</td><td class="status-col"><div class="status-btns"><button class="status-btn ok-btn" onclick="setStatus(this,'ok')">OK</button><button class="status-btn rev-btn" onclick="setStatus(this,'rev')">Revision</button></div></td></tr>
+  <tr data-id="081"><td class="check-col"><input type="checkbox" onchange="updateRow(this)"></td><td>EARS-081</td><td><span class="tag">Ubiquitous</span></td><td>El sistema debera calcular un Nivel de Confianza (0% a 100%) para cada narrativa, representando su grado de pertenencia al nucleo de su cluster.</td><td class="status-col"><div class="status-btns"><button class="status-btn ok-btn" onclick="setStatus(this,'ok')">OK</button><button class="status-btn rev-btn" onclick="setStatus(this,'rev')">Revision</button></div></td></tr>
+  <tr data-id="082"><td class="check-col"><input type="checkbox" onchange="updateRow(this)"></td><td>EARS-082</td><td><span class="tag">Ubiquitous</span></td><td>El sistema debera calcular la Popularidad (0% a 100%) y el Sentimiento promedio (-2 a +2) para cada cluster identificado.</td><td class="status-col"><div class="status-btns"><button class="status-btn ok-btn" onclick="setStatus(this,'ok')">OK</button><button class="status-btn rev-btn" onclick="setStatus(this,'rev')">Revision</button></div></td></tr>
+</table>
+
+<!-- ============================================================ -->
+<h2>S. Mapa Semantico — Parametros Avanzados</h2>
+
+<table>
+  <tr><th class="check-col">Cumple</th><th style="width:80px;">ID</th><th style="width:100px;">Pattern</th><th>Requirement</th><th class="status-col">Estado</th></tr>
+  <tr data-id="083"><td class="check-col"><input type="checkbox" onchange="updateRow(this)"></td><td>EARS-083</td><td><span class="tag">Event-Driven</span></td><td>Cuando el usuario modifique los parametros <code>n_neighbors</code> o <code>min_dist</code>, el sistema debera recalcular la posicion de los puntos en el mapa semantico.</td><td class="status-col"><div class="status-btns"><button class="status-btn ok-btn" onclick="setStatus(this,'ok')">OK</button><button class="status-btn rev-btn" onclick="setStatus(this,'rev')">Revision</button></div></td></tr>
+  <tr data-id="084"><td class="check-col"><input type="checkbox" onchange="updateRow(this)"></td><td>EARS-084</td><td><span class="tag">Unwanted</span></td><td>Si el usuario introduce un valor para <code>min_dist</code> fuera del rango 0-1, el sistema debera bloquear la ejecucion y mostrar un mensaje de error.</td><td class="status-col"><div class="status-btns"><button class="status-btn ok-btn" onclick="setStatus(this,'ok')">OK</button><button class="status-btn rev-btn" onclick="setStatus(this,'rev')">Revision</button></div></td></tr>
+  <tr data-id="085"><td class="check-col"><input type="checkbox" onchange="updateRow(this)"></td><td>EARS-085</td><td><span class="tag">State-Driven</span></td><td>Mientras una narrativa posea una probabilidad de pertenencia inferior al <code>threshold</code> definido, el sistema debera clasificarla como "atipica" y visualizarla en color gris.</td><td class="status-col"><div class="status-btns"><button class="status-btn ok-btn" onclick="setStatus(this,'ok')">OK</button><button class="status-btn rev-btn" onclick="setStatus(this,'rev')">Revision</button></div></td></tr>
+</table>
+
+<!-- ============================================================ -->
+<h2>T. Clustering — Parametros y Edicion</h2>
+
+<table>
+  <tr><th class="check-col">Cumple</th><th style="width:80px;">ID</th><th style="width:100px;">Pattern</th><th>Requirement</th><th class="status-col">Estado</th></tr>
+  <tr data-id="086"><td class="check-col"><input type="checkbox" onchange="updateRow(this)"></td><td>EARS-086</td><td><span class="tag">Event-Driven</span></td><td>Cuando el usuario active "Generar Clusters", el sistema debera agrupar las narrativas basandose en los parametros <code>min_cluster_size</code> (entero) y <code>threshold</code> (decimal).</td><td class="status-col"><div class="status-btns"><button class="status-btn ok-btn" onclick="setStatus(this,'ok')">OK</button><button class="status-btn rev-btn" onclick="setStatus(this,'rev')">Revision</button></div></td></tr>
+  <tr data-id="087"><td class="check-col"><input type="checkbox" onchange="updateRow(this)"></td><td>EARS-087</td><td><span class="tag">Event-Driven</span></td><td>Cuando el usuario seleccione "Generar Nombre y Resumen con IA" en un cluster, el sistema debera proponer un titulo descriptivo y un resumen ejecutivo. El cluster debe contener al menos 2 narrativas.</td><td class="status-col"><div class="status-btns"><button class="status-btn ok-btn" onclick="setStatus(this,'ok')">OK</button><button class="status-btn rev-btn" onclick="setStatus(this,'rev')">Revision</button></div></td></tr>
+  <tr data-id="088"><td class="check-col"><input type="checkbox" onchange="updateRow(this)"></td><td>EARS-088</td><td><span class="tag">Event-Driven</span></td><td>Cuando el usuario modifique el nombre o resumen propuesto por la IA, el sistema debera guardar los nuevos valores en los metadatos permanentes del cluster.</td><td class="status-col"><div class="status-btns"><button class="status-btn ok-btn" onclick="setStatus(this,'ok')">OK</button><button class="status-btn rev-btn" onclick="setStatus(this,'rev')">Revision</button></div></td></tr>
+</table>
+
+<!-- ============================================================ -->
+<h2>U. Admin — Metricas Operativas</h2>
+
+<table>
+  <tr><th class="check-col">Cumple</th><th style="width:80px;">ID</th><th style="width:100px;">Pattern</th><th>Requirement</th><th class="status-col">Estado</th></tr>
+  <tr data-id="089"><td class="check-col"><input type="checkbox" onchange="updateRow(this)"></td><td>EARS-089</td><td><span class="tag">Event-Driven</span></td><td>Cuando el usuario acceda a la seccion "Inicio", el dashboard debera mostrar un resumen de metricas operativas: total de entrevistas, duracion media, porcentaje de sesiones con narrativas capturadas y clusters activos.</td><td class="status-col"><div class="status-btns"><button class="status-btn ok-btn" onclick="setStatus(this,'ok')">OK</button><button class="status-btn rev-btn" onclick="setStatus(this,'rev')">Revision</button></div></td></tr>
+  <tr data-id="090"><td class="check-col"><input type="checkbox" onchange="updateRow(this)"></td><td>EARS-090</td><td><span class="tag">Event-Driven</span></td><td>Cuando el usuario aplique un filtro por metrica (Sentimiento o Abstraccion), el dashboard debera actualizar dinamicamente las visualizaciones.</td><td class="status-col"><div class="status-btns"><button class="status-btn ok-btn" onclick="setStatus(this,'ok')">OK</button><button class="status-btn rev-btn" onclick="setStatus(this,'rev')">Revision</button></div></td></tr>
+</table>
+
+<div class="comment-box">
+  <p>Comentarios Cardus-inspired specs:</p>
   <br><br><br>
 </div>
 
