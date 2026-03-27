@@ -162,6 +162,40 @@
   .spinner { display: inline-block; width: 18px; height: 18px; border: 2px solid var(--gray-200); border-top-color: var(--purple); border-radius: 50%; animation: spin 0.6s linear infinite; }
   @keyframes spin { to { transform: rotate(360deg); } }
 
+  /* === SUMMARY BAR (EARS-059) === */
+  .summary-bar { display: flex; gap: 16px; margin-bottom: 20px; }
+  .summary-card {
+    flex: 1; background: #fff; border: 1.5px solid var(--gray-200); border-radius: var(--radius);
+    padding: 16px 18px; text-align: center;
+  }
+  .summary-card .num { font-size: 1.5rem; font-weight: 800; color: var(--dark-2); }
+  .summary-card .num.purple { color: var(--purple); }
+  .summary-card .num.green { color: #2e7d32; }
+  .summary-card .lbl { font-size: 0.72rem; color: var(--gray-400); margin-top: 2px; }
+
+  /* === TABLE (EARS-055) === */
+  .data-table { width: 100%; border-collapse: collapse; background: #fff; border-radius: var(--radius); overflow: hidden; border: 1.5px solid var(--gray-200); }
+  .data-table th { text-align: left; padding: 10px 14px; font-size: 0.72rem; font-weight: 700; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1.5px solid var(--gray-200); background: var(--gray-50); }
+  .data-table td { padding: 10px 14px; font-size: 0.82rem; border-bottom: 1px solid var(--gray-200); }
+  .data-table tr:last-child td { border-bottom: none; }
+  .data-table tr:hover td { background: var(--gray-50); }
+  .progress-bar { width: 80px; height: 6px; background: var(--gray-200); border-radius: 3px; overflow: hidden; display: inline-block; vertical-align: middle; margin-right: 6px; }
+  .progress-bar-fill { height: 100%; background: var(--purple); border-radius: 3px; }
+  .status-pill { display: inline-block; padding: 2px 10px; border-radius: 10px; font-size: 0.7rem; font-weight: 600; }
+  .status-pendiente { background: var(--gray-100); color: var(--gray-600); }
+  .status-en_curso { background: #fff3e0; color: #e65100; }
+  .status-completada { background: #e8f5e9; color: #2e7d32; }
+
+  /* === BACK BUTTON === */
+  .back-btn { display: inline-flex; align-items: center; gap: 4px; font-size: 0.82rem; color: var(--gray-600); cursor: pointer; background: none; border: none; font-family: inherit; margin-bottom: 16px; padding: 0; }
+  .back-btn:hover { color: var(--purple); }
+  .back-btn svg { width: 16px; height: 16px; }
+
+  /* === COPY LINK === */
+  .copy-box { display: flex; gap: 8px; align-items: center; }
+  .copy-box input { flex: 1; padding: 9px 12px; border: 1.5px solid var(--gray-200); border-radius: 8px; font-size: 0.82rem; font-family: monospace; background: var(--gray-50); }
+  .copy-box button { white-space: nowrap; }
+
   /* === RESPONSIVE === */
   @media (max-width: 768px) {
     .sidebar { transform: translateX(-100%); }
@@ -289,6 +323,55 @@
   </div>
 </div>
 
+<!-- CONFIGURE INTERVIEW MODAL (EARS-056) -->
+<div id="config-interview-modal" class="modal-overlay" onclick="if(event.target===this)closeModal('config-interview-modal')">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('config-interview-modal')">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" x2="6" y1="6" y2="18"/><line x1="6" x2="18" y1="6" y2="18"/></svg>
+    </button>
+    <h3>Configurar entrevista</h3>
+    <p>Definí los parámetros de la entrevista con IA</p>
+    <form id="config-interview-form" onsubmit="saveInterviewConfig(event)">
+      <div class="form-group">
+        <label for="cfg-question">Pregunta inicial *</label>
+        <textarea id="cfg-question" required placeholder="Ej: ¿Cómo describirías la cultura de tu equipo?"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="cfg-themes">Temas de seguimiento</label>
+        <textarea id="cfg-themes" placeholder="Ej: Liderazgo, comunicación, autonomía, bienestar"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="cfg-lang">Idioma</label>
+        <select id="cfg-lang">
+          <option value="es">Español</option>
+          <option value="en">English</option>
+          <option value="pt">Português</option>
+        </select>
+      </div>
+      <div class="form-actions">
+        <button type="button" class="btn btn-outline" onclick="closeModal('config-interview-modal')">Cancelar</button>
+        <button type="submit" class="btn btn-primary">Guardar configuración</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- INVITE PARTICIPANTS MODAL (EARS-057) -->
+<div id="invite-modal" class="modal-overlay" onclick="if(event.target===this)closeModal('invite-modal')">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('invite-modal')">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" x2="6" y1="6" y2="18"/><line x1="6" x2="18" y1="6" y2="18"/></svg>
+    </button>
+    <h3>Invitar participantes</h3>
+    <p>Compartí este link para que las personas inicien su entrevista</p>
+    <div class="copy-box" style="margin-bottom:16px;">
+      <input type="text" id="invite-link" readonly>
+      <button class="btn btn-primary" onclick="copyInviteLink()" id="copy-btn">Copiar</button>
+    </div>
+    <p style="font-size:0.78rem; color:var(--gray-400);">Cada persona que acceda al link iniciará una entrevista anónima e individual.</p>
+  </div>
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.4"></script>
 <script>
 // Supabase init
@@ -375,26 +458,161 @@ async function createProject(e) {
   loadProjects();
 }
 
-// Open project (placeholder for future sections)
-function openProject(id) {
-  alert('Proximamente: vista de proyecto. ID: ' + id);
+// State
+var currentProject = null;
+
+// Open project — load interview view (EARS-055)
+async function openProject(id) {
+  var { data } = await _supabase.from('projects').select('*').eq('id', id).single();
+  if (!data) return;
+  currentProject = data;
+  document.getElementById('page-title').textContent = data.name;
+  document.getElementById('search-input').placeholder = 'Buscar entrevistas...';
+  // Activate sidebar
+  document.querySelectorAll('.sidebar-nav a').forEach(function(a) { a.classList.remove('active'); });
+  document.querySelector('[data-page="interviews"]').classList.add('active');
+  loadInterviews();
 }
 
-// Modal
-function openNewProject() { document.getElementById('new-project-modal').classList.add('open'); }
-function closeNewProject() { document.getElementById('new-project-modal').classList.remove('open'); }
-document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeNewProject(); });
+// Load interviews (EARS-055, 059)
+async function loadInterviews() {
+  var container = document.getElementById('content');
+  var { data, error } = await _supabase.from('interviews').select('*').eq('project_id', currentProject.id).order('created_at', { ascending: false });
+  if (error) { container.innerHTML = '<p style="color:red;">Error al cargar entrevistas</p>'; return; }
+  var interviews = data || [];
+
+  // Summary bar (EARS-059)
+  var total = interviews.length;
+  var started = interviews.filter(function(i) { return i.status !== 'pendiente'; }).length;
+  var completed = interviews.filter(function(i) { return i.status === 'completada'; }).length;
+  var rate = total > 0 ? Math.round((completed / total) * 100) : 0;
+
+  var html = '<button class="back-btn" onclick="backToProjects()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg> Volver a proyectos</button>';
+
+  html += '<div class="summary-bar">' +
+    '<div class="summary-card"><div class="num">' + total + '</div><div class="lbl">Total</div></div>' +
+    '<div class="summary-card"><div class="num">' + started + '</div><div class="lbl">Iniciadas</div></div>' +
+    '<div class="summary-card"><div class="num green">' + completed + '</div><div class="lbl">Completadas</div></div>' +
+    '<div class="summary-card"><div class="num purple">' + rate + '%</div><div class="lbl">Tasa de completitud</div></div>' +
+    '</div>';
+
+  html += '<div class="page-header"><h2>Entrevistas</h2><div style="display:flex;gap:8px;">' +
+    '<button class="btn btn-outline" onclick="openModal(\'config-interview-modal\')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg> Configurar</button>' +
+    '<button class="btn btn-outline" onclick="openInviteModal()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" x2="19" y1="8" y2="14"/><line x1="22" x2="16" y1="11" y2="11"/></svg> Invitar participantes</button>' +
+    '</div></div>';
+
+  if (interviews.length === 0) {
+    html += '<div class="empty-state">' +
+      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="48" height="48"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/></svg>' +
+      '<h3>Sin entrevistas aún</h3>' +
+      '<p>Invitá participantes para que comiencen sus entrevistas anónimas con IA.</p>' +
+      '<button class="btn btn-primary" onclick="openInviteModal()">Invitar participantes</button>' +
+      '</div>';
+  } else {
+    html += '<table class="data-table"><thead><tr>' +
+      '<th>Participante</th><th>Estado</th><th>Progreso</th><th>Inicio</th><th>Duración</th>' +
+      '</tr></thead><tbody>';
+    interviews.forEach(function(iv) {
+      var statusClass = 'status-' + iv.status;
+      var statusLabel = iv.status === 'en_curso' ? 'En curso' : iv.status.charAt(0).toUpperCase() + iv.status.slice(1);
+      var started = iv.started_at ? new Date(iv.started_at).toLocaleDateString('es-AR', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }) : '—';
+      var dur = iv.duration_seconds > 0 ? Math.round(iv.duration_seconds / 60) + ' min' : '—';
+      html += '<tr>' +
+        '<td style="font-family:monospace; font-size:0.78rem; color:var(--gray-600);">' + escapeHtml(iv.participant_id) + '</td>' +
+        '<td><span class="status-pill ' + statusClass + '">' + statusLabel + '</span></td>' +
+        '<td><div class="progress-bar"><div class="progress-bar-fill" style="width:' + iv.progress + '%"></div></div>' + iv.progress + '%</td>' +
+        '<td>' + started + '</td>' +
+        '<td>' + dur + '</td>' +
+        '</tr>';
+    });
+    html += '</tbody></table>';
+  }
+
+  container.innerHTML = html;
+}
+
+// Back to projects
+function backToProjects() {
+  currentProject = null;
+  document.getElementById('page-title').textContent = 'Proyectos';
+  document.getElementById('search-input').placeholder = 'Buscar proyectos...';
+  document.querySelectorAll('.sidebar-nav a').forEach(function(a) { a.classList.remove('active'); });
+  document.querySelector('[data-page="projects"]').classList.add('active');
+  var container = document.getElementById('content');
+  container.innerHTML = '<div class="page-header"><h2>Mis Proyectos</h2>' +
+    '<button class="btn btn-primary" onclick="openNewProject()">' +
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" x2="12" y1="5" y2="19"/><line x1="5" x2="19" y1="12" y2="12"/></svg> Nuevo Proyecto</button></div>' +
+    '<div id="projects-list"><div style="text-align:center; padding:40px;"><div class="spinner"></div></div></div>';
+  loadProjects();
+}
+
+// Save interview config (EARS-056)
+async function saveInterviewConfig(e) {
+  e.preventDefault();
+  if (!currentProject) return;
+  var questions = [document.getElementById('cfg-question').value];
+  var themes = document.getElementById('cfg-themes').value;
+  if (themes) questions.push('Temas: ' + themes);
+  await _supabase.from('projects').update({
+    interview_questions: questions
+  }).eq('id', currentProject.id);
+  currentProject.interview_questions = questions;
+  closeModal('config-interview-modal');
+}
+
+// Invite modal (EARS-057)
+function openInviteModal() {
+  if (!currentProject) return;
+  var link = window.location.origin + window.location.pathname.replace('dashboard.html', '') + 'entrevista.html?p=' + currentProject.id;
+  document.getElementById('invite-link').value = link;
+  openModal('invite-modal');
+}
+
+function copyInviteLink() {
+  var input = document.getElementById('invite-link');
+  input.select();
+  navigator.clipboard.writeText(input.value).then(function() {
+    var btn = document.getElementById('copy-btn');
+    btn.textContent = 'Copiado!';
+    setTimeout(function() { btn.textContent = 'Copiar'; }, 2000);
+  });
+}
+
+// Sidebar navigation
+document.querySelectorAll('.sidebar-nav a').forEach(function(a) {
+  a.addEventListener('click', function(e) {
+    e.preventDefault();
+    var page = this.dataset.page;
+    if (page === 'projects') { backToProjects(); return; }
+    if (!currentProject) { alert('Seleccioná un proyecto primero.'); return; }
+    document.querySelectorAll('.sidebar-nav a').forEach(function(el) { el.classList.remove('active'); });
+    this.classList.add('active');
+    if (page === 'interviews') loadInterviews();
+    else document.getElementById('content').innerHTML = '<div class="empty-state"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="48" height="48"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg><h3>Próximamente</h3><p>Esta sección está en desarrollo.</p></div>';
+  });
+});
+
+// Modals
+function openModal(id) { document.getElementById(id).classList.add('open'); }
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+function openNewProject() { openModal('new-project-modal'); }
+function closeNewProject() { closeModal('new-project-modal'); }
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    document.querySelectorAll('.modal-overlay.open').forEach(function(m) { m.classList.remove('open'); });
+  }
+});
 
 // Search
 document.getElementById('search-input').addEventListener('input', function(e) {
   var q = e.target.value.toLowerCase();
-  document.querySelectorAll('.project-card').forEach(function(card) {
-    var name = card.querySelector('h3').textContent.toLowerCase();
-    card.style.display = name.includes(q) ? '' : 'none';
+  document.querySelectorAll('.project-card, .data-table tbody tr').forEach(function(el) {
+    var text = el.textContent.toLowerCase();
+    el.style.display = text.includes(q) ? '' : 'none';
   });
 });
 
-// Responsive menu toggle
+// Responsive
 if (window.innerWidth <= 768) document.getElementById('menu-toggle').style.display = '';
 
 // Helpers
