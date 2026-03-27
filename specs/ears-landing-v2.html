@@ -348,13 +348,16 @@ const DEFAULT_STATE = {
   '036': { checked: true, status: 'ok' }   // Token validation (Supabase server-side)
 };
 
-// Restore state on load
+// Restore state on load — merge defaults so new OKs always appear
+const STATE_VERSION = 2; // bump to force re-merge
 document.addEventListener('DOMContentLoaded', function() {
   let state = loadState();
-  // Apply defaults only if no state exists yet
-  if (Object.keys(state).length === 0) {
-    state = { ...DEFAULT_STATE };
+  const savedVersion = parseInt(localStorage.getItem(STORAGE_KEY + '_v') || '0');
+  if (savedVersion < STATE_VERSION || Object.keys(state).length === 0) {
+    // Merge: defaults win for items in DEFAULT_STATE, user choices kept for others
+    state = { ...state, ...DEFAULT_STATE };
     saveState(state);
+    localStorage.setItem(STORAGE_KEY + '_v', String(STATE_VERSION));
   }
   document.querySelectorAll('tr[data-id]').forEach(row => {
     const id = row.dataset.id;
