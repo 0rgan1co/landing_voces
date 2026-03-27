@@ -3,11 +3,11 @@
     {
       "id": "a1b2c3d4e5f60001",
       "type": "group",
-      "x": -80,
-      "y": -80,
-      "width": 1560,
-      "height": 1040,
-      "label": "Voces.ai — DER Simplificado (v2 con metricas Cardus)",
+      "x": -100,
+      "y": -100,
+      "width": 1700,
+      "height": 1700,
+      "label": "Voces.ai — DER v2 (con metricas Cardus)",
       "color": "6"
     },
     {
@@ -15,80 +15,80 @@
       "type": "text",
       "x": 0,
       "y": 0,
-      "width": 320,
-      "height": 280,
+      "width": 360,
+      "height": 500,
       "color": "4",
-      "text": "## projects\n*Tabla creada*\n\n| Campo | Tipo |\n|---|---|\n| `id` | UUID PK |\n| `user_id` | UUID FK → auth.users |\n| `name` | TEXT |\n| `description` | TEXT |\n| `target_audience` | TEXT |\n| `status` | borrador/activo/completado |\n| `interview_questions` | JSONB |\n| `interviews_count` | INT |\n| `narratives_count` | INT |\n| `created_at` | TIMESTAMPTZ |"
+      "text": "## projects\n*Tabla creada*\n\n| Campo | Tipo |\n|---|---|\n| `id` | UUID PK |\n| `user_id` | UUID FK → auth.users |\n| `name` | TEXT |\n| `description` | TEXT |\n| `target_audience` | TEXT |\n| `status` | borrador / activo / completado |\n| `interview_questions` | JSONB |\n| `interviews_count` | INT |\n| `narratives_count` | INT |\n| `created_at` | TIMESTAMPTZ |\n| `updated_at` | TIMESTAMPTZ |"
     },
     {
       "id": "a1b2c3d4e5f60020",
       "type": "text",
-      "x": 520,
+      "x": 540,
       "y": 0,
-      "width": 320,
-      "height": 300,
+      "width": 360,
+      "height": 560,
       "color": "3",
-      "text": "## interviews\n*Pendiente*\n\n| Campo | Tipo |\n|---|---|\n| `id` | UUID PK |\n| `project_id` | UUID FK → projects |\n| `participant_id` | TEXT (anonimizado) |\n| `status` | pendiente/en_curso/completada |\n| `progress` | INT (0-100) |\n| `language` | es/en/pt |\n| `messages` | JSONB |\n| `narrative_count` | INT |\n| `anonymity_reminders` | INT |\n| `started_at` | TIMESTAMPTZ |\n| `completed_at` | TIMESTAMPTZ |\n| `duration_seconds` | INT |"
+      "text": "## interviews\n*Pendiente*\n\n| Campo | Tipo |\n|---|---|\n| `id` | UUID PK |\n| `project_id` | UUID FK → projects |\n| `participant_id` | TEXT (anonimizado) |\n| `status` | pendiente / en_curso / completada |\n| `progress` | INT (0-100) |\n| `language` | es / en / pt |\n| `messages` | JSONB |\n| `narrative_count` | INT |\n| `anonymity_reminders` | INT |\n| `started_at` | TIMESTAMPTZ |\n| `completed_at` | TIMESTAMPTZ |\n| `duration_seconds` | INT |"
     },
     {
       "id": "a1b2c3d4e5f60030",
       "type": "text",
-      "x": 1040,
+      "x": 1080,
       "y": 0,
-      "width": 320,
-      "height": 300,
+      "width": 380,
+      "height": 640,
       "color": "3",
-      "text": "## narratives\n*Pendiente*\n\n| Campo | Tipo |\n|---|---|\n| `id` | UUID PK |\n| `project_id` | UUID FK → projects |\n| `interview_id` | UUID FK → interviews |\n| `text` | TEXT |\n| `fact` | TEXT |\n| `context` | TEXT |\n| `consequence` | TEXT |\n| `sentiment` | FLOAT (-2 a +2) |\n| `abstraction` | INT (1-4) |\n| `confidence` | FLOAT (0-1) |\n| `cluster_id` | UUID FK → clusters |\n| `is_outlier` | BOOLEAN |\n| `embedding` | VECTOR(1536) |\n| `created_at` | TIMESTAMPTZ |"
+      "text": "## narratives\n*Pendiente*\n\n| Campo | Tipo |\n|---|---|\n| `id` | UUID PK |\n| `project_id` | UUID FK → projects |\n| `interview_id` | UUID FK → interviews |\n| `text` | TEXT |\n| `fact` | TEXT |\n| `context` | TEXT |\n| `consequence` | TEXT |\n| `sentiment` | FLOAT (-2 a +2) |\n| `abstraction` | INT (1=concreto, 4=abstracto) |\n| `confidence` | FLOAT (0-1) |\n| `cluster_id` | UUID FK → clusters |\n| `is_outlier` | BOOLEAN |\n| `embedding` | VECTOR(1536) |\n| `created_at` | TIMESTAMPTZ |"
     },
     {
       "id": "a1b2c3d4e5f60040",
       "type": "text",
       "x": 0,
-      "y": 380,
-      "width": 320,
-      "height": 240,
+      "y": 600,
+      "width": 360,
+      "height": 520,
       "color": "3",
-      "text": "## clusters\n*Pendiente*\n\n| Campo | Tipo |\n|---|---|\n| `id` | UUID PK |\n| `project_id` | UUID FK → projects |\n| `name` | TEXT (AI-generated) |\n| `summary` | TEXT |\n| `narrative_count` | INT |\n| `avg_sentiment` | FLOAT |\n| `popularity` | FLOAT (0-1) |\n| `min_cluster_size` | INT |\n| `threshold` | FLOAT (0-1) |\n| `color` | TEXT (hex) |\n| `created_at` | TIMESTAMPTZ |"
+      "text": "## clusters\n*Pendiente*\n\n| Campo | Tipo |\n|---|---|\n| `id` | UUID PK |\n| `project_id` | UUID FK → projects |\n| `name` | TEXT (AI-generated) |\n| `summary` | TEXT (AI-generated) |\n| `narrative_count` | INT |\n| `avg_sentiment` | FLOAT (-2 a +2) |\n| `popularity` | FLOAT (0-1) |\n| `min_cluster_size` | INT (param) |\n| `threshold` | FLOAT (0-1, param) |\n| `color` | TEXT (hex) |\n| `created_at` | TIMESTAMPTZ |"
     },
     {
       "id": "a1b2c3d4e5f60050",
       "type": "text",
-      "x": 520,
-      "y": 380,
-      "width": 320,
-      "height": 220,
+      "x": 540,
+      "y": 660,
+      "width": 360,
+      "height": 340,
       "color": "3",
       "text": "## tags\n*Pendiente*\n\n| Campo | Tipo |\n|---|---|\n| `id` | UUID PK |\n| `project_id` | UUID FK → projects |\n| `name` | TEXT |\n| `color` | TEXT (hex) |\n| `created_at` | TIMESTAMPTZ |"
     },
     {
       "id": "a1b2c3d4e5f60055",
       "type": "text",
-      "x": 520,
-      "y": 660,
-      "width": 320,
-      "height": 160,
+      "x": 540,
+      "y": 1080,
+      "width": 360,
+      "height": 260,
       "color": "3",
-      "text": "## narrative_tags\n*Pendiente (junction)*\n\n| Campo | Tipo |\n|---|---|\n| `narrative_id` | UUID FK → narratives |\n| `tag_id` | UUID FK → tags |\n| PK | (narrative_id, tag_id) |"
+      "text": "## narrative_tags\n*Pendiente (junction N:M)*\n\n| Campo | Tipo |\n|---|---|\n| `narrative_id` | UUID FK → narratives |\n| `tag_id` | UUID FK → tags |\n| PK | (narrative_id, tag_id) |"
     },
     {
       "id": "a1b2c3d4e5f60060",
       "type": "text",
-      "x": 1040,
-      "y": 380,
-      "width": 320,
-      "height": 220,
+      "x": 1080,
+      "y": 740,
+      "width": 380,
+      "height": 380,
       "color": "3",
-      "text": "## project_members\n*Pendiente*\n\n| Campo | Tipo |\n|---|---|\n| `id` | UUID PK |\n| `project_id` | UUID FK → projects |\n| `user_id` | UUID FK → auth.users |\n| `role` | admin/investigador/lector |\n| `invited_at` | TIMESTAMPTZ |\n| `accepted_at` | TIMESTAMPTZ |"
+      "text": "## project_members\n*Pendiente*\n\n| Campo | Tipo |\n|---|---|\n| `id` | UUID PK |\n| `project_id` | UUID FK → projects |\n| `user_id` | UUID FK → auth.users |\n| `role` | admin / investigador / lector |\n| `invited_at` | TIMESTAMPTZ |\n| `accepted_at` | TIMESTAMPTZ |"
     },
     {
       "id": "a1b2c3d4e5f60070",
       "type": "text",
       "x": 0,
-      "y": 680,
-      "width": 320,
-      "height": 180,
+      "y": 1200,
+      "width": 360,
+      "height": 340,
       "color": "3",
-      "text": "## findings\n*Pendiente*\n\n| Campo | Tipo |\n|---|---|\n| `id` | UUID PK |\n| `project_id` | UUID FK → projects |\n| `cluster_id` | UUID FK → clusters |\n| `title` | TEXT |\n| `summary` | TEXT (AI) |\n| `created_at` | TIMESTAMPTZ |"
+      "text": "## findings\n*Pendiente*\n\n| Campo | Tipo |\n|---|---|\n| `id` | UUID PK |\n| `project_id` | UUID FK → projects |\n| `cluster_id` | UUID FK → clusters |\n| `title` | TEXT |\n| `summary` | TEXT (AI-generated) |\n| `created_at` | TIMESTAMPTZ |"
     }
   ],
   "edges": [
@@ -126,13 +126,13 @@
       "toNode": "a1b2c3d4e5f60030",
       "toSide": "bottom",
       "toEnd": "arrow",
-      "label": "1:N",
-      "color": "5"
+      "color": "5",
+      "label": "1:N"
     },
     {
       "id": "e1b2c3d4e5f60005",
       "fromNode": "a1b2c3d4e5f60010",
-      "fromSide": "bottom",
+      "fromSide": "right",
       "toNode": "a1b2c3d4e5f60050",
       "toSide": "top",
       "toEnd": "arrow",
@@ -175,7 +175,7 @@
       "label": "1:N"
     },
     {
-      "id": "e1b2c3d4e5f60010",
+      "id": "e1b2c3d4e5f60011",
       "fromNode": "a1b2c3d4e5f60010",
       "fromSide": "bottom",
       "toNode": "a1b2c3d4e5f60070",

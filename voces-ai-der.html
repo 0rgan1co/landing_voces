@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Voces.ai — DER v2</title>
+<style>
+  @page { size: landscape; margin: 12mm; }
+  body { font-family: 'Inter', -apple-system, sans-serif; background: #f8f4ff; margin: 0; padding: 24px; }
+  h1 { text-align: center; font-size: 18px; color: #1a1a2e; margin-bottom: 4px; }
+  .subtitle { text-align: center; font-size: 11px; color: #636366; margin-bottom: 24px; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; max-width: 1100px; margin: 0 auto; }
+  .card { background: #fff; border: 1.5px solid #e8e8ed; border-radius: 10px; padding: 14px 16px; font-size: 11px; }
+  .card.created { border-color: #7B2FF7; box-shadow: 0 2px 8px rgba(123,47,247,0.08); }
+  .card h2 { font-size: 13px; margin: 0 0 2px; color: #1a1a2e; }
+  .card .badge { display: inline-block; font-size: 9px; font-weight: 700; padding: 1px 8px; border-radius: 10px; margin-bottom: 8px; }
+  .badge-created { background: #e8f5e9; color: #2e7d32; }
+  .badge-pending { background: #fff3e0; color: #e65100; }
+  table { width: 100%; border-collapse: collapse; font-size: 10.5px; }
+  th { text-align: left; font-weight: 700; color: #7B2FF7; padding: 3px 0; border-bottom: 1px solid #e8e8ed; }
+  td { padding: 2.5px 0; color: #1a1a2e; }
+  td:first-child { font-family: 'SF Mono', 'Fira Code', monospace; font-size: 10px; color: #636366; }
+  td:last-child { color: #8e8e93; font-size: 10px; }
+  .relations { max-width: 1100px; margin: 20px auto 0; background: #fff; border: 1.5px solid #e8e8ed; border-radius: 10px; padding: 14px 20px; font-size: 11px; }
+  .relations h2 { font-size: 13px; margin: 0 0 8px; color: #1a1a2e; }
+  .rel-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 24px; }
+  .rel-item { display: flex; align-items: center; gap: 6px; padding: 3px 0; }
+  .rel-item .arrow { color: #7B2FF7; font-weight: 700; }
+  .rel-item .label { background: #f8f4ff; color: #7B2FF7; font-size: 9px; font-weight: 700; padding: 1px 6px; border-radius: 8px; }
+  footer { text-align: center; margin-top: 20px; font-size: 9px; color: #8e8e93; }
+</style>
+</head>
+<body>
+
+<h1>Voces.ai — Diagrama Entidad-Relacion (DER v2)</h1>
+<p class="subtitle">8 tablas | Supabase (sa-east-1) | Actualizado 27 marzo 2026</p>
+
+<div class="grid">
+
+  <div class="card created">
+    <h2>projects</h2>
+    <span class="badge badge-created">Creada</span>
+    <table>
+      <tr><th>Campo</th><th>Tipo</th></tr>
+      <tr><td>id</td><td>UUID PK</td></tr>
+      <tr><td>user_id</td><td>UUID FK → auth.users</td></tr>
+      <tr><td>name</td><td>TEXT</td></tr>
+      <tr><td>description</td><td>TEXT</td></tr>
+      <tr><td>target_audience</td><td>TEXT</td></tr>
+      <tr><td>status</td><td>borrador / activo / completado</td></tr>
+      <tr><td>interview_questions</td><td>JSONB</td></tr>
+      <tr><td>interviews_count</td><td>INT</td></tr>
+      <tr><td>narratives_count</td><td>INT</td></tr>
+      <tr><td>created_at</td><td>TIMESTAMPTZ</td></tr>
+      <tr><td>updated_at</td><td>TIMESTAMPTZ</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>interviews</h2>
+    <span class="badge badge-pending">Pendiente</span>
+    <table>
+      <tr><th>Campo</th><th>Tipo</th></tr>
+      <tr><td>id</td><td>UUID PK</td></tr>
+      <tr><td>project_id</td><td>UUID FK → projects</td></tr>
+      <tr><td>participant_id</td><td>TEXT (anonimizado)</td></tr>
+      <tr><td>status</td><td>pendiente / en_curso / completada</td></tr>
+      <tr><td>progress</td><td>INT (0-100)</td></tr>
+      <tr><td>language</td><td>es / en / pt</td></tr>
+      <tr><td>messages</td><td>JSONB</td></tr>
+      <tr><td>narrative_count</td><td>INT</td></tr>
+      <tr><td>anonymity_reminders</td><td>INT</td></tr>
+      <tr><td>started_at</td><td>TIMESTAMPTZ</td></tr>
+      <tr><td>completed_at</td><td>TIMESTAMPTZ</td></tr>
+      <tr><td>duration_seconds</td><td>INT</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>narratives</h2>
+    <span class="badge badge-pending">Pendiente</span>
+    <table>
+      <tr><th>Campo</th><th>Tipo</th></tr>
+      <tr><td>id</td><td>UUID PK</td></tr>
+      <tr><td>project_id</td><td>UUID FK → projects</td></tr>
+      <tr><td>interview_id</td><td>UUID FK → interviews</td></tr>
+      <tr><td>text</td><td>TEXT</td></tr>
+      <tr><td>fact</td><td>TEXT</td></tr>
+      <tr><td>context</td><td>TEXT</td></tr>
+      <tr><td>consequence</td><td>TEXT</td></tr>
+      <tr><td>sentiment</td><td>FLOAT (-2 a +2)</td></tr>
+      <tr><td>abstraction</td><td>INT (1=concreto, 4=abstracto)</td></tr>
+      <tr><td>confidence</td><td>FLOAT (0-1)</td></tr>
+      <tr><td>cluster_id</td><td>UUID FK → clusters</td></tr>
+      <tr><td>is_outlier</td><td>BOOLEAN</td></tr>
+      <tr><td>embedding</td><td>VECTOR(1536)</td></tr>
+      <tr><td>created_at</td><td>TIMESTAMPTZ</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>clusters</h2>
+    <span class="badge badge-pending">Pendiente</span>
+    <table>
+      <tr><th>Campo</th><th>Tipo</th></tr>
+      <tr><td>id</td><td>UUID PK</td></tr>
+      <tr><td>project_id</td><td>UUID FK → projects</td></tr>
+      <tr><td>name</td><td>TEXT (AI-generated)</td></tr>
+      <tr><td>summary</td><td>TEXT (AI-generated)</td></tr>
+      <tr><td>narrative_count</td><td>INT</td></tr>
+      <tr><td>avg_sentiment</td><td>FLOAT (-2 a +2)</td></tr>
+      <tr><td>popularity</td><td>FLOAT (0-1)</td></tr>
+      <tr><td>min_cluster_size</td><td>INT (param)</td></tr>
+      <tr><td>threshold</td><td>FLOAT (0-1, param)</td></tr>
+      <tr><td>color</td><td>TEXT (hex)</td></tr>
+      <tr><td>created_at</td><td>TIMESTAMPTZ</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>tags</h2>
+    <span class="badge badge-pending">Pendiente</span>
+    <table>
+      <tr><th>Campo</th><th>Tipo</th></tr>
+      <tr><td>id</td><td>UUID PK</td></tr>
+      <tr><td>project_id</td><td>UUID FK → projects</td></tr>
+      <tr><td>name</td><td>TEXT</td></tr>
+      <tr><td>color</td><td>TEXT (hex)</td></tr>
+      <tr><td>created_at</td><td>TIMESTAMPTZ</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>narrative_tags</h2>
+    <span class="badge badge-pending">Pendiente (junction N:M)</span>
+    <table>
+      <tr><th>Campo</th><th>Tipo</th></tr>
+      <tr><td>narrative_id</td><td>UUID FK → narratives</td></tr>
+      <tr><td>tag_id</td><td>UUID FK → tags</td></tr>
+      <tr><td>PK</td><td>(narrative_id, tag_id)</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>project_members</h2>
+    <span class="badge badge-pending">Pendiente</span>
+    <table>
+      <tr><th>Campo</th><th>Tipo</th></tr>
+      <tr><td>id</td><td>UUID PK</td></tr>
+      <tr><td>project_id</td><td>UUID FK → projects</td></tr>
+      <tr><td>user_id</td><td>UUID FK → auth.users</td></tr>
+      <tr><td>role</td><td>admin / investigador / lector</td></tr>
+      <tr><td>invited_at</td><td>TIMESTAMPTZ</td></tr>
+      <tr><td>accepted_at</td><td>TIMESTAMPTZ</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>findings</h2>
+    <span class="badge badge-pending">Pendiente</span>
+    <table>
+      <tr><th>Campo</th><th>Tipo</th></tr>
+      <tr><td>id</td><td>UUID PK</td></tr>
+      <tr><td>project_id</td><td>UUID FK → projects</td></tr>
+      <tr><td>cluster_id</td><td>UUID FK → clusters</td></tr>
+      <tr><td>title</td><td>TEXT</td></tr>
+      <tr><td>summary</td><td>TEXT (AI-generated)</td></tr>
+      <tr><td>created_at</td><td>TIMESTAMPTZ</td></tr>
+    </table>
+  </div>
+
+</div>
+
+<div class="relations">
+  <h2>Relaciones</h2>
+  <div class="rel-grid">
+    <div class="rel-item">projects <span class="arrow">→</span> interviews <span class="label">1:N</span></div>
+    <div class="rel-item">interviews <span class="arrow">→</span> narratives <span class="label">1:N</span></div>
+    <div class="rel-item">projects <span class="arrow">→</span> clusters <span class="label">1:N</span></div>
+    <div class="rel-item">clusters <span class="arrow">→</span> narratives <span class="label">1:N</span></div>
+    <div class="rel-item">projects <span class="arrow">→</span> tags <span class="label">1:N</span></div>
+    <div class="rel-item">narratives <span class="arrow">↔</span> tags <span class="label">N:M</span> via narrative_tags</div>
+    <div class="rel-item">projects <span class="arrow">→</span> project_members <span class="label">1:N</span></div>
+    <div class="rel-item">projects <span class="arrow">→</span> findings <span class="label">1:N</span></div>
+    <div class="rel-item">clusters <span class="arrow">→</span> findings <span class="label">1:N</span></div>
+  </div>
+</div>
+
+<footer>Voces.ai — DER v2 con metricas Cardus — Supabase (sa-east-1) — 27 marzo 2026</footer>
+
+</body>
+</html>
