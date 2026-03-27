@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard — Voces.ai</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%237B2FF7' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z'/%3E%3Cpath d='M19 10v2a7 7 0 0 1-14 0v-2'/%3E%3Cline x1='12' x2='12' y1='19' y2='22'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --purple: #7B2FF7; --purple-light: #A855F7; --purple-bg: #f8f4ff;
+    --dark: #0f0f23; --dark-2: #1a1a2e; --dark-3: #2d2d44;
+    --gray-50: #fafafa; --gray-100: #f5f5f7; --gray-200: #e8e8ed;
+    --gray-400: #8e8e93; --gray-600: #636366;
+    --sidebar-w: 240px; --topbar-h: 56px; --radius: 10px;
+  }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: var(--dark-2); background: var(--gray-50); line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
+
+  /* === LAYOUT === */
+  .app { display: flex; min-height: 100vh; }
+
+  /* === SIDEBAR (EARS-051) === */
+  .sidebar {
+    width: var(--sidebar-w); background: var(--dark); color: #fff;
+    display: flex; flex-direction: column; position: fixed; top: 0; bottom: 0;
+    z-index: 50; transition: transform 0.2s;
+  }
+  .sidebar-logo {
+    padding: 18px 20px; font-size: 1rem; font-weight: 800;
+    display: flex; align-items: center; gap: 8px;
+    border-bottom: 1px solid var(--dark-3);
+  }
+  .sidebar-logo svg { color: var(--purple-light); }
+  .sidebar-nav { flex: 1; padding: 12px 0; }
+  .sidebar-nav a {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 20px; font-size: 0.85rem; font-weight: 400;
+    color: var(--gray-400); transition: all 0.15s; border-left: 3px solid transparent;
+  }
+  .sidebar-nav a:hover { color: #fff; background: rgba(255,255,255,0.05); }
+  .sidebar-nav a.active { color: #fff; background: rgba(123,47,247,0.15); border-left-color: var(--purple); font-weight: 600; }
+  .sidebar-nav a svg { width: 18px; height: 18px; flex-shrink: 0; }
+  .sidebar-section { padding: 16px 20px 6px; font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.2px; color: var(--gray-600); }
+  .sidebar-footer {
+    padding: 14px 20px; border-top: 1px solid var(--dark-3);
+    display: flex; align-items: center; gap: 10px; font-size: 0.8rem;
+  }
+  .sidebar-footer img { width: 28px; height: 28px; border-radius: 50%; }
+  .sidebar-footer .user-info { flex: 1; overflow: hidden; }
+  .sidebar-footer .user-info span { display: block; font-weight: 600; font-size: 0.8rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .sidebar-footer .user-info small { color: var(--gray-400); font-size: 0.7rem; }
+  .sidebar-footer button {
+    background: none; border: none; color: var(--gray-400); cursor: pointer; padding: 4px;
+  }
+  .sidebar-footer button:hover { color: #fff; }
+
+  /* === MAIN === */
+  .main { flex: 1; margin-left: var(--sidebar-w); }
+
+  /* === TOPBAR (EARS-052) === */
+  .topbar {
+    height: var(--topbar-h); background: #fff; border-bottom: 1px solid var(--gray-200);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 24px; position: sticky; top: 0; z-index: 40;
+  }
+  .topbar-left { display: flex; align-items: center; gap: 12px; }
+  .topbar-left h1 { font-size: 1rem; font-weight: 700; }
+  .topbar-search {
+    padding: 7px 14px 7px 34px; border: 1px solid var(--gray-200); border-radius: 8px;
+    font-size: 0.82rem; font-family: inherit; width: 260px; background: var(--gray-50);
+    outline: none; transition: border-color 0.15s;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%238e8e93' stroke-width='2'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.3-4.3'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: 10px center;
+  }
+  .topbar-search:focus { border-color: var(--purple); }
+  .topbar-right { display: flex; align-items: center; gap: 12px; }
+
+  /* === CONTENT === */
+  .content { padding: 24px; }
+
+  /* === PROJECT CARDS (EARS-054) === */
+  .page-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; }
+  .page-header h2 { font-size: 1.25rem; font-weight: 800; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 9px 20px; border-radius: 8px; font-size: 0.85rem;
+    font-weight: 600; border: none; cursor: pointer; font-family: inherit;
+    transition: transform 0.1s, box-shadow 0.15s;
+  }
+  .btn-primary { background: var(--purple); color: #fff; box-shadow: 0 2px 8px rgba(123,47,247,0.2); }
+  .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(123,47,247,0.3); }
+  .btn-outline { background: #fff; color: var(--dark-2); border: 1.5px solid var(--gray-200); }
+  .btn-outline:hover { border-color: var(--purple); color: var(--purple); }
+  .btn svg { width: 16px; height: 16px; }
+
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
+  .project-card {
+    background: #fff; border: 1.5px solid var(--gray-200); border-radius: var(--radius);
+    padding: 20px; transition: border-color 0.15s, box-shadow 0.15s; cursor: pointer;
+  }
+  .project-card:hover { border-color: var(--purple); box-shadow: 0 4px 16px rgba(123,47,247,0.06); }
+  .project-card-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 8px; }
+  .project-card h3 { font-size: 0.95rem; font-weight: 700; }
+  .project-card p { font-size: 0.82rem; color: var(--gray-600); margin-bottom: 14px; line-height: 1.5; }
+  .project-card-meta { display: flex; gap: 16px; font-size: 0.75rem; color: var(--gray-400); }
+  .project-card-meta span { display: flex; align-items: center; gap: 4px; }
+  .status-badge {
+    display: inline-block; padding: 2px 10px; border-radius: 12px;
+    font-size: 0.68rem; font-weight: 700; letter-spacing: 0.3px;
+  }
+  .status-borrador { background: var(--gray-100); color: var(--gray-600); }
+  .status-activo { background: #e8f5e9; color: #2e7d32; }
+  .status-completado { background: var(--purple-bg); color: var(--purple); }
+
+  /* === EMPTY STATE === */
+  .empty-state {
+    text-align: center; padding: 60px 20px; background: #fff;
+    border: 2px dashed var(--gray-200); border-radius: var(--radius);
+  }
+  .empty-state svg { width: 48px; height: 48px; color: var(--gray-400); margin-bottom: 16px; }
+  .empty-state h3 { font-size: 1rem; font-weight: 700; margin-bottom: 6px; }
+  .empty-state p { font-size: 0.85rem; color: var(--gray-600); margin-bottom: 20px; }
+
+  /* === MODAL === */
+  .modal-overlay {
+    display: none; position: fixed; inset: 0; z-index: 300;
+    background: rgba(0,0,0,0.5); backdrop-filter: blur(4px);
+    align-items: center; justify-content: center;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    background: #fff; border-radius: 14px; padding: 32px;
+    max-width: 520px; width: 90%; box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+    position: relative; max-height: 90vh; overflow-y: auto;
+  }
+  .modal h3 { font-size: 1.1rem; font-weight: 800; margin-bottom: 4px; }
+  .modal > p { font-size: 0.85rem; color: var(--gray-600); margin-bottom: 20px; }
+  .modal-close {
+    position: absolute; top: 14px; right: 14px; background: none; border: none;
+    cursor: pointer; color: var(--gray-400); padding: 4px;
+  }
+  .modal-close:hover { color: var(--dark-2); }
+  .form-group { margin-bottom: 16px; }
+  .form-group label { display: block; font-size: 0.82rem; font-weight: 600; margin-bottom: 5px; }
+  .form-group input, .form-group textarea, .form-group select {
+    width: 100%; padding: 9px 12px; border: 1.5px solid var(--gray-200); border-radius: 8px;
+    font-size: 0.85rem; font-family: inherit; outline: none; transition: border-color 0.15s;
+  }
+  .form-group input:focus, .form-group textarea:focus { border-color: var(--purple); }
+  .form-group textarea { resize: vertical; min-height: 70px; }
+  .form-actions { display: flex; gap: 8px; justify-content: flex-end; margin-top: 20px; }
+
+  /* === LOADING === */
+  .spinner { display: inline-block; width: 18px; height: 18px; border: 2px solid var(--gray-200); border-top-color: var(--purple); border-radius: 50%; animation: spin 0.6s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* === RESPONSIVE === */
+  @media (max-width: 768px) {
+    .sidebar { transform: translateX(-100%); }
+    .sidebar.open { transform: translateX(0); }
+    .main { margin-left: 0; }
+    .topbar-search { width: 160px; }
+    .projects-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="app">
+
+<!-- SIDEBAR (EARS-051) -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-logo">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/></svg>
+    Voces.ai
+  </div>
+  <nav class="sidebar-nav">
+    <div class="sidebar-section">General</div>
+    <a href="#" class="active" data-page="projects">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8l-7-6H4a2 2 0 0 0-2 2v16z"/><path d="M14 2v6h6"/></svg>
+      Proyectos
+    </a>
+    <div class="sidebar-section">Proyecto actual</div>
+    <a href="#" data-page="interviews">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/></svg>
+      Entrevistas
+    </a>
+    <a href="#" data-page="narratives">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      Narrativas
+    </a>
+    <a href="#" data-page="clusters">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><path d="M13 6h3a2 2 0 0 1 2 2v7"/><path d="M11 18H8a2 2 0 0 1-2-2V9"/></svg>
+      Clusters
+    </a>
+    <a href="#" data-page="map">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+      Mapa Semantico
+    </a>
+    <div class="sidebar-section">Sistema</div>
+    <a href="#" data-page="settings">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+      Configuracion
+    </a>
+  </nav>
+  <div class="sidebar-footer">
+    <img id="sb-avatar" src="" alt="">
+    <div class="user-info">
+      <span id="sb-name">—</span>
+      <small id="sb-email">—</small>
+    </div>
+    <button onclick="logout()" title="Cerrar sesion">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" x2="9" y1="12" y2="12"/></svg>
+    </button>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- TOPBAR (EARS-052) -->
+  <header class="topbar">
+    <div class="topbar-left">
+      <button class="btn-outline" style="display:none;padding:6px 8px;" id="menu-toggle" onclick="document.getElementById('sidebar').classList.toggle('open')">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+      </button>
+      <h1 id="page-title">Proyectos</h1>
+    </div>
+    <div class="topbar-right">
+      <input type="text" class="topbar-search" placeholder="Buscar proyectos..." id="search-input">
+    </div>
+  </header>
+
+  <!-- CONTENT: PROJECTS (EARS-054) -->
+  <div class="content" id="content">
+    <div class="page-header">
+      <h2>Mis Proyectos</h2>
+      <button class="btn btn-primary" onclick="openNewProject()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" x2="12" y1="5" y2="19"/><line x1="5" x2="19" y1="12" y2="12"/></svg>
+        Nuevo Proyecto
+      </button>
+    </div>
+
+    <div id="projects-list">
+      <div style="text-align:center; padding:40px;"><div class="spinner"></div></div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<!-- NEW PROJECT MODAL (EARS-053) -->
+<div id="new-project-modal" class="modal-overlay" onclick="if(event.target===this)closeNewProject()">
+  <div class="modal">
+    <button class="modal-close" onclick="closeNewProject()">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" x2="6" y1="6" y2="18"/><line x1="6" x2="18" y1="6" y2="18"/></svg>
+    </button>
+    <h3>Nuevo Proyecto</h3>
+    <p>Configura tu diagnostico cultural</p>
+    <form id="new-project-form" onsubmit="createProject(event)">
+      <div class="form-group">
+        <label for="proj-name">Nombre del proyecto *</label>
+        <input type="text" id="proj-name" required placeholder="Ej: Diagnostico Cultura Q1 2026">
+      </div>
+      <div class="form-group">
+        <label for="proj-desc">Descripcion</label>
+        <textarea id="proj-desc" placeholder="Objetivo del diagnostico y contexto"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="proj-audience">Audiencia objetivo</label>
+        <input type="text" id="proj-audience" placeholder="Ej: Todos los empleados de la region LATAM">
+      </div>
+      <div class="form-group">
+        <label for="proj-questions">Pregunta inicial de la entrevista</label>
+        <textarea id="proj-questions" placeholder="Ej: Como describirias la cultura de tu equipo en el dia a dia?"></textarea>
+      </div>
+      <div class="form-actions">
+        <button type="button" class="btn btn-outline" onclick="closeNewProject()">Cancelar</button>
+        <button type="submit" class="btn btn-primary" id="btn-create">Crear Proyecto</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.4"></script>
+<script>
+// Supabase init
+var _supabase = typeof supabase !== 'undefined' ? supabase.createClient(
+  'https://efprxfxvuyniqixugixz.supabase.co',
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVmcHJ4Znh2dXluaXFpeHVnaXh6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ0NzI1MzAsImV4cCI6MjA5MDA0ODUzMH0.8qvRplB2EntMzaygeae1QsSqo1VkG5IW-ZXN18GjM8I'
+) : null;
+
+// Auth guard — redirect to landing if not logged in
+async function checkAuth() {
+  if (!_supabase) { window.location.href = './'; return null; }
+  var res = await _supabase.auth.getSession();
+  if (!res.data.session) { window.location.href = './'; return null; }
+  return res.data.session;
+}
+
+// Init
+var currentUser = null;
+checkAuth().then(function(session) {
+  if (!session) return;
+  currentUser = session.user;
+  var meta = currentUser.user_metadata || {};
+  document.getElementById('sb-avatar').src = meta.avatar_url || meta.picture || '';
+  document.getElementById('sb-name').textContent = meta.full_name || meta.name || currentUser.email;
+  document.getElementById('sb-email').textContent = currentUser.email;
+  loadProjects();
+});
+
+// Logout
+async function logout() {
+  if (_supabase) await _supabase.auth.signOut();
+  window.location.href = './';
+}
+
+// Load projects (EARS-054)
+async function loadProjects() {
+  var container = document.getElementById('projects-list');
+  var { data, error } = await _supabase.from('projects').select('*').order('created_at', { ascending: false });
+  if (error) { container.innerHTML = '<p style="color:red;">Error al cargar proyectos</p>'; return; }
+  if (!data || data.length === 0) {
+    container.innerHTML = '<div class="empty-state">' +
+      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 20a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8l-7-6H4a2 2 0 0 0-2 2v16z"/><path d="M14 2v6h6"/></svg>' +
+      '<h3>Aun no tenes proyectos</h3>' +
+      '<p>Crea tu primer diagnostico cultural para empezar a escuchar a tu organizacion.</p>' +
+      '<button class="btn btn-primary" onclick="openNewProject()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><line x1="12" x2="12" y1="5" y2="19"/><line x1="5" x2="19" y1="12" y2="12"/></svg> Nuevo Proyecto</button>' +
+      '</div>';
+    return;
+  }
+  var html = '<div class="projects-grid">';
+  data.forEach(function(p) {
+    var statusClass = 'status-' + p.status;
+    var statusLabel = p.status.charAt(0).toUpperCase() + p.status.slice(1);
+    var date = new Date(p.created_at).toLocaleDateString('es-AR', { day: 'numeric', month: 'short', year: 'numeric' });
+    html += '<div class="project-card" onclick="openProject(\'' + p.id + '\')">' +
+      '<div class="project-card-header"><h3>' + escapeHtml(p.name) + '</h3><span class="status-badge ' + statusClass + '">' + statusLabel + '</span></div>' +
+      '<p>' + escapeHtml(p.description || 'Sin descripcion') + '</p>' +
+      '<div class="project-card-meta">' +
+      '<span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/></svg> ' + p.interviews_count + ' entrevistas</span>' +
+      '<span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg> ' + p.narratives_count + ' narrativas</span>' +
+      '<span>' + date + '</span>' +
+      '</div></div>';
+  });
+  html += '</div>';
+  container.innerHTML = html;
+}
+
+// Create project (EARS-053)
+async function createProject(e) {
+  e.preventDefault();
+  var btn = document.getElementById('btn-create');
+  btn.disabled = true; btn.innerHTML = '<div class="spinner"></div> Creando...';
+  var questions = document.getElementById('proj-questions').value;
+  var { error } = await _supabase.from('projects').insert({
+    user_id: currentUser.id,
+    name: document.getElementById('proj-name').value,
+    description: document.getElementById('proj-desc').value,
+    target_audience: document.getElementById('proj-audience').value,
+    interview_questions: questions ? [questions] : []
+  });
+  btn.disabled = false; btn.textContent = 'Crear Proyecto';
+  if (error) { alert('Error: ' + error.message); return; }
+  closeNewProject();
+  document.getElementById('new-project-form').reset();
+  loadProjects();
+}
+
+// Open project (placeholder for future sections)
+function openProject(id) {
+  alert('Proximamente: vista de proyecto. ID: ' + id);
+}
+
+// Modal
+function openNewProject() { document.getElementById('new-project-modal').classList.add('open'); }
+function closeNewProject() { document.getElementById('new-project-modal').classList.remove('open'); }
+document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeNewProject(); });
+
+// Search
+document.getElementById('search-input').addEventListener('input', function(e) {
+  var q = e.target.value.toLowerCase();
+  document.querySelectorAll('.project-card').forEach(function(card) {
+    var name = card.querySelector('h3').textContent.toLowerCase();
+    card.style.display = name.includes(q) ? '' : 'none';
+  });
+});
+
+// Responsive menu toggle
+if (window.innerWidth <= 768) document.getElementById('menu-toggle').style.display = '';
+
+// Helpers
+function escapeHtml(str) {
+  var div = document.createElement('div');
+  div.textContent = str;
+  return div.innerHTML;
+}
+</script>
+</body>
+</html>
