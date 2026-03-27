@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://0rgan1co.github.io/landing_voces/sitemap.xml
