@@ -79,29 +79,49 @@
 
 <h1>EARS Requirements — Voces.ai Landing Page v2</h1>
 <p class="meta">
-  Estado: <strong>Landing 36/48 — Dashboard 5/41</strong> &nbsp;|&nbsp; Actualizado: 26 marzo 2026 &nbsp;|&nbsp; Autor: Equipo Voces.ai<br>
+  Estado: <strong>Landing 39/48 — Dashboard 5/41</strong> &nbsp;|&nbsp; Actualizado: 27 marzo 2026 &nbsp;|&nbsp; Autor: Equipo Voces.ai<br>
   Landing actual: <a href="https://0rgan1co.github.io/landing_voces/">https://0rgan1co.github.io/landing_voces/</a> &nbsp;|&nbsp;
   Repo: <a href="https://github.com/0rgan1co/landing_voces">github.com/0rgan1co/landing_voces</a>
 </p>
 
 <h2>Estado actual (v1)</h2>
 
-<h3>Lo que funciona (24/36 OK)</h3>
+<h3>Lo que funciona — Landing (39/48 OK)</h3>
 <div class="ok">
-  Estructura completa (11 secciones inc. pricing) · Google OAuth via Supabase (sa-east-1) · Avatar + dropdown post-login con logout · Cookie banner con persistencia localStorage · GA condicional (placeholder ID) · OG tags, favicon SVG+PNG, JSON-LD · Inter font · Seccion de precios (3 planes) · CTAs conectados a TidyCal y WhatsApp · Scroll-reveal animations · Logos reales en social proof (GCBA, CREA, ClimaTech, AKAPOL)
+  Estructura completa (12 secciones inc. pricing + FAQ) · Google OAuth via Supabase (sa-east-1) · Avatar + dropdown post-login con logout · Cookie banner con persistencia localStorage · GA real (G-YPJK6R4BX3) · OG tags, favicon SVG+PNG, JSON-LD (Organization + SoftwareApplication + HowTo + FAQPage) · Inter font · Seccion de precios (3 planes) · CTAs conectados a TidyCal y WhatsApp · Scroll-reveal animations · Logos reales en social proof · AEO: FAQ con 6 preguntas + FAQPage schema · GEO: parrafo de definicion citable + feature cards autocontenidas · LLMO: meta description optimizada + sitemap.xml + robots.txt · Dashboard base con CRUD de proyectos · Token refresh error handling (EARS-012)
 </div>
 
-<h3>Gaps pendientes (12 restantes)</h3>
+<h3>Lo que funciona — Dashboard (5/41 OK)</h3>
+<div class="ok">
+  Dashboard HTML con sidebar, topbar y busqueda (EARS-050/051/052) · Nuevo proyecto con formulario completo (EARS-053) · Project cards con status, contadores y fecha (EARS-054) · Supabase: tabla projects con RLS · Auth guard: redirige a landing si no hay sesion
+</div>
+
+<h3>Gaps pendientes — Landing (9 restantes)</h3>
 <div class="gap">
   <ul style="margin:0; padding-left:18px;">
-    <li><strong>EARS-005:</strong> Redirect post-login a /dashboard (dashboard no existe aun)</li>
+    <li><strong>EARS-005:</strong> Redirect post-login a dashboard (dashboard existe, falta redirect automatico)</li>
     <li><strong>EARS-007:</strong> Restriccion por dominio de email</li>
-    <li><strong>EARS-012:</strong> Redirect a modal si refresh token falla</li>
     <li><strong>EARS-018/019/020:</strong> Selector de idioma no funciona (i18n)</li>
     <li><strong>EARS-026/027/028:</strong> Demo tour con screenshots reales</li>
     <li><strong>EARS-033:</strong> Lighthouse score &ge; 90 (sin verificar)</li>
     <li><strong>EARS-034:</strong> HTTP security headers (GitHub Pages no lo permite)</li>
-    <li><strong>EARS-035:</strong> OAuth client ID como env var (anon key es publica por diseno)</li>
+    <li><strong>EARS-035:</strong> OAuth client ID como env var (anon key es publica por diseno en Supabase)</li>
+  </ul>
+</div>
+
+<h3>Gaps pendientes — Dashboard (36 restantes)</h3>
+<div class="gap">
+  <ul style="margin:0; padding-left:18px;">
+    <li><strong>EARS-055 a 059:</strong> Gestion de entrevistas (tabla, config, invitaciones, progreso, resumen)</li>
+    <li><strong>EARS-060 a 064:</strong> Narrativas y analisis (extraccion, cards, edicion, filtros, clusters)</li>
+    <li><strong>EARS-065 a 069:</strong> Visualizaciones (mapa semantico, tooltips, zoom, sentimiento, heatmap)</li>
+    <li><strong>EARS-070 a 072:</strong> Hallazgos, exportacion PDF, Voces Chat</li>
+    <li><strong>EARS-073 a 075:</strong> Roles (admin/investigador/lector), compartir, anonimizacion</li>
+    <li><strong>EARS-076 a 079:</strong> Agente IA RTI (anonimato, ejemplos concretos, silencios)</li>
+    <li><strong>EARS-080 a 082:</strong> Metricas avanzadas (abstraccion, confianza, popularidad)</li>
+    <li><strong>EARS-083 a 085:</strong> Mapa semantico parametrizable (UMAP, outliers)</li>
+    <li><strong>EARS-086 a 088:</strong> Clustering avanzado (params, AI naming, edicion)</li>
+    <li><strong>EARS-089 a 090:</strong> Admin metricas operativas y filtrado dinamico</li>
   </ul>
 </div>
 
@@ -229,15 +249,17 @@
 <h2>Priorizacion sugerida</h2>
 
 <div class="priority">
-  <p><strong>Completados:</strong> Bloque A (parcial), B, D, F (parcial)</p>
+  <p><strong>Landing completados:</strong> Bloques A (parcial), B, D, F, H (AEO), I (GEO), J (LLMO)</p>
+  <p><strong>Dashboard completados:</strong> Bloque K (estructura base)</p>
   <p><strong>Proximos pasos sugeridos:</strong></p>
   <ol>
-    <li><strong>EARS-033</strong> — Verificar Lighthouse score (rapido)</li>
-    <li><strong>EARS-005</strong> — Dashboard basico o redirect post-login (requiere webapp)</li>
-    <li><strong>Bloque E</strong> — Demo tour con screenshots reales (requiere producto)</li>
-    <li><strong>Bloque C</strong> — i18n (expansion regional, requiere traducciones)</li>
-    <li><strong>EARS-007</strong> — Restriccion por dominio (Supabase RLS o middleware)</li>
-    <li><strong>Bloque G</strong> — Security headers (requiere migrar de GitHub Pages)</li>
+    <li><strong>Bloque L</strong> — Gestion de entrevistas (EARS-055 a 059) — tablas + UI</li>
+    <li><strong>Bloque M</strong> — Narrativas y clusters (EARS-060 a 064) — core del producto</li>
+    <li><strong>Bloque N</strong> — Visualizaciones (EARS-065 a 069) — mapa semantico</li>
+    <li><strong>Bloque Q</strong> — Agente IA RTI (EARS-076 a 079) — entrevistador</li>
+    <li><strong>Bloque O</strong> — Hallazgos y export (EARS-070 a 072)</li>
+    <li><strong>Bloque P</strong> — Roles y compartir (EARS-073 a 075)</li>
+    <li><strong>Landing pendientes:</strong> i18n (C), demo tour (E), Lighthouse (033)</li>
   </ol>
 </div>
 
@@ -487,6 +509,7 @@ const DEFAULT_STATE = {
   '009': { checked: true },  // Dropdown with Dashboard + Logout
   '010': { checked: true },  // Logout revokes session + reload
   '011': { checked: true },  // Silent token refresh (Supabase)
+  '012': { checked: true },  // Redirect if refresh fails
   // B. Cookie
   '013': { checked: true },  // Cookie accept -> localStorage
   '014': { checked: true },  // Cookie reject -> localStorage
@@ -525,7 +548,7 @@ const DEFAULT_STATE = {
 };
 
 // Restore state on load — merge defaults so new OKs always appear
-const STATE_VERSION = 4; // bump to force re-merge
+const STATE_VERSION = 5; // bump to force re-merge
 document.addEventListener('DOMContentLoaded', function() {
   let state = loadState();
   const savedVersion = parseInt(localStorage.getItem(STORAGE_KEY + '_v') || '0');
