@@ -79,7 +79,7 @@
 
 <h1>EARS Requirements — Voces.ai Landing Page v2</h1>
 <p class="meta">
-  Estado: <strong>Landing 39/48 — Dashboard 5/41</strong> &nbsp;|&nbsp; Actualizado: 27 marzo 2026 &nbsp;|&nbsp; Autor: Equipo Voces.ai<br>
+  Estado: <strong>Landing 48/57 — Dashboard 10/41</strong> &nbsp;|&nbsp; Actualizado: 27 marzo 2026 &nbsp;|&nbsp; Autor: Equipo Voces.ai<br>
   Landing actual: <a href="https://0rgan1co.github.io/landing_voces/">https://0rgan1co.github.io/landing_voces/</a> &nbsp;|&nbsp;
   Repo: <a href="https://github.com/0rgan1co/landing_voces">github.com/0rgan1co/landing_voces</a>
 </p>
@@ -429,8 +429,31 @@
   <br><br><br>
 </div>
 
+<!-- ============================================================ -->
+<h2>V. UX — Formularios y Autenticación</h2>
+
+<table>
+  <tr><th class="check-col">Cumple</th><th style="width:80px;">ID</th><th style="width:100px;">Pattern</th><th>Requirement</th><th class="status-col">Estado</th></tr>
+  <tr data-id="091"><td class="check-col"><input type="checkbox" onchange="updateRow(this)"></td><td>EARS-091</td><td><span class="tag">Ubiquitous</span></td><td>The login modal shall display the Voces.ai logo, Google OAuth button, and LinkedIn OAuth button as the only authentication methods.</td><td class="status-col"><div class="status-btns"><button class="status-btn ok-btn" onclick="setStatus(this,'ok')">OK</button><button class="status-btn rev-btn" onclick="setStatus(this,'rev')">Revision</button></div></td></tr>
+  <tr data-id="092"><td class="check-col"><input type="checkbox" onchange="updateRow(this)"></td><td>EARS-092</td><td><span class="tag">Event-Driven</span></td><td>When the user clicks "Continuar con LinkedIn", the system shall initiate the LinkedIn OIDC authorization flow via Supabase Auth.</td><td class="status-col"><div class="status-btns"><button class="status-btn ok-btn" onclick="setStatus(this,'ok')">OK</button><button class="status-btn rev-btn" onclick="setStatus(this,'rev')">Revision</button></div></td></tr>
+  <tr data-id="093"><td class="check-col"><input type="checkbox" onchange="updateRow(this)"></td><td>EARS-093</td><td><span class="tag">Ubiquitous</span></td><td>The login modal shall display links to Terms of Service and Privacy Policy at the bottom.</td><td class="status-col"><div class="status-btns"><button class="status-btn ok-btn" onclick="setStatus(this,'ok')">OK</button><button class="status-btn rev-btn" onclick="setStatus(this,'rev')">Revision</button></div></td></tr>
+  <tr data-id="094"><td class="check-col"><input type="checkbox" onchange="updateRow(this)"></td><td>EARS-094</td><td><span class="tag">Ubiquitous</span></td><td>The contact form shall capture name, email, company, role, and message, and store them in the Supabase leads table.</td><td class="status-col"><div class="status-btns"><button class="status-btn ok-btn" onclick="setStatus(this,'ok')">OK</button><button class="status-btn rev-btn" onclick="setStatus(this,'rev')">Revision</button></div></td></tr>
+  <tr data-id="095"><td class="check-col"><input type="checkbox" onchange="updateRow(this)"></td><td>EARS-095</td><td><span class="tag">Event-Driven</span></td><td>When the user submits the contact form, the system shall display a success confirmation and offer WhatsApp as an alternative channel.</td><td class="status-col"><div class="status-btns"><button class="status-btn ok-btn" onclick="setStatus(this,'ok')">OK</button><button class="status-btn rev-btn" onclick="setStatus(this,'rev')">Revision</button></div></td></tr>
+  <tr data-id="096"><td class="check-col"><input type="checkbox" onchange="updateRow(this)"></td><td>EARS-096</td><td><span class="tag">Ubiquitous</span></td><td>All form inputs shall respect the active theme (dark/light) using CSS custom properties for background, border, and text color.</td><td class="status-col"><div class="status-btns"><button class="status-btn ok-btn" onclick="setStatus(this,'ok')">OK</button><button class="status-btn rev-btn" onclick="setStatus(this,'rev')">Revision</button></div></td></tr>
+</table>
+
+<!-- ============================================================ -->
+<h2>W. UX — Theme y Preferencias</h2>
+
+<table>
+  <tr><th class="check-col">Cumple</th><th style="width:80px;">ID</th><th style="width:100px;">Pattern</th><th>Requirement</th><th class="status-col">Estado</th></tr>
+  <tr data-id="097"><td class="check-col"><input type="checkbox" onchange="updateRow(this)"></td><td>EARS-097</td><td><span class="tag">Event-Driven</span></td><td>When the user clicks the theme toggle, the system shall switch between dark and light mode and persist the preference in localStorage.</td><td class="status-col"><div class="status-btns"><button class="status-btn ok-btn" onclick="setStatus(this,'ok')">OK</button><button class="status-btn rev-btn" onclick="setStatus(this,'rev')">Revision</button></div></td></tr>
+  <tr data-id="098"><td class="check-col"><input type="checkbox" onchange="updateRow(this)"></td><td>EARS-098</td><td><span class="tag">Complex</span></td><td>While no theme preference is stored, the system shall detect the user's OS preference (prefers-color-scheme) and apply the matching theme on first visit.</td><td class="status-col"><div class="status-btns"><button class="status-btn ok-btn" onclick="setStatus(this,'ok')">OK</button><button class="status-btn rev-btn" onclick="setStatus(this,'rev')">Revision</button></div></td></tr>
+  <tr data-id="099"><td class="check-col"><input type="checkbox" onchange="updateRow(this)"></td><td>EARS-099</td><td><span class="tag">Ubiquitous</span></td><td>All pages (landing, pricing, dashboard, coming soon) shall support dark and light themes using CSS custom properties.</td><td class="status-col"><div class="status-btns"><button class="status-btn ok-btn" onclick="setStatus(this,'ok')">OK</button><button class="status-btn rev-btn" onclick="setStatus(this,'rev')">Revision</button></div></td></tr>
+</table>
+
 <footer>
-  Voces.ai — EARS Requirements v2 — Documento para feedback interno — 25 marzo 2026
+  Voces.ai — EARS Requirements v3 — Documento para feedback interno — 28 marzo 2026
 </footer>
 
 <script>
@@ -530,6 +553,17 @@ const DEFAULT_STATE = {
   '032': { checked: true },  // Inter font from Google Fonts
   // G. Security
   '036': { checked: true },  // Token validation (Supabase server-side)
+  // V. Forms
+  '091': { checked: true },  // Login modal with Google + LinkedIn
+  '092': { checked: true },  // LinkedIn OIDC
+  '093': { checked: true },  // Terms/Privacy links in login
+  '094': { checked: true },  // Contact form → Supabase leads
+  '095': { checked: true },  // Success state + WhatsApp fallback
+  '096': { checked: true },  // Theme-aware inputs
+  // W. Theme
+  '097': { checked: true },  // Dark/light toggle + localStorage
+  '098': { checked: true },  // OS preference detection
+  '099': { checked: true },  // All pages support themes
   // H. AEO
   '037': { checked: true },  // FAQ section visible
   '038': { checked: true },  // FAQPage JSON-LD
@@ -548,7 +582,7 @@ const DEFAULT_STATE = {
 };
 
 // Restore state on load — merge defaults so new OKs always appear
-const STATE_VERSION = 5; // bump to force re-merge
+const STATE_VERSION = 6; // bump to force re-merge
 document.addEventListener('DOMContentLoaded', function() {
   let state = loadState();
   const savedVersion = parseInt(localStorage.getItem(STORAGE_KEY + '_v') || '0');

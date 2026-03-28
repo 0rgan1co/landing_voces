@@ -31,8 +31,8 @@
 </head>
 <body>
 
-<h1>Voces.ai — Diagrama Entidad-Relacion (DER v2)</h1>
-<p class="subtitle">8 tablas | Supabase (sa-east-1) | Actualizado 27 marzo 2026</p>
+<h1>Voces.ai — Diagrama Entidad-Relacion (DER v3)</h1>
+<p class="subtitle">9 tablas | Supabase (sa-east-1) | Actualizado 28 marzo 2026</p>
 
 <div class="grid">
 
@@ -170,6 +170,24 @@
 
 </div>
 
+  <div class="card created">
+    <h2>leads</h2>
+    <span class="badge badge-created">Creada</span>
+    <table>
+      <tr><th>Campo</th><th>Tipo</th></tr>
+      <tr><td>id</td><td>UUID PK</td></tr>
+      <tr><td>name</td><td>TEXT</td></tr>
+      <tr><td>email</td><td>TEXT</td></tr>
+      <tr><td>company</td><td>TEXT</td></tr>
+      <tr><td>role</td><td>TEXT</td></tr>
+      <tr><td>message</td><td>TEXT</td></tr>
+      <tr><td>source</td><td>TEXT (landing / precios)</td></tr>
+      <tr><td>created_at</td><td>TIMESTAMPTZ</td></tr>
+    </table>
+  </div>
+
+</div>
+
 <div class="relations">
   <h2>Relaciones</h2>
   <div class="rel-grid">
@@ -185,7 +203,7 @@
   </div>
 </div>
 
-<footer>Voces.ai — DER v2 con metricas Cardus — Supabase (sa-east-1) — 27 marzo 2026</footer>
+<footer>Voces.ai — DER v3 — Supabase (sa-east-1) — 28 marzo 2026</footer>
 
 </body>
 </html>
