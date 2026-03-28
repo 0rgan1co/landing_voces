@@ -17,7 +17,7 @@
 <meta name="robots" content="index, follow">
 <meta name="theme-color" content="#f97316">
 <!-- EARS-030: Favicon -->
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23f97316' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='M2 12c0 0 2-4 4-4s3 8 5 8 3-12 5-12 3 8 5 8 2-4 2-4' opacity='0.35'/%3E%3Cpath d='M4 12c0 0 1.5-3 3-3s2.5 6 4 6 2.5-6 4-6 2.5 6 4 6 1.5-3 1.5-3' opacity='0.6'/%3E%3Cpath d='M7 12c0 0 1-2 2-2s2 4 3 4 2-4 3-4 1.5 2 1.5 2'/%3E%3C/svg%3E">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48' fill='none'%3E%3Crect x='6' y='16' width='4' height='16' rx='2' fill='%23f97316'/%3E%3Crect x='14' y='8' width='4' height='32' rx='2' fill='%23f97316'/%3E%3Crect x='22' y='14' width='4' height='20' rx='2' fill='%23f97316'/%3E%3Crect x='30' y='6' width='4' height='36' rx='2' fill='%23f97316'/%3E%3Crect x='38' y='18' width='4' height='12' rx='2' fill='%23f97316'/%3E%3C/svg%3E">
 <link rel="icon" type="image/png" sizes="32x32" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAYRJREFUWEftlrFOwzAQhn+nSExMbEi8AC/AwMrEyMbCxMTKxsjIyMgb8AIMTExITExMSIgFCaHc6ey4TuLYSZoW1FNk+/7v7v87O8QWf7TF+vEPYOMZ2PoMxLpg2xtIBUBEJwG8BXCKiA6UX7IOkLkDZInonIjeA7gB4JaZX1e1I+sAGQEg0yPiYwCPiOg5ET0C8IKZ71a1I8sOkBkAkgMxzzPzc2b+vKodWXaAjACQGQDZCzE/I6IXRPSMme9WtSPLDpAZADIDQHIg5jlmfs7MX1a1I8sOEFkPSGeA6BSAPcw8T0QPmfmBiBaI6NWKM5BlB8gcAJkB8HcAJHtgfkrMj5j54Yp25L8ByD8gsgfILAB/B0DyIORZZn7EzA+Y+T4z3xPRqxVnIKvugIwBkOyBeZaZHzHzfWa+y8x3RPSGRF+Z+fuqduS/AcjGb8G/HSDrAXIZoDsb/J9fQ7IJZBKAdRswAd8Bz3lfMAVPHocAAAAASUVORK5CYII=">
 <!-- EARS-031: JSON-LD -->
 <script type="application/ld+json">
@@ -90,7 +90,7 @@
   .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(249,115,22,0.35); }
   .btn-ghost { background: none; color: var(--accent); font-weight: 600; cursor: pointer; border: none; }
   .btn-ghost:hover { text-decoration: underline; }
-  .btn-outline { background: #fff; color: var(--dark-2); border: 1.5px solid var(--gray-200); }
+  .btn-outline { background: var(--card-bg); color: var(--dark-2); border: 1.5px solid var(--gray-200); }
   .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
 
   /* === NAVBAR === */
@@ -108,7 +108,7 @@
   .navbar-actions { display: flex; align-items: center; gap: 10px; }
   .lang-select {
     padding: 5px 8px; border: 1px solid var(--gray-200); border-radius: 6px;
-    font-size: 0.8rem; background: #fff; cursor: pointer; color: var(--gray-600);
+    font-size: 0.8rem; background: var(--card-bg); cursor: pointer; color: var(--gray-600);
     font-family: inherit;
   }
   .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
@@ -329,7 +329,7 @@
   /* === COOKIE === */
   .cookie-banner {
     position: fixed; bottom: 20px; left: 20px; right: 20px; z-index: 200;
-    background: #fff; border-radius: 14px; box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+    background: var(--card-bg); border-radius: 14px; box-shadow: 0 8px 32px rgba(0,0,0,0.12);
     padding: 14px 20px; display: flex; align-items: center; justify-content: space-between; gap: 16px;
     max-width: 880px; margin: 0 auto; transition: transform 0.3s, opacity 0.3s;
   }
@@ -401,7 +401,7 @@
   .user-menu { position: relative; }
   .user-avatar-btn {
     display: flex; align-items: center; gap: 8px; padding: 4px 10px 4px 4px;
-    border-radius: 8px; border: 1.5px solid var(--gray-200); background: #fff;
+    border-radius: 8px; border: 1.5px solid var(--gray-200); background: var(--card-bg);
     cursor: pointer; transition: all 0.15s; font-family: inherit;
   }
   .user-avatar-btn:hover { border-color: var(--accent); }
@@ -415,7 +415,7 @@
   .user-avatar-btn svg { width: 14px; height: 14px; color: var(--gray-400); flex-shrink: 0; }
   .user-dropdown {
     display: none; position: absolute; top: calc(100% + 6px); right: 0;
-    background: #fff; border: 1px solid var(--gray-200); border-radius: 10px;
+    background: var(--card-bg); border: 1px solid var(--gray-200); border-radius: 10px;
     box-shadow: 0 8px 24px rgba(0,0,0,0.1); min-width: 200px; z-index: 110;
     overflow: hidden;
   }
@@ -456,7 +456,7 @@
   .social-proof-header h2 { font-size: clamp(1.3rem, 2.5vw, 1.7rem); font-weight: 800; margin-top: 12px; }
   .proof-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 900px; margin: 0 auto; }
   .proof-card {
-    background: linear-gradient(135deg, var(--accent-bg) 0%, #fff 100%);
+    background: linear-gradient(135deg, var(--accent-bg) 0%, var(--card-bg) 100%);
     border: 1.5px solid rgba(249,115,22,0.12); border-radius: 14px; padding: 28px 24px;
     transition: transform 0.15s, box-shadow 0.15s;
   }
@@ -516,7 +516,7 @@
 <nav class="navbar">
   <div class="container">
     <a href="#" class="navbar-logo">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 12c0 0 2-4 4-4s3 8 5 8 3-12 5-12 3 8 5 8 2-4 2-4" opacity="0.35"/><path d="M4 12c0 0 1.5-3 3-3s2.5 6 4 6 2.5-6 4-6 2.5 6 4 6 1.5-3 1.5-3" opacity="0.6"/><path d="M7 12c0 0 1-2 2-2s2 4 3 4 2-4 3-4 1.5 2 1.5 2"/></svg>
+      <svg width="22" height="22" viewBox="0 0 48 48" fill="none"><rect x="6" y="16" width="4" height="16" rx="2" fill="currentColor"/><rect x="14" y="8" width="4" height="32" rx="2" fill="currentColor"/><rect x="22" y="14" width="4" height="20" rx="2" fill="currentColor"/><rect x="30" y="6" width="4" height="36" rx="2" fill="currentColor"/><rect x="38" y="18" width="4" height="12" rx="2" fill="currentColor"/></svg>
       Voces.ai
     </a>
     <div class="navbar-links">
@@ -914,7 +914,7 @@
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" x2="6" y1="6" y2="18"/><line x1="6" x2="18" y1="6" y2="18"/></svg>
     </button>
     <div class="modal-logo">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 12c0 0 2-4 4-4s3 8 5 8 3-12 5-12 3 8 5 8 2-4 2-4" opacity="0.35"/><path d="M4 12c0 0 1.5-3 3-3s2.5 6 4 6 2.5-6 4-6 2.5 6 4 6 1.5-3 1.5-3" opacity="0.6"/><path d="M7 12c0 0 1-2 2-2s2 4 3 4 2-4 3-4 1.5 2 1.5 2"/></svg>
+      <svg width="24" height="24" viewBox="0 0 48 48" fill="none"><rect x="6" y="16" width="4" height="16" rx="2" fill="currentColor"/><rect x="14" y="8" width="4" height="32" rx="2" fill="currentColor"/><rect x="22" y="14" width="4" height="20" rx="2" fill="currentColor"/><rect x="30" y="6" width="4" height="36" rx="2" fill="currentColor"/><rect x="38" y="18" width="4" height="12" rx="2" fill="currentColor"/></svg>
       Voces.ai
     </div>
     <h3>Ingresá a tu cuenta</h3>
@@ -930,7 +930,7 @@
       </button>
     </div>
     <div class="auth-footer">
-      Al continuar, aceptás nuestros <a href="terminos.html">Términos</a> y <a href="privacidad.html">Política de Privacidad</a>.
+      Al continuar, aceptás nuestros <a href="proximamente.html">Términos</a> y <a href="proximamente.html">Política de Privacidad</a>.
     </div>
   </div>
 </div>
@@ -942,7 +942,7 @@
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" x2="6" y1="6" y2="18"/><line x1="6" x2="18" y1="6" y2="18"/></svg>
     </button>
     <div class="modal-logo">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 12c0 0 2-4 4-4s3 8 5 8 3-12 5-12 3 8 5 8 2-4 2-4" opacity="0.35"/><path d="M4 12c0 0 1.5-3 3-3s2.5 6 4 6 2.5-6 4-6 2.5 6 4 6 1.5-3 1.5-3" opacity="0.6"/><path d="M7 12c0 0 1-2 2-2s2 4 3 4 2-4 3-4 1.5 2 1.5 2"/></svg>
+      <svg width="24" height="24" viewBox="0 0 48 48" fill="none"><rect x="6" y="16" width="4" height="16" rx="2" fill="currentColor"/><rect x="14" y="8" width="4" height="32" rx="2" fill="currentColor"/><rect x="22" y="14" width="4" height="20" rx="2" fill="currentColor"/><rect x="30" y="6" width="4" height="36" rx="2" fill="currentColor"/><rect x="38" y="18" width="4" height="12" rx="2" fill="currentColor"/></svg>
       Voces.ai
     </div>
     <h3>Hablemos de tu organización</h3>
