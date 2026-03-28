@@ -125,23 +125,81 @@
   }
 
   /* Mockup */
-  .mockup {
-    max-width: 680px; margin: 0 auto;
-    background: var(--dark); border-radius: 12px; overflow: hidden;
-    box-shadow: 0 24px 48px rgba(0,0,0,0.15), 0 0 0 1px rgba(255,255,255,0.05);
+  /* === INTERVIEW WIDGET === */
+  .interview-widget {
+    background: var(--dark); border-radius: 16px; overflow: hidden;
+    box-shadow: 0 24px 48px rgba(0,0,0,0.2), 0 0 0 1px rgba(255,255,255,0.06);
   }
-  .mockup-bar { background: var(--dark-3); padding: 10px 14px; display: flex; gap: 6px; }
-  .mockup-dot { width: 10px; height: 10px; border-radius: 50%; }
-  .mockup-dot:nth-child(1) { background: #ff5f57; }
-  .mockup-dot:nth-child(2) { background: #ffbd2e; }
-  .mockup-dot:nth-child(3) { background: #28c840; }
-  .mockup-panels { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; padding: 16px; }
-  .mockup-panel { background: var(--dark-3); border-radius: 8px; padding: 20px; color: #ccc; font-size: 0.85rem; }
-  .mockup-panel-title { color: var(--purple-light); font-size: 0.65rem; font-weight: 700; letter-spacing: 1.2px; margin-bottom: 12px; text-transform: uppercase; }
-  .mockup-bubble { background: rgba(123,47,247,0.12); border-radius: 8px; padding: 10px 12px; font-size: 0.8rem; color: #ddd; margin-bottom: 8px; }
-  .mockup-progress { background: var(--dark); border-radius: 4px; height: 5px; margin: 10px 0 6px; }
-  .mockup-progress-fill { background: var(--purple); height: 100%; border-radius: 4px; width: 62%; }
-  .mockup-node { display: inline-block; background: rgba(123,47,247,0.15); border: 1px solid rgba(123,47,247,0.4); border-radius: 16px; padding: 4px 10px; font-size: 0.7rem; color: var(--purple-light); margin: 3px; }
+  .iw-header {
+    background: var(--dark-3); padding: 12px 16px; display: flex; align-items: center; justify-content: space-between;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .iw-header-left { display: flex; align-items: center; gap: 8px; }
+  .iw-dot { width: 8px; height: 8px; border-radius: 50%; }
+  .iw-dot.red { background: #ff5f57; }
+  .iw-dot.yellow { background: #ffbd2e; }
+  .iw-dot.green { background: #28c840; }
+  .iw-header-title { font-size: 0.7rem; font-weight: 600; color: rgba(255,255,255,0.5); letter-spacing: 0.5px; margin-left: 8px; }
+  .iw-live { display: flex; align-items: center; gap: 5px; font-size: 0.65rem; font-weight: 700; color: #28c840; text-transform: uppercase; letter-spacing: 0.8px; }
+  .iw-live-dot { width: 6px; height: 6px; background: #28c840; border-radius: 50%; animation: livePulse 1.5s ease-in-out infinite; }
+  @keyframes livePulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+  .iw-body { padding: 20px 16px; }
+  .iw-status { display: flex; align-items: center; gap: 8px; margin-bottom: 16px; }
+  .iw-mic-icon {
+    width: 36px; height: 36px; border-radius: 50%; background: rgba(123,47,247,0.15);
+    border: 1.5px solid rgba(123,47,247,0.4); display: flex; align-items: center; justify-content: center;
+    animation: micGlow 2s ease-in-out infinite;
+  }
+  @keyframes micGlow { 0%, 100% { box-shadow: 0 0 0 0 rgba(123,47,247,0.2); } 50% { box-shadow: 0 0 12px 4px rgba(123,47,247,0.15); } }
+  .iw-mic-icon svg { width: 16px; height: 16px; color: var(--purple-light); }
+  .iw-status-text { font-size: 0.72rem; color: rgba(255,255,255,0.4); }
+  .iw-status-text strong { color: var(--purple-light); font-weight: 600; }
+
+  .iw-chat { display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px; }
+  .iw-msg {
+    max-width: 88%; padding: 10px 14px; border-radius: 12px; font-size: 0.8rem; line-height: 1.5;
+    animation: msgFadeIn 0.4s ease;
+  }
+  @keyframes msgFadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+  .iw-msg.ai {
+    background: rgba(123,47,247,0.12); color: #ddd; border-bottom-left-radius: 4px;
+    align-self: flex-start;
+  }
+  .iw-msg.ai .iw-msg-label { font-size: 0.6rem; color: var(--purple-light); font-weight: 700; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.8px; }
+  .iw-msg.user {
+    background: rgba(255,255,255,0.06); color: #bbb; border-bottom-right-radius: 4px;
+    align-self: flex-end;
+  }
+  .iw-typing { display: flex; gap: 4px; padding: 10px 14px; align-self: flex-start; }
+  .iw-typing span {
+    width: 6px; height: 6px; background: var(--purple-light); border-radius: 50%; opacity: 0.4;
+    animation: typingBounce 1.2s ease-in-out infinite;
+  }
+  .iw-typing span:nth-child(2) { animation-delay: 0.15s; }
+  .iw-typing span:nth-child(3) { animation-delay: 0.3s; }
+  @keyframes typingBounce { 0%, 60%, 100% { transform: translateY(0); opacity: 0.4; } 30% { transform: translateY(-4px); opacity: 1; } }
+
+  .iw-waveform { display: flex; align-items: center; gap: 2px; height: 24px; margin-bottom: 12px; }
+  .iw-bar {
+    width: 3px; background: var(--purple); border-radius: 2px; opacity: 0.5;
+    animation: waveBar 1s ease-in-out infinite;
+  }
+  @keyframes waveBar { 0%, 100% { height: 4px; } 50% { height: var(--h); } }
+
+  .iw-footer {
+    padding: 12px 16px; border-top: 1px solid rgba(255,255,255,0.06);
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .iw-progress-wrap { flex: 1; margin-right: 12px; }
+  .iw-progress-bar { height: 4px; background: rgba(255,255,255,0.08); border-radius: 2px; overflow: hidden; }
+  .iw-progress-fill { height: 100%; background: var(--purple); border-radius: 2px; width: 62%; transition: width 1s; }
+  .iw-progress-label { font-size: 0.65rem; color: rgba(255,255,255,0.35); margin-top: 3px; }
+  .iw-anon-badge {
+    display: flex; align-items: center; gap: 4px; font-size: 0.6rem; color: #28c840;
+    font-weight: 600; letter-spacing: 0.3px;
+  }
+  .iw-anon-badge svg { width: 12px; height: 12px; }
 
   /* === SECTION 2: VALUE PROP + FEATURES (2-column) === */
   .value-features { padding: 80px 0; background: var(--gray-50); }
@@ -322,7 +380,7 @@
     .hero { padding: 48px 0 40px; }
     .hero h1 { font-size: 1.75rem; }
     .hero-grid { grid-template-columns: 1fr; gap: 32px; }
-    .mockup-panels { grid-template-columns: 1fr; }
+    .iw-chat .iw-msg { max-width: 95%; }
     .value-features-grid { grid-template-columns: 1fr; gap: 40px; }
     .demo-grid { grid-template-columns: 1fr; gap: 32px; }
     .tabs { gap: 6px; }
@@ -400,24 +458,66 @@
         </div>
       </div>
       <div>
-        <div class="mockup">
-          <div class="mockup-bar"><div class="mockup-dot"></div><div class="mockup-dot"></div><div class="mockup-dot"></div></div>
-          <div class="mockup-panels">
-            <div class="mockup-panel">
-              <div class="mockup-panel-title">Entrevista en curso</div>
-              <div class="mockup-bubble">¿Cómo describirías la cultura de tu equipo en el día a día?</div>
-              <div class="mockup-bubble" style="background:rgba(255,255,255,0.05); text-align:right;">Hay buena onda pero las decisiones se toman arriba y nos enteramos después...</div>
-              <div class="mockup-progress"><div class="mockup-progress-fill"></div></div>
-              <div style="font-size:0.7rem; color:var(--gray-400);">62% completado</div>
+        <div class="interview-widget">
+          <div class="iw-header">
+            <div class="iw-header-left">
+              <div class="iw-dot red"></div><div class="iw-dot yellow"></div><div class="iw-dot green"></div>
+              <span class="iw-header-title">Voces.ai — Entrevista</span>
             </div>
-            <div class="mockup-panel">
-              <div class="mockup-panel-title">Mapa de narrativas</div>
-              <div style="text-align:center; padding:8px 0;">
-                <span class="mockup-node">Confianza</span><span class="mockup-node">Liderazgo</span>
-                <span class="mockup-node">Autonomía</span><span class="mockup-node">Innovación</span>
-                <span class="mockup-node">Bienestar</span><span class="mockup-node">Comunicación</span>
+            <div class="iw-live"><div class="iw-live-dot"></div> En vivo</div>
+          </div>
+          <div class="iw-body">
+            <div class="iw-status">
+              <div class="iw-mic-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/></svg>
               </div>
-              <div style="font-size:0.7rem; color:var(--gray-400); margin-top:6px;">12 narrativas emergentes &middot; 3 clusters</div>
+              <div class="iw-status-text"><strong>Agente IA</strong> está escuchando</div>
+            </div>
+            <div class="iw-chat">
+              <div class="iw-msg ai">
+                <div class="iw-msg-label">Agente Voces.ai</div>
+                ¿Cómo describirías la cultura de tu equipo en el día a día? Contame una situación concreta.
+              </div>
+              <div class="iw-msg user">
+                Hay buena onda, pero las decisiones se toman arriba y nos enteramos después... a veces sentís que tu opinión no cuenta.
+              </div>
+              <div class="iw-msg ai">
+                <div class="iw-msg-label">Agente Voces.ai</div>
+                Interesante. ¿Podrías contarme un momento específico donde sentiste que tu opinión no fue tenida en cuenta? ¿Qué pasó?
+              </div>
+              <div class="iw-typing"><span></span><span></span><span></span></div>
+            </div>
+            <div class="iw-waveform">
+              <div class="iw-bar" style="--h:16px; animation-delay:0s"></div>
+              <div class="iw-bar" style="--h:10px; animation-delay:0.1s"></div>
+              <div class="iw-bar" style="--h:20px; animation-delay:0.2s"></div>
+              <div class="iw-bar" style="--h:8px; animation-delay:0.3s"></div>
+              <div class="iw-bar" style="--h:18px; animation-delay:0.4s"></div>
+              <div class="iw-bar" style="--h:12px; animation-delay:0.5s"></div>
+              <div class="iw-bar" style="--h:22px; animation-delay:0.15s"></div>
+              <div class="iw-bar" style="--h:6px; animation-delay:0.25s"></div>
+              <div class="iw-bar" style="--h:14px; animation-delay:0.35s"></div>
+              <div class="iw-bar" style="--h:20px; animation-delay:0.45s"></div>
+              <div class="iw-bar" style="--h:10px; animation-delay:0.05s"></div>
+              <div class="iw-bar" style="--h:16px; animation-delay:0.55s"></div>
+              <div class="iw-bar" style="--h:8px; animation-delay:0.2s"></div>
+              <div class="iw-bar" style="--h:18px; animation-delay:0.3s"></div>
+              <div class="iw-bar" style="--h:12px; animation-delay:0.4s"></div>
+              <div class="iw-bar" style="--h:22px; animation-delay:0.1s"></div>
+              <div class="iw-bar" style="--h:6px; animation-delay:0.5s"></div>
+              <div class="iw-bar" style="--h:14px; animation-delay:0.15s"></div>
+              <div class="iw-bar" style="--h:20px; animation-delay:0.25s"></div>
+              <div class="iw-bar" style="--h:10px; animation-delay:0.35s"></div>
+            </div>
+          </div>
+          <div class="iw-footer">
+            <div class="iw-progress-wrap">
+              <div class="iw-progress-bar"><div class="iw-progress-fill"></div></div>
+              <div class="iw-progress-label">62% completado &middot; 8 de 13 preguntas</div>
+            </div>
+            <div class="iw-anon-badge">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              Anónimo
             </div>
           </div>
         </div>
