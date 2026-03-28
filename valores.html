@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nuestros Valores — Voces.ai</title>
+<meta name="description" content="Los valores que guian a Voces.ai: confidencialidad, escucha autentica, confiabilidad y simplicidad.">
+<meta property="og:title" content="Nuestros Valores — Voces.ai">
+<meta property="og:description" content="Los valores que guian a Voces.ai: confidencialidad, escucha autentica, confiabilidad y simplicidad.">
+<meta property="og:url" content="https://0rgan1co.github.io/landing_voces/valores.html">
+<meta name="theme-color" content="#06b6d4">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2306b6d4' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z'/%3E%3Cpath d='M19 10v2a7 7 0 0 1-14 0v-2'/%3E%3Cline x1='12' x2='12' y1='19' y2='22'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    color: #1a1a2e; background: #fff; line-height: 1.6;
+    -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+  }
+  a { color: inherit; text-decoration: none; }
+
+  :root {
+    --accent: #06b6d4; --accent-light: #22d3ee; --accent-bg: #ecfeff;
+    --dark: #0a0a0a; --dark-2: #171717; --dark-3: #262626;
+    --gray-50: #fafafa; --gray-100: #f5f5f5; --gray-200: #e5e5e5;
+    --gray-400: #a3a3a3; --gray-600: #525252;
+    --max-w: 720px; --radius: 12px;
+  }
+
+  .container { max-width: var(--max-w); margin: 0 auto; padding: 0 24px; }
+
+  /* Navbar */
+  .navbar {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(255,255,255,0.95); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--gray-200);
+  }
+  .navbar .container {
+    display: flex; align-items: center; justify-content: space-between;
+    height: 64px; max-width: 1080px;
+  }
+  .navbar-logo {
+    font-size: 1.15rem; font-weight: 800;
+    display: flex; align-items: center; gap: 8px;
+    color: var(--dark-2); text-decoration: none;
+  }
+  .navbar-logo svg { color: var(--accent); }
+  .navbar-back {
+    font-size: 0.88rem; color: var(--gray-600); font-weight: 400;
+    transition: color 0.15s; display: flex; align-items: center; gap: 4px;
+  }
+  .navbar-back:hover { color: var(--dark-2); }
+
+  /* Hero */
+  .hero {
+    padding: 80px 0 48px;
+    background: linear-gradient(135deg, #0a0a0a 0%, #0e1b2e 30%, #0e4a5c 60%, #06b6d4 80%, #22d3ee 100%);
+    background-size: 200% 200%;
+    animation: heroGradient 8s ease infinite;
+    color: #fff; text-align: center;
+  }
+  @keyframes heroGradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  .hero h1 {
+    font-size: clamp(2rem, 4.5vw, 2.8rem); font-weight: 800;
+    line-height: 1.15; margin-bottom: 16px; letter-spacing: -0.03em;
+  }
+  .hero p {
+    font-size: 1.1rem; color: rgba(255,255,255,0.75);
+    max-width: 600px; margin: 0 auto; line-height: 1.7;
+  }
+
+  /* Values */
+  .values { padding: 64px 0 80px; }
+  .value-card {
+    padding: 40px 0;
+    border-bottom: 1px solid var(--gray-200);
+  }
+  .value-card:last-child { border-bottom: none; }
+
+  .value-number {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 36px; height: 36px; border-radius: 50%;
+    background: var(--accent-bg); color: var(--accent);
+    font-size: 0.85rem; font-weight: 700; margin-bottom: 12px;
+  }
+  .value-card h2 {
+    font-size: 1.5rem; font-weight: 800; color: var(--dark-2);
+    margin-bottom: 12px; letter-spacing: -0.02em;
+  }
+  .value-card > p {
+    font-size: 1rem; color: var(--gray-600); line-height: 1.7;
+    margin-bottom: 20px;
+  }
+  .value-card .means-label {
+    font-size: 0.8rem; font-weight: 700; color: var(--dark-2);
+    text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px;
+  }
+  .value-card ul {
+    list-style: none; display: flex; flex-direction: column; gap: 8px;
+  }
+  .value-card li {
+    font-size: 0.95rem; color: var(--dark-3); line-height: 1.6;
+    padding-left: 20px; position: relative;
+  }
+  .value-card li::before {
+    content: ''; position: absolute; left: 0; top: 10px;
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--accent); opacity: 0.6;
+  }
+
+  /* Footer */
+  .footer {
+    padding: 32px 0; border-top: 1px solid var(--gray-200);
+    text-align: center;
+  }
+  .footer a {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 0.9rem; font-weight: 600; color: var(--accent);
+    transition: opacity 0.15s;
+  }
+  .footer a:hover { opacity: 0.8; }
+
+  @media (max-width: 640px) {
+    .hero { padding: 56px 0 36px; }
+    .value-card { padding: 28px 0; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar">
+  <div class="container">
+    <a href="index.html" class="navbar-logo">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/></svg>
+      Voces.ai
+    </a>
+    <a href="index.html" class="navbar-back">&larr; Volver a inicio</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="container">
+    <h1>Nuestros Valores</h1>
+    <p>Nuestro propósito es mejorar las conversaciones, mejorar los vínculos y mejorar los resultados incrementando la capacidad de escucha de las organizaciones, haciendo visible lo invisible a través de conversaciones sin juicio con IA.</p>
+  </div>
+</section>
+
+<!-- Values -->
+<section class="values">
+  <div class="container">
+
+    <div class="value-card">
+      <div class="value-number">1</div>
+      <h2>Confidencialidad</h2>
+      <p>Las voces solo emergen cuando hay confianza. Si las personas sienten que sus respuestas pueden identificarlas, se autocensuran y el diagnóstico pierde su razón de ser.</p>
+      <div class="means-label">Esto significa que:</div>
+      <ul>
+        <li>Anonimizamos todas las respuestas antes de que lleguen al equipo cliente</li>
+        <li>Encriptamos los datos de extremo a extremo</li>
+        <li>Realizamos auditorías de seguridad periódicas y seguimos las mejores prácticas del sector</li>
+        <li>Nunca compartimos datos individuales — solo narrativas colectivas</li>
+      </ul>
+    </div>
+
+    <div class="value-card">
+      <div class="value-number">2</div>
+      <h2>Escucha auténtica</h2>
+      <p>Una entrevista robótica genera respuestas robóticas. Voces debe sentirse como una conversación real — empática, adaptativa y sin juicio.</p>
+      <div class="means-label">Esto significa que:</div>
+      <ul>
+        <li>Priorizamos la calidad conversacional sobre la cantidad de preguntas</li>
+        <li>El agente de IA se adapta al tono y ritmo de cada persona</li>
+        <li>Cada interacción está diseñada para generar profundidad, no solo datos</li>
+        <li>Valoramos las historias tanto como las métricas</li>
+      </ul>
+    </div>
+
+    <div class="value-card">
+      <div class="value-number">3</div>
+      <h2>Confiabilidad</h2>
+      <p>Tus datos deben estar siempre accesibles donde vayas. Esto no solo significa que Voces necesita ser lo más confiable posible, sino que también tiene implicaciones en el modelo de negocio (ya que 100% de uptime no significa nada si el servicio deja de existir).</p>
+      <p>Demasiadas empresas levantan capital de riesgo tradicional, crecen de forma insostenible, son adquiridas y finalmente cierran.</p>
+      <div class="means-label">Esto significa que:</div>
+      <ul>
+        <li>Voces necesita funcionar offline</li>
+        <li>Usaremos las mejores prácticas de confiabilidad (como testing de releases)</li>
+        <li>Nos enfocaremos en crecer de forma sostenible y rentable</li>
+        <li>Siempre te permitiremos exportar tus datos</li>
+      </ul>
+    </div>
+
+    <div class="value-card">
+      <div class="value-number">4</div>
+      <h2>Menos es más</h2>
+      <p>Nuestro objetivo es llevar la escucha organizacional al mainstream. Esto requiere un grado de simplicidad, y también significa que puede que no seamos la herramienta para personas con casos de uso avanzados o muy específicos.</p>
+      <div class="means-label">Esto significa que:</div>
+      <ul>
+        <li>Nos enfocaremos en el 80% de las funcionalidades que todos usan</li>
+        <li>Valoraremos la simplicidad y una experiencia de usuario hermosa</li>
+        <li>En lugar de ofrecer cada funcionalidad, ofreceremos una API</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <a href="index.html">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/></svg>
+      Voces.ai
+    </a>
+  </div>
+</footer>
+
+</body>
+</html>
