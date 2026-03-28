@@ -10,32 +10,50 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --accent: #f97316; --accent-light: #fb923c; --accent-dark: #c2410c; --accent-bg: #fff7ed;
+    --bg: #fcfcfa; --bg-2: #f5f0e8; --text: #1f1f1f; --text-2: rgba(0,0,0,0.6);
+    --card-bg: #ffffff; --card-border: rgba(0,0,0,0.1);
+  }
+  [data-theme="dark"] {
+    --bg: #042729; --bg-2: #093436; --text: #f8f5ee; --text-2: rgba(255,255,255,0.6);
+    --card-bg: #093436; --card-border: rgba(255,255,255,0.1);
+    --accent-bg: rgba(249,115,22,0.1);
+  }
   body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     min-height: 100vh; display: flex; align-items: center; justify-content: center;
-    background: linear-gradient(180deg, #fff7ed 0%, #fff 100%);
-    color: #1a1a2e; text-align: center; padding: 24px;
+    background: linear-gradient(180deg, var(--accent-bg) 0%, var(--bg) 100%);
+    color: var(--text); text-align: center; padding: 24px;
+    transition: background 0.3s, color 0.3s;
   }
   .card {
     max-width: 480px; width: 100%;
   }
   .icon {
-    width: 64px; height: 64px; border-radius: 16px; background: #fff7ed;
+    width: 64px; height: 64px; border-radius: 16px; background: var(--accent-bg);
     display: flex; align-items: center; justify-content: center;
     margin: 0 auto 24px;
   }
-  .icon svg { width: 32px; height: 32px; color: #f97316; }
-  h1 { font-size: 1.75rem; font-weight: 800; margin-bottom: 12px; letter-spacing: -0.02em; }
-  p { font-size: 1rem; color: #636366; line-height: 1.6; margin-bottom: 32px; }
+  .icon svg { width: 32px; height: 32px; color: var(--accent); }
+  h1 { font-size: 1.75rem; font-weight: 800; margin-bottom: 12px; letter-spacing: -0.02em; color: var(--text); }
+  p { font-size: 1rem; color: var(--text-2); line-height: 1.6; margin-bottom: 32px; }
   .btn-back {
     display: inline-flex; align-items: center; gap: 6px;
     padding: 12px 28px; border-radius: 8px; font-size: 0.95rem;
-    font-weight: 600; background: #f97316; color: #fff; text-decoration: none;
+    font-weight: 600; background: var(--accent); color: #fff; text-decoration: none;
     box-shadow: 0 2px 8px rgba(249,115,22,0.25);
-    transition: transform 0.15s, box-shadow 0.15s;
+    transition: transform 0.15s, box-shadow 0.15s, background 0.15s;
   }
-  .btn-back:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(249,115,22,0.35); }
+  .btn-back:hover { background: var(--accent-dark); transform: translateY(-1px); box-shadow: 0 4px 16px rgba(249,115,22,0.35); }
 </style>
+<script>
+(function() {
+  var saved = localStorage.getItem('voces_theme');
+  if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+  else if (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches) document.documentElement.setAttribute('data-theme', 'dark');
+})();
+</script>
 </head>
 <body>
 <a href="#main-content" class="sr-only" style="position:absolute;top:-100px;left:0;z-index:999;background:var(--accent,#f97316);color:#fff;padding:8px 16px;font-size:0.85rem;" onfocus="this.style.top='0';" onblur="this.style.top='-100px';">Saltar al contenido</a>

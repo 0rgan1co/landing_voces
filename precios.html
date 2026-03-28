@@ -12,15 +12,22 @@
 <style>
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
   :root {
-    --purple: #f97316; --purple-light: #fb923c; --purple-glow: rgba(249,115,22,0.15);
-    --bg: #030014; --bg-2: #0a0a1a; --bg-card: rgba(255,255,255,0.04);
-    --border: rgba(255,255,255,0.08); --border-hover: rgba(249,115,22,0.4);
-    --text: #f0f0f5; --text-2: rgba(255,255,255,0.6); --text-3: rgba(255,255,255,0.35);
-    --max-w: 1080px; --radius: 16px;
+    --accent: #f97316; --accent-light: #fb923c; --accent-dark: #c2410c; --accent-bg: #fff7ed;
+    --bg: #fcfcfa; --bg-2: #f5f0e8; --text: #1f1f1f; --text-2: rgba(0,0,0,0.6);
+    --card-bg: #ffffff; --card-border: rgba(0,0,0,0.1);
+    --nav-bg: rgba(252,252,250,0.95); --nav-border: rgba(0,0,0,0.08);
+    --max-w: 1080px; --radius: 12px;
+  }
+  [data-theme="dark"] {
+    --bg: #042729; --bg-2: #093436; --text: #f8f5ee; --text-2: rgba(255,255,255,0.6);
+    --card-bg: #093436; --card-border: rgba(255,255,255,0.1);
+    --nav-bg: rgba(4,39,41,0.95); --nav-border: rgba(255,255,255,0.08);
+    --accent-bg: rgba(249,115,22,0.1);
   }
   body {
     font-family: 'Inter', -apple-system, sans-serif; color: var(--text);
     background: var(--bg); line-height: 1.6; -webkit-font-smoothing: antialiased;
+    transition: background 0.3s, color 0.3s;
   }
   a { color: inherit; text-decoration: none; }
   .container { max-width: var(--max-w); margin: 0 auto; padding: 0 24px; }
@@ -28,16 +35,16 @@
   /* === NAVBAR === */
   .navbar {
     position: sticky; top: 0; z-index: 100;
-    background: rgba(3,0,20,0.85); backdrop-filter: blur(16px);
-    border-bottom: 1px solid var(--border);
+    background: var(--nav-bg); backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--nav-border); transition: background 0.3s;
   }
   .navbar .container { display: flex; align-items: center; justify-content: space-between; height: 64px; }
   .navbar-logo { font-size: 1.15rem; font-weight: 800; display: flex; align-items: center; gap: 8px; }
-  .navbar-logo svg { color: var(--purple-light); }
+  .navbar-logo svg { color: var(--accent); }
   .navbar-links { display: flex; gap: 32px; }
   .navbar-links a { font-size: 0.88rem; color: var(--text-2); font-weight: 400; transition: color 0.15s; }
-  .navbar-links a:hover { color: #fff; }
-  .navbar-links a.active { color: #fff; font-weight: 600; }
+  .navbar-links a:hover { color: var(--text); }
+  .navbar-links a.active { color: var(--text); font-weight: 600; }
   .navbar-actions { display: flex; align-items: center; gap: 10px; }
 
   /* === BUTTONS === */
@@ -48,27 +55,27 @@
     transition: all 0.2s cubic-bezier(.6,.6,0,1);
   }
   .btn-primary {
-    background: var(--purple); color: #fff;
+    background: var(--accent); color: #fff;
     box-shadow: 0 0 24px rgba(249,115,22,0.3), 0 2px 8px rgba(249,115,22,0.2);
   }
-  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 32px rgba(249,115,22,0.45), 0 4px 16px rgba(249,115,22,0.3); }
+  .btn-primary:hover { background: var(--accent-dark); transform: translateY(-2px); box-shadow: 0 0 32px rgba(249,115,22,0.45), 0 4px 16px rgba(249,115,22,0.3); }
   .btn-outline {
-    background: transparent; color: var(--text);
-    border: 1px solid var(--border); backdrop-filter: blur(4px);
+    background: var(--card-bg); color: var(--text);
+    border: 1px solid var(--card-border);
   }
-  .btn-outline:hover { border-color: var(--border-hover); color: #fff; }
-  .btn-ghost { background: none; color: var(--purple-light); font-weight: 600; border: none; cursor: pointer; }
+  .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+  .btn-ghost { background: none; color: var(--accent-light); font-weight: 600; border: none; cursor: pointer; }
   .btn-ghost:hover { text-decoration: underline; }
   .tag {
-    display: inline-block; background: rgba(249,115,22,0.12); color: var(--purple-light);
+    display: inline-block; background: var(--accent-bg); color: var(--accent);
     padding: 5px 14px; border-radius: 20px; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.5px;
-    border: 1px solid rgba(249,115,22,0.2);
   }
 
   /* === HERO PRICING === */
   .pricing-hero {
     padding: 80px 0 0; text-align: center;
-    background: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(249,115,22,0.08) 0%, transparent 70%);
+    background: var(--bg);
+    background-image: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(249,115,22,0.06) 0%, transparent 70%);
   }
   .pricing-hero h1 {
     font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 800;
@@ -83,27 +90,27 @@
   .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 960px; margin: 0 auto; padding-bottom: 80px; }
 
   .pricing-card {
-    background: var(--bg-card); border: 1px solid var(--border);
+    background: var(--card-bg); border: 1px solid var(--card-border);
     border-radius: var(--radius); padding: 36px 28px; text-align: left;
     display: flex; flex-direction: column; position: relative;
-    backdrop-filter: blur(8px); transition: border-color 0.25s, box-shadow 0.25s;
+    transition: border-color 0.25s, box-shadow 0.25s;
   }
-  .pricing-card:hover { border-color: var(--border-hover); }
+  .pricing-card:hover { border-color: var(--accent); }
   .pricing-card.featured {
-    border-color: rgba(249,115,22,0.5);
-    background: linear-gradient(180deg, rgba(249,115,22,0.06) 0%, transparent 40%);
+    border-color: var(--accent);
+    background: linear-gradient(180deg, rgba(249,115,22,0.06) 0%, var(--card-bg) 40%);
     box-shadow: 0 0 40px rgba(249,115,22,0.08);
   }
   .pricing-badge {
     position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
-    background: var(--purple); color: #fff; padding: 4px 16px; border-radius: 20px;
+    background: var(--accent); color: #fff; padding: 4px 16px; border-radius: 20px;
     font-size: 0.68rem; font-weight: 700; letter-spacing: 0.3px;
     box-shadow: 0 0 16px rgba(249,115,22,0.4);
   }
   .pricing-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 4px; color: var(--text); }
-  .pricing-card .price { font-size: 2rem; font-weight: 800; margin: 14px 0 4px; color: #fff; }
-  .pricing-card .price span { font-size: 0.85rem; font-weight: 400; color: var(--text-3); }
-  .pricing-card .price-note { font-size: 0.78rem; color: var(--text-3); margin-bottom: 24px; }
+  .pricing-card .price { font-size: 2rem; font-weight: 800; margin: 14px 0 4px; color: var(--text); }
+  .pricing-card .price span { font-size: 0.85rem; font-weight: 400; color: var(--text-2); }
+  .pricing-card .price-note { font-size: 0.78rem; color: var(--text-2); margin-bottom: 24px; }
   .pricing-card ul { list-style: none; margin-bottom: 28px; flex: 1; }
   .pricing-card ul li {
     font-size: 0.85rem; color: var(--text-2); padding: 7px 0 7px 26px;
@@ -116,23 +123,23 @@
   }
   .pricing-card ul li::after {
     content: '\2713'; position: absolute; left: 3px; top: 7px;
-    font-size: 0.68rem; color: var(--purple-light); font-weight: 700;
+    font-size: 0.68rem; color: var(--accent-light); font-weight: 700;
   }
   .pricing-card .btn { width: 100%; justify-content: center; }
 
   /* === FAQ === */
-  .faq { padding: 80px 0; text-align: center; border-top: 1px solid var(--border); }
+  .faq { padding: 80px 0; text-align: center; background: var(--bg-2); border-top: 1px solid var(--card-border); }
   .faq h2 { font-size: clamp(1.3rem, 2.5vw, 1.7rem); font-weight: 800; margin: 12px 0 0; letter-spacing: -0.01em; }
   .faq-list { max-width: 680px; margin: 36px auto 0; text-align: left; }
-  .faq-item { border-bottom: 1px solid var(--border); }
+  .faq-item { border-bottom: 1px solid var(--card-border); }
   .faq-item:last-child { border-bottom: none; }
   .faq-item summary {
     font-weight: 600; font-size: 0.92rem; cursor: pointer; padding: 18px 0;
     list-style: none; display: flex; justify-content: space-between; align-items: center;
     color: var(--text); transition: color 0.15s;
   }
-  .faq-item summary:hover { color: var(--purple-light); }
-  .faq-item summary .icon { color: var(--purple-light); font-size: 1.1rem; transition: transform 0.2s; }
+  .faq-item summary:hover { color: var(--accent-light); }
+  .faq-item summary .icon { color: var(--accent-light); font-size: 1.1rem; transition: transform 0.2s; }
   .faq-item[open] summary .icon { transform: rotate(45deg); }
   .faq-item p {
     padding: 0 0 18px; font-size: 0.88rem; color: var(--text-2); line-height: 1.75;
@@ -141,19 +148,33 @@
   /* === CTA === */
   .cta {
     padding: 72px 0; text-align: center;
-    background: radial-gradient(ellipse 50% 60% at 50% 100%, rgba(249,115,22,0.1) 0%, transparent 70%);
-    border-top: 1px solid var(--border);
+    background: #1f1f1f;
+    border-top: 1px solid rgba(255,255,255,0.08);
   }
+  .cta h2 { color: #f8f5ee; }
   .cta h2 { font-size: clamp(1.2rem, 2.5vw, 1.5rem); font-weight: 800; margin-bottom: 8px; }
-  .cta .sub { font-size: 1rem; color: var(--purple-light); font-weight: 600; margin-bottom: 28px; }
+  .cta .sub { font-size: 1rem; color: var(--accent-light); font-weight: 600; margin-bottom: 28px; }
+  .cta p { color: rgba(255,255,255,0.7); }
 
   /* === FOOTER === */
-  .footer { border-top: 1px solid var(--border); padding: 28px 0; font-size: 0.82rem; color: var(--text-3); }
+  .footer { background: #1f1f1f; border-top: 1px solid rgba(255,255,255,0.08); padding: 28px 0; font-size: 0.82rem; color: rgba(255,255,255,0.5); }
   .footer .container { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
-  .footer a:hover { color: var(--text); }
+  .footer a:hover { color: #fff; }
 
   /* === RESPONSIVE === */
-  #pricing-form input:focus { border-color: var(--purple-light) !important; box-shadow: 0 0 0 3px rgba(249,115,22,0.15); }
+  #pricing-form input:focus { border-color: var(--accent-light) !important; box-shadow: 0 0 0 3px rgba(249,115,22,0.15); }
+
+  /* === THEME TOGGLE === */
+  .theme-toggle {
+    background: none; border: 1px solid var(--card-border); border-radius: 8px;
+    padding: 5px 7px; cursor: pointer; display: flex; align-items: center;
+    color: var(--text-2); transition: all 0.2s;
+  }
+  .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+  .theme-toggle svg { width: 16px; height: 16px; }
+  .theme-toggle .icon-sun { display: none; }
+  [data-theme="dark"] .theme-toggle .icon-moon { display: none; }
+  [data-theme="dark"] .theme-toggle .icon-sun { display: block; }
 
   /* === HAMBURGER === */
   .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
@@ -163,7 +184,7 @@
     background: var(--bg); z-index: 99; padding: 24px; flex-direction: column; gap: 0;
   }
   .mobile-menu.open { display: flex; }
-  .mobile-menu a { font-size: 1rem; padding: 16px 0; border-bottom: 1px solid var(--border); color: var(--text); font-weight: 600; }
+  .mobile-menu a { font-size: 1rem; padding: 16px 0; border-bottom: 1px solid var(--card-border); color: var(--text); font-weight: 600; }
 
   @media (max-width: 768px) {
     .pricing-grid { grid-template-columns: 1fr; max-width: 400px; }
@@ -189,6 +210,10 @@
       <a href="precios.html" class="active">Precios</a>
     </div>
     <div class="navbar-actions">
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Cambiar tema">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
       <a href="#contacto" class="btn btn-primary" style="padding:8px 20px; font-size:0.82rem;">Agendar Demo</a>
       <button class="hamburger" onclick="document.getElementById('mobile-menu').classList.toggle('open')" aria-label="Menu">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
@@ -342,6 +367,22 @@ async function submitPricingLead(e) {
   document.getElementById('pricing-form').style.display = 'none';
   document.getElementById('pricing-success').style.display = '';
 }
+</script>
+
+<script>
+// Theme toggle
+function toggleTheme() {
+  var html = document.documentElement;
+  var current = html.getAttribute('data-theme');
+  var next = current === 'dark' ? 'light' : 'dark';
+  html.setAttribute('data-theme', next);
+  localStorage.setItem('voces_theme', next);
+}
+(function() {
+  var saved = localStorage.getItem('voces_theme');
+  if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+  else if (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches) document.documentElement.setAttribute('data-theme', 'dark');
+})();
 </script>
 
 <!-- FOOTER -->
