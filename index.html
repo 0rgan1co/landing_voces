@@ -231,8 +231,9 @@
     border: 1px solid rgba(255,255,255,0.2);
   }
   .feature-check svg { width: 18px; height: 18px; color: #fff; }
-  .feature-item h3 { font-size: 0.92rem; font-weight: 600; margin: 0; color: #fff; }
-  .feature-item p { display: none; }
+  .feature-item-text { flex: 1; }
+  .feature-item h3 { font-size: 0.92rem; font-weight: 700; margin: 0 0 3px; color: #fff; }
+  .feature-item p { font-size: 0.78rem; color: rgba(255,255,255,0.7); line-height: 1.5; margin: 0; }
 
   /* === SECTION 3: EMPATHY + USE CASES (tabs) === */
   .use-cases { padding: 80px 0; text-align: center; background: var(--purple-bg); }
@@ -461,7 +462,7 @@
       <div>
         <span class="tag">Mejora continua con IA</span>
         <h1>Lo que tu organización no pone sobre la mesa está frenando los resultados</h1>
-        <p class="hero-sub">Voces.ai entrevista personas, anonimiza respuestas, analiza patrones y revela las narrativas que nadie pone en agenda.</p>
+        <p class="hero-sub">En semanas sabés lo que tu organización realmente piensa — y podés decidir con evidencia, no con supuestos.</p>
         <div class="hero-ctas">
           <a href="https://tidycal.com/roldanjorgex" target="_blank" rel="noopener" class="btn" style="background:#fff; color:var(--purple); box-shadow:0 2px 12px rgba(0,0,0,0.15);">Agendar demo &rarr;</a>
           <a href="#como-funciona" class="btn" style="background:none; color:rgba(255,255,255,0.85); border:1.5px solid rgba(255,255,255,0.3);">Ver cómo funciona</a>
@@ -552,31 +553,46 @@
             <div class="feature-check">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
             </div>
-            <div><h3>Entrevistas a escala, con profundidad humana</h3></div>
+            <div class="feature-item-text">
+              <h3>Entrevistas a escala, con profundidad humana</h3>
+              <p>Un agente de IA conduce hasta 500 entrevistas individuales. Cada persona habla a su ritmo, desde su dispositivo, sin coordinar agenda.</p>
+            </div>
           </div>
           <div class="feature-item">
             <div class="feature-check">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><line x1="16" x2="8" y1="13" y2="13"/><line x1="16" x2="8" y1="17" y2="17"/></svg>
             </div>
-            <div><h3>Extracción inteligente de narrativas</h3></div>
+            <div class="feature-item-text">
+              <h3>Extracción inteligente de narrativas</h3>
+              <p>Cada entrevista se transforma en fragmentos con hecho, contexto y consecuencia. Sin interpretación manual, sin sesgos del analista.</p>
+            </div>
           </div>
           <div class="feature-item">
             <div class="feature-check">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
             </div>
-            <div><h3>Análisis semántico que revela patrones</h3></div>
+            <div class="feature-item-text">
+              <h3>Análisis semántico que revela patrones</h3>
+              <p>Las narrativas se agrupan automáticamente en clusters temáticos. Ves qué se repite, qué se contradice y qué nadie pone en agenda.</p>
+            </div>
           </div>
           <div class="feature-item">
             <div class="feature-check">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
             </div>
-            <div><h3>Medición del cambio a lo largo del tiempo</h3></div>
+            <div class="feature-item-text">
+              <h3>Medición del cambio a lo largo del tiempo</h3>
+              <p>Compará narrativas antes y después de una intervención. Medí si algo cambió con evidencia, no con percepciones ni encuestas de satisfacción.</p>
+            </div>
           </div>
           <div class="feature-item">
             <div class="feature-check">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" x2="15.42" y1="13.51" y2="17.49"/><line x1="15.41" x2="8.59" y1="6.51" y2="10.49"/></svg>
             </div>
-            <div><h3>Colaboración inteligente con stakeholders</h3></div>
+            <div class="feature-item-text">
+              <h3>Colaboración inteligente con stakeholders</h3>
+              <p>Compartí hallazgos con roles diferenciados. El equipo accede al dashboard, los líderes reciben el resumen ejecutivo listo para decidir.</p>
+            </div>
           </div>
         </div>
       </div>
@@ -674,6 +690,34 @@
           </div>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOCIAL PROOF -->
+<section style="padding: 64px 0; background: #fff;">
+  <div class="container" style="max-width: 900px;">
+    <div style="text-align:center; margin-bottom: 40px;">
+      <span class="tag">Resultados reales</span>
+      <h2 style="font-size: clamp(1.3rem, 2.5vw, 1.7rem); font-weight: 800; margin-top: 12px; letter-spacing: -0.01em;">Organizaciones que ya están escuchando</h2>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
+      <div style="background: var(--gray-50); border: 1.5px solid var(--gray-200); border-radius: 12px; padding: 28px 24px;">
+        <div style="font-size: 2rem; font-weight: 800; color: var(--purple); margin-bottom: 4px;">+300</div>
+        <div style="font-size: 0.85rem; color: var(--gray-600); line-height: 1.5;">entrevistas en 3 semanas para un diagnóstico de cultura post-fusión en una empresa de servicios financieros.</div>
+      </div>
+      <div style="background: var(--gray-50); border: 1.5px solid var(--gray-200); border-radius: 12px; padding: 28px 24px;">
+        <div style="font-size: 2rem; font-weight: 800; color: var(--purple); margin-bottom: 4px;">12</div>
+        <div style="font-size: 0.85rem; color: var(--gray-600); line-height: 1.5;">narrativas críticas detectadas que ninguna encuesta previa había capturado en una organización agropecuaria.</div>
+      </div>
+      <div style="background: var(--gray-50); border: 1.5px solid var(--gray-200); border-radius: 12px; padding: 28px 24px;">
+        <div style="font-size: 2rem; font-weight: 800; color: var(--purple); margin-bottom: 4px;">2 sem</div>
+        <div style="font-size: 0.85rem; color: var(--gray-600); line-height: 1.5;">de diagnóstico completo vs. 4 meses con metodología tradicional. Sin consultoras, con anonimato total.</div>
+      </div>
+    </div>
+    <div style="text-align: center; margin-top: 32px; padding: 24px; background: var(--purple-bg); border-radius: 12px; border: 1px solid rgba(123,47,247,0.1);">
+      <p style="font-size: 0.95rem; color: var(--dark-2); line-height: 1.7; font-style: italic; max-width: 640px; margin: 0 auto;">"Por primera vez pudimos ver lo que realmente estaba pasando en los equipos. No era lo que suponíamos. Las decisiones que tomamos después fueron completamente distintas."</p>
+      <p style="font-size: 0.82rem; color: var(--gray-600); margin-top: 10px; font-weight: 600;">— Director de Transformación, empresa de servicios financieros (LATAM)</p>
     </div>
   </div>
 </section>
