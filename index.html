@@ -112,8 +112,33 @@
   .hero {
     padding: 80px 0 64px;
     background: linear-gradient(135deg, #1a0533 0%, #2d1b69 30%, #7B2FF7 60%, #A855F7 80%, #c084fc 100%);
-    color: #fff;
+    background-size: 200% 200%;
+    animation: heroGradient 8s ease infinite;
+    color: #fff; position: relative; overflow: hidden;
   }
+  @keyframes heroGradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  .hero::after {
+    content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+    background: radial-gradient(ellipse at 30% 50%, rgba(168,85,247,0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 70% 30%, rgba(192,132,252,0.1) 0%, transparent 40%);
+    animation: heroOrb 12s ease-in-out infinite alternate;
+    pointer-events: none;
+  }
+  @keyframes heroOrb { 0% { transform: translate(0,0) rotate(0deg); } 100% { transform: translate(5%,3%) rotate(15deg); } }
+
+  /* === METRICS BAR === */
+  .metrics-bar { padding: 28px 0; background: var(--dark); border-bottom: 1px solid rgba(255,255,255,0.06); }
+  .metrics-row {
+    display: flex; justify-content: center; gap: 48px; flex-wrap: wrap;
+  }
+  .metric-item { text-align: center; }
+  .metric-num { font-size: 1.5rem; font-weight: 800; color: #fff; }
+  .metric-num span { color: var(--purple-light); }
+  .metric-label { font-size: 0.75rem; color: rgba(255,255,255,0.45); margin-top: 2px; letter-spacing: 0.3px; }
   .hero .tag { margin-bottom: 20px; background: rgba(255,255,255,0.15); color: #fff; border: 1px solid rgba(255,255,255,0.25); }
   .hero h1 {
     font-size: clamp(2rem, 4.5vw, 3rem); font-weight: 800;
@@ -537,6 +562,30 @@
   </div>
 </section>
 
+<!-- METRICS BAR -->
+<section class="metrics-bar">
+  <div class="container">
+    <div class="metrics-row">
+      <div class="metric-item">
+        <div class="metric-num"><span>+</span>300</div>
+        <div class="metric-label">Entrevistas realizadas</div>
+      </div>
+      <div class="metric-item">
+        <div class="metric-num">2 <span>sem</span></div>
+        <div class="metric-label">Diagnóstico promedio</div>
+      </div>
+      <div class="metric-item">
+        <div class="metric-num">100<span>%</span></div>
+        <div class="metric-label">Anónimo por diseño</div>
+      </div>
+      <div class="metric-item">
+        <div class="metric-num">0</div>
+        <div class="metric-label">Consultoras necesarias</div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- SECTION 2: PROPUESTA DE VALOR + FEATURES (2-column) -->
 <section id="funcionalidades" class="value-features reveal">
   <div class="container">
@@ -596,6 +645,9 @@
         </div>
       </div>
     </div>
+    <div style="text-align:center; margin-top:40px;">
+      <a href="https://tidycal.com/roldanjorgex" target="_blank" rel="noopener" class="btn btn-primary">Agendar demo &rarr;</a>
+    </div>
   </div>
 </section>
 
@@ -626,6 +678,9 @@
     <div class="tab-panel" role="tabpanel" data-tab="3">
       <h3>Cambio</h3>
       <p>Hiciste la transformación. ¿Cambió algo de verdad o solo cambió el discurso? Compará narrativas antes y después con evidencia, no con percepciones.</p>
+    </div>
+    <div style="text-align:center; margin-top:36px;">
+      <a href="https://tidycal.com/roldanjorgex" target="_blank" rel="noopener" class="btn btn-primary">Hablemos de tu organización &rarr;</a>
     </div>
   </div>
 </section>
@@ -689,6 +744,9 @@
           </div>
         </div>
       </div>
+    </div>
+    <div style="text-align:center; margin-top:40px;">
+      <a href="https://tidycal.com/roldanjorgex" target="_blank" rel="noopener" class="btn btn-primary">Quiero verlo en acción &rarr;</a>
     </div>
   </div>
 </section>
