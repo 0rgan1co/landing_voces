@@ -264,22 +264,22 @@
   .use-cases { padding: 80px 0; text-align: center; background: var(--purple-bg); }
   .use-cases h2 { font-size: clamp(1.4rem, 3vw, 1.85rem); font-weight: 800; margin-bottom: 8px; letter-spacing: -0.01em; }
   .use-cases-sub { font-size: 0.95rem; color: var(--gray-600); margin-bottom: 32px; max-width: 560px; margin-left: auto; margin-right: auto; line-height: 1.6; }
-  .tabs { display: flex; gap: 4px; justify-content: center; flex-wrap: wrap; margin-bottom: 28px; }
+  .tabs { display: flex; gap: 6px; justify-content: center; flex-wrap: wrap; margin-bottom: 32px; }
   .tab-btn {
-    padding: 8px 18px; border-radius: 8px; font-size: 0.85rem; font-weight: 600;
-    border: 1.5px solid var(--gray-200); background: #fff; color: var(--gray-600);
-    cursor: pointer; transition: all 0.15s; font-family: inherit;
+    padding: 10px 22px; border-radius: 24px; font-size: 0.85rem; font-weight: 600;
+    border: none; background: rgba(123,47,247,0.08); color: var(--purple);
+    cursor: pointer; transition: all 0.2s; font-family: inherit;
   }
-  .tab-btn:hover { border-color: var(--purple); color: var(--purple); }
-  .tab-btn.active { background: var(--purple); color: #fff; border-color: var(--purple); }
+  .tab-btn:hover { background: rgba(123,47,247,0.15); }
+  .tab-btn.active { background: var(--purple); color: #fff; box-shadow: 0 4px 12px rgba(123,47,247,0.25); }
   .tab-panel {
-    display: none; text-align: left; max-width: 600px; margin: 0 auto;
-    padding: 28px 32px; background: #fff; border-radius: var(--radius);
-    border: 1px solid var(--gray-200); box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    display: none; text-align: left; max-width: 640px; margin: 0 auto;
+    padding: 32px; background: #fff; border-radius: 16px;
+    border: none; box-shadow: 0 8px 32px rgba(0,0,0,0.06);
   }
   .tab-panel.active { display: block; }
-  .tab-panel h3 { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
-  .tab-panel p { font-size: 0.9rem; color: var(--gray-600); line-height: 1.6; }
+  .tab-panel h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 10px; color: var(--purple); }
+  .tab-panel p { font-size: 0.92rem; color: var(--gray-600); line-height: 1.7; }
 
   /* === SECTION 4: DEMO (2-column) === */
   .demo-section { padding: 80px 0; background: #fff; }
@@ -402,6 +402,30 @@
   /* === SR-ONLY (accessibility) === */
   .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
 
+  /* === SOCIAL PROOF === */
+  .social-proof-section { padding: 64px 0; background: #fff; }
+  .social-proof-header { text-align: center; margin-bottom: 40px; }
+  .social-proof-header h2 { font-size: clamp(1.3rem, 2.5vw, 1.7rem); font-weight: 800; margin-top: 12px; }
+  .proof-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 900px; margin: 0 auto; }
+  .proof-card {
+    background: linear-gradient(135deg, var(--purple-bg) 0%, #fff 100%);
+    border: 1.5px solid rgba(123,47,247,0.12); border-radius: 14px; padding: 28px 24px;
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .proof-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(123,47,247,0.08); }
+  .proof-num { font-size: 2.2rem; font-weight: 800; color: var(--purple); margin-bottom: 6px; }
+  .proof-text { font-size: 0.85rem; color: var(--gray-600); line-height: 1.5; }
+  .testimonial {
+    max-width: 700px; margin: 36px auto 0; padding: 28px 32px;
+    background: var(--dark); border-radius: 14px; color: #fff; position: relative;
+  }
+  .testimonial::before {
+    content: '"'; position: absolute; top: 16px; left: 24px;
+    font-size: 3rem; color: var(--purple); font-family: Georgia, serif; line-height: 1;
+  }
+  .testimonial p { font-size: 0.95rem; line-height: 1.7; padding-left: 32px; font-style: italic; color: rgba(255,255,255,0.85); }
+  .testimonial .author { font-size: 0.82rem; color: var(--purple-light); margin-top: 12px; padding-left: 32px; font-style: normal; font-weight: 600; }
+
   /* === SCROLL REVEAL === */
   .reveal {
     opacity: 0; transform: translateY(24px);
@@ -421,12 +445,18 @@
     .demo-grid { grid-template-columns: 1fr; gap: 32px; }
     .tabs { gap: 6px; }
     .tab-btn { padding: 6px 12px; font-size: 0.8rem; }
+    .metrics-row { gap: 24px; }
+    .metric-num { font-size: 1.2rem; }
+    [style*="grid-template-columns: repeat(3"] { grid-template-columns: 1fr !important; }
+    .proof-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
     .cookie-banner { flex-direction: column; text-align: center; bottom: 12px; left: 12px; right: 12px; }
     .footer .container { flex-direction: column; text-align: center; }
   }
   @media (max-width: 480px) {
     .hero-ctas { flex-direction: column; }
     .cta-final-actions { flex-direction: column; }
+    .metrics-row { gap: 16px; flex-direction: column; }
+    .hero-sub { font-size: 1rem; }
   }
 </style>
 </head>
@@ -723,23 +753,42 @@
         </div>
       </div>
       <div>
-        <div class="mockup">
-          <div class="mockup-bar"><div class="mockup-dot"></div><div class="mockup-dot"></div><div class="mockup-dot"></div></div>
-          <div class="mockup-panels">
-            <div class="mockup-panel">
-              <div class="mockup-panel-title">Hallazgos</div>
-              <div class="mockup-bubble">3 de cada 4 equipos mencionan falta de autonomía en decisiones operativas.</div>
-              <div class="mockup-bubble" style="background:rgba(255,255,255,0.05);">El discurso de innovación no coincide con las prácticas de aprobación.</div>
+        <div class="interview-widget">
+          <div class="iw-header">
+            <div class="iw-header-left">
+              <div class="iw-dot red"></div><div class="iw-dot yellow"></div><div class="iw-dot green"></div>
+              <span class="iw-header-title">Voces.ai — Resultados</span>
             </div>
-            <div class="mockup-panel">
-              <div class="mockup-panel-title">Clusters detectados</div>
-              <div style="text-align:center; padding:8px 0;">
-                <span class="mockup-node">Autonomía</span><span class="mockup-node">Decisiones</span>
-                <span class="mockup-node">Innovación</span><span class="mockup-node">Procesos</span>
-                <span class="mockup-node">Liderazgo</span>
+            <div class="iw-live"><div class="iw-live-dot"></div> Análisis completo</div>
+          </div>
+          <div class="iw-body" style="padding:16px;">
+            <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px; margin-bottom:14px;">
+              <div style="background:rgba(123,47,247,0.1); border-radius:10px; padding:12px; text-align:center;">
+                <div style="font-size:1.3rem; font-weight:800; color:var(--purple-light);">247</div>
+                <div style="font-size:0.6rem; color:rgba(255,255,255,0.4);">Narrativas</div>
               </div>
-              <div class="mockup-progress"><div class="mockup-progress-fill" style="width:85%;"></div></div>
-              <div style="font-size:0.7rem; color:var(--gray-400);">85% de entrevistas analizadas</div>
+              <div style="background:rgba(40,200,64,0.1); border-radius:10px; padding:12px; text-align:center;">
+                <div style="font-size:1.3rem; font-weight:800; color:#28c840;">8</div>
+                <div style="font-size:0.6rem; color:rgba(255,255,255,0.4);">Clusters</div>
+              </div>
+              <div style="background:rgba(255,189,46,0.1); border-radius:10px; padding:12px; text-align:center;">
+                <div style="font-size:1.3rem; font-weight:800; color:#ffbd2e;">+0.6</div>
+                <div style="font-size:0.6rem; color:rgba(255,255,255,0.4);">Sentimiento</div>
+              </div>
+            </div>
+            <div style="margin-bottom:12px;">
+              <div style="font-size:0.65rem; color:var(--purple-light); font-weight:700; letter-spacing:0.8px; text-transform:uppercase; margin-bottom:8px;">Top clusters</div>
+              <div style="display:flex; flex-wrap:wrap; gap:6px;">
+                <span style="background:rgba(123,47,247,0.15); border:1px solid rgba(123,47,247,0.3); border-radius:16px; padding:5px 12px; font-size:0.72rem; color:var(--purple-light);">Autonomía en decisiones</span>
+                <span style="background:rgba(123,47,247,0.15); border:1px solid rgba(123,47,247,0.3); border-radius:16px; padding:5px 12px; font-size:0.72rem; color:var(--purple-light);">Comunicación entre áreas</span>
+                <span style="background:rgba(123,47,247,0.15); border:1px solid rgba(123,47,247,0.3); border-radius:16px; padding:5px 12px; font-size:0.72rem; color:var(--purple-light);">Velocidad de adaptación</span>
+                <span style="background:rgba(40,200,64,0.15); border:1px solid rgba(40,200,64,0.3); border-radius:16px; padding:5px 12px; font-size:0.72rem; color:#28c840;">Confianza en liderazgo</span>
+                <span style="background:rgba(255,189,46,0.15); border:1px solid rgba(255,189,46,0.3); border-radius:16px; padding:5px 12px; font-size:0.72rem; color:#ffbd2e;">Procesos vs. realidad</span>
+              </div>
+            </div>
+            <div style="background:rgba(255,255,255,0.04); border-radius:10px; padding:12px;">
+              <div style="font-size:0.65rem; color:var(--purple-light); font-weight:700; letter-spacing:0.8px; text-transform:uppercase; margin-bottom:6px;">Hallazgo principal</div>
+              <p style="font-size:0.78rem; color:#ccc; line-height:1.6; margin:0;">3 de cada 4 equipos mencionan falta de autonomía en decisiones operativas. El discurso de innovación no coincide con las prácticas de aprobación.</p>
             </div>
           </div>
         </div>
@@ -752,29 +801,29 @@
 </section>
 
 <!-- SOCIAL PROOF -->
-<section style="padding: 64px 0; background: #fff;">
-  <div class="container" style="max-width: 900px;">
-    <div style="text-align:center; margin-bottom: 40px;">
+<section class="social-proof-section reveal">
+  <div class="container">
+    <div class="social-proof-header">
       <span class="tag">Resultados reales</span>
-      <h2 style="font-size: clamp(1.3rem, 2.5vw, 1.7rem); font-weight: 800; margin-top: 12px; letter-spacing: -0.01em;">Organizaciones que ya están escuchando</h2>
+      <h2>Organizaciones que ya están escuchando</h2>
     </div>
-    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
-      <div style="background: var(--gray-50); border: 1.5px solid var(--gray-200); border-radius: 12px; padding: 28px 24px;">
-        <div style="font-size: 2rem; font-weight: 800; color: var(--purple); margin-bottom: 4px;">+300</div>
-        <div style="font-size: 0.85rem; color: var(--gray-600); line-height: 1.5;">entrevistas en 3 semanas para un diagnóstico de cultura post-fusión en una empresa de servicios financieros.</div>
+    <div class="proof-grid">
+      <div class="proof-card">
+        <div class="proof-num">+300</div>
+        <div class="proof-text">entrevistas en 3 semanas para un diagnóstico de cultura post-fusión en una empresa de servicios financieros.</div>
       </div>
-      <div style="background: var(--gray-50); border: 1.5px solid var(--gray-200); border-radius: 12px; padding: 28px 24px;">
-        <div style="font-size: 2rem; font-weight: 800; color: var(--purple); margin-bottom: 4px;">12</div>
-        <div style="font-size: 0.85rem; color: var(--gray-600); line-height: 1.5;">narrativas críticas detectadas que ninguna encuesta previa había capturado en una organización agropecuaria.</div>
+      <div class="proof-card">
+        <div class="proof-num">12</div>
+        <div class="proof-text">narrativas críticas detectadas que ninguna encuesta previa había capturado en una organización agropecuaria.</div>
       </div>
-      <div style="background: var(--gray-50); border: 1.5px solid var(--gray-200); border-radius: 12px; padding: 28px 24px;">
-        <div style="font-size: 2rem; font-weight: 800; color: var(--purple); margin-bottom: 4px;">2 sem</div>
-        <div style="font-size: 0.85rem; color: var(--gray-600); line-height: 1.5;">de diagnóstico completo vs. 4 meses con metodología tradicional. Sin consultoras, con anonimato total.</div>
+      <div class="proof-card">
+        <div class="proof-num">2 sem</div>
+        <div class="proof-text">de diagnóstico completo vs. 4 meses con metodología tradicional. Sin consultoras, con anonimato total.</div>
       </div>
     </div>
-    <div style="text-align: center; margin-top: 32px; padding: 24px; background: var(--purple-bg); border-radius: 12px; border: 1px solid rgba(123,47,247,0.1);">
-      <p style="font-size: 0.95rem; color: var(--dark-2); line-height: 1.7; font-style: italic; max-width: 640px; margin: 0 auto;">"Por primera vez pudimos ver lo que realmente estaba pasando en los equipos. No era lo que suponíamos. Las decisiones que tomamos después fueron completamente distintas."</p>
-      <p style="font-size: 0.82rem; color: var(--gray-600); margin-top: 10px; font-weight: 600;">— Director de Transformación, empresa de servicios financieros (LATAM)</p>
+    <div class="testimonial">
+      <p>Por primera vez pudimos ver lo que realmente estaba pasando en los equipos. No era lo que suponíamos. Las decisiones que tomamos después fueron completamente distintas.</p>
+      <div class="author">— Director de Transformación, empresa de servicios financieros (LATAM)</div>
     </div>
   </div>
 </section>
