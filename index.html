@@ -109,14 +109,18 @@
   .mobile-menu a { font-size: 1rem; padding: 16px 0; border-bottom: 1px solid var(--gray-200); color: var(--dark-2); font-weight: 600; }
 
   /* === HERO (2-column) === */
-  .hero { padding: 72px 0 56px; background: linear-gradient(180deg, var(--purple-bg) 0%, #fff 100%); }
-  .hero .tag { margin-bottom: 20px; }
+  .hero {
+    padding: 80px 0 64px;
+    background: linear-gradient(135deg, #1a0533 0%, #2d1b69 30%, #7B2FF7 60%, #A855F7 80%, #c084fc 100%);
+    color: #fff;
+  }
+  .hero .tag { margin-bottom: 20px; background: rgba(255,255,255,0.15); color: #fff; border: 1px solid rgba(255,255,255,0.25); }
   .hero h1 {
     font-size: clamp(1.75rem, 4vw, 2.5rem); font-weight: 800;
     line-height: 1.15; margin-bottom: 16px; letter-spacing: -0.02em;
   }
   .hero-sub {
-    font-size: 1.05rem; color: var(--gray-600); max-width: 480px;
+    font-size: 1.05rem; color: rgba(255,255,255,0.75); max-width: 480px;
     margin: 0 0 28px; line-height: 1.6;
   }
   .hero-ctas { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
@@ -453,8 +457,8 @@
         <h1>Lo que tu organización no dice en voz alta está frenando los resultados</h1>
         <p class="hero-sub">Voces.ai conduce entrevistas individuales con IA, anonimiza cada respuesta y revela las narrativas que nadie pone en agenda.</p>
         <div class="hero-ctas">
-          <a href="https://tidycal.com/roldanjorgex" target="_blank" rel="noopener" class="btn btn-primary">Agendar demo &rarr;</a>
-          <a href="#como-funciona" class="btn btn-ghost">Ver cómo funciona</a>
+          <a href="https://tidycal.com/roldanjorgex" target="_blank" rel="noopener" class="btn" style="background:#fff; color:var(--purple); box-shadow:0 2px 12px rgba(0,0,0,0.15);">Agendar demo &rarr;</a>
+          <a href="#como-funciona" class="btn" style="background:none; color:rgba(255,255,255,0.85); border:1.5px solid rgba(255,255,255,0.3);">Ver cómo funciona</a>
         </div>
       </div>
       <div>
