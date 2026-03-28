@@ -12,61 +12,147 @@
 <style>
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
   :root {
-    --purple: #7B2FF7; --purple-light: #A855F7; --purple-bg: #f8f4ff;
-    --dark: #0f0f23; --dark-2: #1a1a2e;
-    --gray-50: #fafafa; --gray-100: #f5f5f7; --gray-200: #e8e8ed;
-    --gray-400: #8e8e93; --gray-600: #636366;
-    --max-w: 1080px; --radius: 12px;
+    --purple: #7B2FF7; --purple-light: #A855F7; --purple-glow: rgba(123,47,247,0.15);
+    --bg: #030014; --bg-2: #0a0a1a; --bg-card: rgba(255,255,255,0.04);
+    --border: rgba(255,255,255,0.08); --border-hover: rgba(123,47,247,0.4);
+    --text: #f0f0f5; --text-2: rgba(255,255,255,0.6); --text-3: rgba(255,255,255,0.35);
+    --max-w: 1080px; --radius: 16px;
   }
-  body { font-family: 'Inter', -apple-system, sans-serif; color: var(--dark-2); background: #fff; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  body {
+    font-family: 'Inter', -apple-system, sans-serif; color: var(--text);
+    background: var(--bg); line-height: 1.6; -webkit-font-smoothing: antialiased;
+  }
   a { color: inherit; text-decoration: none; }
   .container { max-width: var(--max-w); margin: 0 auto; padding: 0 24px; }
-  .tag { display: inline-block; background: var(--purple-bg); color: var(--purple); padding: 5px 14px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; }
-  .btn { display: inline-flex; align-items: center; gap: 6px; padding: 12px 28px; border-radius: 8px; font-size: 0.95rem; font-weight: 600; border: none; cursor: pointer; transition: transform 0.15s, box-shadow 0.15s; }
-  .btn-primary { background: var(--purple); color: #fff; box-shadow: 0 2px 8px rgba(123,47,247,0.25); }
-  .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(123,47,247,0.35); }
-  .btn-outline { background: #fff; color: var(--dark-2); border: 1.5px solid var(--gray-200); }
-  .btn-outline:hover { border-color: var(--purple); color: var(--purple); }
-  .btn-ghost { background: none; color: var(--purple); font-weight: 600; border: none; cursor: pointer; }
-  .btn-ghost:hover { text-decoration: underline; }
 
-  /* Navbar */
-  .navbar { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,0.95); backdrop-filter: blur(12px); border-bottom: 1px solid var(--gray-200); }
+  /* === NAVBAR === */
+  .navbar {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(3,0,20,0.85); backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+  }
   .navbar .container { display: flex; align-items: center; justify-content: space-between; height: 64px; }
   .navbar-logo { font-size: 1.15rem; font-weight: 800; display: flex; align-items: center; gap: 8px; }
-  .navbar-logo svg { color: var(--purple); }
+  .navbar-logo svg { color: var(--purple-light); }
   .navbar-links { display: flex; gap: 32px; }
-  .navbar-links a { font-size: 0.88rem; color: var(--gray-600); font-weight: 400; transition: color 0.15s; }
-  .navbar-links a:hover { color: var(--dark-2); }
+  .navbar-links a { font-size: 0.88rem; color: var(--text-2); font-weight: 400; transition: color 0.15s; }
+  .navbar-links a:hover { color: #fff; }
+  .navbar-links a.active { color: #fff; font-weight: 600; }
   .navbar-actions { display: flex; align-items: center; gap: 10px; }
 
-  /* Pricing */
-  .pricing { padding: 80px 0; text-align: center; }
-  .pricing h1 { font-size: clamp(1.6rem, 3.5vw, 2.2rem); font-weight: 800; margin-bottom: 8px; letter-spacing: -0.02em; }
-  .pricing-sub { font-size: 1rem; color: var(--gray-600); margin-bottom: 48px; max-width: 500px; margin-left: auto; margin-right: auto; }
-  .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 920px; margin: 0 auto; }
-  .pricing-card { background: #fff; border: 1.5px solid var(--gray-200); border-radius: var(--radius); padding: 32px 24px; text-align: left; display: flex; flex-direction: column; transition: border-color 0.15s; }
-  .pricing-card:hover { border-color: var(--purple); }
-  .pricing-card.featured { border-color: var(--purple); box-shadow: 0 4px 24px rgba(123,47,247,0.1); position: relative; }
-  .pricing-badge { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--purple); color: #fff; padding: 3px 14px; border-radius: 20px; font-size: 0.7rem; font-weight: 700; }
-  .pricing-card h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 4px; }
-  .pricing-card .price { font-size: 1.75rem; font-weight: 800; margin: 12px 0 4px; }
-  .pricing-card .price-note { font-size: 0.78rem; color: var(--gray-400); margin-bottom: 20px; }
-  .pricing-card ul { list-style: none; margin-bottom: 24px; flex: 1; }
-  .pricing-card ul li { font-size: 0.85rem; color: var(--gray-600); padding: 6px 0 6px 22px; position: relative; line-height: 1.4; }
-  .pricing-card ul li::before { content: ''; position: absolute; left: 0; top: 10px; width: 14px; height: 14px; border-radius: 50%; background: var(--purple-bg); }
-  .pricing-card ul li::after { content: '\2713'; position: absolute; left: 2px; top: 6px; font-size: 0.7rem; color: var(--purple); font-weight: 700; }
+  /* === BUTTONS === */
+  .btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 12px 28px; border-radius: 10px; font-size: 0.92rem;
+    font-weight: 600; border: none; cursor: pointer; font-family: inherit;
+    transition: all 0.2s cubic-bezier(.6,.6,0,1);
+  }
+  .btn-primary {
+    background: var(--purple); color: #fff;
+    box-shadow: 0 0 24px rgba(123,47,247,0.3), 0 2px 8px rgba(123,47,247,0.2);
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 32px rgba(123,47,247,0.45), 0 4px 16px rgba(123,47,247,0.3); }
+  .btn-outline {
+    background: transparent; color: var(--text);
+    border: 1px solid var(--border); backdrop-filter: blur(4px);
+  }
+  .btn-outline:hover { border-color: var(--border-hover); color: #fff; }
+  .btn-ghost { background: none; color: var(--purple-light); font-weight: 600; border: none; cursor: pointer; }
+  .btn-ghost:hover { text-decoration: underline; }
+  .tag {
+    display: inline-block; background: rgba(123,47,247,0.12); color: var(--purple-light);
+    padding: 5px 14px; border-radius: 20px; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.5px;
+    border: 1px solid rgba(123,47,247,0.2);
+  }
+
+  /* === HERO PRICING === */
+  .pricing-hero {
+    padding: 80px 0 0; text-align: center;
+    background: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(123,47,247,0.08) 0%, transparent 70%);
+  }
+  .pricing-hero h1 {
+    font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 800;
+    letter-spacing: -0.03em; margin: 16px 0 12px; line-height: 1.15;
+  }
+  .pricing-hero .sub {
+    font-size: 1.05rem; color: var(--text-2); max-width: 480px;
+    margin: 0 auto 48px; line-height: 1.7;
+  }
+
+  /* === PRICING GRID === */
+  .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 960px; margin: 0 auto; padding-bottom: 80px; }
+
+  .pricing-card {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 36px 28px; text-align: left;
+    display: flex; flex-direction: column; position: relative;
+    backdrop-filter: blur(8px); transition: border-color 0.25s, box-shadow 0.25s;
+  }
+  .pricing-card:hover { border-color: var(--border-hover); }
+  .pricing-card.featured {
+    border-color: rgba(123,47,247,0.5);
+    background: linear-gradient(180deg, rgba(123,47,247,0.06) 0%, transparent 40%);
+    box-shadow: 0 0 40px rgba(123,47,247,0.08);
+  }
+  .pricing-badge {
+    position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+    background: var(--purple); color: #fff; padding: 4px 16px; border-radius: 20px;
+    font-size: 0.68rem; font-weight: 700; letter-spacing: 0.3px;
+    box-shadow: 0 0 16px rgba(123,47,247,0.4);
+  }
+  .pricing-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 4px; color: var(--text); }
+  .pricing-card .price { font-size: 2rem; font-weight: 800; margin: 14px 0 4px; color: #fff; }
+  .pricing-card .price span { font-size: 0.85rem; font-weight: 400; color: var(--text-3); }
+  .pricing-card .price-note { font-size: 0.78rem; color: var(--text-3); margin-bottom: 24px; }
+  .pricing-card ul { list-style: none; margin-bottom: 28px; flex: 1; }
+  .pricing-card ul li {
+    font-size: 0.85rem; color: var(--text-2); padding: 7px 0 7px 26px;
+    position: relative; line-height: 1.5;
+  }
+  .pricing-card ul li::before {
+    content: ''; position: absolute; left: 0; top: 10px;
+    width: 16px; height: 16px; border-radius: 50%;
+    background: rgba(123,47,247,0.12); border: 1px solid rgba(123,47,247,0.25);
+  }
+  .pricing-card ul li::after {
+    content: '\2713'; position: absolute; left: 3px; top: 7px;
+    font-size: 0.68rem; color: var(--purple-light); font-weight: 700;
+  }
   .pricing-card .btn { width: 100%; justify-content: center; }
 
-  /* CTA */
-  .cta { background: var(--dark); color: #fff; padding: 56px 0; text-align: center; }
-  .cta h2 { font-size: 1.3rem; font-weight: 800; margin-bottom: 20px; }
-  .cta .btn-ghost { color: var(--purple-light); }
+  /* === FAQ === */
+  .faq { padding: 80px 0; text-align: center; border-top: 1px solid var(--border); }
+  .faq h2 { font-size: clamp(1.3rem, 2.5vw, 1.7rem); font-weight: 800; margin: 12px 0 0; letter-spacing: -0.01em; }
+  .faq-list { max-width: 680px; margin: 36px auto 0; text-align: left; }
+  .faq-item { border-bottom: 1px solid var(--border); }
+  .faq-item:last-child { border-bottom: none; }
+  .faq-item summary {
+    font-weight: 600; font-size: 0.92rem; cursor: pointer; padding: 18px 0;
+    list-style: none; display: flex; justify-content: space-between; align-items: center;
+    color: var(--text); transition: color 0.15s;
+  }
+  .faq-item summary:hover { color: var(--purple-light); }
+  .faq-item summary .icon { color: var(--purple-light); font-size: 1.1rem; transition: transform 0.2s; }
+  .faq-item[open] summary .icon { transform: rotate(45deg); }
+  .faq-item p {
+    padding: 0 0 18px; font-size: 0.88rem; color: var(--text-2); line-height: 1.75;
+  }
 
-  /* Footer */
-  .footer { background: var(--dark-2); color: var(--gray-400); padding: 28px 0; font-size: 0.82rem; }
+  /* === CTA === */
+  .cta {
+    padding: 72px 0; text-align: center;
+    background: radial-gradient(ellipse 50% 60% at 50% 100%, rgba(123,47,247,0.1) 0%, transparent 70%);
+    border-top: 1px solid var(--border);
+  }
+  .cta h2 { font-size: clamp(1.2rem, 2.5vw, 1.5rem); font-weight: 800; margin-bottom: 8px; }
+  .cta .sub { font-size: 1rem; color: var(--purple-light); font-weight: 600; margin-bottom: 28px; }
+
+  /* === FOOTER === */
+  .footer { border-top: 1px solid var(--border); padding: 28px 0; font-size: 0.82rem; color: var(--text-3); }
   .footer .container { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+  .footer a:hover { color: var(--text); }
 
+  /* === RESPONSIVE === */
   @media (max-width: 768px) {
     .pricing-grid { grid-template-columns: 1fr; max-width: 400px; }
     .navbar-links { display: none; }
@@ -76,6 +162,7 @@
 </head>
 <body>
 
+<!-- NAVBAR -->
 <nav class="navbar">
   <div class="container">
     <a href="./" class="navbar-logo">
@@ -85,19 +172,26 @@
     <div class="navbar-links">
       <a href="./#funcionalidades">Funcionalidades</a>
       <a href="./#casos-de-uso">Casos de Uso</a>
-      <a href="precios.html" style="color:var(--dark-2); font-weight:600;">Precios</a>
+      <a href="precios.html" class="active">Precios</a>
     </div>
     <div class="navbar-actions">
-      <a href="https://tidycal.com/roldanjorgex" target="_blank" rel="noopener" class="btn btn-primary" style="padding:8px 20px; font-size:0.85rem;">Agendar Demo</a>
+      <a href="https://tidycal.com/roldanjorgex" target="_blank" rel="noopener" class="btn btn-primary" style="padding:8px 20px; font-size:0.82rem;">Agendar Demo</a>
     </div>
   </div>
 </nav>
 
-<section class="pricing">
+<!-- PRICING HERO -->
+<section class="pricing-hero">
   <div class="container">
     <span class="tag">Precios</span>
     <h1>Elegí cómo empezar a escuchar</h1>
-    <p class="pricing-sub">Cada plan incluye entrevistas con IA, anonimización y extracción de narrativas.</p>
+    <p class="sub">Cada plan incluye entrevistas con IA, anonimización y extracción de narrativas.</p>
+  </div>
+</section>
+
+<!-- PRICING CARDS -->
+<section style="padding: 0 0 40px;">
+  <div class="container">
     <div class="pricing-grid">
       <div class="pricing-card">
         <h3>Piloto</h3>
@@ -146,49 +240,52 @@
 </section>
 
 <!-- FAQ -->
-<section id="faq" style="padding: 80px 0; background: #fff; text-align: center;">
+<section class="faq">
   <div class="container">
     <span class="tag">Preguntas frecuentes</span>
-    <h2 style="font-size: clamp(1.4rem, 3vw, 1.85rem); font-weight: 800; margin-bottom: 8px; letter-spacing: -0.01em;">Todo lo que necesitás saber sobre Voces.ai</h2>
-    <div style="max-width:680px; margin:32px auto 0; text-align:left;">
-      <details style="border-bottom:1px solid var(--gray-200); padding:16px 0;" open>
-        <summary style="font-weight:700; font-size:0.95rem; cursor:pointer; list-style:none; display:flex; justify-content:space-between; align-items:center;">¿En qué se diferencia Voces.ai de una encuesta de clima? <span style="color:var(--purple);">+</span></summary>
-        <p style="margin-top:12px; font-size:0.88rem; color:var(--gray-600); line-height:1.7;">Las encuestas de clima dan promedios numéricos (ej: "el clima es 7.2"). Voces.ai conduce conversaciones reales con IA donde las personas explican con sus palabras qué piensan. El resultado no es un número sino narrativas: qué se repite, qué se contradice y qué nadie pone en agenda. Es la diferencia entre medir temperatura y entender qué la causa.</p>
+    <h2>Todo lo que necesitás saber</h2>
+    <div class="faq-list">
+      <details class="faq-item" open>
+        <summary>¿En qué se diferencia Voces.ai de una encuesta de clima? <span class="icon">+</span></summary>
+        <p>Las encuestas de clima dan promedios numéricos (ej: "el clima es 7.2"). Voces.ai conduce conversaciones reales con IA donde las personas explican con sus palabras qué piensan. El resultado no es un número sino narrativas: qué se repite, qué se contradice y qué nadie pone en agenda.</p>
       </details>
-      <details style="border-bottom:1px solid var(--gray-200); padding:16px 0;">
-        <summary style="font-weight:700; font-size:0.95rem; cursor:pointer; list-style:none; display:flex; justify-content:space-between; align-items:center;">¿Las respuestas son anónimas? <span style="color:var(--purple);">+</span></summary>
-        <p style="margin-top:12px; font-size:0.88rem; color:var(--gray-600); line-height:1.7;">Sí. Voces.ai anonimiza las respuestas por diseño, no por política. La identidad de cada participante se elimina automáticamente antes de cualquier análisis. Es una decisión de arquitectura de la plataforma, no un checkbox de configuración.</p>
+      <details class="faq-item">
+        <summary>¿Las respuestas son anónimas? <span class="icon">+</span></summary>
+        <p>Sí. Voces.ai anonimiza las respuestas por diseño, no por política. La identidad de cada participante se elimina automáticamente antes de cualquier análisis. Es una decisión de arquitectura de la plataforma.</p>
       </details>
-      <details style="border-bottom:1px solid var(--gray-200); padding:16px 0;">
-        <summary style="font-weight:700; font-size:0.95rem; cursor:pointer; list-style:none; display:flex; justify-content:space-between; align-items:center;">¿Cuántas entrevistas puede hacer Voces.ai? <span style="color:var(--purple);">+</span></summary>
-        <p style="margin-top:12px; font-size:0.88rem; color:var(--gray-600); line-height:1.7;">Voces.ai puede conducir desde 30 entrevistas en el plan piloto gratuito hasta entrevistas ilimitadas en el plan Enterprise. El plan Profesional soporta hasta 500 entrevistas por proyecto. Todas las entrevistas son individuales, asíncronas y no requieren coordinación de agenda.</p>
+      <details class="faq-item">
+        <summary>¿Cuántas entrevistas puede hacer Voces.ai? <span class="icon">+</span></summary>
+        <p>Desde 30 entrevistas en el plan piloto gratuito hasta ilimitadas en Enterprise. El plan Profesional soporta hasta 500 por proyecto. Todas son individuales, asíncronas y no requieren coordinación de agenda.</p>
       </details>
-      <details style="border-bottom:1px solid var(--gray-200); padding:16px 0;">
-        <summary style="font-weight:700; font-size:0.95rem; cursor:pointer; list-style:none; display:flex; justify-content:space-between; align-items:center;">¿Voces.ai reemplaza a los consultores? <span style="color:var(--purple);">+</span></summary>
-        <p style="margin-top:12px; font-size:0.88rem; color:var(--gray-600); line-height:1.7;">No. Voces.ai reemplaza la etapa de recolección de datos (entrevistas manuales, encuestas, focus groups) con IA. Los hallazgos y narrativas que genera son insumos para que consultores, líderes de RRHH y equipos de transformación tomen mejores decisiones con evidencia real.</p>
+      <details class="faq-item">
+        <summary>¿Voces.ai reemplaza a los consultores? <span class="icon">+</span></summary>
+        <p>No. Voces.ai reemplaza la etapa de recolección de datos (entrevistas manuales, encuestas, focus groups) con IA. Los hallazgos son insumos para que consultores, líderes de RRHH y equipos de transformación tomen mejores decisiones con evidencia real.</p>
       </details>
-      <details style="border-bottom:1px solid var(--gray-200); padding:16px 0;">
-        <summary style="font-weight:700; font-size:0.95rem; cursor:pointer; list-style:none; display:flex; justify-content:space-between; align-items:center;">¿Cuánto tiempo toma un diagnóstico completo? <span style="color:var(--purple);">+</span></summary>
-        <p style="margin-top:12px; font-size:0.88rem; color:var(--gray-600); line-height:1.7;">Con Voces.ai un diagnóstico cultural completo — desde configurar las preguntas hasta tener narrativas y hallazgos — toma entre 2 y 4 semanas. Un proceso equivalente con entrevistas manuales toma entre 3 y 6 meses.</p>
+      <details class="faq-item">
+        <summary>¿Cuánto tiempo toma un diagnóstico completo? <span class="icon">+</span></summary>
+        <p>Con Voces.ai un diagnóstico cultural completo toma entre 2 y 4 semanas. Un proceso equivalente con entrevistas manuales toma entre 3 y 6 meses.</p>
       </details>
-      <details style="padding:16px 0;">
-        <summary style="font-weight:700; font-size:0.95rem; cursor:pointer; list-style:none; display:flex; justify-content:space-between; align-items:center;">¿Cómo funciona la IA de Voces.ai? <span style="color:var(--purple);">+</span></summary>
-        <p style="margin-top:12px; font-size:0.88rem; color:var(--gray-600); line-height:1.7;">Voces.ai usa modelos de lenguaje avanzados para conducir entrevistas conversacionales. La IA hace preguntas de seguimiento basadas en las respuestas, extrae fragmentos narrativos con estructura (hecho, contexto, consecuencia) y agrupa patrones en clusters temáticos. Todo el proceso es automático y anónimo.</p>
+      <details class="faq-item">
+        <summary>¿Cómo funciona la IA de Voces.ai? <span class="icon">+</span></summary>
+        <p>Voces.ai usa modelos de lenguaje avanzados para conducir entrevistas conversacionales. La IA hace preguntas de seguimiento, extrae fragmentos narrativos con estructura (hecho, contexto, consecuencia) y agrupa patrones en clusters temáticos. Todo es automático y anónimo.</p>
       </details>
     </div>
   </div>
 </section>
 
+<!-- CTA -->
 <section class="cta">
   <div class="container">
     <h2>¿Qué pasa cuando las personas pueden ser escuchadas?</h2>
-    <div style="display:flex; gap:16px; justify-content:center; flex-wrap:wrap;">
+    <p class="sub">Mejores conversaciones. Mejores vínculos. Mejores resultados.</p>
+    <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
       <a href="https://tidycal.com/roldanjorgex" target="_blank" rel="noopener" class="btn btn-primary">Agendar Demo &rarr;</a>
       <a href="https://wa.me/541160135064?text=Hola!%20Quiero%20saber%20m%C3%A1s%20sobre%20Voces.ai" target="_blank" rel="noopener" class="btn btn-ghost">Escribinos por WhatsApp</a>
     </div>
   </div>
 </section>
 
+<!-- FOOTER -->
 <footer class="footer">
   <div class="container">
     <span>&copy; 2026 Voces.ai</span>
