@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Política de Privacidad — Voces.ai</title>
+<meta name="description" content="Política de privacidad de Voces.ai, operado por Productta LLC. Conoce cómo recopilamos, usamos y protegemos tus datos personales.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://0rgan1co.github.io/landing_voces/privacidad.html">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cpolygon points='6,8 42,8 24,42' fill='%231a1a2e'/%3E%3Crect x='16' y='18' width='2' height='10' rx='1' fill='%23fff'/%3E%3Crect x='20' y='14' width='2' height='18' rx='1' fill='%23fff'/%3E%3Crect x='24' y='16' width='2' height='14' rx='1' fill='%23fff'/%3E%3Crect x='28' y='13' width='2' height='20' rx='1' fill='%23fff'/%3E%3Crect x='32' y='18' width='2' height='10' rx='1' fill='%23fff'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    color: var(--text); background: var(--bg); line-height: 1.7;
+    -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+    transition: background 0.3s, color 0.3s;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  :root {
+    --accent: #f97316; --accent-light: #fb923c; --accent-dark: #c2410c; --accent-bg: #fff7ed;
+    --bg: #fcfcfa; --bg-2: #f5f0e8; --text: #1f1f1f; --text-2: rgba(0,0,0,0.6);
+    --card-bg: #ffffff; --card-border: rgba(0,0,0,0.1);
+    --nav-bg: rgba(252,252,250,0.95); --nav-border: rgba(0,0,0,0.08);
+    --max-w: 780px; --radius: 12px;
+  }
+  [data-theme="dark"] {
+    --bg: #141414; --bg-2: #1e1e1e; --text: #f8f5ee; --text-2: rgba(255,255,255,0.6);
+    --card-bg: #1e1e1e; --card-border: rgba(255,255,255,0.1);
+    --nav-bg: rgba(20,20,20,0.95); --nav-border: rgba(255,255,255,0.08);
+    --accent-bg: rgba(249,115,22,0.1);
+  }
+
+  /* NAV */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--nav-bg); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--nav-border);
+    padding: 14px 24px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .nav-logo {
+    font-size: 1.1rem; font-weight: 700; color: var(--text);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .nav-logo svg { width: 24px; height: 24px; }
+  .nav-actions { display: flex; gap: 12px; align-items: center; }
+  .nav-back {
+    font-size: 0.85rem; color: var(--text-2); padding: 6px 14px;
+    border: 1px solid var(--card-border); border-radius: 8px;
+    transition: all 0.2s;
+  }
+  .nav-back:hover { color: var(--text); border-color: var(--text); text-decoration: none; }
+  .theme-toggle {
+    background: none; border: 1px solid var(--card-border); border-radius: 8px;
+    padding: 6px 10px; cursor: pointer; font-size: 1rem; color: var(--text);
+    transition: border-color 0.2s;
+  }
+  .theme-toggle:hover { border-color: var(--text); }
+
+  /* CONTENT */
+  .container { max-width: var(--max-w); margin: 0 auto; padding: 0 24px; }
+  .legal-header {
+    padding: 64px 0 32px;
+    border-bottom: 1px solid var(--card-border);
+    margin-bottom: 40px;
+  }
+  .legal-header h1 { font-size: 2rem; font-weight: 800; margin-bottom: 8px; }
+  .legal-header .meta { font-size: 0.85rem; color: var(--text-2); }
+  .legal-body { padding-bottom: 80px; }
+  .legal-body h2 {
+    font-size: 1.25rem; font-weight: 700; margin: 40px 0 16px;
+    padding-bottom: 8px; border-bottom: 1px solid var(--card-border);
+  }
+  .legal-body h3 { font-size: 1.05rem; font-weight: 600; margin: 24px 0 8px; }
+  .legal-body p { margin-bottom: 14px; color: var(--text); }
+  .legal-body ul, .legal-body ol { margin: 0 0 14px 24px; }
+  .legal-body li { margin-bottom: 6px; }
+  .legal-body strong { font-weight: 600; }
+
+  /* FOOTER */
+  .footer { background: #1f1f1f; color: rgba(255,255,255,0.5); padding: 28px 0; font-size: 0.82rem; }
+  .footer .container { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; max-width: 1080px; }
+  .footer-links { display: flex; gap: 20px; }
+  .footer-links a, .footer-social a { color: rgba(255,255,255,0.5); }
+  .footer-links a:hover, .footer-social a:hover { color: #fff; text-decoration: none; }
+  .footer-social { display: flex; gap: 16px; }
+
+  @media (max-width: 640px) {
+    .legal-header h1 { font-size: 1.5rem; }
+    .footer .container { flex-direction: column; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <svg viewBox="0 0 48 48" fill="none"><rect x="6" y="16" width="4" height="16" rx="2" fill="#f97316"/><rect x="14" y="8" width="4" height="32" rx="2" fill="#f97316"/><rect x="22" y="14" width="4" height="20" rx="2" fill="#f97316"/><rect x="30" y="6" width="4" height="36" rx="2" fill="#f97316"/><rect x="38" y="18" width="4" height="12" rx="2" fill="#f97316"/></svg>
+    Voces.ai
+  </a>
+  <div class="nav-actions">
+    <a href="index.html" class="nav-back">&larr; Volver</a>
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Cambiar tema">🌙</button>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="legal-header">
+    <h1>Política de Privacidad</h1>
+    <p class="meta">Fecha de vigencia: 28 de Marzo de 2026 &mdash; Productta LLC (operando como Voces.ai)</p>
+  </div>
+
+  <div class="legal-body">
+
+    <h2>1. Introducción</h2>
+    <p>Productta LLC ("nosotros", "nuestro" o "la empresa"), operando como <strong>Voces.ai</strong>, se compromete a proteger la privacidad de los usuarios de nuestros servicios. Esta Política de Privacidad describe cómo recopilamos, usamos, almacenamos y protegemos la información personal cuando utilizas nuestro sitio web <strong>voces.ai</strong> y los servicios asociados (en adelante, el "Servicio").</p>
+    <p>Al acceder o utilizar el Servicio, aceptas las prácticas descritas en esta Política de Privacidad. Si no estás de acuerdo, te pedimos que no utilices el Servicio.</p>
+
+    <h2>2. Tipos de Usuarios</h2>
+    <ul>
+      <li><strong>Visitantes:</strong> Personas que acceden al contenido público del sitio web sin registrarse.</li>
+      <li><strong>Usuarios Registrados:</strong> Personas que crean una cuenta para acceder a funcionalidades avanzadas del Servicio.</li>
+      <li><strong>Participantes de Entrevistas:</strong> Personas que participan en entrevistas conducidas por la IA de Voces.ai dentro de una organización cliente.</li>
+    </ul>
+
+    <h2>3. Definiciones</h2>
+    <ul>
+      <li><strong>Datos Personales:</strong> Cualquier información que permita identificar directa o indirectamente a una persona física.</li>
+      <li><strong>Datos de Uso:</strong> Información recopilada automáticamente al utilizar el Servicio (por ejemplo, dirección IP, tipo de navegador, páginas visitadas).</li>
+      <li><strong>Cookies:</strong> Pequeños archivos de datos almacenados en tu dispositivo al visitar el sitio web.</li>
+      <li><strong>Responsable del Tratamiento:</strong> Productta LLC, que determina los fines y medios del tratamiento de datos personales.</li>
+    </ul>
+
+    <h2>4. Información que Recopilamos</h2>
+
+    <h3>4.1 Datos Personales</h3>
+    <p>Podemos solicitarte que nos proporciones ciertos datos personales identificables, incluyendo pero no limitado a:</p>
+    <ul>
+      <li>Dirección de correo electrónico</li>
+      <li>Nombre y apellidos</li>
+      <li>Nombre de la organización</li>
+      <li>Cargo o rol profesional</li>
+    </ul>
+
+    <h3>4.2 Datos de Uso</h3>
+    <p>Recopilamos automáticamente información cuando accedes al Servicio, incluyendo:</p>
+    <ul>
+      <li>Dirección IP del dispositivo</li>
+      <li>Tipo y versión del navegador</li>
+      <li>Páginas visitadas y tiempo de permanencia</li>
+      <li>Fecha y hora de acceso</li>
+      <li>Identificadores únicos de dispositivo</li>
+    </ul>
+
+    <h3>4.3 Datos de Entrevistas</h3>
+    <p>Las respuestas proporcionadas durante las entrevistas conducidas por la IA son <strong>anonimizadas por diseño</strong>. La identidad de cada participante se elimina automáticamente antes de cualquier análisis. No almacenamos asociaciones entre la identidad del participante y sus respuestas.</p>
+
+    <h2>5. Uso de la Información</h2>
+    <p>Utilizamos los datos recopilados para los siguientes fines:</p>
+    <ul>
+      <li>Suministrar, operar y mantener el Servicio</li>
+      <li>Notificarte sobre cambios en el Servicio</li>
+      <li>Prestar asistencia al cliente</li>
+      <li>Realizar análisis para mejorar el Servicio</li>
+      <li>Supervisar el uso del Servicio y detectar problemas técnicos</li>
+      <li>Enviar información comercial y promocional, siempre con tu consentimiento previo</li>
+    </ul>
+
+    <h2>6. Base Legal para el Tratamiento (RGPD)</h2>
+    <p>Si te encuentras en el Espacio Económico Europeo (EEE), las bases legales para el tratamiento de tus datos son:</p>
+    <ul>
+      <li><strong>Ejecución de contrato:</strong> Cuando el tratamiento es necesario para cumplir un contrato contigo.</li>
+      <li><strong>Consentimiento:</strong> Cuando has otorgado tu consentimiento para una finalidad específica.</li>
+      <li><strong>Intereses legítimos:</strong> Cuando es necesario para nuestros intereses legítimos y no prevalecen tus derechos.</li>
+      <li><strong>Cumplimiento legal:</strong> Cuando debemos cumplir con una obligación legal.</li>
+    </ul>
+
+    <h2>7. Conservación de Datos</h2>
+    <p>Conservamos tus datos personales únicamente durante el tiempo necesario para los fines establecidos en esta política. Los datos de uso se conservan durante un período menor, salvo que sean necesarios para reforzar la seguridad o mejorar el Servicio, o que estemos legalmente obligados a conservarlos.</p>
+
+    <h2>8. Transferencia de Datos</h2>
+    <p>Tu información, incluidos los datos personales, puede ser transferida y almacenada en servidores ubicados en <strong>Estados Unidos</strong>. Si te encuentras fuera de Estados Unidos, ten en cuenta que las leyes de protección de datos pueden diferir de las de tu jurisdicción.</p>
+    <p>Tomamos las medidas razonablemente necesarias para garantizar que tus datos sean tratados de forma segura y conforme a esta Política de Privacidad. No transferiremos tus datos a ninguna organización o país a menos que existan controles adecuados.</p>
+
+    <h2>9. Divulgación de Datos</h2>
+    <p>Podemos divulgar tus datos personales en las siguientes circunstancias:</p>
+    <ul>
+      <li>Para cumplir con una obligación legal</li>
+      <li>Para proteger los derechos o la propiedad de Productta LLC</li>
+      <li>Para prevenir o investigar posibles infracciones relacionadas con el Servicio</li>
+      <li>Para proteger la seguridad personal de los usuarios o del público</li>
+    </ul>
+
+    <h2>10. Seguridad de los Datos</h2>
+    <p>La seguridad de tus datos es importante para nosotros. Implementamos medidas de seguridad técnicas y organizativas apropiadas. Sin embargo, ningún método de transmisión por Internet o almacenamiento electrónico resulta 100% seguro, por lo que no podemos garantizar seguridad absoluta.</p>
+
+    <h2>11. Tus Derechos (RGPD)</h2>
+    <p>Si resides en el Espacio Económico Europeo, tienes los siguientes derechos:</p>
+    <ul>
+      <li><strong>Acceso:</strong> Solicitar una copia de tus datos personales.</li>
+      <li><strong>Rectificación:</strong> Solicitar la corrección de información inexacta.</li>
+      <li><strong>Eliminación:</strong> Solicitar la eliminación de tus datos personales.</li>
+      <li><strong>Oposición:</strong> Oponerte al tratamiento de tus datos.</li>
+      <li><strong>Limitación:</strong> Solicitar la limitación del tratamiento.</li>
+      <li><strong>Portabilidad:</strong> Recibir tus datos en un formato estructurado y de uso común.</li>
+      <li><strong>Retirada del consentimiento:</strong> Retirar tu consentimiento en cualquier momento.</li>
+      <li><strong>Reclamación:</strong> Presentar una reclamación ante una autoridad de protección de datos.</li>
+    </ul>
+
+    <h2>12. Solicitud de Eliminación de Datos</h2>
+    <p>Puedes solicitar la eliminación de tus datos personales mediante los siguientes métodos:</p>
+    <ul>
+      <li>Enviando un correo electrónico a <strong>hola@voces.ai</strong> con el asunto "Solicitud de eliminación de datos".</li>
+      <li>A través de la configuración de tu cuenta, si eres un usuario registrado.</li>
+    </ul>
+    <p>Responderemos a tu solicitud en un plazo máximo de <strong>30 días naturales</strong>.</p>
+
+    <h2>13. Proveedores de Servicios</h2>
+    <p>Podemos emplear a empresas y personas terceras para facilitar el Servicio. Estos terceros tienen acceso a tus datos personales únicamente para realizar tareas en nuestro nombre y están obligados a no divulgarlos ni usarlos para otro fin.</p>
+
+    <h3>Análisis</h3>
+    <ul>
+      <li><strong>Google Analytics:</strong> Servicio de análisis web de Google LLC que rastrea e informa sobre el tráfico del sitio web.</li>
+    </ul>
+
+    <h3>Pagos</h3>
+    <ul>
+      <li><strong>Stripe:</strong> Procesador de pagos. Sus políticas de privacidad están disponibles en <a href="https://stripe.com/privacy" target="_blank" rel="noopener">stripe.com/privacy</a>.</li>
+    </ul>
+
+    <h2>14. Enlaces a Sitios de Terceros</h2>
+    <p>Nuestro Servicio puede contener enlaces a sitios web de terceros que no están operados por nosotros. No nos hacemos responsables del contenido, las políticas de privacidad ni las prácticas de sitios de terceros. Te recomendamos revisar la política de privacidad de cada sitio que visites.</p>
+
+    <h2>15. Privacidad de Menores</h2>
+    <p>Nuestro Servicio no está dirigido a menores de 18 años. No recopilamos conscientemente información personal de menores de 18 años. Si descubrimos que un menor nos ha proporcionado datos personales, los eliminaremos de nuestros servidores de inmediato.</p>
+
+    <h2>16. Cambios a esta Política</h2>
+    <p>Podemos actualizar esta Política de Privacidad periódicamente. Te notificaremos de cualquier cambio publicando la nueva versión en esta página y, si los cambios son significativos, mediante un aviso por correo electrónico.</p>
+    <p>Te recomendamos revisar esta Política de Privacidad periódicamente. Los cambios entran en vigor a partir de su publicación en esta página.</p>
+
+    <h2>17. Contacto</h2>
+    <p>Si tienes preguntas sobre esta Política de Privacidad, puedes contactarnos:</p>
+    <ul>
+      <li><strong>Email:</strong> hola@voces.ai</li>
+      <li><strong>Correo postal:</strong> Productta LLC, Delaware, United States</li>
+    </ul>
+
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <span>&copy; 2026 Voces.ai</span>
+    <div class="footer-links">
+      <a href="proximamente.html">Términos</a>
+      <a href="privacidad.html">Privacidad</a>
+      <a href="index.html">Inicio</a>
+    </div>
+    <div class="footer-social">
+      <a href="proximamente.html">LinkedIn</a>
+      <a href="proximamente.html">Contacto</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function toggleTheme() {
+    const body = document.body;
+    const btn = document.querySelector('.theme-toggle');
+    if (body.getAttribute('data-theme') === 'dark') {
+      body.removeAttribute('data-theme');
+      btn.textContent = '🌙';
+      localStorage.setItem('voces-theme', 'light');
+    } else {
+      body.setAttribute('data-theme', 'dark');
+      btn.textContent = '☀️';
+      localStorage.setItem('voces-theme', 'dark');
+    }
+  }
+  (function() {
+    const saved = localStorage.getItem('voces-theme');
+    if (saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.body.setAttribute('data-theme', 'dark');
+      document.querySelector('.theme-toggle').textContent = '☀️';
+    }
+  })();
+</script>
+
+</body>
+</html>
