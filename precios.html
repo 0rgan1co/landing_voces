@@ -5,16 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Precios — Voces.ai</title>
 <meta name="description" content="Planes y precios de Voces.ai. Desde gratis hasta enterprise. Entrevistas con IA, anonimización y narrativas colectivas.">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2306b6d4' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='M2 12c0 0 2-4 4-4s3 8 5 8 3-12 5-12 3 8 5 8 2-4 2-4' opacity='0.35'/%3E%3Cpath d='M4 12c0 0 1.5-3 3-3s2.5 6 4 6 2.5-6 4-6 2.5 6 4 6 1.5-3 1.5-3' opacity='0.6'/%3E%3Cpath d='M7 12c0 0 1-2 2-2s2 4 3 4 2-4 3-4 1.5 2 1.5 2'/%3E%3C/svg%3E">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2310b981' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='M2 12c0 0 2-4 4-4s3 8 5 8 3-12 5-12 3 8 5 8 2-4 2-4' opacity='0.35'/%3E%3Cpath d='M4 12c0 0 1.5-3 3-3s2.5 6 4 6 2.5-6 4-6 2.5 6 4 6 1.5-3 1.5-3' opacity='0.6'/%3E%3Cpath d='M7 12c0 0 1-2 2-2s2 4 3 4 2-4 3-4 1.5 2 1.5 2'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
   :root {
-    --purple: #06b6d4; --purple-light: #22d3ee; --purple-glow: rgba(6,182,212,0.15);
+    --purple: #10b981; --purple-light: #34d399; --purple-glow: rgba(16,185,129,0.15);
     --bg: #030014; --bg-2: #0a0a1a; --bg-card: rgba(255,255,255,0.04);
-    --border: rgba(255,255,255,0.08); --border-hover: rgba(6,182,212,0.4);
+    --border: rgba(255,255,255,0.08); --border-hover: rgba(16,185,129,0.4);
     --text: #f0f0f5; --text-2: rgba(255,255,255,0.6); --text-3: rgba(255,255,255,0.35);
     --max-w: 1080px; --radius: 16px;
   }
@@ -49,9 +49,9 @@
   }
   .btn-primary {
     background: var(--purple); color: #fff;
-    box-shadow: 0 0 24px rgba(6,182,212,0.3), 0 2px 8px rgba(6,182,212,0.2);
+    box-shadow: 0 0 24px rgba(16,185,129,0.3), 0 2px 8px rgba(16,185,129,0.2);
   }
-  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 32px rgba(6,182,212,0.45), 0 4px 16px rgba(6,182,212,0.3); }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 32px rgba(16,185,129,0.45), 0 4px 16px rgba(16,185,129,0.3); }
   .btn-outline {
     background: transparent; color: var(--text);
     border: 1px solid var(--border); backdrop-filter: blur(4px);
@@ -60,15 +60,15 @@
   .btn-ghost { background: none; color: var(--purple-light); font-weight: 600; border: none; cursor: pointer; }
   .btn-ghost:hover { text-decoration: underline; }
   .tag {
-    display: inline-block; background: rgba(6,182,212,0.12); color: var(--purple-light);
+    display: inline-block; background: rgba(16,185,129,0.12); color: var(--purple-light);
     padding: 5px 14px; border-radius: 20px; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.5px;
-    border: 1px solid rgba(6,182,212,0.2);
+    border: 1px solid rgba(16,185,129,0.2);
   }
 
   /* === HERO PRICING === */
   .pricing-hero {
     padding: 80px 0 0; text-align: center;
-    background: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(6,182,212,0.08) 0%, transparent 70%);
+    background: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(16,185,129,0.08) 0%, transparent 70%);
   }
   .pricing-hero h1 {
     font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 800;
@@ -90,15 +90,15 @@
   }
   .pricing-card:hover { border-color: var(--border-hover); }
   .pricing-card.featured {
-    border-color: rgba(6,182,212,0.5);
-    background: linear-gradient(180deg, rgba(6,182,212,0.06) 0%, transparent 40%);
-    box-shadow: 0 0 40px rgba(6,182,212,0.08);
+    border-color: rgba(16,185,129,0.5);
+    background: linear-gradient(180deg, rgba(16,185,129,0.06) 0%, transparent 40%);
+    box-shadow: 0 0 40px rgba(16,185,129,0.08);
   }
   .pricing-badge {
     position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
     background: var(--purple); color: #fff; padding: 4px 16px; border-radius: 20px;
     font-size: 0.68rem; font-weight: 700; letter-spacing: 0.3px;
-    box-shadow: 0 0 16px rgba(6,182,212,0.4);
+    box-shadow: 0 0 16px rgba(16,185,129,0.4);
   }
   .pricing-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 4px; color: var(--text); }
   .pricing-card .price { font-size: 2rem; font-weight: 800; margin: 14px 0 4px; color: #fff; }
@@ -112,7 +112,7 @@
   .pricing-card ul li::before {
     content: ''; position: absolute; left: 0; top: 10px;
     width: 16px; height: 16px; border-radius: 50%;
-    background: rgba(6,182,212,0.12); border: 1px solid rgba(6,182,212,0.25);
+    background: rgba(16,185,129,0.12); border: 1px solid rgba(16,185,129,0.25);
   }
   .pricing-card ul li::after {
     content: '\2713'; position: absolute; left: 3px; top: 7px;
@@ -141,7 +141,7 @@
   /* === CTA === */
   .cta {
     padding: 72px 0; text-align: center;
-    background: radial-gradient(ellipse 50% 60% at 50% 100%, rgba(6,182,212,0.1) 0%, transparent 70%);
+    background: radial-gradient(ellipse 50% 60% at 50% 100%, rgba(16,185,129,0.1) 0%, transparent 70%);
     border-top: 1px solid var(--border);
   }
   .cta h2 { font-size: clamp(1.2rem, 2.5vw, 1.5rem); font-weight: 800; margin-bottom: 8px; }
