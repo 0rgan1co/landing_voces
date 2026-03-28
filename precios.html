@@ -175,7 +175,7 @@
       <a href="precios.html" class="active">Precios</a>
     </div>
     <div class="navbar-actions">
-      <a href="https://tidycal.com/roldanjorgex" target="_blank" rel="noopener" class="btn btn-primary" style="padding:8px 20px; font-size:0.82rem;">Agendar Demo</a>
+      <a href="#contacto" class="btn btn-primary" style="padding:8px 20px; font-size:0.82rem;">Agendar Demo</a>
     </div>
   </div>
 </nav>
@@ -204,7 +204,7 @@
           <li>Reporte básico de narrativas</li>
           <li>Soporte por email</li>
         </ul>
-        <a href="https://tidycal.com/roldanjorgex" target="_blank" rel="noopener" class="btn btn-outline">Empezar gratis</a>
+        <a href="#contacto" class="btn btn-outline">Empezar gratis</a>
       </div>
       <div class="pricing-card featured">
         <div class="pricing-badge">Más popular</div>
@@ -219,7 +219,7 @@
           <li>Export PDF e integraciones</li>
           <li>Soporte prioritario</li>
         </ul>
-        <a href="https://tidycal.com/roldanjorgex" target="_blank" rel="noopener" class="btn btn-primary">Agendar Demo</a>
+        <a href="#contacto" class="btn btn-primary">Agendar Demo</a>
       </div>
       <div class="pricing-card">
         <h3>Enterprise</h3>
@@ -233,7 +233,7 @@
           <li>Customer success manager</li>
           <li>SLA garantizado</li>
         </ul>
-        <a href="https://tidycal.com/roldanjorgex" target="_blank" rel="noopener" class="btn btn-outline">Contactar ventas</a>
+        <a href="#contacto" class="btn btn-outline">Contactar ventas</a>
       </div>
     </div>
   </div>
@@ -274,16 +274,53 @@
 </section>
 
 <!-- CTA -->
-<section class="cta">
+<section class="cta" id="contacto">
   <div class="container">
     <h2>¿Qué pasa cuando las personas pueden ser escuchadas?</h2>
     <p class="sub">Mejores conversaciones. Mejores vínculos. Mejores resultados.</p>
-    <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
-      <a href="https://tidycal.com/roldanjorgex" target="_blank" rel="noopener" class="btn btn-primary">Agendar Demo &rarr;</a>
-      <a href="https://wa.me/541160135064?text=Hola!%20Quiero%20saber%20m%C3%A1s%20sobre%20Voces.ai" target="_blank" rel="noopener" class="btn btn-ghost">Escribinos por WhatsApp</a>
+    <div id="pricing-form" style="max-width:440px; margin:0 auto; text-align:left;">
+      <form onsubmit="submitPricingLead(event)">
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:10px;">
+          <input type="text" id="p-name" required placeholder="Nombre *" style="padding:10px 14px; border:1px solid rgba(255,255,255,0.12); border-radius:8px; background:rgba(255,255,255,0.06); color:#fff; font-family:inherit; font-size:0.85rem; outline:none;">
+          <input type="email" id="p-email" required placeholder="Email *" style="padding:10px 14px; border:1px solid rgba(255,255,255,0.12); border-radius:8px; background:rgba(255,255,255,0.06); color:#fff; font-family:inherit; font-size:0.85rem; outline:none;">
+        </div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:14px;">
+          <input type="text" id="p-company" placeholder="Empresa" style="padding:10px 14px; border:1px solid rgba(255,255,255,0.12); border-radius:8px; background:rgba(255,255,255,0.06); color:#fff; font-family:inherit; font-size:0.85rem; outline:none;">
+          <input type="text" id="p-role" placeholder="Rol" style="padding:10px 14px; border:1px solid rgba(255,255,255,0.12); border-radius:8px; background:rgba(255,255,255,0.06); color:#fff; font-family:inherit; font-size:0.85rem; outline:none;">
+        </div>
+        <button type="submit" class="btn btn-primary" id="p-btn" style="width:100%; justify-content:center;">Quiero una demo &rarr;</button>
+      </form>
+    </div>
+    <div id="pricing-success" style="display:none; text-align:center; padding:20px 0;">
+      <p style="font-size:1.1rem;">¡Listo! Te contactamos pronto.</p>
+    </div>
+    <div style="text-align:center; margin-top:14px;">
+      <a href="https://wa.me/541160135064?text=Hola!%20Quiero%20saber%20m%C3%A1s%20sobre%20Voces.ai" target="_blank" rel="noopener" class="btn btn-ghost">o escribinos por WhatsApp</a>
     </div>
   </div>
 </section>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.4"></script>
+<script>
+var _sb = typeof supabase !== 'undefined' ? supabase.createClient(
+  'https://efprxfxvuyniqixugixz.supabase.co',
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVmcHJ4Znh2dXluaXFpeHVnaXh6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ0NzI1MzAsImV4cCI6MjA5MDA0ODUzMH0.8qvRplB2EntMzaygeae1QsSqo1VkG5IW-ZXN18GjM8I'
+) : null;
+async function submitPricingLead(e) {
+  e.preventDefault();
+  var btn = document.getElementById('p-btn');
+  btn.disabled = true; btn.textContent = 'Enviando...';
+  if (_sb) await _sb.from('leads').insert({
+    name: document.getElementById('p-name').value,
+    email: document.getElementById('p-email').value,
+    company: document.getElementById('p-company').value || null,
+    role: document.getElementById('p-role').value || null,
+    source: 'precios'
+  });
+  document.getElementById('pricing-form').style.display = 'none';
+  document.getElementById('pricing-success').style.display = '';
+}
+</script>
 
 <!-- FOOTER -->
 <footer class="footer">
