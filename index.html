@@ -17,7 +17,7 @@
 <meta name="robots" content="index, follow">
 <meta name="theme-color" content="#f97316">
 <!-- EARS-030: Favicon -->
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cpolygon points='6,8 42,8 24,42' fill='%231a1a2e'/%3E%3Crect x='16' y='18' width='2' height='10' rx='1' fill='%23fff'/%3E%3Crect x='20' y='14' width='2' height='18' rx='1' fill='%23fff'/%3E%3Crect x='24' y='16' width='2' height='14' rx='1' fill='%23fff'/%3E%3Crect x='28' y='13' width='2' height='20' rx='1' fill='%23fff'/%3E%3Crect x='32' y='18' width='2' height='10' rx='1' fill='%23fff'/%3E%3C/svg%3E">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48' fill='none'%3E%3Crect x='6' y='16' width='4' height='16' rx='2' fill='%23f97316'/%3E%3Crect x='14' y='8' width='4' height='32' rx='2' fill='%23f97316'/%3E%3Crect x='22' y='14' width='4' height='20' rx='2' fill='%23f97316'/%3E%3Crect x='30' y='6' width='4' height='36' rx='2' fill='%23f97316'/%3E%3Crect x='38' y='18' width='4' height='12' rx='2' fill='%23f97316'/%3E%3C/svg%3E">
 <link rel="icon" type="image/png" sizes="32x32" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAYRJREFUWEftlrFOwzAQhn+nSExMbEi8AC/AwMrEyMbCxMTKxsjIyMgb8AIMTExITExMSIgFCaHc6ey4TuLYSZoW1FNk+/7v7v87O8QWf7TF+vEPYOMZ2PoMxLpg2xtIBUBEJwG8BXCKiA6UX7IOkLkDZInonIjeA7gB4JaZX1e1I+sAGQEg0yPiYwCPiOg5ET0C8IKZ71a1I8sOkBkAkgMxzzPzc2b+vKodWXaAjACQGQDZCzE/I6IXRPSMme9WtSPLDpAZADIDQHIg5jlmfs7MX1a1I8sOEFkPSGeA6BSAPcw8T0QPmfmBiBaI6NWKM5BlB8gcAJkB8HcAJHtgfkrMj5j54Yp25L8ByD8gsgfILAB/B0DyIORZZn7EzA+Y+T4z3xPRqxVnIKvugIwBkOyBeZaZHzHzfWa+y8x3RPSGRF+Z+fuqduS/AcjGb8G/HSDrAXIZoDsb/J9fQ7IJZBKAdRswAd8Bz3lfMAVPHocAAAAASUVORK5CYII=">
 <!-- EARS-031: JSON-LD -->
 <script type="application/ld+json">
@@ -396,6 +396,8 @@
     cursor: pointer; transition: all 0.15s; font-family: inherit;
   }
   .btn-enter:hover { border-color: var(--accent); color: var(--accent); }
+  [data-theme="dark"] .btn-enter { border-color: rgba(255,255,255,0.5); color: #fff; }
+  [data-theme="dark"] .btn-enter:hover { border-color: var(--accent); color: var(--accent); }
 
   /* === USER MENU (post-login) === */
   .user-menu { position: relative; }
@@ -517,7 +519,7 @@
 <nav class="navbar">
   <div class="container">
     <a href="#" class="navbar-logo">
-      <svg width="22" height="22" viewBox="0 0 48 48" fill="none"><polygon points="6,8 42,8 24,42" fill="currentColor"/><rect x="16" y="18" width="2" height="10" rx="1" fill="#fff"/><rect x="20" y="14" width="2" height="18" rx="1" fill="#fff"/><rect x="24" y="16" width="2" height="14" rx="1" fill="#fff"/><rect x="28" y="13" width="2" height="20" rx="1" fill="#fff"/><rect x="32" y="18" width="2" height="10" rx="1" fill="#fff"/></svg>
+      <svg width="22" height="22" viewBox="0 0 48 48" fill="none"><rect x="6" y="16" width="4" height="16" rx="2" fill="currentColor"/><rect x="14" y="8" width="4" height="32" rx="2" fill="currentColor"/><rect x="22" y="14" width="4" height="20" rx="2" fill="currentColor"/><rect x="30" y="6" width="4" height="36" rx="2" fill="currentColor"/><rect x="38" y="18" width="4" height="12" rx="2" fill="currentColor"/></svg>
       Voces.ai
     </a>
     <div class="navbar-links">
@@ -910,7 +912,7 @@
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" x2="6" y1="6" y2="18"/><line x1="6" x2="18" y1="6" y2="18"/></svg>
     </button>
     <div class="modal-logo">
-      <svg width="24" height="24" viewBox="0 0 48 48" fill="none"><polygon points="6,8 42,8 24,42" fill="currentColor"/><rect x="16" y="18" width="2" height="10" rx="1" fill="#fff"/><rect x="20" y="14" width="2" height="18" rx="1" fill="#fff"/><rect x="24" y="16" width="2" height="14" rx="1" fill="#fff"/><rect x="28" y="13" width="2" height="20" rx="1" fill="#fff"/><rect x="32" y="18" width="2" height="10" rx="1" fill="#fff"/></svg>
+      <svg width="24" height="24" viewBox="0 0 48 48" fill="none"><rect x="6" y="16" width="4" height="16" rx="2" fill="currentColor"/><rect x="14" y="8" width="4" height="32" rx="2" fill="currentColor"/><rect x="22" y="14" width="4" height="20" rx="2" fill="currentColor"/><rect x="30" y="6" width="4" height="36" rx="2" fill="currentColor"/><rect x="38" y="18" width="4" height="12" rx="2" fill="currentColor"/></svg>
       Voces.ai
     </div>
     <h3>Ingresá a tu cuenta</h3>
@@ -938,7 +940,7 @@
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" x2="6" y1="6" y2="18"/><line x1="6" x2="18" y1="6" y2="18"/></svg>
     </button>
     <div class="modal-logo">
-      <svg width="24" height="24" viewBox="0 0 48 48" fill="none"><polygon points="6,8 42,8 24,42" fill="currentColor"/><rect x="16" y="18" width="2" height="10" rx="1" fill="#fff"/><rect x="20" y="14" width="2" height="18" rx="1" fill="#fff"/><rect x="24" y="16" width="2" height="14" rx="1" fill="#fff"/><rect x="28" y="13" width="2" height="20" rx="1" fill="#fff"/><rect x="32" y="18" width="2" height="10" rx="1" fill="#fff"/></svg>
+      <svg width="24" height="24" viewBox="0 0 48 48" fill="none"><rect x="6" y="16" width="4" height="16" rx="2" fill="currentColor"/><rect x="14" y="8" width="4" height="32" rx="2" fill="currentColor"/><rect x="22" y="14" width="4" height="20" rx="2" fill="currentColor"/><rect x="30" y="6" width="4" height="36" rx="2" fill="currentColor"/><rect x="38" y="18" width="4" height="12" rx="2" fill="currentColor"/></svg>
       Voces.ai
     </div>
     <h3>Hablemos de tu organización</h3>
@@ -1033,7 +1035,7 @@ async function loginWithLinkedIn() {
   if (!_supabase) { alert('Servicio no disponible. Intentá más tarde.'); return; }
   var { error } = await _supabase.auth.signInWithOAuth({
     provider: 'linkedin_oidc',
-    options: { redirectTo: 'https://0rgan1co.github.io/landing_voces/' }
+    options: { redirectTo: 'https://0rgan1co.github.io/landing_voces/dashboard.html' }
   });
   if (error) { closeLogin(); alert('No se pudo iniciar sesión. Intentá de nuevo.'); }
 }
@@ -1043,7 +1045,7 @@ async function loginWithGoogle() {
   if (!_supabase) { alert('Servicio no disponible. Intentá más tarde.'); return; }
   const { error } = await _supabase.auth.signInWithOAuth({
     provider: 'google',
-    options: { redirectTo: 'https://0rgan1co.github.io/landing_voces/' }
+    options: { redirectTo: 'https://0rgan1co.github.io/landing_voces/dashboard.html' }
   });
   if (error) {
     closeLogin();
