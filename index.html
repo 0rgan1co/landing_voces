@@ -240,7 +240,7 @@
   }
   .iw-progress-wrap { flex: 1; margin-right: 12px; }
   .iw-progress-bar { height: 4px; background: rgba(255,255,255,0.08); border-radius: 2px; overflow: hidden; }
-  .iw-progress-fill { height: 100%; background: var(--accent); border-radius: 2px; width: 62%; transition: width 1s; }
+  .iw-progress-fill { height: 100%; background: var(--accent); border-radius: 2px; width: 43%; transition: width 1s; }
   .iw-progress-label { font-size: 0.65rem; color: rgba(255,255,255,0.35); margin-top: 3px; }
   .iw-anon-badge {
     display: flex; align-items: center; gap: 4px; font-size: 0.6rem; color: #28c840;
@@ -291,13 +291,36 @@
   .tab-btn:hover { background: rgba(249,115,22,0.15); }
   .tab-btn.active { background: var(--accent); color: #fff; box-shadow: 0 4px 12px rgba(249,115,22,0.25); }
   .tab-panel {
-    display: none; text-align: left; max-width: 640px; margin: 0 auto;
+    display: none; text-align: left; max-width: 780px; margin: 0 auto;
     padding: 32px; background: var(--card-bg); border-radius: 16px;
     border: 1px solid var(--card-border); box-shadow: 0 8px 32px rgba(0,0,0,0.06);
+    animation: tabFade 0.4s ease;
   }
+  @keyframes tabFade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
   .tab-panel.active { display: block; }
-  .tab-panel h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 10px; color: var(--accent); }
-  .tab-panel p { font-size: 0.92rem; color: var(--gray-600); line-height: 1.7; }
+  .tab-panel h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 6px; color: var(--dark-2); }
+  .tab-panel .tab-desc { font-size: 0.92rem; color: var(--gray-600); line-height: 1.7; margin-bottom: 20px; }
+  .tab-panel .tab-icon { font-size: 2rem; margin-bottom: 12px; display: block; }
+  .tab-compare {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+  }
+  .tab-compare-card {
+    padding: 18px 20px; border-radius: 12px; font-size: 0.85rem; line-height: 1.6;
+  }
+  .tab-compare-card.without {
+    background: #fef2f2; border: 1px solid #fecaca; color: #991b1b;
+  }
+  .tab-compare-card.with {
+    background: #f0fdf4; border: 1px solid #bbf7d0; color: #166534;
+  }
+  .tab-compare-label {
+    font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;
+    margin-bottom: 8px; display: flex; align-items: center; gap: 6px;
+  }
+  .tab-compare-card.without .tab-compare-label { color: #dc2626; }
+  .tab-compare-card.with .tab-compare-label { color: #16a34a; }
+  .tab-compare-card ul { margin: 0; padding: 0 0 0 16px; }
+  .tab-compare-card li { margin-bottom: 4px; }
 
   /* === SECTION 4: DEMO (2-column) === */
   .demo-section { padding: 80px 0; background: var(--bg); }
@@ -483,16 +506,37 @@
   .proof-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(249,115,22,0.08); }
   .proof-num { font-size: 2.2rem; font-weight: 800; color: var(--accent); margin-bottom: 6px; }
   .proof-text { font-size: 0.85rem; color: var(--gray-600); line-height: 1.5; }
-  .testimonial {
-    max-width: 700px; margin: 36px auto 0; padding: 28px 32px;
-    background: var(--dark); border-radius: 14px; color: #fff; position: relative;
+  .testimonial-carousel {
+    max-width: 700px; margin: 36px auto 0; position: relative;
   }
-  .testimonial::before {
-    content: '"'; position: absolute; top: 16px; left: 24px;
+  .testimonial-track { overflow: hidden; border-radius: 14px; }
+  .testimonial-slide {
+    display: none; padding: 28px 32px;
+    background: var(--dark); border-radius: 14px; color: #fff; position: relative;
+    animation: testimonialFade 0.5s ease;
+  }
+  .testimonial-slide.active { display: block; }
+  @keyframes testimonialFade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+  .testimonial-slide::before {
+    content: '\201C'; position: absolute; top: 16px; left: 24px;
     font-size: 3rem; color: var(--accent); font-family: Georgia, serif; line-height: 1;
   }
-  .testimonial p { font-size: 0.95rem; line-height: 1.7; padding-left: 32px; font-style: italic; color: rgba(255,255,255,0.85); }
-  .testimonial .author { font-size: 0.82rem; color: var(--accent-light); margin-top: 12px; padding-left: 32px; font-style: normal; font-weight: 600; }
+  .testimonial-slide p { font-size: 0.95rem; line-height: 1.7; padding-left: 32px; font-style: italic; color: rgba(255,255,255,0.85); }
+  .testimonial-slide .author { font-size: 0.82rem; color: var(--accent-light); margin-top: 12px; padding-left: 32px; font-style: normal; font-weight: 600; }
+  .testimonial-nav { display: flex; justify-content: center; align-items: center; gap: 16px; margin-top: 20px; }
+  .testimonial-dots { display: flex; gap: 6px; align-items: center; }
+  .testimonial-dot {
+    width: 8px; height: 8px; border-radius: 50%; background: var(--gray-200);
+    border: none; cursor: pointer; padding: 0; transition: all 0.3s;
+  }
+  .testimonial-dot.active { background: var(--accent); width: 24px; border-radius: 4px; }
+  .testimonial-arrows { display: flex; gap: 8px; }
+  .testimonial-arrow {
+    width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--card-border);
+    background: var(--card-bg); cursor: pointer; display: flex; align-items: center;
+    justify-content: center; transition: all 0.2s; font-family: inherit; font-size: 0.9rem; color: var(--gray-600);
+  }
+  .testimonial-arrow:hover { border-color: var(--accent); color: var(--accent); }
 
   /* === SCROLL REVEAL === */
   .reveal {
@@ -517,6 +561,7 @@
     .metric-num { font-size: 1.2rem; }
     [style*="grid-template-columns: repeat(3"] { grid-template-columns: 1fr !important; }
     .proof-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
+    .tab-compare { grid-template-columns: 1fr; }
     .cookie-banner { flex-direction: column; text-align: center; bottom: 12px; left: 12px; right: 12px; }
     .footer .container { flex-direction: column; text-align: center; }
   }
@@ -650,7 +695,7 @@
           <div class="iw-footer">
             <div class="iw-progress-wrap">
               <div class="iw-progress-bar"><div class="iw-progress-fill"></div></div>
-              <div class="iw-progress-label">62% completado &middot; 8 de 13 preguntas</div>
+              <div class="iw-progress-label">3 de 7 desaf&iacute;os estrat&eacute;gicos</div>
             </div>
             <div class="iw-anon-badge">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
@@ -742,20 +787,96 @@
       <button class="tab-btn" role="tab" aria-selected="false" onclick="showTab(3)">Cambio</button>
     </div>
     <div class="tab-panel active" role="tabpanel" data-tab="0">
+      <span class="tab-icon">&#128200;</span>
       <h3>Negocios</h3>
-      <p>Vas a abrir un mercado, lanzar un producto o cerrar una adquisición. ¿Escuchaste a quienes van a ejecutar? Voces.ai te muestra dónde se pierde claridad antes de que cueste plata.</p>
+      <p class="tab-desc">Vas a abrir un mercado, lanzar un producto o cerrar una adquisición. ¿Escuchaste a quienes van a ejecutar?</p>
+      <div class="tab-compare">
+        <div class="tab-compare-card without">
+          <div class="tab-compare-label">&#10005; Sin Voces</div>
+          <ul>
+            <li>Decisiones basadas en supuestos del directorio</li>
+            <li>Resistencia invisible que frena la ejecución</li>
+            <li>Costos de oportunidad por llegar tarde</li>
+          </ul>
+        </div>
+        <div class="tab-compare-card with">
+          <div class="tab-compare-label">&#10003; Con Voces</div>
+          <ul>
+            <li>Sabés dónde se pierde claridad antes de invertir</li>
+            <li>El equipo ejecutor valida la estrategia desde el día uno</li>
+            <li>Decisiones con evidencia, no con intuición</li>
+          </ul>
+        </div>
+      </div>
     </div>
     <div class="tab-panel" role="tabpanel" data-tab="1">
+      <span class="tab-icon">&#128101;</span>
       <h3>Personas</h3>
-      <p>La encuesta anual te dice que "el clima es 7.2". Voces.ai te dice por qué la gente se va, qué frena a los equipos y qué valores se practican vs. cuáles solo se declaran.</p>
+      <p class="tab-desc">La encuesta anual te dice que "el clima es 7.2". Voces.ai te dice por qué la gente se va y qué valores realmente se practican.</p>
+      <div class="tab-compare">
+        <div class="tab-compare-card without">
+          <div class="tab-compare-label">&#10005; Sin Voces</div>
+          <ul>
+            <li>Encuestas con respuestas políticamente correctas</li>
+            <li>Rotación que sorprende porque "nadie dijo nada"</li>
+            <li>Valores declarados que nadie reconoce en la práctica</li>
+          </ul>
+        </div>
+        <div class="tab-compare-card with">
+          <div class="tab-compare-label">&#10003; Con Voces</div>
+          <ul>
+            <li>Narrativas reales sobre lo que frena a los equipos</li>
+            <li>Alertas tempranas de rotación con contexto</li>
+            <li>Brecha visible entre cultura declarada y vivida</li>
+          </ul>
+        </div>
+      </div>
     </div>
     <div class="tab-panel" role="tabpanel" data-tab="2">
+      <span class="tab-icon">&#9881;</span>
       <h3>Procesos</h3>
-      <p>Hay procesos diseñados en una sala y vividos de otra forma en los pasillos. Voces.ai muestra la brecha — y quién se anima a ponerla en agenda.</p>
+      <p class="tab-desc">Hay procesos diseñados en una sala y vividos de otra forma en los pasillos. Voces.ai muestra la brecha.</p>
+      <div class="tab-compare">
+        <div class="tab-compare-card without">
+          <div class="tab-compare-label">&#10005; Sin Voces</div>
+          <ul>
+            <li>Procesos documentados que nadie sigue</li>
+            <li>Workarounds invisibles que generan riesgo</li>
+            <li>Mejoras basadas en lo que cree el diseñador</li>
+          </ul>
+        </div>
+        <div class="tab-compare-card with">
+          <div class="tab-compare-label">&#10003; Con Voces</div>
+          <ul>
+            <li>Mapa real de cómo se viven los procesos</li>
+            <li>Fricciones identificadas por quienes las sufren</li>
+            <li>Priorización basada en impacto real, no en teoría</li>
+          </ul>
+        </div>
+      </div>
     </div>
     <div class="tab-panel" role="tabpanel" data-tab="3">
+      <span class="tab-icon">&#128260;</span>
       <h3>Cambio</h3>
-      <p>Implementaron una nueva forma de trabajo. ¿Hubo cambios de comportamiento profundos o solo cambió el discurso? Compara narrativas antes y después con evidencia, no con percepciones.</p>
+      <p class="tab-desc">Implementaron una nueva forma de trabajo. ¿Hubo cambios profundos o solo cambió el discurso?</p>
+      <div class="tab-compare">
+        <div class="tab-compare-card without">
+          <div class="tab-compare-label">&#10005; Sin Voces</div>
+          <ul>
+            <li>Adopción medida por uso de herramientas, no por comportamiento</li>
+            <li>Discurso nuevo con prácticas viejas</li>
+            <li>Sin forma de medir cambio cultural real</li>
+          </ul>
+        </div>
+        <div class="tab-compare-card with">
+          <div class="tab-compare-label">&#10003; Con Voces</div>
+          <ul>
+            <li>Comparación de narrativas antes y después</li>
+            <li>Evidencia de cambios de comportamiento reales</li>
+            <li>Identificación de dónde el cambio no penetró</li>
+          </ul>
+        </div>
+      </div>
     </div>
     <div style="text-align:center; margin-top:36px;">
       <a href="#" onclick="openContact();return false;" class="btn btn-primary">Hablemos de tu organización &rarr;</a>
@@ -869,9 +990,35 @@
         <div class="proof-text">de diagnóstico completo vs. 4 meses con metodología tradicional. Sin consultoras, con total anonimato.</div>
       </div>
     </div>
-    <div class="testimonial">
-      <p>Por primera vez pudimos ver lo que realmente estaba pasando en los equipos. No era lo que suponíamos. Las decisiones que tomamos después fueron completamente distintas.</p>
-      <div class="author">— Director de Transformación, empresa de servicios financieros (LATAM)</div>
+    <div class="testimonial-carousel">
+      <div class="testimonial-track">
+        <div class="testimonial-slide active">
+          <p>Por primera vez pudimos ver lo que realmente estaba pasando en los equipos. No era lo que suponíamos. Las decisiones que tomamos después fueron completamente distintas.</p>
+          <div class="author">— Director de Transformación, empresa de servicios financieros (LATAM)</div>
+        </div>
+        <div class="testimonial-slide">
+          <p>En dos semanas tuvimos un diagnóstico que con la metodología anterior nos hubiera tomado un trimestre. Y con mucha más profundidad.</p>
+          <div class="author">— VP de Personas, empresa agropecuaria (Argentina)</div>
+        </div>
+        <div class="testimonial-slide">
+          <p>Lo más valioso fue lo que apareció en las narrativas: temas que todos conocíamos pero que nadie se animaba a poner en agenda. Eso cambió las conversaciones del directorio.</p>
+          <div class="author">— CEO, empresa de tecnología (LATAM)</div>
+        </div>
+        <div class="testimonial-slide">
+          <p>El anonimato hizo la diferencia. La gente habló con una honestidad que nunca vimos en encuestas ni en focus groups.</p>
+          <div class="author">— Directora de Cultura, retail (México)</div>
+        </div>
+      </div>
+      <div class="testimonial-nav">
+        <button class="testimonial-arrow" onclick="changeTestimonial(-1)" aria-label="Anterior">&#8592;</button>
+        <div class="testimonial-dots">
+          <button class="testimonial-dot active" onclick="goToTestimonial(0)"></button>
+          <button class="testimonial-dot" onclick="goToTestimonial(1)"></button>
+          <button class="testimonial-dot" onclick="goToTestimonial(2)"></button>
+          <button class="testimonial-dot" onclick="goToTestimonial(3)"></button>
+        </div>
+        <button class="testimonial-arrow" onclick="changeTestimonial(1)" aria-label="Siguiente">&#8594;</button>
+      </div>
     </div>
   </div>
 </section>
@@ -1174,6 +1321,27 @@ function showTab(index) {
   document.querySelectorAll('.tab-btn').forEach(function(btn, i) { btn.classList.toggle('active', i === index); btn.setAttribute('aria-selected', i === index ? 'true' : 'false'); });
   document.querySelectorAll('.tab-panel').forEach(function(panel, i) { panel.classList.toggle('active', i === index); });
 }
+
+// Testimonial carousel
+var _tCurrent = 0;
+var _tSlides = document.querySelectorAll('.testimonial-slide');
+var _tDots = document.querySelectorAll('.testimonial-dot');
+var _tAutoplay;
+
+function goToTestimonial(i) {
+  _tCurrent = i;
+  _tSlides.forEach(function(s, idx) { s.classList.toggle('active', idx === i); });
+  _tDots.forEach(function(d, idx) { d.classList.toggle('active', idx === i); });
+  resetAutoplay();
+}
+function changeTestimonial(dir) {
+  goToTestimonial((_tCurrent + dir + _tSlides.length) % _tSlides.length);
+}
+function resetAutoplay() {
+  clearInterval(_tAutoplay);
+  _tAutoplay = setInterval(function() { changeTestimonial(1); }, 6000);
+}
+resetAutoplay();
 </script>
 
 </body>
