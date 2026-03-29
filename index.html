@@ -128,6 +128,12 @@
     animation: heroGradient 8s ease infinite;
     color: #fff; position: relative; overflow: hidden;
   }
+  .hero::before {
+    content: ''; position: absolute; inset: 0;
+    background: url('hero-bg.jpg') center/cover no-repeat;
+    opacity: 0.12; z-index: 0;
+  }
+  .hero > .container { position: relative; z-index: 1; }
   @keyframes heroGradient {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
@@ -314,7 +320,19 @@
   .process-step p { font-size: 0.85rem; color: var(--gray-600); line-height: 1.5; }
 
   /* === CTA FINAL === */
-  .cta-final { background: var(--dark); color: #fff; padding: 72px 0; text-align: center; }
+  .cta-final {
+    background: linear-gradient(135deg, #0a0a0a 0%, #1c1108 30%, #7c2d12 60%, #f97316 80%, #fb923c 100%);
+    background-size: 200% 200%;
+    animation: heroGradient 8s ease infinite;
+    color: #fff; padding: 72px 0; text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .cta-final::before {
+    content: ''; position: absolute; inset: 0;
+    background: url('hero-bg.jpg') center/cover no-repeat;
+    opacity: 0.12; z-index: 0;
+  }
+  .cta-final > .container { position: relative; z-index: 1; }
   .cta-final h2 { font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 800; margin-bottom: 24px; }
   .cta-final-actions { display: flex; gap: 16px; justify-content: center; align-items: center; flex-wrap: wrap; }
   .cta-final .btn-ghost { color: var(--accent-light); }
@@ -605,7 +623,6 @@
                 <div class="iw-msg-label">Alex — Voces.ai</div>
                 ¿Podrías darme un ejemplo concreto donde esa demora les haya costado una oportunidad? ¿Que paso y quienes estaban involucrados?
               </div>
-              <div class="iw-typing"><span></span><span></span><span></span></div>
             </div>
             <div class="iw-waveform">
               <div class="iw-bar" style="--h:16px; animation-delay:0s"></div>
