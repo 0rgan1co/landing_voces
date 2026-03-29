@@ -542,11 +542,11 @@
     transition: border-color 0.2s;
   }
   .testimonial-card:hover { border-color: rgba(249,115,22,0.3); }
-  .testimonial-card p {
-    font-size: 0.9rem; line-height: 1.7; color: var(--gray-600); margin: 0 0 16px;
-  }
   .testimonial-author {
-    display: flex; align-items: center; gap: 10px;
+    display: flex; align-items: center; gap: 10px; margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid var(--card-border);
+  }
+  .testimonial-card p {
+    font-size: 0.9rem; line-height: 1.7; color: var(--gray-600); margin: 0;
   }
   .testimonial-avatar {
     width: 40px; height: 40px; border-radius: 50%; flex-shrink: 0;
@@ -1012,7 +1012,6 @@
     <div class="testimonial-scroll-wrap">
       <div class="testimonial-track">
         <div class="testimonial-card">
-          <p>Por primera vez pudimos ver lo que realmente estaba pasando en los equipos. No era lo que suponíamos. Las decisiones que tomamos después fueron completamente distintas.</p>
           <div class="testimonial-author">
             <img class="testimonial-avatar" src="avatar-1.jpg" alt="Director de Transformación">
             <div class="testimonial-info">
@@ -1020,9 +1019,9 @@
               <span class="testimonial-role">Servicios financieros · LATAM</span>
             </div>
           </div>
+          <p>Por primera vez pudimos ver lo que realmente estaba pasando en los equipos. No era lo que suponíamos. Las decisiones que tomamos después fueron completamente distintas.</p>
         </div>
         <div class="testimonial-card">
-          <p>En dos semanas tuvimos un diagnóstico que con la metodología anterior nos hubiera tomado un trimestre. Y con mucha más profundidad.</p>
           <div class="testimonial-author">
             <img class="testimonial-avatar" src="avatar-2.jpg" alt="VP de Personas">
             <div class="testimonial-info">
@@ -1030,9 +1029,9 @@
               <span class="testimonial-role">Empresa agropecuaria · Argentina</span>
             </div>
           </div>
+          <p>En dos semanas tuvimos un diagnóstico que con la metodología anterior nos hubiera tomado un trimestre. Y con mucha más profundidad.</p>
         </div>
         <div class="testimonial-card">
-          <p>Lo más valioso fue lo que apareció en las narrativas: temas que todos conocíamos pero que nadie se animaba a poner en agenda.</p>
           <div class="testimonial-author">
             <img class="testimonial-avatar" src="avatar-3.jpg" alt="CEO">
             <div class="testimonial-info">
@@ -1040,9 +1039,9 @@
               <span class="testimonial-role">Empresa de tecnología · LATAM</span>
             </div>
           </div>
+          <p>Lo más valioso fue lo que apareció en las narrativas: temas que todos conocíamos pero que nadie se animaba a poner en agenda.</p>
         </div>
         <div class="testimonial-card">
-          <p>El anonimato hizo la diferencia. La gente habló con una honestidad que nunca vimos en encuestas ni en focus groups.</p>
           <div class="testimonial-author">
             <img class="testimonial-avatar" src="avatar-4.jpg" alt="Directora de Cultura">
             <div class="testimonial-info">
@@ -1050,10 +1049,10 @@
               <span class="testimonial-role">Retail · México</span>
             </div>
           </div>
+          <p>El anonimato hizo la diferencia. La gente habló con una honestidad que nunca vimos en encuestas ni en focus groups.</p>
         </div>
         <!-- Duplicados para loop infinito -->
         <div class="testimonial-card">
-          <p>Por primera vez pudimos ver lo que realmente estaba pasando en los equipos. No era lo que suponíamos. Las decisiones que tomamos después fueron completamente distintas.</p>
           <div class="testimonial-author">
             <img class="testimonial-avatar" src="avatar-1.jpg" alt="Director de Transformación">
             <div class="testimonial-info">
@@ -1061,9 +1060,9 @@
               <span class="testimonial-role">Servicios financieros · LATAM</span>
             </div>
           </div>
+          <p>Por primera vez pudimos ver lo que realmente estaba pasando en los equipos. No era lo que suponíamos. Las decisiones que tomamos después fueron completamente distintas.</p>
         </div>
         <div class="testimonial-card">
-          <p>En dos semanas tuvimos un diagnóstico que con la metodología anterior nos hubiera tomado un trimestre. Y con mucha más profundidad.</p>
           <div class="testimonial-author">
             <img class="testimonial-avatar" src="avatar-2.jpg" alt="VP de Personas">
             <div class="testimonial-info">
@@ -1071,9 +1070,9 @@
               <span class="testimonial-role">Empresa agropecuaria · Argentina</span>
             </div>
           </div>
+          <p>En dos semanas tuvimos un diagnóstico que con la metodología anterior nos hubiera tomado un trimestre. Y con mucha más profundidad.</p>
         </div>
         <div class="testimonial-card">
-          <p>Lo más valioso fue lo que apareció en las narrativas: temas que todos conocíamos pero que nadie se animaba a poner en agenda.</p>
           <div class="testimonial-author">
             <img class="testimonial-avatar" src="avatar-3.jpg" alt="CEO">
             <div class="testimonial-info">
@@ -1081,9 +1080,9 @@
               <span class="testimonial-role">Empresa de tecnología · LATAM</span>
             </div>
           </div>
+          <p>Lo más valioso fue lo que apareció en las narrativas: temas que todos conocíamos pero que nadie se animaba a poner en agenda.</p>
         </div>
         <div class="testimonial-card">
-          <p>El anonimato hizo la diferencia. La gente habló con una honestidad que nunca vimos en encuestas ni en focus groups.</p>
           <div class="testimonial-author">
             <img class="testimonial-avatar" src="avatar-4.jpg" alt="Directora de Cultura">
             <div class="testimonial-info">
@@ -1091,6 +1090,7 @@
               <span class="testimonial-role">Retail · México</span>
             </div>
           </div>
+          <p>El anonimato hizo la diferencia. La gente habló con una honestidad que nunca vimos en encuestas ni en focus groups.</p>
         </div>
       </div>
     </div>
