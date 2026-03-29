@@ -522,12 +522,22 @@
   .proof-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(249,115,22,0.08); }
   .proof-num { font-size: 2.2rem; font-weight: 800; color: var(--accent); margin-bottom: 6px; }
   .proof-text { font-size: 0.85rem; color: var(--gray-600); line-height: 1.5; }
-  .testimonial-grid {
-    display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;
-    max-width: 900px; margin: 40px auto 0;
+  .testimonial-scroll-wrap {
+    margin-top: 40px; overflow: hidden; position: relative;
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+  }
+  .testimonial-track {
+    display: flex; gap: 20px; width: max-content;
+    animation: testimonialScroll 30s linear infinite;
+  }
+  .testimonial-track:hover { animation-play-state: paused; }
+  @keyframes testimonialScroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
   }
   .testimonial-card {
-    padding: 24px; border-radius: 14px;
+    padding: 24px; border-radius: 14px; width: 340px; flex-shrink: 0;
     background: var(--card-bg); border: 1px solid var(--card-border);
     transition: border-color 0.2s;
   }
@@ -539,9 +549,8 @@
     display: flex; align-items: center; gap: 10px;
   }
   .testimonial-avatar {
-    width: 36px; height: 36px; border-radius: 50%;
-    background: var(--accent-bg); display: flex; align-items: center; justify-content: center;
-    font-size: 0.8rem; font-weight: 700; color: var(--accent); flex-shrink: 0;
+    width: 40px; height: 40px; border-radius: 50%; flex-shrink: 0;
+    object-fit: cover;
   }
   .testimonial-info { display: flex; flex-direction: column; }
   .testimonial-name { font-size: 0.82rem; font-weight: 600; color: var(--text); }
@@ -570,7 +579,6 @@
     .metric-num { font-size: 1.2rem; }
     [style*="grid-template-columns: repeat(3"] { grid-template-columns: 1fr !important; }
     .proof-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
-    .testimonial-grid { grid-template-columns: 1fr; }
     .tab-compare { grid-template-columns: 1fr; }
     .cookie-banner { flex-direction: column; text-align: center; bottom: 12px; left: 12px; right: 12px; }
     .footer .container { flex-direction: column; text-align: center; }
@@ -1001,44 +1009,87 @@
         <div class="proof-text">de diagnóstico completo vs. 4 meses con metodología tradicional. Sin consultoras, con total anonimato.</div>
       </div>
     </div>
-    <div class="testimonial-grid">
-      <div class="testimonial-card">
-        <p>Por primera vez pudimos ver lo que realmente estaba pasando en los equipos. No era lo que suponíamos. Las decisiones que tomamos después fueron completamente distintas.</p>
-        <div class="testimonial-author">
-          <div class="testimonial-avatar">DT</div>
-          <div class="testimonial-info">
-            <span class="testimonial-name">Director de Transformación</span>
-            <span class="testimonial-role">Servicios financieros · LATAM</span>
+    <div class="testimonial-scroll-wrap">
+      <div class="testimonial-track">
+        <div class="testimonial-card">
+          <p>Por primera vez pudimos ver lo que realmente estaba pasando en los equipos. No era lo que suponíamos. Las decisiones que tomamos después fueron completamente distintas.</p>
+          <div class="testimonial-author">
+            <img class="testimonial-avatar" src="avatar-1.jpg" alt="Director de Transformación">
+            <div class="testimonial-info">
+              <span class="testimonial-name">Director de Transformación</span>
+              <span class="testimonial-role">Servicios financieros · LATAM</span>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="testimonial-card">
-        <p>En dos semanas tuvimos un diagnóstico que con la metodología anterior nos hubiera tomado un trimestre. Y con mucha más profundidad.</p>
-        <div class="testimonial-author">
-          <div class="testimonial-avatar">VP</div>
-          <div class="testimonial-info">
-            <span class="testimonial-name">VP de Personas</span>
-            <span class="testimonial-role">Empresa agropecuaria · Argentina</span>
+        <div class="testimonial-card">
+          <p>En dos semanas tuvimos un diagnóstico que con la metodología anterior nos hubiera tomado un trimestre. Y con mucha más profundidad.</p>
+          <div class="testimonial-author">
+            <img class="testimonial-avatar" src="avatar-2.jpg" alt="VP de Personas">
+            <div class="testimonial-info">
+              <span class="testimonial-name">VP de Personas</span>
+              <span class="testimonial-role">Empresa agropecuaria · Argentina</span>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="testimonial-card">
-        <p>Lo más valioso fue lo que apareció en las narrativas: temas que todos conocíamos pero que nadie se animaba a poner en agenda.</p>
-        <div class="testimonial-author">
-          <div class="testimonial-avatar">CE</div>
-          <div class="testimonial-info">
-            <span class="testimonial-name">CEO</span>
-            <span class="testimonial-role">Empresa de tecnología · LATAM</span>
+        <div class="testimonial-card">
+          <p>Lo más valioso fue lo que apareció en las narrativas: temas que todos conocíamos pero que nadie se animaba a poner en agenda.</p>
+          <div class="testimonial-author">
+            <img class="testimonial-avatar" src="avatar-3.jpg" alt="CEO">
+            <div class="testimonial-info">
+              <span class="testimonial-name">CEO</span>
+              <span class="testimonial-role">Empresa de tecnología · LATAM</span>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="testimonial-card">
-        <p>El anonimato hizo la diferencia. La gente habló con una honestidad que nunca vimos en encuestas ni en focus groups.</p>
-        <div class="testimonial-author">
-          <div class="testimonial-avatar">DC</div>
-          <div class="testimonial-info">
-            <span class="testimonial-name">Directora de Cultura</span>
-            <span class="testimonial-role">Retail · México</span>
+        <div class="testimonial-card">
+          <p>El anonimato hizo la diferencia. La gente habló con una honestidad que nunca vimos en encuestas ni en focus groups.</p>
+          <div class="testimonial-author">
+            <img class="testimonial-avatar" src="avatar-4.jpg" alt="Directora de Cultura">
+            <div class="testimonial-info">
+              <span class="testimonial-name">Directora de Cultura</span>
+              <span class="testimonial-role">Retail · México</span>
+            </div>
+          </div>
+        </div>
+        <!-- Duplicados para loop infinito -->
+        <div class="testimonial-card">
+          <p>Por primera vez pudimos ver lo que realmente estaba pasando en los equipos. No era lo que suponíamos. Las decisiones que tomamos después fueron completamente distintas.</p>
+          <div class="testimonial-author">
+            <img class="testimonial-avatar" src="avatar-1.jpg" alt="Director de Transformación">
+            <div class="testimonial-info">
+              <span class="testimonial-name">Director de Transformación</span>
+              <span class="testimonial-role">Servicios financieros · LATAM</span>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <p>En dos semanas tuvimos un diagnóstico que con la metodología anterior nos hubiera tomado un trimestre. Y con mucha más profundidad.</p>
+          <div class="testimonial-author">
+            <img class="testimonial-avatar" src="avatar-2.jpg" alt="VP de Personas">
+            <div class="testimonial-info">
+              <span class="testimonial-name">VP de Personas</span>
+              <span class="testimonial-role">Empresa agropecuaria · Argentina</span>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <p>Lo más valioso fue lo que apareció en las narrativas: temas que todos conocíamos pero que nadie se animaba a poner en agenda.</p>
+          <div class="testimonial-author">
+            <img class="testimonial-avatar" src="avatar-3.jpg" alt="CEO">
+            <div class="testimonial-info">
+              <span class="testimonial-name">CEO</span>
+              <span class="testimonial-role">Empresa de tecnología · LATAM</span>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <p>El anonimato hizo la diferencia. La gente habló con una honestidad que nunca vimos en encuestas ni en focus groups.</p>
+          <div class="testimonial-author">
+            <img class="testimonial-avatar" src="avatar-4.jpg" alt="Directora de Cultura">
+            <div class="testimonial-info">
+              <span class="testimonial-name">Directora de Cultura</span>
+              <span class="testimonial-role">Retail · México</span>
+            </div>
           </div>
         </div>
       </div>
