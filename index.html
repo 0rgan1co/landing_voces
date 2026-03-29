@@ -51,7 +51,7 @@
 
   :root {
     --accent: #f97316; --accent-light: #fb923c; --accent-dark: #c2410c; --accent-bg: #fff7ed;
-    --dark: #0a0a0a; --dark-2: #171717; --dark-3: #262626;
+    --dark: #1a1714; --dark-2: #2a2520; --dark-3: #3a342e;
     --gray-50: #fafafa; --gray-100: #f5f5f5; --gray-200: #e5e5e5;
     --gray-400: #a3a3a3; --gray-600: #525252;
     --max-w: 1080px; --radius: 12px;
@@ -61,10 +61,10 @@
     --nav-bg: rgba(252,252,250,0.95); --nav-border: rgba(0,0,0,0.08);
   }
   [data-theme="dark"] {
-    --bg: #141414; --bg-2: #1e1e1e; --text: #f8f5ee; --text-2: rgba(255,255,255,0.6);
-    --card-bg: #1e1e1e; --card-border: rgba(255,255,255,0.1);
-    --nav-bg: rgba(20,20,20,0.95); --nav-border: rgba(255,255,255,0.08);
-    --gray-50: #1e1e1e; --gray-100: #2a2a2a; --gray-200: rgba(255,255,255,0.1);
+    --bg: #1a1714; --bg-2: #231f1b; --text: #f8f5ee; --text-2: rgba(255,255,255,0.6);
+    --card-bg: #231f1b; --card-border: rgba(255,255,255,0.1);
+    --nav-bg: rgba(26,23,20,0.95); --nav-border: rgba(255,255,255,0.08);
+    --gray-50: #231f1b; --gray-100: #2e2924; --gray-200: rgba(255,255,255,0.1);
     --gray-400: rgba(255,255,255,0.4); --gray-600: rgba(255,255,255,0.65);
     --dark-2: #f8f5ee; --dark-3: #e5e5e5;
     --accent-bg: rgba(249,115,22,0.1);
@@ -124,7 +124,7 @@
   /* === HERO (2-column) === */
   .hero {
     padding: 80px 0 64px;
-    background: linear-gradient(135deg, #0a0a0a 0%, #1c1108 30%, #7c2d12 60%, #f97316 80%, #fb923c 100%);
+    background: linear-gradient(135deg, #1a1714 0%, #2a1f10 30%, #7c2d12 60%, #f97316 80%, #fb923c 100%);
     background-size: 200% 200%;
     animation: heroGradient 8s ease infinite;
     color: #fff; position: relative; overflow: hidden;
@@ -175,11 +175,11 @@
   /* Mockup */
   /* === INTERVIEW WIDGET === */
   .interview-widget {
-    background: #0a0a0a; border-radius: 16px; overflow: hidden;
+    background: #1a1714; border-radius: 16px; overflow: hidden;
     box-shadow: 0 24px 48px rgba(0,0,0,0.2), 0 0 0 1px rgba(255,255,255,0.06);
   }
   .iw-header {
-    background: #262626; padding: 12px 16px; display: flex; align-items: center; justify-content: space-between;
+    background: #2a2520; padding: 12px 16px; display: flex; align-items: center; justify-content: space-between;
     border-bottom: 1px solid rgba(255,255,255,0.06);
   }
   .iw-header-left { display: flex; align-items: center; gap: 8px; }
@@ -350,7 +350,7 @@
 
   /* === CTA FINAL === */
   .cta-final {
-    background: linear-gradient(135deg, #0a0a0a 0%, #1c1108 30%, #7c2d12 60%, #f97316 80%, #fb923c 100%);
+    background: linear-gradient(135deg, #1a1714 0%, #2a1f10 30%, #7c2d12 60%, #f97316 80%, #fb923c 100%);
     background-size: 200% 200%;
     animation: heroGradient 8s ease infinite;
     color: #fff; padding: 72px 0; text-align: center;
@@ -367,7 +367,7 @@
   .cta-final .btn-ghost { color: var(--accent-light); }
 
   /* === FOOTER === */
-  .footer { background: #1f1f1f; color: rgba(255,255,255,0.5); padding: 28px 0; font-size: 0.82rem; }
+  .footer { background: #1a1714; color: rgba(255,255,255,0.5); padding: 28px 0; font-size: 0.82rem; }
   .footer .container { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
   .footer-links { display: flex; gap: 20px; }
   .footer-links a:hover, .footer-social a:hover { color: #fff; }
@@ -392,7 +392,7 @@
   }
   .modal-overlay.open { display: flex; }
   .modal {
-    background: #141414; border: 1px solid rgba(255,255,255,0.08); border-radius: 24px; padding: 48px 40px;
+    background: #1a1714; border: 1px solid rgba(255,255,255,0.08); border-radius: 24px; padding: 48px 40px;
     max-width: 440px; width: 92%; text-align: center;
     box-shadow: 0 32px 80px rgba(0,0,0,0.5);
     position: relative; max-height: 90vh; overflow-y: auto; color: #fff;
@@ -522,37 +522,30 @@
   .proof-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(249,115,22,0.08); }
   .proof-num { font-size: 2.2rem; font-weight: 800; color: var(--accent); margin-bottom: 6px; }
   .proof-text { font-size: 0.85rem; color: var(--gray-600); line-height: 1.5; }
-  .testimonial-carousel {
-    max-width: 700px; margin: 36px auto 0; position: relative;
+  .testimonial-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;
+    max-width: 900px; margin: 40px auto 0;
   }
-  .testimonial-track { overflow: hidden; border-radius: 14px; }
-  .testimonial-slide {
-    display: none; padding: 28px 32px;
-    background: #0a0a0a; border-radius: 14px; color: #fff; position: relative;
-    animation: testimonialFade 0.5s ease;
+  .testimonial-card {
+    padding: 24px; border-radius: 14px;
+    background: var(--card-bg); border: 1px solid var(--card-border);
+    transition: border-color 0.2s;
   }
-  .testimonial-slide.active { display: block; }
-  @keyframes testimonialFade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
-  .testimonial-slide::before {
-    content: '\201C'; position: absolute; top: 16px; left: 24px;
-    font-size: 3rem; color: var(--accent); font-family: Georgia, serif; line-height: 1;
+  .testimonial-card:hover { border-color: rgba(249,115,22,0.3); }
+  .testimonial-card p {
+    font-size: 0.9rem; line-height: 1.7; color: var(--gray-600); margin: 0 0 16px;
   }
-  .testimonial-slide p { font-size: 0.95rem; line-height: 1.7; padding-left: 32px; font-style: italic; color: rgba(255,255,255,0.85); }
-  .testimonial-slide .author { font-size: 0.82rem; color: var(--accent-light); margin-top: 12px; padding-left: 32px; font-style: normal; font-weight: 600; }
-  .testimonial-nav { display: flex; justify-content: center; align-items: center; gap: 16px; margin-top: 20px; }
-  .testimonial-dots { display: flex; gap: 6px; align-items: center; }
-  .testimonial-dot {
-    width: 8px; height: 8px; border-radius: 50%; background: var(--gray-200);
-    border: none; cursor: pointer; padding: 0; transition: all 0.3s;
+  .testimonial-author {
+    display: flex; align-items: center; gap: 10px;
   }
-  .testimonial-dot.active { background: var(--accent); width: 24px; border-radius: 4px; }
-  .testimonial-arrows { display: flex; gap: 8px; }
-  .testimonial-arrow {
-    width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--card-border);
-    background: var(--card-bg); cursor: pointer; display: flex; align-items: center;
-    justify-content: center; transition: all 0.2s; font-family: inherit; font-size: 0.9rem; color: var(--gray-600);
+  .testimonial-avatar {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: var(--accent-bg); display: flex; align-items: center; justify-content: center;
+    font-size: 0.8rem; font-weight: 700; color: var(--accent); flex-shrink: 0;
   }
-  .testimonial-arrow:hover { border-color: var(--accent); color: var(--accent); }
+  .testimonial-info { display: flex; flex-direction: column; }
+  .testimonial-name { font-size: 0.82rem; font-weight: 600; color: var(--text); }
+  .testimonial-role { font-size: 0.72rem; color: var(--text-2); }
 
   /* === SCROLL REVEAL === */
   .reveal {
@@ -577,6 +570,7 @@
     .metric-num { font-size: 1.2rem; }
     [style*="grid-template-columns: repeat(3"] { grid-template-columns: 1fr !important; }
     .proof-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
+    .testimonial-grid { grid-template-columns: 1fr; }
     .tab-compare { grid-template-columns: 1fr; }
     .cookie-banner { flex-direction: column; text-align: center; bottom: 12px; left: 12px; right: 12px; }
     .footer .container { flex-direction: column; text-align: center; }
@@ -991,7 +985,7 @@
   <div class="container">
     <div class="social-proof-header">
       <span class="tag">Resultados reales</span>
-      <h2>Organizaciones que ya están escuchando</h2>
+      <h2>Evolución y mejora continua de las conversaciones</h2>
     </div>
     <div class="proof-grid">
       <div class="proof-card">
@@ -1007,34 +1001,46 @@
         <div class="proof-text">de diagnóstico completo vs. 4 meses con metodología tradicional. Sin consultoras, con total anonimato.</div>
       </div>
     </div>
-    <div class="testimonial-carousel">
-      <div class="testimonial-track">
-        <div class="testimonial-slide active">
-          <p>Por primera vez pudimos ver lo que realmente estaba pasando en los equipos. No era lo que suponíamos. Las decisiones que tomamos después fueron completamente distintas.</p>
-          <div class="author">— Director de Transformación, empresa de servicios financieros (LATAM)</div>
-        </div>
-        <div class="testimonial-slide">
-          <p>En dos semanas tuvimos un diagnóstico que con la metodología anterior nos hubiera tomado un trimestre. Y con mucha más profundidad.</p>
-          <div class="author">— VP de Personas, empresa agropecuaria (Argentina)</div>
-        </div>
-        <div class="testimonial-slide">
-          <p>Lo más valioso fue lo que apareció en las narrativas: temas que todos conocíamos pero que nadie se animaba a poner en agenda. Eso cambió las conversaciones del directorio.</p>
-          <div class="author">— CEO, empresa de tecnología (LATAM)</div>
-        </div>
-        <div class="testimonial-slide">
-          <p>El anonimato hizo la diferencia. La gente habló con una honestidad que nunca vimos en encuestas ni en focus groups.</p>
-          <div class="author">— Directora de Cultura, retail (México)</div>
+    <div class="testimonial-grid">
+      <div class="testimonial-card">
+        <p>Por primera vez pudimos ver lo que realmente estaba pasando en los equipos. No era lo que suponíamos. Las decisiones que tomamos después fueron completamente distintas.</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">DT</div>
+          <div class="testimonial-info">
+            <span class="testimonial-name">Director de Transformación</span>
+            <span class="testimonial-role">Servicios financieros · LATAM</span>
+          </div>
         </div>
       </div>
-      <div class="testimonial-nav">
-        <button class="testimonial-arrow" onclick="changeTestimonial(-1)" aria-label="Anterior">&#8592;</button>
-        <div class="testimonial-dots">
-          <button class="testimonial-dot active" onclick="goToTestimonial(0)"></button>
-          <button class="testimonial-dot" onclick="goToTestimonial(1)"></button>
-          <button class="testimonial-dot" onclick="goToTestimonial(2)"></button>
-          <button class="testimonial-dot" onclick="goToTestimonial(3)"></button>
+      <div class="testimonial-card">
+        <p>En dos semanas tuvimos un diagnóstico que con la metodología anterior nos hubiera tomado un trimestre. Y con mucha más profundidad.</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">VP</div>
+          <div class="testimonial-info">
+            <span class="testimonial-name">VP de Personas</span>
+            <span class="testimonial-role">Empresa agropecuaria · Argentina</span>
+          </div>
         </div>
-        <button class="testimonial-arrow" onclick="changeTestimonial(1)" aria-label="Siguiente">&#8594;</button>
+      </div>
+      <div class="testimonial-card">
+        <p>Lo más valioso fue lo que apareció en las narrativas: temas que todos conocíamos pero que nadie se animaba a poner en agenda.</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">CE</div>
+          <div class="testimonial-info">
+            <span class="testimonial-name">CEO</span>
+            <span class="testimonial-role">Empresa de tecnología · LATAM</span>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <p>El anonimato hizo la diferencia. La gente habló con una honestidad que nunca vimos en encuestas ni en focus groups.</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">DC</div>
+          <div class="testimonial-info">
+            <span class="testimonial-name">Directora de Cultura</span>
+            <span class="testimonial-role">Retail · México</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -1339,26 +1345,6 @@ function showTab(index) {
   document.querySelectorAll('.tab-panel').forEach(function(panel, i) { panel.classList.toggle('active', i === index); });
 }
 
-// Testimonial carousel
-var _tCurrent = 0;
-var _tSlides = document.querySelectorAll('.testimonial-slide');
-var _tDots = document.querySelectorAll('.testimonial-dot');
-var _tAutoplay;
-
-function goToTestimonial(i) {
-  _tCurrent = i;
-  _tSlides.forEach(function(s, idx) { s.classList.toggle('active', idx === i); });
-  _tDots.forEach(function(d, idx) { d.classList.toggle('active', idx === i); });
-  resetAutoplay();
-}
-function changeTestimonial(dir) {
-  goToTestimonial((_tCurrent + dir + _tSlides.length) % _tSlides.length);
-}
-function resetAutoplay() {
-  clearInterval(_tAutoplay);
-  _tAutoplay = setInterval(function() { changeTestimonial(1); }, 6000);
-}
-resetAutoplay();
 </script>
 
 </body>
