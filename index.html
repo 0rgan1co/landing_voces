@@ -392,54 +392,98 @@
   .feature-item h3 { font-size: 0.92rem; font-weight: 700; margin: 0 0 3px; color: #fff; }
   .feature-item p { font-size: 0.78rem; color: rgba(255,255,255,0.7); line-height: 1.5; margin: 0; }
 
-  /* === SECTION 3: EMPATHY + USE CASES (tabs) === */
+  /* === SECTION 3: USE CASES (cards) === */
   .use-cases { padding: 80px 0; text-align: center; background: var(--accent-bg); }
   .use-cases h2 { font-size: clamp(1.4rem, 3vw, 1.85rem); font-weight: 800; margin-bottom: 8px; letter-spacing: -0.01em; }
-  .use-cases-sub { font-size: 0.95rem; color: var(--gray-600); margin-bottom: 32px; max-width: 560px; margin-left: auto; margin-right: auto; line-height: 1.6; }
-  .tabs { display: flex; gap: 6px; justify-content: center; flex-wrap: wrap; margin-bottom: 32px; }
-  .tab-btn {
-    padding: 10px 22px; border-radius: 24px; font-size: 0.85rem; font-weight: 600;
-    border: none; background: rgba(249,115,22,0.08); color: var(--accent);
-    cursor: pointer; transition: all 0.2s; font-family: inherit;
+  .use-cases-sub { font-size: 0.95rem; color: var(--gray-600); margin-bottom: 40px; max-width: 560px; margin-left: auto; margin-right: auto; line-height: 1.6; }
+
+  /* App cards grid */
+  .app-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    max-width: 900px;
+    margin: 0 auto;
   }
-  .tab-btn:hover { background: rgba(249,115,22,0.15); }
-  .tab-btn.active { background: var(--accent); color: #fff; box-shadow: 0 4px 12px rgba(249,115,22,0.25); }
-  .tab-panel {
-    display: none; text-align: left; max-width: 780px; margin: 0 auto;
-    padding: 32px; background: var(--card-bg); border-radius: 16px;
-    border: 1px solid var(--card-border); box-shadow: 0 8px 32px rgba(0,0,0,0.06);
-    animation: tabFade 0.4s ease;
+  @media (min-width: 860px) {
+    .app-cards-grid { grid-template-columns: repeat(4, 1fr); max-width: 100%; }
   }
-  @keyframes tabFade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
-  .tab-panel.active { display: block; }
-  .tab-panel h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 6px; color: var(--dark-2); }
-  .tab-panel .tab-desc { font-size: 0.92rem; color: var(--gray-600); line-height: 1.7; margin-bottom: 20px; }
-  .tab-panel .tab-icon { margin-bottom: 12px; display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 10px; background: var(--accent-bg); }
-  .tab-panel .tab-icon svg { width: 22px; height: 22px; color: var(--accent); }
-  .tab-compare {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+  @media (max-width: 480px) {
+    .app-cards-grid { grid-template-columns: 1fr; }
   }
-  .tab-compare-card {
-    padding: 18px 20px; border-radius: 12px; font-size: 0.85rem; line-height: 1.6;
+
+  .app-card {
+    position: relative;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 24px;
+    min-height: 270px;
+    overflow: hidden;
+    transition: transform 0.35s cubic-bezier(0.4,0,0.2,1), box-shadow 0.35s;
   }
-  .tab-compare-card.without {
-    background: #fef2f2; border: 1px solid #fecaca; color: #991b1b;
+  .app-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 48px rgba(0,0,0,0.14);
   }
-  .tab-compare-card.with {
-    background: #f0fdf4; border: 1px solid #bbf7d0; color: #166534;
+  .app-card-inner {
+    display: block;
+    position: absolute;
+    inset: 0;
+    z-index: 4;
+    text-decoration: none;
+    padding: 22px 16px 0;
   }
-  .tab-compare-label {
-    font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;
-    margin-bottom: 8px; display: flex; align-items: center; gap: 6px;
+  .app-card-title {
+    font-size: clamp(1.25rem, 2.5vw, 1.65rem);
+    font-weight: 800;
+    text-align: center;
+    color: var(--accent);
+    position: relative;
+    z-index: 2;
+    letter-spacing: -0.02em;
+    margin: 0 0 6px;
+    transition: opacity 0.25s;
   }
-  .tab-compare-card.without .tab-compare-label { color: #dc2626; }
-  .tab-compare-card.with .tab-compare-label { color: #16a34a; }
-  [data-theme="dark"] .tab-compare-card.without { background: rgba(220,38,38,0.1); border-color: rgba(220,38,38,0.25); color: #fca5a5; }
-  [data-theme="dark"] .tab-compare-card.with { background: rgba(22,163,74,0.1); border-color: rgba(22,163,74,0.25); color: #86efac; }
-  [data-theme="dark"] .tab-compare-card.without .tab-compare-label { color: #f87171; }
-  [data-theme="dark"] .tab-compare-card.with .tab-compare-label { color: #4ade80; }
-  .tab-compare-card ul { margin: 0; padding: 0 0 0 16px; }
-  .tab-compare-card li { margin-bottom: 4px; }
+  .app-card:hover .app-card-title { opacity: 0.85; }
+  .app-card-icon-wrap {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+  }
+  .app-card-icon {
+    width: 76px; height: 76px;
+    color: var(--accent);
+    opacity: 0.3;
+    transition: transform 0.45s cubic-bezier(0.4,0,0.2,1), opacity 0.3s;
+  }
+  .app-card-icon svg { width: 100%; height: 100%; }
+  .app-card:hover .app-card-icon { transform: scale(1.12); opacity: 0.5; }
+
+  /* Arrow corner — bottom-right */
+  .app-card-corner {
+    position: absolute;
+    bottom: 0; right: 0;
+    width: 62px; height: 62px;
+    background: var(--bg);
+    border-top-left-radius: 14px;
+    border-top: 1px solid var(--card-border);
+    border-left: 1px solid var(--card-border);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 5;
+  }
+  .app-card-arrow {
+    width: 42px; height: 42px;
+    border-radius: 50%;
+    background: rgba(249,115,22,0.1);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--accent);
+    transition: background 0.3s, transform 0.3s, color 0.3s;
+  }
+  .app-card:hover .app-card-arrow { background: var(--accent); color: #fff; transform: scale(1.08); }
+  .app-card-arrow svg { width: 18px; height: 18px; }
 
   /* === ANIMATED CARD CHART === */
   .animated-card {
@@ -1046,89 +1090,6 @@
   .bento-item:nth-child(1) h3 { font-size: 1.15rem; }
   .bento-item:nth-child(1) p { font-size: 0.86rem; color: rgba(255,255,255,0.75); }
 
-  /* === COMPARISON SLIDER (Sin / Con Voces) === */
-  .tab-compare {
-    position: relative;
-    height: 210px;
-    border-radius: 12px;
-    overflow: hidden;
-    cursor: ew-resize;
-    user-select: none;
-    touch-action: none;
-  }
-  .tcs-left, .tcs-right {
-    position: absolute;
-    inset: 0;
-  }
-  .tcs-left {
-    background: #1c1815;
-    clip-path: inset(0 calc(100% - var(--pos, 50%)) 0 0);
-  }
-  .tcs-right {
-    background: linear-gradient(135deg, rgba(124,45,18,0.4) 0%, rgba(249,115,22,0.12) 100%);
-    border: 1px solid rgba(249,115,22,0.18);
-    border-radius: 12px;
-    clip-path: inset(0 0 0 var(--pos, 50%));
-  }
-  .tcs-inner {
-    position: absolute;
-    inset: 0;
-    padding: 20px 22px;
-  }
-  .tcs-handle {
-    position: absolute;
-    top: 0; bottom: 0;
-    left: var(--pos, 50%);
-    transform: translateX(-50%);
-    width: 1.5px;
-    background: rgba(255,255,255,0.22);
-    z-index: 10;
-    pointer-events: none;
-  }
-  .tcs-handle-knob {
-    position: absolute;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    width: 30px; height: 30px;
-    border-radius: 50%;
-    background: #fff;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.35);
-    display: flex; align-items: center; justify-content: center;
-  }
-  .tcs-handle-knob svg { width: 13px; height: 13px; color: #555; }
-  .tcs-label-badge {
-    display: inline-flex; align-items: center; gap: 5px;
-    font-size: 0.62rem; font-weight: 700; text-transform: uppercase;
-    letter-spacing: 0.7px; margin-bottom: 11px;
-    padding: 3px 8px; border-radius: 20px;
-  }
-  .tcs-left .tcs-label-badge {
-    background: rgba(255,255,255,0.06);
-    color: rgba(255,255,255,0.38);
-    border: 1px solid rgba(255,255,255,0.09);
-  }
-  .tcs-right .tcs-label-badge {
-    background: rgba(249,115,22,0.14);
-    color: var(--accent-light);
-    border: 1px solid rgba(249,115,22,0.24);
-  }
-  .tcs-left ul, .tcs-right ul {
-    margin: 0; padding: 0 0 0 14px;
-    font-size: 0.77rem; line-height: 1.65;
-  }
-  .tcs-left li { color: rgba(255,255,255,0.36); margin-bottom: 5px; }
-  .tcs-right li { color: rgba(255,255,255,0.72); margin-bottom: 5px; }
-  .tcs-hint {
-    position: absolute;
-    bottom: 8px; left: 50%;
-    transform: translateX(-50%);
-    font-size: 0.58rem; color: rgba(255,255,255,0.2);
-    letter-spacing: 0.5px; white-space: nowrap;
-    pointer-events: none;
-    transition: opacity 0.3s;
-    z-index: 5;
-  }
-  .tab-compare.dragging .tcs-hint { opacity: 0; }
 
   @media (max-width: 768px) {
     .navbar-links, .lang-select { display: none; }
@@ -1139,8 +1100,6 @@
     .iw-chat .iw-msg { max-width: 95%; }
     .value-features-grid { grid-template-columns: 1fr; gap: 40px; }
     .demo-grid { grid-template-columns: 1fr; gap: 32px; }
-    .tabs { gap: 6px; }
-    .tab-btn { padding: 6px 12px; font-size: 0.8rem; }
     .metrics-row { gap: 24px; }
     .metric-num { font-size: 1.2rem; }
     [style*="grid-template-columns: repeat(3"] { grid-template-columns: 1fr !important; }
@@ -1149,7 +1108,6 @@
     .vp-transforms { grid-template-columns: repeat(2, 1fr); }
     .bento-grid { grid-template-columns: 1fr !important; }
     .bento-item:nth-child(1) { grid-column: span 1 !important; }
-    .tab-compare { height: 220px; cursor: ns-resize; }
     .cookie-banner { flex-direction: column; text-align: center; bottom: 12px; left: 12px; right: 12px; }
     .footer .container { flex-direction: column; text-align: center; }
   }
@@ -1426,119 +1384,87 @@
   </div>
 </section>
 
-<!-- SECTION 3: EMPATIA + 4 APLICACIONES -->
+<!-- SECTION 3: 4 APLICACIONES (cards) -->
 <section id="casos-de-uso" class="use-cases reveal" style="position:relative; overflow:hidden;">
   <canvas id="hero-canvas" aria-hidden="true"></canvas>
   <div class="container">
     <span class="tag">Aplicaciones</span>
     <h2>Cada equipo u organización tiene una conversación pendiente</h2>
     <p class="use-cases-sub">Hay temas que todos conocen pero nadie pone en agenda. Voces.ai les da visibilidad para que las decisiones se tomen con evidencia, no con supuestos.</p>
-    <div class="tabs" role="tablist">
-      <button class="tab-btn active" role="tab" aria-selected="true" onclick="showTab(0)">Negocios</button>
-      <button class="tab-btn" role="tab" aria-selected="false" onclick="showTab(1)">Personas</button>
-      <button class="tab-btn" role="tab" aria-selected="false" onclick="showTab(2)">Procesos</button>
-      <button class="tab-btn" role="tab" aria-selected="false" onclick="showTab(3)">Cambio</button>
-    </div>
-    <div class="tab-panel active" role="tabpanel" data-tab="0">
-      <div class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" x2="12" y1="20" y2="10"/><line x1="18" x2="18" y1="20" y2="4"/><line x1="6" x2="6" y1="20" y2="16"/></svg></div>
-      <h3>Negocios</h3>
-      <p class="tab-desc">Vas a abrir un mercado, lanzar un producto o cerrar una adquisición — y las señales más críticas están en las personas que van a ejecutar, no en el PowerPoint.</p>
-      <div class="tab-compare" style="--pos:50%">
-        <div class="tcs-left"><div class="tcs-inner">
-          <div class="tcs-label-badge">&#10005; Sin Voces</div>
-          <ul>
-            <li>Decisiones basadas en supuestos del directorio</li>
-            <li>Resistencia invisible que frena la ejecución</li>
-            <li>Costos de oportunidad por llegar tarde</li>
-          </ul>
-        </div></div>
-        <div class="tcs-right"><div class="tcs-inner">
-          <div class="tcs-label-badge">&#10003; Con Voces</div>
-          <ul>
-            <li>Voces.ai entrevista a los equipos antes de que el plan baje.</li>
-            <li>Menos sorpresas en la implementación.</li>
-            <li>Más velocidad de ejecución desde el día uno.</li>
-          </ul>
-        </div></div>
-        <div class="tcs-handle"><div class="tcs-handle-knob"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12H3"/><path d="m15 18 6-6-6-6"/><path d="m9 6-6 6 6 6"/></svg></div></div>
-        <div class="tcs-hint">&#8592; arrastrá &#8594;</div>
+
+    <div class="app-cards-grid">
+
+      <!-- Negocios -->
+      <div class="app-card">
+        <a href="#agendar" class="app-card-inner">
+          <h3 class="app-card-title">Negocios</h3>
+          <div class="app-card-icon-wrap">
+            <div class="app-card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" x2="12" y1="20" y2="10"/><line x1="18" x2="18" y1="20" y2="4"/><line x1="6" x2="6" y1="20" y2="16"/></svg>
+            </div>
+          </div>
+          <div class="app-card-corner">
+            <div class="app-card-arrow">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+            </div>
+          </div>
+        </a>
       </div>
-    </div>
-    <div class="tab-panel" role="tabpanel" data-tab="1">
-      <div class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
-      <h3>Personas</h3>
-      <p class="tab-desc">La encuesta anual te dice que "el clima es 7.2". No te dice por qué la gente se va, qué frena a los equipos ni qué valores se practican versus cuáles solo se declaran.</p>
-      <div class="tab-compare" style="--pos:50%">
-        <div class="tcs-left"><div class="tcs-inner">
-          <div class="tcs-label-badge">&#10005; Sin Voces</div>
-          <ul>
-            <li>Encuestas con respuestas políticamente correctas</li>
-            <li>Rotación que sorprende porque "nadie dijo nada"</li>
-            <li>Valores declarados que nadie reconoce en la práctica</li>
-          </ul>
-        </div></div>
-        <div class="tcs-right"><div class="tcs-inner">
-          <div class="tcs-label-badge">&#10003; Con Voces</div>
-          <ul>
-            <li>Voces.ai captura lo que las personas realmente piensan — sin audiencia, sin filtro.</li>
-            <li>Decisiones sobre talento y cultura basadas en lo que está pasando.</li>
-            <li>No en lo que la gente está dispuesta a admitir.</li>
-          </ul>
-        </div></div>
-        <div class="tcs-handle"><div class="tcs-handle-knob"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12H3"/><path d="m15 18 6-6-6-6"/><path d="m9 6-6 6 6 6"/></svg></div></div>
-        <div class="tcs-hint">&#8592; arrastrá &#8594;</div>
+
+      <!-- Personas -->
+      <div class="app-card">
+        <a href="#agendar" class="app-card-inner">
+          <h3 class="app-card-title">Personas</h3>
+          <div class="app-card-icon-wrap">
+            <div class="app-card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+          </div>
+          <div class="app-card-corner">
+            <div class="app-card-arrow">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+            </div>
+          </div>
+        </a>
       </div>
-    </div>
-    <div class="tab-panel" role="tabpanel" data-tab="2">
-      <div class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg></div>
-      <h3>Procesos</h3>
-      <p class="tab-desc">Hay procesos diseñados en una sala y vividos de otra forma en los pasillos. La brecha existe. Casi nadie la pone en agenda.</p>
-      <div class="tab-compare" style="--pos:50%">
-        <div class="tcs-left"><div class="tcs-inner">
-          <div class="tcs-label-badge">&#10005; Sin Voces</div>
-          <ul>
-            <li>Procesos documentados que nadie sigue</li>
-            <li>Workarounds invisibles que generan riesgo</li>
-            <li>Mejoras basadas en lo que cree el diseñador</li>
-          </ul>
-        </div></div>
-        <div class="tcs-right"><div class="tcs-inner">
-          <div class="tcs-label-badge">&#10003; Con Voces</div>
-          <ul>
-            <li>Voces.ai mapea cómo se viven los procesos en la práctica — quién los adopta y por qué.</li>
-            <li>Rediseño con evidencia real.</li>
-            <li>No con la versión oficial de cómo debería funcionar.</li>
-          </ul>
-        </div></div>
-        <div class="tcs-handle"><div class="tcs-handle-knob"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12H3"/><path d="m15 18 6-6-6-6"/><path d="m9 6-6 6 6 6"/></svg></div></div>
-        <div class="tcs-hint">&#8592; arrastrá &#8594;</div>
+
+      <!-- Procesos -->
+      <div class="app-card">
+        <a href="#agendar" class="app-card-inner">
+          <h3 class="app-card-title">Procesos</h3>
+          <div class="app-card-icon-wrap">
+            <div class="app-card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+            </div>
+          </div>
+          <div class="app-card-corner">
+            <div class="app-card-arrow">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+            </div>
+          </div>
+        </a>
       </div>
-    </div>
-    <div class="tab-panel" role="tabpanel" data-tab="3">
-      <div class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/></svg></div>
-      <h3>Cambio</h3>
-      <p class="tab-desc">Implementaron una nueva forma de trabajo. El discurso cambió. ¿Cambiaron los comportamientos?</p>
-      <div class="tab-compare" style="--pos:50%">
-        <div class="tcs-left"><div class="tcs-inner">
-          <div class="tcs-label-badge">&#10005; Sin Voces</div>
-          <ul>
-            <li>Adopción medida por uso de herramientas, no por comportamiento</li>
-            <li>Discurso nuevo con prácticas viejas</li>
-            <li>Sin forma de medir cambio cultural real</li>
-          </ul>
-        </div></div>
-        <div class="tcs-right"><div class="tcs-inner">
-          <div class="tcs-label-badge">&#10003; Con Voces</div>
-          <ul>
-            <li>Voces.ai compara narrativas antes y después — distingue transformación real de adaptación superficial.</li>
-            <li>Sabés si el cambio aterrizó antes de que el retroceso sea invisible.</li>
-          </ul>
-        </div></div>
-        <div class="tcs-handle"><div class="tcs-handle-knob"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12H3"/><path d="m15 18 6-6-6-6"/><path d="m9 6-6 6 6 6"/></svg></div></div>
-        <div class="tcs-hint">&#8592; arrastrá &#8594;</div>
+
+      <!-- Cambio -->
+      <div class="app-card">
+        <a href="#agendar" class="app-card-inner">
+          <h3 class="app-card-title">Cambio</h3>
+          <div class="app-card-icon-wrap">
+            <div class="app-card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/></svg>
+            </div>
+          </div>
+          <div class="app-card-corner">
+            <div class="app-card-arrow">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+            </div>
+          </div>
+        </a>
       </div>
+
     </div>
-    <div style="text-align:center; margin-top:36px;">
+
+    <div style="text-align:center; margin-top:40px;">
       <a href="#" onclick="openContact();return false;" class="btn btn-primary">Hablemos de tu organización &rarr;</a>
     </div>
   </div>
@@ -2497,29 +2423,6 @@ async function submitLead(e) {
   });
 })();
 
-// Comparison sliders
-(function() {
-  document.querySelectorAll('.tab-compare').forEach(function(slider) {
-    var dragging = false;
-    function update(clientX) {
-      var rect = slider.getBoundingClientRect();
-      var pct = Math.min(Math.max((clientX - rect.left) / rect.width * 100, 5), 95);
-      slider.style.setProperty('--pos', pct + '%');
-    }
-    slider.addEventListener('mousedown', function(e) { dragging = true; slider.classList.add('dragging'); update(e.clientX); });
-    document.addEventListener('mousemove', function(e) { if (dragging) update(e.clientX); });
-    document.addEventListener('mouseup', function() { dragging = false; slider.classList.remove('dragging'); });
-    slider.addEventListener('touchstart', function(e) { update(e.touches[0].clientX); }, { passive: true });
-    slider.addEventListener('touchmove', function(e) { update(e.touches[0].clientX); slider.classList.add('dragging'); }, { passive: true });
-    slider.addEventListener('touchend', function() { slider.classList.remove('dragging'); });
-  });
-})();
-
-// Tabs
-function showTab(index) {
-  document.querySelectorAll('.tab-btn').forEach(function(btn, i) { btn.classList.toggle('active', i === index); btn.setAttribute('aria-selected', i === index ? 'true' : 'false'); });
-  document.querySelectorAll('.tab-panel').forEach(function(panel, i) { panel.classList.toggle('active', i === index); });
-}
 
 </script>
 
