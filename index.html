@@ -61,13 +61,13 @@
     --nav-bg: rgba(252,252,250,0.95); --nav-border: rgba(0,0,0,0.08);
   }
   [data-theme="dark"] {
-    --bg: #1a1714; --bg-2: #231f1b; --text: #f8f5ee; --text-2: rgba(255,255,255,0.6);
-    --card-bg: #231f1b; --card-border: rgba(255,255,255,0.1);
+    --bg: #1a1714; --bg-2: #2d2620; --text: #f8f5ee; --text-2: rgba(255,255,255,0.6);
+    --card-bg: #352d27; --card-border: rgba(255,255,255,0.13);
     --nav-bg: rgba(26,23,20,0.95); --nav-border: rgba(255,255,255,0.08);
     --gray-50: #231f1b; --gray-100: #2e2924; --gray-200: rgba(255,255,255,0.1);
     --gray-400: rgba(255,255,255,0.4); --gray-600: rgba(255,255,255,0.65);
     --dark-2: #f8f5ee; --dark-3: #e5e5e5;
-    --accent-bg: rgba(249,115,22,0.1);
+    --accent-bg: rgba(249,115,22,0.14);
   }
 
   .container { max-width: var(--max-w); margin: 0 auto; padding: 0 24px; }
@@ -97,10 +97,14 @@
   /* === NAVBAR === */
   .navbar {
     position: sticky; top: 0; z-index: 100;
-    background: var(--nav-bg); backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--nav-border); transition: background 0.3s;
+    background: var(--nav-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--nav-border);
+    pointer-events: auto;
   }
-  .navbar .container { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .navbar .container {
+    display: flex; align-items: center; justify-content: space-between; height: 56px;
+    padding: 0 24px;
+  }
   .navbar-logo { font-size: 1.15rem; font-weight: 800; display: flex; align-items: center; gap: 8px; }
   .navbar-logo svg { color: var(--accent); }
   .navbar-links { display: flex; gap: 32px; }
@@ -120,6 +124,12 @@
   }
   .mobile-menu.open { display: flex; }
   .mobile-menu a { font-size: 1rem; padding: 16px 0; border-bottom: 1px solid var(--gray-200); color: var(--dark-2); font-weight: 600; }
+
+  /* === HERO PARTICLE CANVAS === */
+  #hero-canvas {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    z-index: 0; pointer-events: none; display: block;
+  }
 
   /* === HERO (2-column) === */
   .hero {
@@ -249,17 +259,120 @@
   }
   .iw-anon-badge svg { width: 12px; height: 12px; }
 
+  /* === VAPOUR TEXT EFFECT === */
+  .value-features-grid > div > h2 { margin-bottom: 6px; }
+  #vapour-wrap { width: 100%; margin: 0 0 28px; line-height: 1; overflow: hidden; }
+  #vapour-wrap canvas { display: block; }
+
   /* === SECTION 2: VALUE PROP + FEATURES (2-column) === */
   .value-features { padding: 80px 0; background: var(--bg-2); }
+  .value-features > .container { position: relative; z-index: 1; }
+  .use-cases > .container { position: relative; z-index: 1; }
   .value-features-grid {
     display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start;
   }
   .value-features h2 {
-    font-size: clamp(1.6rem, 3.2vw, 2.1rem); font-weight: 800;
-    margin-bottom: 28px; letter-spacing: -0.02em; line-height: 1.2;
+    font-size: clamp(1.7rem, 3.2vw, 2.3rem); font-weight: 800;
+    margin-bottom: 24px; letter-spacing: -0.03em; line-height: 1.18;
+    text-align: center;
   }
-  .value-features .value-text {
-    font-size: 1.1rem; color: var(--gray-600); line-height: 1.8; margin-bottom: 18px;
+  /* Gradient cards for value props */
+  .vp-cards {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 32px;
+    align-items: start;
+  }
+  .vp-card {
+    position: relative; overflow: hidden;
+    border-radius: 18px;
+    transition: transform 0.25s cubic-bezier(0.4,0,0.2,1), box-shadow 0.25s;
+    cursor: default;
+  }
+  .vp-card:hover { transform: scale(1.02) translateY(-3px); box-shadow: 0 16px 48px rgba(0,0,0,0.12); }
+  /* Card 1: más pequeño/secundario */
+  .vp-card-1 {
+    background: linear-gradient(135deg, #fff7ed 0%, #fed7aa 70%);
+    border: 1px solid rgba(249,115,22,0.18);
+    padding: 22px 24px;
+  }
+  .vp-card-1 .vp-card-text { font-size: 0.88rem; }
+  /* Card 2: grande/principal */
+  .vp-card-2 {
+    background: linear-gradient(135deg, #7c2d12 0%, #c2410c 45%, #f97316 100%);
+    padding: 36px 32px;
+  }
+  .vp-card-2 .vp-card-text { font-size: 1.15rem; }
+  .vp-card::before {
+    content: ''; position: absolute; width: 220px; height: 220px;
+    border-radius: 50%; pointer-events: none;
+  }
+  .vp-card-1::before {
+    background: radial-gradient(circle, rgba(249,115,22,0.12) 0%, transparent 70%);
+    bottom: -70px; right: -70px;
+  }
+  .vp-card-2::before {
+    background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%);
+    top: -50px; left: -50px;
+  }
+  .vp-card-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 0.65rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.6px; margin-bottom: 16px;
+    padding: 4px 10px; border-radius: 20px;
+    backdrop-filter: blur(4px);
+  }
+  .vp-card-1 .vp-card-badge { background: rgba(255,255,255,0.6); color: var(--accent-dark); }
+  .vp-card-2 .vp-card-badge { background: rgba(255,255,255,0.15); color: rgba(255,255,255,0.9); }
+  .vp-card-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+  .vp-card-text { line-height: 1.75; position: relative; z-index: 1; }
+  .vp-card-1 .vp-card-text { font-size: 1.05rem; color: #3a1f0e; }
+  .vp-card-2 .vp-card-text { font-size: 1.12rem; font-weight: 500; color: rgba(255,255,255,0.9); }
+  [data-theme="dark"] .vp-card-1 { background: linear-gradient(135deg, #2a1f0e 0%, #3d2510 70%); border-color: rgba(249,115,22,0.2); }
+  [data-theme="dark"] .vp-card-1 .vp-card-text { color: #f8d5aa; }
+  [data-theme="dark"] .vp-card-1 .vp-card-badge { background: rgba(249,115,22,0.15); color: var(--accent-light); }
+
+  /* === TRANSFORMATION CARDS (DE → A) === */
+  .vp-transforms {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;
+    margin-top: 20px;
+  }
+  .vp-tx-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 14px; padding: 20px;
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    cursor: default;
+  }
+  .vp-tx-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    border-color: rgba(249,115,22,0.3);
+  }
+  .vp-tx-from {
+    font-size: 0.6rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.7px; color: var(--gray-400); margin-bottom: 4px;
+  }
+  .vp-tx-from-val {
+    font-size: 0.82rem; color: var(--gray-600); line-height: 1.35;
+    margin-bottom: 10px; opacity: 0.75;
+    text-decoration: line-through; text-decoration-color: rgba(0,0,0,0.2);
+  }
+  [data-theme="dark"] .vp-tx-from-val { text-decoration-color: rgba(255,255,255,0.2); }
+  [data-theme="dark"] .social-proof-section { background: #231d18; }
+  .vp-tx-arrow {
+    display: flex; align-items: center; gap: 6px;
+    margin-bottom: 6px;
+  }
+  .vp-tx-arrow-line {
+    height: 1.5px; flex: 1; background: linear-gradient(to right, var(--gray-200), var(--accent));
+    border-radius: 2px;
+  }
+  .vp-tx-arrow svg { width: 14px; height: 14px; color: var(--accent); flex-shrink: 0; }
+  .vp-tx-to {
+    font-size: 0.6rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.7px; color: var(--accent); margin-bottom: 4px;
+  }
+  .vp-tx-to-val {
+    font-size: 0.9rem; font-weight: 700; color: var(--dark-2); line-height: 1.3;
   }
   .feature-list { display: flex; flex-direction: column; gap: 12px; }
   .feature-item {
@@ -327,6 +440,201 @@
   [data-theme="dark"] .tab-compare-card.with .tab-compare-label { color: #4ade80; }
   .tab-compare-card ul { margin: 0; padding: 0 0 0 16px; }
   .tab-compare-card li { margin-bottom: 4px; }
+
+  /* === ANIMATED CARD CHART === */
+  .animated-card {
+    position: relative; width: 100%; border-radius: 16px;
+    border: 1px solid rgba(255,255,255,0.08); background: #100e0c;
+    overflow: hidden; box-shadow: 0 24px 48px rgba(0,0,0,0.35), 0 0 0 0.5px rgba(255,255,255,0.04);
+    transition: box-shadow 0.3s;
+  }
+  .animated-card:hover { box-shadow: 0 32px 64px rgba(0,0,0,0.45), 0 0 0 1px rgba(249,115,22,0.15); }
+  .ac-visual {
+    position: relative; height: 200px; overflow: hidden;
+    border-radius: 14px 14px 0 0; background: #0d0b09;
+  }
+  /* Bars */
+  .ac-bars-group {
+    position: absolute; inset: 0; z-index: 8;
+    display: flex; align-items: flex-end; justify-content: center;
+    transform-origin: center bottom;
+    transition: transform 0.5s cubic-bezier(0.6,0.6,0,1);
+  }
+  .animated-card:hover .ac-bars-group { transform: scale(1.5); }
+  .ac-bars {
+    display: flex; align-items: flex-end; gap: 5px;
+    padding: 0 24px; width: 100%;
+  }
+  .ac-bar {
+    flex: 1; border-radius: 2px 2px 0 0;
+    height: var(--h); min-width: 0;
+    transition: height 0.5s cubic-bezier(0.6,0.6,0,1), background 0.5s;
+  }
+  .animated-card:hover .ac-bar { height: var(--hh); }
+  .ac-bar.clr-a { background: #f97316; }
+  .ac-bar.clr-b { background: rgba(255,255,255,0.1); }
+  .animated-card:hover .ac-bar.clr-b { background: #f59e0b; }
+  /* Grid overlay */
+  .ac-grid {
+    position: absolute; inset: 0; z-index: 4; pointer-events: none; opacity: 0.6;
+    background-image: linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px),
+                      linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px);
+    background-size: 20px 20px;
+    -webkit-mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, black 60%, transparent 100%);
+    mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, black 60%, transparent 100%);
+  }
+  /* Ellipse glow */
+  .ac-ellipse { position: absolute; inset: 0; z-index: 5; width: 100%; height: 100%; pointer-events: none; }
+  /* Bottom gradient reveal on hover */
+  .ac-gradient-reveal {
+    position: absolute; inset: 0; z-index: 6; pointer-events: none;
+    background: linear-gradient(to bottom, transparent 35%, rgba(249,115,22,0.22) 100%);
+    transform: translateY(100%); opacity: 0;
+    transition: transform 0.5s cubic-bezier(0.6,0.6,0,1), opacity 0.5s;
+  }
+  .animated-card:hover .ac-gradient-reveal { transform: translateY(0); opacity: 1; }
+  /* Tooltip reveal on hover */
+  .ac-tooltip-wrap {
+    position: absolute; inset: 0; z-index: 9;
+    display: flex; align-items: flex-start; justify-content: center; padding: 14px;
+    transform: translateY(100%); opacity: 0;
+    transition: transform 0.5s cubic-bezier(0.6,0.6,0,1), opacity 0.4s;
+  }
+  .animated-card:hover .ac-tooltip-wrap { transform: translateY(0); opacity: 1; }
+  .ac-tooltip {
+    background: rgba(10,8,6,0.75); backdrop-filter: blur(10px);
+    border: 1px solid rgba(249,115,22,0.25); border-radius: 10px; padding: 10px 14px;
+  }
+  .ac-tooltip-row { display: flex; align-items: center; gap: 8px; }
+  .ac-tooltip-dot { width: 8px; height: 8px; border-radius: 50%; background: #f97316; flex-shrink: 0; }
+  .ac-tooltip-label { font-size: 0.72rem; color: #fff; font-weight: 600; }
+  .ac-tooltip-sub { font-size: 0.68rem; color: rgba(255,255,255,0.45); margin: 4px 0 0; }
+  /* Metric badges (fade on hover) */
+  .ac-badges {
+    position: absolute; top: 12px; left: 12px; z-index: 9;
+    display: flex; gap: 6px; flex-wrap: wrap;
+    transition: opacity 0.3s ease-in-out;
+  }
+  .animated-card:hover .ac-badges { opacity: 0; }
+  .ac-badge {
+    display: flex; align-items: center; gap: 5px;
+    background: rgba(255,255,255,0.08); backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.1); border-radius: 20px;
+    padding: 3px 9px; font-size: 0.65rem; color: rgba(255,255,255,0.85);
+  }
+  .ac-badge-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+  .ac-badge-dot.a { background: #f97316; }
+  .ac-badge-dot.b { background: #f59e0b; }
+  /* Card body */
+  .ac-body {
+    padding: 14px 18px 18px; border-top: 1px solid rgba(255,255,255,0.06);
+    display: flex; flex-direction: column; gap: 4px;
+  }
+  .ac-title { font-size: 1rem; font-weight: 700; color: #f8f5ee; margin: 0; }
+  .ac-desc { font-size: 0.75rem; color: rgba(255,255,255,0.4); margin: 0; line-height: 1.5; }
+
+  /* === WAVE NARRATIVE CARD === */
+  @keyframes waveFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+  }
+  .wave-card {
+    position: relative; width: 100%; border-radius: 16px; overflow: hidden;
+    background: #0d0b09;
+    border: 1px solid rgba(249,115,22,0.2);
+    box-shadow: 0 0 0 1px rgba(249,115,22,0.06), 0 24px 48px rgba(0,0,0,0.4), 0 0 40px rgba(249,115,22,0.06);
+    animation: waveFloat 5s ease-in-out infinite;
+  }
+  .wave-canvas-wrap {
+    position: relative; height: 220px; overflow: hidden;
+    border-radius: 14px 14px 0 0; background: #070604;
+  }
+  .wave-canvas-wrap canvas { display: block; width: 100%; height: 100%; }
+  /* Grid overlay on canvas */
+  .wave-canvas-wrap::before {
+    content: ''; position: absolute; inset: 0; z-index: 2; pointer-events: none; opacity: 0.08;
+    background-image: linear-gradient(90deg, rgba(255,255,255,0.4) 1px, transparent 1px),
+                      linear-gradient(rgba(255,255,255,0.4) 1px, transparent 1px);
+    background-size: 15px 15px;
+  }
+  /* Top badge overlay */
+  .wave-overlay {
+    position: absolute; top: 14px; left: 14px; z-index: 3;
+    display: flex; gap: 6px;
+  }
+  .wave-badge {
+    display: flex; align-items: center; gap: 5px;
+    background: rgba(10,8,6,0.65); backdrop-filter: blur(8px);
+    border: 1px solid rgba(249,115,22,0.25); border-radius: 20px;
+    padding: 4px 10px; font-size: 0.65rem; color: rgba(255,255,255,0.8); font-weight: 600;
+  }
+  .wave-live-dot {
+    width: 6px; height: 6px; border-radius: 50%; background: #f97316;
+    animation: livePulse 1.5s ease-in-out infinite; flex-shrink: 0;
+  }
+  /* Separator line */
+  .wave-separator {
+    height: 1px; width: 100%;
+    background: linear-gradient(to right, transparent, rgba(249,115,22,0.25), transparent);
+  }
+  /* Card body */
+  .wave-card-body { padding: 16px 18px 20px; }
+  .wave-label {
+    display: inline-block; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.8px;
+    text-transform: uppercase; color: #f97316; margin-bottom: 8px;
+  }
+  .wave-title { font-size: 1.05rem; font-weight: 700; color: #f8f5ee; margin: 0 0 8px; line-height: 1.3; }
+  .wave-desc { font-size: 0.75rem; color: rgba(255,255,255,0.45); line-height: 1.65; margin: 0 0 14px; }
+  .wave-footer { display: flex; align-items: center; justify-content: space-between; }
+  .wave-cta {
+    display: inline-flex; align-items: center; gap: 4px;
+    font-size: 0.72rem; font-weight: 600; color: #f97316;
+    background: rgba(249,115,22,0.1); border: 1px solid rgba(249,115,22,0.25);
+    border-radius: 8px; padding: 6px 12px;
+    transition: background 0.2s, color 0.2s;
+  }
+  .wave-cta:hover { background: rgba(249,115,22,0.18); color: #fb923c; }
+  .wave-status {
+    font-size: 0.65rem; color: rgba(255,255,255,0.35);
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 20px; padding: 4px 10px;
+  }
+  /* Cluster pills row */
+  .wave-clusters {
+    display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 14px;
+  }
+  .wave-cluster-pill {
+    font-size: 0.62rem; font-weight: 600;
+    border-radius: 16px; padding: 3px 10px;
+  }
+  .wave-cluster-pill.hot {
+    background: rgba(249,115,22,0.12); border: 1px solid rgba(249,115,22,0.25); color: #fb923c;
+  }
+  .wave-cluster-pill.warm {
+    background: rgba(245,158,11,0.1); border: 1px solid rgba(245,158,11,0.2); color: #fbbf24;
+  }
+  .wave-cluster-pill.cool {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.45);
+  }
+
+  /* === FLOATING SHAPES (demo title) === */
+  .demo-title-wrap { position: relative; padding-bottom: 4px; }
+  .demo-shape {
+    position: absolute;
+    border-radius: 999px;
+    pointer-events: none;
+    opacity: 0;
+    animation: shapeIn 2s cubic-bezier(0.23, 0.86, 0.39, 0.96) var(--delay, 0s) both,
+               shapeFloat 12s ease-in-out calc(2s + var(--delay, 0s)) infinite;
+  }
+  @keyframes shapeIn {
+    from { opacity: 0; transform: translateY(-50px) rotate(calc(var(--rot, 0deg) - 15deg)); }
+    to   { opacity: 1; transform: translateY(0) rotate(var(--rot, 0deg)); }
+  }
+  @keyframes shapeFloat {
+    0%, 100% { transform: translateY(0) rotate(var(--rot, 0deg)); }
+    50%       { transform: translateY(-10px) rotate(var(--rot, 0deg)); }
+  }
 
   /* === SECTION 4: DEMO (2-column) === */
   .demo-section { padding: 80px 0; background: var(--bg); }
@@ -506,6 +814,87 @@
   [data-theme="dark"] .theme-toggle .icon-moon { display: none; }
   [data-theme="dark"] .theme-toggle .icon-sun { display: block; }
 
+  /* === HAND-WRITING HIGHLIGHT === */
+  .hw-highlight {
+    position: relative;
+    display: inline-block;
+    white-space: nowrap;
+  }
+  .hw-svg {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 115%; height: 200%;
+    pointer-events: none;
+    overflow: visible;
+  }
+  .hw-svg path {
+    fill: none;
+    stroke: var(--accent-light);
+    stroke-width: 3;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    animation: hwDraw 2s cubic-bezier(0.43, 0.13, 0.23, 0.96) 0.8s forwards;
+  }
+  @keyframes hwDraw { to { stroke-dashoffset: 0; } }
+
+  /* === LOGOS CAROUSEL === */
+  .logos-section {
+    padding: 44px 0;
+    background: var(--bg);
+    border-bottom: 1px solid var(--card-border);
+    overflow: hidden;
+  }
+  .logos-heading {
+    text-align: center;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--gray-400);
+    text-transform: uppercase;
+    margin-bottom: 28px;
+  }
+  .logos-track-outer {
+    position: relative;
+    overflow: hidden;
+  }
+  .logos-track-outer::before,
+  .logos-track-outer::after {
+    content: ''; position: absolute; top: 0; bottom: 0;
+    width: 100px; z-index: 2; pointer-events: none;
+  }
+  .logos-track-outer::before {
+    left: 0;
+    background: linear-gradient(to right, var(--bg) 20%, transparent);
+  }
+  .logos-track-outer::after {
+    right: 0;
+    background: linear-gradient(to left, var(--bg) 20%, transparent);
+  }
+  .logos-track {
+    display: flex;
+    width: max-content;
+    animation: logoScroll 30s linear infinite;
+  }
+  .logos-track:hover { animation-play-state: paused; }
+  @keyframes logoScroll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+  .logo-item {
+    display: flex; align-items: center; justify-content: center;
+    padding: 0 40px; height: 44px; flex-shrink: 0;
+    opacity: 0.38; transition: opacity 0.25s;
+  }
+  .logo-item:hover { opacity: 0.65; }
+  .logo-item svg { height: 20px; width: auto; }
+  .logo-item span {
+    font-size: 1rem; font-weight: 800; letter-spacing: -0.03em;
+    color: var(--text); white-space: nowrap;
+  }
+
   /* === SR-ONLY (accessibility) === */
   .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
 
@@ -564,6 +953,183 @@
   .reveal.visible { opacity: 1; transform: translateY(0); }
 
   /* === RESPONSIVE === */
+  /* === BENTO FEATURES === */
+  .bento-features {
+    padding: 72px 0;
+    background: linear-gradient(135deg, #7c2d12 0%, #c2410c 35%, #ea580c 65%, #f97316 100%);
+    background-size: 200% 200%;
+    animation: heroGradient 10s ease infinite;
+    position: relative;
+    overflow: hidden;
+  }
+  .bento-features::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 20% 50%, rgba(255,255,255,0.05) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 20%, rgba(0,0,0,0.15) 0%, transparent 50%);
+    pointer-events: none;
+  }
+  .bento-features > .container { position: relative; z-index: 1; }
+  #bg-paths { position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:0; }
+  #bg-paths svg { width:100%;height:100%;position:absolute;top:0;left:0; }
+  .bento-header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+  .bento-header h2 {
+    font-size: clamp(1.4rem, 2.8vw, 1.8rem);
+    font-weight: 800;
+    color: #fff;
+    margin: 14px 0 10px;
+    letter-spacing: -0.02em;
+  }
+  .bento-header p {
+    color: rgba(255,255,255,0.6);
+    font-size: 0.9rem;
+    max-width: 440px;
+    margin: 0 auto;
+  }
+  .bento-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+  .bento-item {
+    background: rgba(0,0,0,0.25);
+    border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 16px;
+    padding: 28px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s, box-shadow 0.3s, background 0.3s;
+    cursor: default;
+    backdrop-filter: blur(4px);
+  }
+  .bento-item::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      500px circle at var(--mouse-x, -200px) var(--mouse-y, -200px),
+      rgba(255,255,255,0.08),
+      transparent 40%
+    );
+    pointer-events: none;
+    border-radius: inherit;
+    opacity: 0;
+    transition: opacity 0.4s;
+  }
+  .bento-item:hover::after { opacity: 1; }
+  .bento-item:hover {
+    border-color: rgba(255,255,255,0.32);
+    background: rgba(0,0,0,0.35);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+  }
+  .bento-item:nth-child(1) { grid-column: span 2; }
+  .bento-item-icon {
+    width: 44px; height: 44px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 11px;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 18px;
+    border: 1px solid rgba(255,255,255,0.2);
+  }
+  .bento-item-icon svg { width: 21px; height: 21px; color: #fff; }
+  .bento-item h3 {
+    font-size: 0.95rem; font-weight: 700;
+    color: #fff; margin-bottom: 7px; line-height: 1.3;
+  }
+  .bento-item p {
+    font-size: 0.8rem; color: rgba(255,255,255,0.7);
+    line-height: 1.65; margin: 0;
+  }
+  .bento-item:nth-child(1) h3 { font-size: 1.15rem; }
+  .bento-item:nth-child(1) p { font-size: 0.86rem; color: rgba(255,255,255,0.75); }
+
+  /* === COMPARISON SLIDER (Sin / Con Voces) === */
+  .tab-compare {
+    position: relative;
+    height: 210px;
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: ew-resize;
+    user-select: none;
+    touch-action: none;
+  }
+  .tcs-left, .tcs-right {
+    position: absolute;
+    inset: 0;
+  }
+  .tcs-left {
+    background: #1c1815;
+    clip-path: inset(0 calc(100% - var(--pos, 50%)) 0 0);
+  }
+  .tcs-right {
+    background: linear-gradient(135deg, rgba(124,45,18,0.4) 0%, rgba(249,115,22,0.12) 100%);
+    border: 1px solid rgba(249,115,22,0.18);
+    border-radius: 12px;
+    clip-path: inset(0 0 0 var(--pos, 50%));
+  }
+  .tcs-inner {
+    position: absolute;
+    inset: 0;
+    padding: 20px 22px;
+  }
+  .tcs-handle {
+    position: absolute;
+    top: 0; bottom: 0;
+    left: var(--pos, 50%);
+    transform: translateX(-50%);
+    width: 1.5px;
+    background: rgba(255,255,255,0.22);
+    z-index: 10;
+    pointer-events: none;
+  }
+  .tcs-handle-knob {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.35);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .tcs-handle-knob svg { width: 13px; height: 13px; color: #555; }
+  .tcs-label-badge {
+    display: inline-flex; align-items: center; gap: 5px;
+    font-size: 0.62rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.7px; margin-bottom: 11px;
+    padding: 3px 8px; border-radius: 20px;
+  }
+  .tcs-left .tcs-label-badge {
+    background: rgba(255,255,255,0.06);
+    color: rgba(255,255,255,0.38);
+    border: 1px solid rgba(255,255,255,0.09);
+  }
+  .tcs-right .tcs-label-badge {
+    background: rgba(249,115,22,0.14);
+    color: var(--accent-light);
+    border: 1px solid rgba(249,115,22,0.24);
+  }
+  .tcs-left ul, .tcs-right ul {
+    margin: 0; padding: 0 0 0 14px;
+    font-size: 0.77rem; line-height: 1.65;
+  }
+  .tcs-left li { color: rgba(255,255,255,0.36); margin-bottom: 5px; }
+  .tcs-right li { color: rgba(255,255,255,0.72); margin-bottom: 5px; }
+  .tcs-hint {
+    position: absolute;
+    bottom: 8px; left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.58rem; color: rgba(255,255,255,0.2);
+    letter-spacing: 0.5px; white-space: nowrap;
+    pointer-events: none;
+    transition: opacity 0.3s;
+    z-index: 5;
+  }
+  .tab-compare.dragging .tcs-hint { opacity: 0; }
+
   @media (max-width: 768px) {
     .navbar-links, .lang-select { display: none; }
     .hamburger { display: block; }
@@ -579,7 +1145,11 @@
     .metric-num { font-size: 1.2rem; }
     [style*="grid-template-columns: repeat(3"] { grid-template-columns: 1fr !important; }
     .proof-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
-    .tab-compare { grid-template-columns: 1fr; }
+    .vp-cards { grid-template-columns: 1fr; }
+    .vp-transforms { grid-template-columns: repeat(2, 1fr); }
+    .bento-grid { grid-template-columns: 1fr !important; }
+    .bento-item:nth-child(1) { grid-column: span 1 !important; }
+    .tab-compare { height: 220px; cursor: ns-resize; }
     .cookie-banner { flex-direction: column; text-align: center; bottom: 12px; left: 12px; right: 12px; }
     .footer .container { flex-direction: column; text-align: center; }
   }
@@ -601,7 +1171,7 @@
   <div class="container">
     <a href="#" class="navbar-logo">
       <svg width="22" height="22" viewBox="0 0 48 48" fill="none"><rect x="6" y="16" width="4" height="16" rx="2" fill="currentColor"/><rect x="14" y="8" width="4" height="32" rx="2" fill="currentColor"/><rect x="22" y="14" width="4" height="20" rx="2" fill="currentColor"/><rect x="30" y="6" width="4" height="36" rx="2" fill="currentColor"/><rect x="38" y="18" width="4" height="12" rx="2" fill="currentColor"/></svg>
-      Voces.ai
+      Voces
     </a>
     <div class="navbar-links">
       <a href="#funcionalidades">Funcionalidades</a>
@@ -651,7 +1221,7 @@
     <div class="hero-grid">
       <div>
         <span class="tag">Plataforma de mejora continua</span>
-        <h1>Lo que tu organización no pone sobre la mesa está frenando los resultados</h1>
+        <h1>Lo que tu organización no pone sobre la mesa está frenando <span class="hw-highlight">los resultados<svg class="hw-svg" viewBox="0 0 220 70" aria-hidden="true"><path pathLength="1" d="M 205 14 C 225 35, 195 62, 110 65 C 28 68, 2 52, 4 32 C 6 12, 58 3, 110 3 C 168 3, 208 16, 208 16"/></svg></span></h1>
         <p class="hero-sub">En semanas sabes lo que tu organización realmente piensa — y podes decidir con evidencia, no con supuestos.</p>
         <div class="hero-ctas">
           <a href="#" onclick="openContact();return false;" class="btn" style="background:#fff; color:var(--accent); box-shadow:0 2px 12px rgba(0,0,0,0.15);">Comenzar gratis &rarr;</a>
@@ -727,74 +1297,138 @@
 </section>
 
 
+<!-- CONFÍAN EN NOSOTROS -->
+<section class="logos-section">
+  <p class="logos-heading">Confían en nosotros</p>
+  <div class="logos-track-outer">
+    <div class="logos-track" aria-hidden="true">
+      <!-- Set 1 -->
+      <div class="logo-item"><span>Arcor</span></div>
+      <div class="logo-item"><span style="font-style:italic;font-weight:700;">Telecom</span></div>
+      <div class="logo-item"><span style="letter-spacing:0.08em;font-size:0.85rem;">GALICIA</span></div>
+      <div class="logo-item"><span>Naranja X</span></div>
+      <div class="logo-item"><span style="font-weight:900;letter-spacing:-0.04em;">YPF</span></div>
+      <div class="logo-item"><span style="letter-spacing:0.04em;">Grupo Pegasus</span></div>
+      <div class="logo-item"><span style="font-style:italic;">Despegar</span></div>
+      <div class="logo-item"><span style="font-weight:900;letter-spacing:-0.02em;">OCA</span></div>
+      <div class="logo-item"><span>Laboratorios Bagó</span></div>
+      <div class="logo-item"><span style="letter-spacing:0.1em;font-size:0.82rem;">OSDE</span></div>
+      <!-- Set 2 (duplicate for seamless loop) -->
+      <div class="logo-item"><span>Arcor</span></div>
+      <div class="logo-item"><span style="font-style:italic;font-weight:700;">Telecom</span></div>
+      <div class="logo-item"><span style="letter-spacing:0.08em;font-size:0.85rem;">GALICIA</span></div>
+      <div class="logo-item"><span>Naranja X</span></div>
+      <div class="logo-item"><span style="font-weight:900;letter-spacing:-0.04em;">YPF</span></div>
+      <div class="logo-item"><span style="letter-spacing:0.04em;">Grupo Pegasus</span></div>
+      <div class="logo-item"><span style="font-style:italic;">Despegar</span></div>
+      <div class="logo-item"><span style="font-weight:900;letter-spacing:-0.02em;">OCA</span></div>
+      <div class="logo-item"><span>Laboratorios Bagó</span></div>
+      <div class="logo-item"><span style="letter-spacing:0.1em;font-size:0.82rem;">OSDE</span></div>
+    </div>
+  </div>
+</section>
+
 <!-- SECTION 2: PROPUESTA DE VALOR + FEATURES (2-column) -->
 <section id="funcionalidades" class="value-features reveal">
   <div class="container">
-    <div class="value-features-grid">
-      <div>
-        <h2>Menos conversaciones de pasillo, más conversaciones en la mesa.</h2>
-        <p class="value-text" style="font-weight:600;">De diagnósticos que duran meses a claridad en semanas.</p>
-        <p class="value-text">Voces.ai te ayuda a entender qué frena a tus equipos y por qué los resultados no cierran. Sin encuestas, sin consultoras, sin meses de espera.</p>
-        <p class="value-text">No es un evento. Es un sistema que se traduce en resultados que se sostienen.</p>
-      </div>
-      <div>
-        <div class="feature-list">
-          <div class="feature-item">
-            <div class="feature-check">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-            </div>
-            <div class="feature-item-text">
-              <h3>Entrevistas a escala, con profundidad humana</h3>
-              <p>Cientos de entrevistas individuales, sin coordinar agenda.</p>
-            </div>
-          </div>
-          <div class="feature-item">
-            <div class="feature-check">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><line x1="16" x2="8" y1="13" y2="13"/><line x1="16" x2="8" y1="17" y2="17"/></svg>
-            </div>
-            <div class="feature-item-text">
-              <h3>Extracción inteligente de narrativas</h3>
-              <p>Hecho, contexto y consecuencia. Sin sesgos.</p>
-            </div>
-          </div>
-          <div class="feature-item">
-            <div class="feature-check">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
-            </div>
-            <div class="feature-item-text">
-              <h3>Análisis semántico que revela patrones</h3>
-              <p>Qué se repite, qué se contradice, qué nadie dice.</p>
-            </div>
-          </div>
-          <div class="feature-item">
-            <div class="feature-check">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-            </div>
-            <div class="feature-item-text">
-              <h3>Medición del cambio a lo largo del tiempo</h3>
-              <p>Antes y después con evidencia, no con percepciones.</p>
-            </div>
-          </div>
-          <div class="feature-item">
-            <div class="feature-check">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" x2="15.42" y1="13.51" y2="17.49"/><line x1="15.41" x2="8.59" y1="6.51" y2="10.49"/></svg>
-            </div>
-            <div class="feature-item-text">
-              <h3>Colaboración inteligente con stakeholders</h3>
-              <p>Roles diferenciados. Resumen ejecutivo listo para decidir.</p>
-            </div>
-          </div>
+    <div style="max-width:720px;margin:0 auto;text-align:center;">
+      <h2>Cuando un desafío estratégico no avanza, casi siempre es por lo mismo:</h2>
+      <div id="vapour-wrap" aria-label="información que existía pero no podríamos ver."></div>
+    </div>
+
+    <!-- 4 transformation cards DE → A -->
+    <div class="vp-transforms">
+      <div class="vp-tx-card">
+        <div class="vp-tx-from-val">Decisiones basadas en suposiciones</div>
+        <div class="vp-tx-arrow">
+          <div class="vp-tx-arrow-line"></div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
         </div>
+        <div class="vp-tx-to-val">Evidencia de lo que el equipo realmente piensa y siente</div>
+      </div>
+      <div class="vp-tx-card">
+        <div class="vp-tx-from-val">1 diagnóstico anual que tarda semanas en procesarse</div>
+        <div class="vp-tx-arrow">
+          <div class="vp-tx-arrow-line"></div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </div>
+        <div class="vp-tx-to-val">Insights accionables cuando los necesitas</div>
+      </div>
+      <div class="vp-tx-card">
+        <div class="vp-tx-from-val">Encuesta que da un 7.2 y no representa todas las voces</div>
+        <div class="vp-tx-arrow">
+          <div class="vp-tx-arrow-line"></div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </div>
+        <div class="vp-tx-to-val">Narrativas y hallazgos que revelan qué está pasando</div>
+      </div>
+      <div class="vp-tx-card">
+        <div class="vp-tx-from-val">Silencio en las reuniones y juegos de culpas a terceros</div>
+        <div class="vp-tx-arrow">
+          <div class="vp-tx-arrow-line"></div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </div>
+        <div class="vp-tx-to-val">Poner en agenda conversaciones incómodas</div>
       </div>
     </div>
+
     <div style="text-align:center; margin-top:40px;">
-      <a href="#" onclick="openContact();return false;" class="btn btn-primary">Comenzar ahora &rarr;</a>
+      <a href="#" onclick="openContact();return false;" class="btn btn-primary">Agendar demo &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<!-- BENTO FEATURES -->
+<section id="bento-features" class="bento-features reveal">
+  <div class="container">
+    <div class="bento-header">
+      <span class="tag" style="background:rgba(255,255,255,0.15);color:#fff;border:1px solid rgba(255,255,255,0.25);">Capacidades</span>
+      <h2>Diseñado para escuchar a escala</h2>
+      <p>Todo lo que necesitás para convertir conversaciones en decisiones.</p>
+    </div>
+    <div class="bento-grid">
+      <div class="bento-item">
+        <div class="bento-item-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h3>Escala sin perder señal</h3>
+        <p>Cientos de conversaciones individuales simultáneas sin coordinar agenda, sin encuestadores, sin perder el matiz de lo que cada persona realmente piensa.</p>
+      </div>
+      <div class="bento-item">
+        <div class="bento-item-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><line x1="16" x2="8" y1="13" y2="13"/><line x1="16" x2="8" y1="17" y2="17"/></svg>
+        </div>
+        <h3>De conversación a evidencia</h3>
+        <p>Hecho, contexto y consecuencia — sin interpretación sesgada.</p>
+      </div>
+      <div class="bento-item">
+        <div class="bento-item-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+        </div>
+        <h3>Patrones que no aparecen en voz alta</h3>
+        <p>Análisis semántico que revela lo que se repite, se contradice y nadie dice abiertamente.</p>
+      </div>
+      <div class="bento-item">
+        <div class="bento-item-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <h3>Antes y después con datos</h3>
+        <p>Para saber si el cambio fue real o solo discursivo.</p>
+      </div>
+      <div class="bento-item">
+        <div class="bento-item-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" x2="15.42" y1="13.51" y2="17.49"/><line x1="15.41" x2="8.59" y1="6.51" y2="10.49"/></svg>
+        </div>
+        <h3>Cada nivel ve lo que necesita</h3>
+        <p>Sin ruido, listo para decidir.</p>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- SECTION 3: EMPATIA + 4 APLICACIONES -->
-<section id="casos-de-uso" class="use-cases reveal">
+<section id="casos-de-uso" class="use-cases reveal" style="position:relative; overflow:hidden;">
+  <canvas id="hero-canvas" aria-hidden="true"></canvas>
   <div class="container">
     <span class="tag">Aplicaciones</span>
     <h2>Cada equipo u organización tiene una conversación pendiente</h2>
@@ -808,93 +1442,100 @@
     <div class="tab-panel active" role="tabpanel" data-tab="0">
       <div class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" x2="12" y1="20" y2="10"/><line x1="18" x2="18" y1="20" y2="4"/><line x1="6" x2="6" y1="20" y2="16"/></svg></div>
       <h3>Negocios</h3>
-      <p class="tab-desc">Vas a abrir un mercado, lanzar un producto o cerrar una adquisición. ¿Escuchaste a quienes van a ejecutar?</p>
-      <div class="tab-compare">
-        <div class="tab-compare-card without">
-          <div class="tab-compare-label">&#10005; Sin Voces</div>
+      <p class="tab-desc">Vas a abrir un mercado, lanzar un producto o cerrar una adquisición — y las señales más críticas están en las personas que van a ejecutar, no en el PowerPoint.</p>
+      <div class="tab-compare" style="--pos:50%">
+        <div class="tcs-left"><div class="tcs-inner">
+          <div class="tcs-label-badge">&#10005; Sin Voces</div>
           <ul>
             <li>Decisiones basadas en supuestos del directorio</li>
             <li>Resistencia invisible que frena la ejecución</li>
             <li>Costos de oportunidad por llegar tarde</li>
           </ul>
-        </div>
-        <div class="tab-compare-card with">
-          <div class="tab-compare-label">&#10003; Con Voces</div>
+        </div></div>
+        <div class="tcs-right"><div class="tcs-inner">
+          <div class="tcs-label-badge">&#10003; Con Voces</div>
           <ul>
-            <li>Sabés dónde se pierde claridad antes de invertir</li>
-            <li>El equipo ejecutor valida la estrategia desde el día uno</li>
-            <li>Decisiones con evidencia, no con intuición</li>
+            <li>Voces.ai entrevista a los equipos antes de que el plan baje.</li>
+            <li>Menos sorpresas en la implementación.</li>
+            <li>Más velocidad de ejecución desde el día uno.</li>
           </ul>
-        </div>
+        </div></div>
+        <div class="tcs-handle"><div class="tcs-handle-knob"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12H3"/><path d="m15 18 6-6-6-6"/><path d="m9 6-6 6 6 6"/></svg></div></div>
+        <div class="tcs-hint">&#8592; arrastrá &#8594;</div>
       </div>
     </div>
     <div class="tab-panel" role="tabpanel" data-tab="1">
       <div class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
       <h3>Personas</h3>
-      <p class="tab-desc">La encuesta anual te dice que "el clima es 7.2". Voces.ai te dice por qué la gente se va y qué valores realmente se practican.</p>
-      <div class="tab-compare">
-        <div class="tab-compare-card without">
-          <div class="tab-compare-label">&#10005; Sin Voces</div>
+      <p class="tab-desc">La encuesta anual te dice que "el clima es 7.2". No te dice por qué la gente se va, qué frena a los equipos ni qué valores se practican versus cuáles solo se declaran.</p>
+      <div class="tab-compare" style="--pos:50%">
+        <div class="tcs-left"><div class="tcs-inner">
+          <div class="tcs-label-badge">&#10005; Sin Voces</div>
           <ul>
             <li>Encuestas con respuestas políticamente correctas</li>
             <li>Rotación que sorprende porque "nadie dijo nada"</li>
             <li>Valores declarados que nadie reconoce en la práctica</li>
           </ul>
-        </div>
-        <div class="tab-compare-card with">
-          <div class="tab-compare-label">&#10003; Con Voces</div>
+        </div></div>
+        <div class="tcs-right"><div class="tcs-inner">
+          <div class="tcs-label-badge">&#10003; Con Voces</div>
           <ul>
-            <li>Narrativas reales sobre lo que frena a los equipos</li>
-            <li>Alertas tempranas de rotación con contexto</li>
-            <li>Brecha visible entre cultura declarada y vivida</li>
+            <li>Voces.ai captura lo que las personas realmente piensan — sin audiencia, sin filtro.</li>
+            <li>Decisiones sobre talento y cultura basadas en lo que está pasando.</li>
+            <li>No en lo que la gente está dispuesta a admitir.</li>
           </ul>
-        </div>
+        </div></div>
+        <div class="tcs-handle"><div class="tcs-handle-knob"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12H3"/><path d="m15 18 6-6-6-6"/><path d="m9 6-6 6 6 6"/></svg></div></div>
+        <div class="tcs-hint">&#8592; arrastrá &#8594;</div>
       </div>
     </div>
     <div class="tab-panel" role="tabpanel" data-tab="2">
       <div class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg></div>
       <h3>Procesos</h3>
-      <p class="tab-desc">Hay procesos diseñados en una sala y vividos de otra forma en los pasillos. Voces.ai muestra la brecha.</p>
-      <div class="tab-compare">
-        <div class="tab-compare-card without">
-          <div class="tab-compare-label">&#10005; Sin Voces</div>
+      <p class="tab-desc">Hay procesos diseñados en una sala y vividos de otra forma en los pasillos. La brecha existe. Casi nadie la pone en agenda.</p>
+      <div class="tab-compare" style="--pos:50%">
+        <div class="tcs-left"><div class="tcs-inner">
+          <div class="tcs-label-badge">&#10005; Sin Voces</div>
           <ul>
             <li>Procesos documentados que nadie sigue</li>
             <li>Workarounds invisibles que generan riesgo</li>
             <li>Mejoras basadas en lo que cree el diseñador</li>
           </ul>
-        </div>
-        <div class="tab-compare-card with">
-          <div class="tab-compare-label">&#10003; Con Voces</div>
+        </div></div>
+        <div class="tcs-right"><div class="tcs-inner">
+          <div class="tcs-label-badge">&#10003; Con Voces</div>
           <ul>
-            <li>Mapa real de cómo se viven los procesos</li>
-            <li>Fricciones identificadas por quienes las sufren</li>
-            <li>Priorización basada en impacto real, no en teoría</li>
+            <li>Voces.ai mapea cómo se viven los procesos en la práctica — quién los adopta y por qué.</li>
+            <li>Rediseño con evidencia real.</li>
+            <li>No con la versión oficial de cómo debería funcionar.</li>
           </ul>
-        </div>
+        </div></div>
+        <div class="tcs-handle"><div class="tcs-handle-knob"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12H3"/><path d="m15 18 6-6-6-6"/><path d="m9 6-6 6 6 6"/></svg></div></div>
+        <div class="tcs-hint">&#8592; arrastrá &#8594;</div>
       </div>
     </div>
     <div class="tab-panel" role="tabpanel" data-tab="3">
       <div class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/></svg></div>
       <h3>Cambio</h3>
-      <p class="tab-desc">Implementaron una nueva forma de trabajo. ¿Hubo cambios profundos o solo cambió el discurso?</p>
-      <div class="tab-compare">
-        <div class="tab-compare-card without">
-          <div class="tab-compare-label">&#10005; Sin Voces</div>
+      <p class="tab-desc">Implementaron una nueva forma de trabajo. El discurso cambió. ¿Cambiaron los comportamientos?</p>
+      <div class="tab-compare" style="--pos:50%">
+        <div class="tcs-left"><div class="tcs-inner">
+          <div class="tcs-label-badge">&#10005; Sin Voces</div>
           <ul>
             <li>Adopción medida por uso de herramientas, no por comportamiento</li>
             <li>Discurso nuevo con prácticas viejas</li>
             <li>Sin forma de medir cambio cultural real</li>
           </ul>
-        </div>
-        <div class="tab-compare-card with">
-          <div class="tab-compare-label">&#10003; Con Voces</div>
+        </div></div>
+        <div class="tcs-right"><div class="tcs-inner">
+          <div class="tcs-label-badge">&#10003; Con Voces</div>
           <ul>
-            <li>Comparación de narrativas antes y después</li>
-            <li>Evidencia de cambios de comportamiento reales</li>
-            <li>Identificación de dónde el cambio no penetró</li>
+            <li>Voces.ai compara narrativas antes y después — distingue transformación real de adaptación superficial.</li>
+            <li>Sabés si el cambio aterrizó antes de que el retroceso sea invisible.</li>
           </ul>
-        </div>
+        </div></div>
+        <div class="tcs-handle"><div class="tcs-handle-knob"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12H3"/><path d="m15 18 6-6-6-6"/><path d="m9 6-6 6 6 6"/></svg></div></div>
+        <div class="tcs-hint">&#8592; arrastrá &#8594;</div>
       </div>
     </div>
     <div style="text-align:center; margin-top:36px;">
@@ -908,7 +1549,12 @@
   <div class="container">
     <div class="demo-grid">
       <div>
-        <h2>Del pasillo a la mesa en 4 pasos</h2>
+        <div class="demo-title-wrap">
+          <div class="demo-shape" style="width:280px;height:66px;--rot:12deg;--delay:0.2s;top:-28px;left:-60px;background:linear-gradient(90deg,rgba(249,115,22,0.1),transparent);border:1.5px solid rgba(249,115,22,0.2);"></div>
+          <div class="demo-shape" style="width:180px;height:48px;--rot:-10deg;--delay:0.4s;top:52px;right:-40px;background:linear-gradient(90deg,rgba(251,191,36,0.08),transparent);border:1.5px solid rgba(251,191,36,0.15);"></div>
+          <div class="demo-shape" style="width:110px;height:32px;--rot:22deg;--delay:0.6s;bottom:-8px;left:55%;background:linear-gradient(90deg,rgba(249,115,22,0.07),transparent);border:1.5px solid rgba(249,115,22,0.12);"></div>
+          <h2 style="position:relative;z-index:1;">Del pasillo a la mesa <span style="display:block;background:linear-gradient(90deg,var(--accent-light),rgba(255,255,255,0.9),#fbbf24);-webkit-background-clip:text;background-clip:text;color:transparent;">en 4 pasos</span></h2>
+        </div>
         <div class="process-steps">
           <div class="process-step">
             <div class="process-step-num">1</div>
@@ -941,42 +1587,33 @@
         </div>
       </div>
       <div>
-        <div class="interview-widget">
-          <div class="iw-header">
-            <div class="iw-header-left">
-              <div class="iw-dot red"></div><div class="iw-dot yellow"></div><div class="iw-dot green"></div>
-              <span class="iw-header-title">Voces.ai — Resultados</span>
+        <div class="wave-card">
+          <div class="wave-canvas-wrap">
+            <canvas id="wave-canvas"></canvas>
+            <div class="wave-overlay">
+              <span class="wave-badge">
+                <span class="wave-live-dot"></span>
+                247 conversaciones · En análisis
+              </span>
             </div>
-            <div class="iw-live"><div class="iw-live-dot"></div> Análisis completo</div>
           </div>
-          <div class="iw-body" style="padding:16px;">
-            <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px; margin-bottom:14px;">
-              <div style="background:rgba(249,115,22,0.1); border-radius:10px; padding:12px; text-align:center;">
-                <div style="font-size:1.3rem; font-weight:800; color:var(--accent-light);">247</div>
-                <div style="font-size:0.6rem; color:rgba(255,255,255,0.4);">Narrativas</div>
-              </div>
-              <div style="background:rgba(40,200,64,0.1); border-radius:10px; padding:12px; text-align:center;">
-                <div style="font-size:1.3rem; font-weight:800; color:#28c840;">8</div>
-                <div style="font-size:0.6rem; color:rgba(255,255,255,0.4);">Clusters</div>
-              </div>
-              <div style="background:rgba(255,189,46,0.1); border-radius:10px; padding:12px; text-align:center;">
-                <div style="font-size:1.3rem; font-weight:800; color:#ffbd2e;">+0.6</div>
-                <div style="font-size:0.6rem; color:rgba(255,255,255,0.4);">Sentimiento</div>
-              </div>
+          <div class="wave-separator"></div>
+          <div class="wave-card-body">
+            <span class="wave-label">Diagnóstico activo</span>
+            <h3 class="wave-title">8 clusters de narrativas detectados</h3>
+            <div class="wave-clusters">
+              <span class="wave-cluster-pill hot">Autonomía en decisiones</span>
+              <span class="wave-cluster-pill hot">Comunicación entre áreas</span>
+              <span class="wave-cluster-pill warm">Velocidad de adaptación</span>
+              <span class="wave-cluster-pill warm">Confianza en liderazgo</span>
+              <span class="wave-cluster-pill cool">Procesos vs. realidad</span>
             </div>
-            <div style="margin-bottom:12px;">
-              <div style="font-size:0.65rem; color:var(--accent-light); font-weight:700; letter-spacing:0.8px; text-transform:uppercase; margin-bottom:8px;">Top clusters</div>
-              <div style="display:flex; flex-wrap:wrap; gap:6px;">
-                <span style="background:rgba(249,115,22,0.15); border:1px solid rgba(249,115,22,0.3); border-radius:16px; padding:5px 12px; font-size:0.72rem; color:var(--accent-light);">Autonomía en decisiones</span>
-                <span style="background:rgba(249,115,22,0.15); border:1px solid rgba(249,115,22,0.3); border-radius:16px; padding:5px 12px; font-size:0.72rem; color:var(--accent-light);">Comunicación entre áreas</span>
-                <span style="background:rgba(249,115,22,0.15); border:1px solid rgba(249,115,22,0.3); border-radius:16px; padding:5px 12px; font-size:0.72rem; color:var(--accent-light);">Velocidad de adaptación</span>
-                <span style="background:rgba(40,200,64,0.15); border:1px solid rgba(40,200,64,0.3); border-radius:16px; padding:5px 12px; font-size:0.72rem; color:#28c840;">Confianza en liderazgo</span>
-                <span style="background:rgba(255,189,46,0.15); border:1px solid rgba(255,189,46,0.3); border-radius:16px; padding:5px 12px; font-size:0.72rem; color:#ffbd2e;">Procesos vs. realidad</span>
-              </div>
-            </div>
-            <div style="background:rgba(255,255,255,0.04); border-radius:10px; padding:12px;">
-              <div style="font-size:0.65rem; color:var(--accent-light); font-weight:700; letter-spacing:0.8px; text-transform:uppercase; margin-bottom:6px;">Hallazgo principal</div>
-              <p style="font-size:0.78rem; color:#ccc; line-height:1.6; margin:0;">3 de cada 4 equipos mencionan falta de autonomía en decisiones operativas. El discurso de innovación no coincide con las prácticas de aprobación.</p>
+            <p class="wave-desc">Lo que se repite, lo que se contradice, lo que nadie dice en voz alta — visible en tiempo real.</p>
+            <div class="wave-footer">
+              <a href="#" onclick="openContact();return false;" class="wave-cta">Ver hallazgos
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </a>
+              <span class="wave-status">Análisis activo</span>
             </div>
           </div>
         </div>
@@ -992,22 +1629,8 @@
 <section class="social-proof-section reveal">
   <div class="container">
     <div class="social-proof-header">
-      <span class="tag">Resultados reales</span>
-      <h2>Evolución y mejora continua de las conversaciones</h2>
-    </div>
-    <div class="proof-grid">
-      <div class="proof-card">
-        <div class="proof-num">+300</div>
-        <div class="proof-text">entrevistas en 3 semanas para un diagnóstico de cultura post-fusión en una empresa de servicios financieros.</div>
-      </div>
-      <div class="proof-card">
-        <div class="proof-num">12</div>
-        <div class="proof-text">narrativas críticas detectadas que ninguna encuesta previa había capturado en una organización agropecuaria.</div>
-      </div>
-      <div class="proof-card">
-        <div class="proof-num">2 sem</div>
-        <div class="proof-text">de diagnóstico completo vs. 4 meses con metodología tradicional. Sin consultoras, con total anonimato.</div>
-      </div>
+      <span class="tag">Testimonios</span>
+      <h2>Historias de celebración y aprendizaje</h2>
     </div>
     <div class="testimonial-scroll-wrap">
       <div class="testimonial-track">
@@ -1100,10 +1723,12 @@
 <!-- SECTION 5: CTA "ZOOM IN" -->
 <section id="agendar" class="cta-final reveal">
   <div class="container">
-    <h2>¿Qué pasa cuando las personas pueden ser escuchadas?</h2>
-    <p style="font-size:1.25rem; color:#fff; margin-bottom:28px; font-weight:700; letter-spacing:0.02em; text-shadow:0 2px 12px rgba(0,0,0,0.4);">Mejores conversaciones. Mejores resultados.</p>
+    <p style="font-size:clamp(1rem,2vw,1.25rem); color:rgba(255,255,255,0.75); margin-bottom:12px; font-weight:500; max-width:620px; margin-left:auto; margin-right:auto;">Lo que no escuchamos también influye en los resultados.</p>
+    <p style="font-size:clamp(1.5rem,3.5vw,2.2rem); color:#fff; margin-bottom:16px; font-weight:800; letter-spacing:-0.02em; line-height:1.2; max-width:680px; margin-left:auto; margin-right:auto;">¿Cuánto de lo que pasa en tu organización es un punto ciego?</p>
+    <p style="font-size:clamp(0.9rem,1.5vw,1rem); color:rgba(255,255,255,0.55); margin-bottom:8px; font-weight:400; max-width:560px; margin-left:auto; margin-right:auto; line-height:1.7;">Voces es un aliado para tomar decisiones con datos.</p>
+    <p style="font-size:clamp(0.9rem,1.5vw,1rem); color:rgba(255,255,255,0.55); margin-bottom:28px; font-weight:400; max-width:560px; margin-left:auto; margin-right:auto; line-height:1.7;">No es un reemplazo del liderazgo. Es la evidencia que le faltaba.</p>
     <div class="cta-final-actions">
-      <a href="https://wa.me/541160135064?text=Hola!%20Quiero%20saber%20m%C3%A1s%20sobre%20Voces.ai" target="_blank" rel="noopener" class="btn btn-primary">Escribinos por WhatsApp</a>
+      <a href="https://wa.me/541160135064?text=Hola!%20Quiero%20saber%20m%C3%A1s%20sobre%20Voces.ai" target="_blank" rel="noopener" class="btn btn-primary">Quiero saber qué dice mi organización</a>
     </div>
   </div>
 </section>
@@ -1389,6 +2014,506 @@ async function submitLead(e) {
   document.getElementById('contact-success').style.display = '';
   document.getElementById('contact-form').reset();
 }
+
+// === VAPOUR TEXT EFFECT ===
+(function() {
+  var wrap = document.getElementById('vapour-wrap');
+  if (!wrap) return;
+
+  var canvas = document.createElement('canvas');
+  wrap.appendChild(canvas);
+  var ctx = canvas.getContext('2d');
+
+  var dpr = Math.min(window.devicePixelRatio || 1, 2.5);
+  var texts = [
+    'información que existía pero no podríamos ver.',
+    'conversaciones que evitamos poner en agenda.',
+    'señales que el sistema guarda en silencio.'
+  ];
+  var CR = 249, CG = 115, CB = 22;
+
+  var VAPORIZE_MS = 2000, FADE_MS = 900, WAIT_MS = 1800, SPREAD = 3.5;
+  var idx = 0, state = 'static', particles = [], bounds = null;
+  var vProgress = 0, fadeOp = 0, lastT = 0, frameId = 0, inView = false;
+  var fontSize = 20; // recalculated on resize
+
+  function rgba(o) { return 'rgba('+CR+','+CG+','+CB+','+o.toFixed(3)+')'; }
+  function fontStr(fs) { return '800 '+(fs*dpr)+'px Inter,-apple-system,sans-serif'; }
+
+  // Auto-fit: find largest font where all texts fit in container width
+  function calcFontSize(containerW) {
+    var tc = document.createElement('canvas');
+    var tx = tc.getContext('2d');
+    var target = containerW * 0.98;
+    for (var f = 26; f >= 11; f--) {
+      tx.font = fontStr(f);
+      var maxW = 0;
+      for (var ti = 0; ti < texts.length; ti++) {
+        var w = tx.measureText(texts[ti]).width / dpr;
+        if (w > maxW) maxW = w;
+      }
+      if (maxW <= target) return f;
+    }
+    return 11;
+  }
+
+  function buildParticles(text) {
+    var W = canvas.width, H = canvas.height;
+    ctx.clearRect(0, 0, W, H);
+    ctx.font = fontStr(fontSize);
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillStyle = rgba(1);
+    ctx.fillText(text, W / 2, H / 2);
+    var m = ctx.measureText(text);
+    var imgData = ctx.getImageData(0, 0, W, H).data;
+    var sr = Math.max(1, Math.round(dpr * 0.85));
+    var ps = [];
+    for (var y = 0; y < H; y += sr) {
+      for (var x = 0; x < W; x += sr) {
+        var a = imgData[(y * W + x) * 4 + 3];
+        if (a > 15) {
+          var oa = a / 255;
+          ps.push({ x:x, y:y, ox:x, oy:y, op:oa, oa:oa, vx:0, vy:0, spd:0, quick:false });
+        }
+      }
+    }
+    ctx.clearRect(0, 0, W, H);
+    particles = ps;
+    bounds = { w: m.width };
+  }
+
+  function resize() {
+    var pw = wrap.clientWidth || 400;
+    fontSize = calcFontSize(pw);
+    // Canvas height: snug to font — enough for ascenders/descenders + small buffer
+    var cssH = Math.ceil(fontSize * 1.55);
+    canvas.width = Math.floor(pw * dpr);
+    canvas.height = Math.ceil(cssH * dpr);
+    canvas.style.width = pw + 'px';
+    canvas.style.height = cssH + 'px';
+    buildParticles(texts[idx]);
+  }
+
+  function reset() {
+    for (var i = 0; i < particles.length; i++) {
+      var p = particles[i]; p.x=p.ox; p.y=p.oy; p.op=p.oa; p.vx=0; p.vy=0; p.spd=0;
+    }
+  }
+
+  function draw() {
+    ctx.save(); ctx.scale(dpr, dpr);
+    for (var i = 0; i < particles.length; i++) {
+      var p = particles[i];
+      if (p.op > 0.005) { ctx.fillStyle = rgba(p.op); ctx.fillRect(p.x/dpr, p.y/dpr, 1, 1); }
+    }
+    ctx.restore();
+  }
+
+  function vaporize(vx, dt) {
+    var allDone = true;
+    for (var i = 0; i < particles.length; i++) {
+      var p = particles[i];
+      if (p.ox <= vx) {
+        if (p.spd === 0) {
+          var ang = Math.random() * Math.PI * 2;
+          p.spd = (Math.random() * 1.2 + 0.4) * SPREAD;
+          p.vx = Math.cos(ang) * p.spd; p.vy = Math.sin(ang) * p.spd;
+          p.quick = Math.random() > 0.55;
+        }
+        if (p.quick) {
+          p.op = Math.max(0, p.op - dt * 3);
+        } else {
+          p.vx = (p.vx + (Math.random()-0.5)*SPREAD*2.5) * 0.91;
+          p.vy = (p.vy + (Math.random()-0.5)*SPREAD*2.5) * 0.91;
+          p.x += p.vx * dt * 18; p.y += p.vy * dt * 9;
+          p.op = Math.max(0, p.op - dt * 0.38);
+        }
+        if (p.op > 0.01) allDone = false;
+      } else { allDone = false; }
+    }
+    return allDone;
+  }
+
+  function frame(t) {
+    if (!inView) { frameId = requestAnimationFrame(frame); return; }
+    var dt = Math.min((t - lastT) / 1000, 0.05);
+    lastT = t;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    if (state === 'static' || state === 'waiting') {
+      draw();
+    } else if (state === 'vaporizing') {
+      vProgress += dt * 100 / (VAPORIZE_MS / 1000);
+      if (bounds) {
+        var offset = (canvas.width - bounds.w) / 2;
+        var vx = offset + bounds.w * Math.min(100, vProgress) / 100;
+        var done = vaporize(vx, dt);
+        draw();
+        if (vProgress >= 100 && done) {
+          idx = (idx + 1) % texts.length;
+          buildParticles(texts[idx]);
+          for (var i = 0; i < particles.length; i++) particles[i].op = 0;
+          state = 'fadingIn'; fadeOp = 0;
+        }
+      }
+    } else if (state === 'fadingIn') {
+      fadeOp += dt * 1000 / FADE_MS;
+      var fo = Math.min(fadeOp, 1);
+      ctx.save(); ctx.scale(dpr, dpr);
+      for (var i = 0; i < particles.length; i++) {
+        var p = particles[i];
+        ctx.fillStyle = rgba(fo * p.oa);
+        ctx.fillRect(p.ox/dpr, p.oy/dpr, 1, 1);
+      }
+      ctx.restore();
+      if (fadeOp >= 1) {
+        reset(); state = 'waiting';
+        setTimeout(function() { vProgress = 0; reset(); state = 'vaporizing'; }, WAIT_MS);
+      }
+    }
+    frameId = requestAnimationFrame(frame);
+  }
+
+  var resizeTimer;
+  window.addEventListener('resize', function() {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(resize, 150);
+  });
+
+  new IntersectionObserver(function(e) {
+    inView = e[0].isIntersecting;
+    if (inView && state === 'static') setTimeout(function() { state = 'vaporizing'; vProgress = 0; }, 800);
+  }, { threshold: 0.15 }).observe(wrap);
+
+  // Wait for Inter font to load before sampling pixels
+  (document.fonts ? document.fonts.ready : Promise.resolve()).then(function() {
+    resize();
+    frameId = requestAnimationFrame(frame);
+  });
+})();
+
+// === BACKGROUND PATHS (bento-features) ===
+(function() {
+  var section = document.querySelector('.bento-features');
+  if (!section) return;
+  var NS = 'http://www.w3.org/2000/svg';
+  var div = document.createElement('div');
+  div.id = 'bg-paths';
+  var svg = document.createElementNS(NS, 'svg');
+  svg.setAttribute('viewBox', '0 0 696 316');
+  svg.setAttribute('preserveAspectRatio', 'xMidYMid slice');
+  svg.setAttribute('overflow', 'visible');
+
+  var pathEls = [];
+
+  function makePath(i, pos) {
+    var a = 380 - i * 5 * pos, b = 189 + i * 6, c = 312 - i * 5 * pos;
+    var d = 'M' + (-a) + ' ' + (-b) +
+            'C' + (-a) + ' ' + (-b) + ' ' + (-c) + ' ' + (216 - i*6) + ' ' + (152 - i*5*pos) + ' ' + (343 - i*6) +
+            'C' + (616 - i*5*pos) + ' ' + (470 - i*6) + ' ' + (684 - i*5*pos) + ' ' + (875 - i*6) + ' ' + (684 - i*5*pos) + ' ' + (875 - i*6);
+    var path = document.createElementNS(NS, 'path');
+    path.setAttribute('d', d);
+    path.setAttribute('fill', 'none');
+    path.setAttribute('stroke', 'rgba(255,255,255,' + (0.07 + i * 0.012).toFixed(3) + ')');
+    path.setAttribute('stroke-width', (0.4 + i * 0.025).toFixed(2));
+    return path;
+  }
+
+  for (var i = 0; i < 36; i++) {
+    var p1 = makePath(i,  1); svg.appendChild(p1);
+    var p2 = makePath(i, -1); svg.appendChild(p2);
+    pathEls.push({ el: p1, dur: 20 + Math.random()*10, off: Math.random() * -20 });
+    pathEls.push({ el: p2, dur: 20 + Math.random()*10, off: Math.random() * -20 });
+  }
+
+  div.appendChild(svg);
+  section.insertBefore(div, section.firstChild);
+
+  // Init dash after DOM insertion (need getTotalLength)
+  requestAnimationFrame(function() {
+    for (var j = 0; j < pathEls.length; j++) {
+      var el = pathEls[j].el;
+      try {
+        var len = el.getTotalLength();
+        var dash = len * 0.35;
+        el.setAttribute('stroke-dasharray', dash + ' ' + (len - dash));
+        el.setAttribute('stroke-dashoffset', '0');
+        pathEls[j].len = len;
+        pathEls[j].dash = dash;
+      } catch(e) { pathEls[j].len = 0; }
+    }
+    animate(performance.now());
+  });
+
+  function animate(t) {
+    for (var j = 0; j < pathEls.length; j++) {
+      var p = pathEls[j];
+      if (!p.len) continue;
+      var elapsed = (t / 1000 + (-p.off)) % p.dur;
+      var progress = elapsed / p.dur; // 0→1
+      // offset moves the dash along the path and opacity breathes
+      var offset = -p.len * progress;
+      var op = 0.35 + 0.25 * Math.sin(progress * Math.PI * 2);
+      p.el.setAttribute('stroke-dashoffset', offset.toFixed(1));
+      p.el.setAttribute('stroke-opacity', op.toFixed(3));
+    }
+    requestAnimationFrame(animate);
+  }
+})();
+
+// === WAVE NARRATIVE CANVAS ===
+(function() {
+  var canvas = document.getElementById('wave-canvas');
+  if (!canvas) return;
+  var wrap = canvas.parentElement;
+  var ctx = canvas.getContext('2d');
+
+  var waveData = Array.from({ length: 8 }, function() {
+    return {
+      value: Math.random() * 0.5 + 0.1,
+      targetValue: Math.random() * 0.5 + 0.1,
+      speed: Math.random() * 0.02 + 0.01
+    };
+  });
+
+  var time = 0;
+  var frameId = 0;
+  var W = 0, H = 0, dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+  function resize() {
+    var rect = wrap.getBoundingClientRect();
+    W = rect.width; H = rect.height || 220;
+    canvas.width = Math.floor(W * dpr);
+    canvas.height = Math.floor(H * dpr);
+    canvas.style.width = W + 'px';
+    canvas.style.height = H + 'px';
+  }
+
+  function updateWaveData() {
+    waveData.forEach(function(d) {
+      if (Math.random() < 0.012) d.targetValue = Math.random() * 0.65 + 0.1;
+      d.value += (d.targetValue - d.value) * d.speed;
+    });
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = '#070604';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    var cW = canvas.width / dpr;
+    var cH = canvas.height / dpr;
+
+    ctx.save();
+    ctx.scale(dpr, dpr);
+
+    waveData.forEach(function(d, i) {
+      var freq = d.value * 7;
+      ctx.beginPath();
+      for (var x = 0; x < cW; x++) {
+        var nx = (x / cW) * 2 - 1;
+        var px = nx + i * 0.04 + freq * 0.03;
+        var py = Math.sin(px * 10 + time) * Math.cos(px * 2) * freq * 0.1 * ((i + 1) / 8);
+        var y = (py + 1) * cH / 2;
+        x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+      }
+      // Orange color palette — intensity drives from dark amber to bright orange
+      var intensity = Math.min(1, freq * 0.3);
+      var r = Math.round(140 + intensity * 109);  // 140→249 (orange)
+      var g = Math.round(50 + intensity * 65);    // 50→115
+      var b = Math.round(0 + intensity * 22);     // 0→22
+      ctx.lineWidth = (0.6 + i * 0.35) * dpr;
+      ctx.strokeStyle = 'rgba(' + r + ',' + g + ',' + b + ',0.65)';
+      ctx.shadowColor = 'rgba(249,115,22,' + (0.2 + intensity * 0.4) + ')';
+      ctx.shadowBlur = 6 * dpr;
+      ctx.stroke();
+      ctx.shadowBlur = 0;
+    });
+
+    ctx.restore();
+  }
+
+  function animate() {
+    time += 0.018;
+    updateWaveData();
+    draw();
+    frameId = requestAnimationFrame(animate);
+  }
+
+  var resizeTimer;
+  window.addEventListener('resize', function() {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function() { resize(); }, 150);
+  });
+
+  setTimeout(function() {
+    resize();
+    animate();
+  }, 100);
+})();
+
+// === HERO PARTICLE EFFECT ===
+(function() {
+  var canvas = document.getElementById('hero-canvas');
+  var hero = document.getElementById('casos-de-uso');
+  if (!canvas || !hero) return;
+  var ctx = canvas.getContext('2d');
+
+  var PARTICLE_DENSITY = 0.00013;
+  var BG_DENSITY = 0.000045;
+  var MOUSE_RADIUS = 170;
+  var RETURN_SPEED = 0.075;
+  var DAMPING = 0.88;
+  var REPULSION = 1.3;
+
+  var particles = [];
+  var bgParticles = [];
+  var mouse = { x: -9999, y: -9999, active: false };
+  var W = 0, H = 0, dpr = 1;
+  var frameId = 0, lastTime = 0;
+
+  function rand(a, b) { return Math.random() * (b - a) + a; }
+
+  function init(w, h) {
+    W = w; H = h;
+    var n = Math.floor(w * h * PARTICLE_DENSITY);
+    particles = [];
+    for (var i = 0; i < n; i++) {
+      var x = Math.random() * w, y = Math.random() * h;
+      particles.push({ x: x, y: y, ox: x, oy: y, vx: 0, vy: 0,
+        size: rand(0.8, 2.2),
+        orange: Math.random() > 0.88 });
+    }
+    var bn = Math.floor(w * h * BG_DENSITY);
+    bgParticles = [];
+    for (var j = 0; j < bn; j++) {
+      bgParticles.push({ x: Math.random() * w, y: Math.random() * h,
+        vx: (Math.random() - 0.5) * 0.18, vy: (Math.random() - 0.5) * 0.18,
+        size: rand(0.4, 1.3),
+        alpha: rand(0.08, 0.3),
+        phase: Math.random() * Math.PI * 2 });
+    }
+  }
+
+  function resize() {
+    var rect = hero.getBoundingClientRect();
+    dpr = window.devicePixelRatio || 1;
+    canvas.width = rect.width * dpr;
+    canvas.height = rect.height * dpr;
+    canvas.style.width = rect.width + 'px';
+    canvas.style.height = rect.height + 'px';
+    ctx.scale(dpr, dpr);
+    init(rect.width, rect.height);
+  }
+
+  function frame(t) {
+    ctx.clearRect(0, 0, W, H);
+
+    // Subtle orange radial glow (fondo claro: opacidad baja)
+    var pulse = Math.sin(t * 0.0007) * 0.015 + 0.03;
+    var grd = ctx.createRadialGradient(W * 0.65, H * 0.4, 0, W * 0.65, H * 0.4, Math.max(W, H) * 0.65);
+    grd.addColorStop(0, 'rgba(249,115,22,' + pulse + ')');
+    grd.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.fillStyle = grd;
+    ctx.fillRect(0, 0, W, H);
+
+    // Background drifting dots (naranja/marrón sobre fondo claro)
+    for (var i = 0; i < bgParticles.length; i++) {
+      var b = bgParticles[i];
+      b.x += b.vx; b.y += b.vy;
+      if (b.x < 0) b.x = W; if (b.x > W) b.x = 0;
+      if (b.y < 0) b.y = H; if (b.y > H) b.y = 0;
+      var twinkle = Math.sin(t * 0.0018 + b.phase) * 0.5 + 0.5;
+      ctx.globalAlpha = b.alpha * 0.5 * (0.25 + 0.75 * twinkle);
+      ctx.fillStyle = '#f97316';
+      ctx.beginPath();
+      ctx.arc(b.x, b.y, b.size, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+
+    // Physics + draw foreground particles
+    for (var j = 0; j < particles.length; j++) {
+      var p = particles[j];
+      var dx = mouse.x - p.x, dy = mouse.y - p.y;
+      var dist = Math.sqrt(dx * dx + dy * dy);
+      if (mouse.active && dist < MOUSE_RADIUS && dist > 0.5) {
+        var force = ((MOUSE_RADIUS - dist) / MOUSE_RADIUS) * REPULSION;
+        p.vx -= (dx / dist) * force * 5;
+        p.vy -= (dy / dist) * force * 5;
+      }
+      p.vx += (p.ox - p.x) * RETURN_SPEED;
+      p.vy += (p.oy - p.y) * RETURN_SPEED;
+      p.vx *= DAMPING; p.vy *= DAMPING;
+      p.x += p.vx; p.y += p.vy;
+      var vel = Math.sqrt(p.vx * p.vx + p.vy * p.vy);
+      var alpha = Math.min(0.25 + vel * 0.12, 0.9);
+      ctx.fillStyle = p.orange
+        ? 'rgba(249,115,22,' + (0.5 + vel * 0.1).toFixed(2) + ')'
+        : 'rgba(120,80,40,' + alpha.toFixed(2) + ')';
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    frameId = requestAnimationFrame(frame);
+  }
+
+  hero.addEventListener('mousemove', function(e) {
+    var r = hero.getBoundingClientRect();
+    mouse.x = e.clientX - r.left;
+    mouse.y = e.clientY - r.top;
+    mouse.active = true;
+  });
+  hero.addEventListener('mouseleave', function() { mouse.active = false; });
+  hero.addEventListener('touchmove', function(e) {
+    var r = hero.getBoundingClientRect();
+    var t = e.touches[0];
+    mouse.x = t.clientX - r.left;
+    mouse.y = t.clientY - r.top;
+    mouse.active = true;
+  }, { passive: true });
+  hero.addEventListener('touchend', function() { mouse.active = false; });
+
+  window.addEventListener('resize', function() {
+    cancelAnimationFrame(frameId);
+    resize();
+    frameId = requestAnimationFrame(frame);
+  });
+
+  resize();
+  frameId = requestAnimationFrame(frame);
+})();
+
+// Bento mouse tracking
+(function() {
+  document.querySelectorAll('.bento-item').forEach(function(item) {
+    item.addEventListener('mousemove', function(e) {
+      var r = item.getBoundingClientRect();
+      item.style.setProperty('--mouse-x', (e.clientX - r.left) + 'px');
+      item.style.setProperty('--mouse-y', (e.clientY - r.top) + 'px');
+    });
+  });
+})();
+
+// Comparison sliders
+(function() {
+  document.querySelectorAll('.tab-compare').forEach(function(slider) {
+    var dragging = false;
+    function update(clientX) {
+      var rect = slider.getBoundingClientRect();
+      var pct = Math.min(Math.max((clientX - rect.left) / rect.width * 100, 5), 95);
+      slider.style.setProperty('--pos', pct + '%');
+    }
+    slider.addEventListener('mousedown', function(e) { dragging = true; slider.classList.add('dragging'); update(e.clientX); });
+    document.addEventListener('mousemove', function(e) { if (dragging) update(e.clientX); });
+    document.addEventListener('mouseup', function() { dragging = false; slider.classList.remove('dragging'); });
+    slider.addEventListener('touchstart', function(e) { update(e.touches[0].clientX); }, { passive: true });
+    slider.addEventListener('touchmove', function(e) { update(e.touches[0].clientX); slider.classList.add('dragging'); }, { passive: true });
+    slider.addEventListener('touchend', function() { slider.classList.remove('dragging'); });
+  });
+})();
 
 // Tabs
 function showTab(index) {
