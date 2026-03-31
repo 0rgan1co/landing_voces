@@ -397,93 +397,76 @@
   .use-cases h2 { font-size: clamp(1.4rem, 3vw, 1.85rem); font-weight: 800; margin-bottom: 8px; letter-spacing: -0.01em; }
   .use-cases-sub { font-size: 0.95rem; color: var(--gray-600); margin-bottom: 40px; max-width: 560px; margin-left: auto; margin-right: auto; line-height: 1.6; }
 
-  /* App cards grid */
-  .app-cards-grid {
+  /* === BOUNCE CARDS GRID (Section 3) === */
+  .bounce-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(12, 1fr);
     gap: 16px;
-    max-width: 900px;
-    margin: 0 auto;
+    text-align: left;
   }
-  @media (min-width: 860px) {
-    .app-cards-grid { grid-template-columns: repeat(4, 1fr); max-width: 100%; }
-  }
-  @media (max-width: 480px) {
-    .app-cards-grid { grid-template-columns: 1fr; }
+  .bounce-col-4 { grid-column: span 12; }
+  .bounce-col-8 { grid-column: span 12; }
+  @media (min-width: 768px) {
+    .bounce-col-4 { grid-column: span 4; }
+    .bounce-col-8 { grid-column: span 8; }
   }
 
-  .app-card {
+  .bounce-card {
     position: relative;
+    min-height: 300px;
+    border-radius: 20px;
     background: var(--card-bg);
     border: 1px solid var(--card-border);
-    border-radius: 24px;
-    min-height: 270px;
+    padding: 32px;
     overflow: hidden;
-    transition: transform 0.35s cubic-bezier(0.4,0,0.2,1), box-shadow 0.35s;
+    cursor: pointer;
+    transition: transform 0.25s cubic-bezier(0.4,0,0.2,1), box-shadow 0.25s;
   }
-  .app-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 20px 48px rgba(0,0,0,0.14);
+  .bounce-card:hover {
+    transform: scale(0.96) rotate(-1deg);
+    box-shadow: 0 16px 40px rgba(0,0,0,0.12);
   }
-  .app-card-inner {
-    display: block;
-    position: absolute;
-    inset: 0;
-    z-index: 4;
-    text-decoration: none;
-    padding: 22px 16px 0;
-  }
-  .app-card-title {
-    font-size: clamp(1.25rem, 2.5vw, 1.65rem);
-    font-weight: 800;
+  .bounce-card-title {
     text-align: center;
-    color: var(--accent);
-    position: relative;
-    z-index: 2;
-    letter-spacing: -0.02em;
-    margin: 0 0 6px;
-    transition: opacity 0.25s;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 700;
+    color: var(--dark-2);
+    margin: 0;
   }
-  .app-card:hover .app-card-title { opacity: 0.85; }
-  .app-card-icon-wrap {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1;
-  }
-  .app-card-icon {
-    width: 76px; height: 76px;
-    color: var(--accent);
-    opacity: 0.3;
-    transition: transform 0.45s cubic-bezier(0.4,0,0.2,1), opacity 0.3s;
-  }
-  .app-card-icon svg { width: 100%; height: 100%; }
-  .app-card:hover .app-card-icon { transform: scale(1.12); opacity: 0.5; }
 
-  /* Arrow corner — bottom-right */
-  .app-card-corner {
+  /* Slide-up panel */
+  .bounce-panel {
     position: absolute;
-    bottom: 0; right: 0;
-    width: 62px; height: 62px;
-    background: var(--bg);
-    border-top-left-radius: 14px;
-    border-top: 1px solid var(--card-border);
-    border-left: 1px solid var(--card-border);
-    display: flex; align-items: center; justify-content: center;
-    z-index: 5;
+    bottom: 0; left: 16px; right: 16px; top: 120px;
+    border-radius: 16px 16px 0 0;
+    padding: 20px 22px;
+    transform: translateY(32px);
+    transition: transform 0.25s cubic-bezier(0.4,0,0.2,1);
   }
-  .app-card-arrow {
-    width: 42px; height: 42px;
-    border-radius: 50%;
-    background: rgba(249,115,22,0.1);
-    display: flex; align-items: center; justify-content: center;
-    color: var(--accent);
-    transition: background 0.3s, transform 0.3s, color 0.3s;
+  .bounce-card:hover .bounce-panel {
+    transform: translateY(16px) rotate(2deg);
   }
-  .app-card:hover .app-card-arrow { background: var(--accent); color: #fff; transform: scale(1.08); }
-  .app-card-arrow svg { width: 18px; height: 18px; }
+  .bounce-panel-label {
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 10px;
+    opacity: 0.7;
+  }
+  .bounce-panel-desc {
+    font-size: 0.9rem;
+    font-weight: 600;
+    line-height: 1.5;
+    margin-bottom: 12px;
+  }
+  .bounce-panel-list {
+    margin: 0; padding: 0 0 0 14px;
+    font-size: 0.8rem;
+    line-height: 1.6;
+  }
+  .bounce-panel-list li { margin-bottom: 3px; }
 
   /* === ANIMATED CARD CHART === */
   .animated-card {
@@ -1384,7 +1367,7 @@
   </div>
 </section>
 
-<!-- SECTION 3: 4 APLICACIONES (cards) -->
+<!-- SECTION 3: 4 APLICACIONES (bounce cards) -->
 <section id="casos-de-uso" class="use-cases reveal" style="position:relative; overflow:hidden;">
   <canvas id="hero-canvas" aria-hidden="true"></canvas>
   <div class="container">
@@ -1392,74 +1375,62 @@
     <h2>Cada equipo u organización tiene una conversación pendiente</h2>
     <p class="use-cases-sub">Hay temas que todos conocen pero nadie pone en agenda. Voces.ai les da visibilidad para que las decisiones se tomen con evidencia, no con supuestos.</p>
 
-    <div class="app-cards-grid">
+    <!-- Row 1 -->
+    <div class="bounce-grid" style="margin-bottom:16px;">
 
-      <!-- Negocios -->
-      <div class="app-card">
-        <a href="#agendar" class="app-card-inner">
-          <h3 class="app-card-title">Negocios</h3>
-          <div class="app-card-icon-wrap">
-            <div class="app-card-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" x2="12" y1="20" y2="10"/><line x1="18" x2="18" y1="20" y2="4"/><line x1="6" x2="6" y1="20" y2="16"/></svg>
-            </div>
-          </div>
-          <div class="app-card-corner">
-            <div class="app-card-arrow">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
-            </div>
-          </div>
-        </a>
+      <div class="bounce-card bounce-col-4">
+        <h3 class="bounce-card-title">Negocios</h3>
+        <div class="bounce-panel" style="background:linear-gradient(135deg,#f97316,#fb923c); color:#fff3e8;">
+          <span class="bounce-panel-label">Señal de riesgo</span>
+          <p class="bounce-panel-desc">Las señales críticas están en las personas, no en el PowerPoint.</p>
+          <ul class="bounce-panel-list">
+            <li>Equipos entrevistados antes de ejecutar</li>
+            <li>Menos sorpresas en la implementación</li>
+          </ul>
+        </div>
       </div>
 
-      <!-- Personas -->
-      <div class="app-card">
-        <a href="#agendar" class="app-card-inner">
-          <h3 class="app-card-title">Personas</h3>
-          <div class="app-card-icon-wrap">
-            <div class="app-card-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-            </div>
-          </div>
-          <div class="app-card-corner">
-            <div class="app-card-arrow">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
-            </div>
-          </div>
-        </a>
+      <div class="bounce-card bounce-col-8">
+        <h3 class="bounce-card-title">Personas &amp; Cultura</h3>
+        <div class="bounce-panel" style="background:linear-gradient(135deg,#ea580c,#f97316); color:#fff3e8;">
+          <span class="bounce-panel-label">Más allá del 7.2</span>
+          <p class="bounce-panel-desc">Lo que la gente realmente piensa — sin filtro ni audiencia.</p>
+          <ul class="bounce-panel-list">
+            <li>Cultura real vs. cultura declarada</li>
+            <li>Rotación anticipada con evidencia</li>
+            <li>Decisiones de talento basadas en data</li>
+          </ul>
+        </div>
       </div>
 
-      <!-- Procesos -->
-      <div class="app-card">
-        <a href="#agendar" class="app-card-inner">
-          <h3 class="app-card-title">Procesos</h3>
-          <div class="app-card-icon-wrap">
-            <div class="app-card-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
-            </div>
-          </div>
-          <div class="app-card-corner">
-            <div class="app-card-arrow">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
-            </div>
-          </div>
-        </a>
+    </div>
+
+    <!-- Row 2 -->
+    <div class="bounce-grid">
+
+      <div class="bounce-card bounce-col-8">
+        <h3 class="bounce-card-title">Procesos</h3>
+        <div class="bounce-panel" style="background:linear-gradient(135deg,#c2410c,#ea580c); color:#fff3e8;">
+          <span class="bounce-panel-label">Brecha proceso-práctica</span>
+          <p class="bounce-panel-desc">Cómo se viven los procesos en la práctica vs. cómo fueron diseñados.</p>
+          <ul class="bounce-panel-list">
+            <li>Workarounds invisibles que generan riesgo</li>
+            <li>Rediseño con evidencia, no con supuestos</li>
+            <li>Quién adopta y por qué</li>
+          </ul>
+        </div>
       </div>
 
-      <!-- Cambio -->
-      <div class="app-card">
-        <a href="#agendar" class="app-card-inner">
-          <h3 class="app-card-title">Cambio</h3>
-          <div class="app-card-icon-wrap">
-            <div class="app-card-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/></svg>
-            </div>
-          </div>
-          <div class="app-card-corner">
-            <div class="app-card-arrow">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
-            </div>
-          </div>
-        </a>
+      <div class="bounce-card bounce-col-4">
+        <h3 class="bounce-card-title">Cambio</h3>
+        <div class="bounce-panel" style="background:linear-gradient(135deg,#9a3412,#c2410c); color:#fff3e8;">
+          <span class="bounce-panel-label">Transformación real</span>
+          <p class="bounce-panel-desc">¿El cambio aterrizó o solo cambió el discurso?</p>
+          <ul class="bounce-panel-list">
+            <li>Narrativas antes y después</li>
+            <li>Transformación real vs. adaptación superficial</li>
+          </ul>
+        </div>
       </div>
 
     </div>
