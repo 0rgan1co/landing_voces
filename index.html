@@ -1074,59 +1074,99 @@
   .bento-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 14px;
+    gap: 12px;
   }
   .bento-item {
-    background: rgba(0,0,0,0.25);
-    border: 1px solid rgba(255,255,255,0.18);
-    border-radius: 16px;
-    padding: 28px;
     position: relative;
+    padding: 20px;
+    border-radius: 14px;
     overflow: hidden;
-    transition: border-color 0.3s, box-shadow 0.3s, background 0.3s;
+    background: #fff;
+    border: 1px solid rgba(0,0,0,0.07);
+    transition: transform 0.3s cubic-bezier(0.4,0,0.2,1), box-shadow 0.3s;
     cursor: default;
-    backdrop-filter: blur(4px);
+    display: flex;
+    flex-direction: column;
+    gap: 0;
   }
-  .bento-item::after {
+  /* Dot pattern — visible on hover (and persistently on item 1) */
+  .bento-item::before {
     content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(
-      500px circle at var(--mouse-x, -200px) var(--mouse-y, -200px),
-      rgba(255,255,255,0.08),
-      transparent 40%
-    );
+    position: absolute; inset: 0;
+    background-image: radial-gradient(circle at center, rgba(0,0,0,0.045) 1px, transparent 1px);
+    background-size: 4px 4px;
+    opacity: 0;
+    transition: opacity 0.3s;
     pointer-events: none;
     border-radius: inherit;
-    opacity: 0;
-    transition: opacity 0.4s;
   }
-  .bento-item:hover::after { opacity: 1; }
-  .bento-item:hover {
-    border-color: rgba(255,255,255,0.32);
-    background: rgba(0,0,0,0.35);
-    box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+  .bento-item:hover { transform: translateY(-2px); box-shadow: 0 4px 20px rgba(0,0,0,0.09); }
+  .bento-item:hover::before { opacity: 1; }
+  /* Col spans */
+  .bento-item:nth-child(1) { grid-column: span 2; transform: translateY(-2px); box-shadow: 0 4px 20px rgba(0,0,0,0.09); }
+  .bento-item:nth-child(1)::before { opacity: 1; }
+  .bento-item:nth-child(3) { grid-column: span 2; }
+  .bento-item:nth-child(5) { grid-column: span 3; }
+  /* Icon + badge row */
+  .bento-item-header {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 14px;
   }
-  .bento-item:nth-child(1) { grid-column: span 2; }
   .bento-item-icon {
-    width: 44px; height: 44px;
-    background: rgba(255,255,255,0.15);
-    border-radius: 11px;
+    width: 36px; height: 36px;
+    border-radius: 10px;
     display: flex; align-items: center; justify-content: center;
-    margin-bottom: 18px;
-    border: 1px solid rgba(255,255,255,0.2);
+    background: rgba(0,0,0,0.05);
+    transition: background 0.3s;
+    flex-shrink: 0;
   }
-  .bento-item-icon svg { width: 21px; height: 21px; color: #fff; }
+  .bento-item:hover .bento-item-icon {
+    background: linear-gradient(135deg, rgba(249,115,22,0.14), rgba(234,88,12,0.07));
+  }
+  .bento-item-icon svg { width: 17px; height: 17px; }
+  .bento-item-badge {
+    font-size: 0.65rem; font-weight: 600;
+    padding: 3px 9px; border-radius: 8px;
+    background: rgba(0,0,0,0.05); color: #555;
+    transition: background 0.3s;
+    white-space: nowrap;
+  }
+  .bento-item:hover .bento-item-badge { background: rgba(0,0,0,0.09); }
+  /* Title + meta */
   .bento-item h3 {
-    font-size: 0.95rem; font-weight: 700;
-    color: #fff; margin-bottom: 7px; line-height: 1.3;
+    font-size: 0.9rem; font-weight: 600;
+    color: #0f0d0b; margin: 0 0 2px; line-height: 1.3;
+    letter-spacing: -0.01em;
+  }
+  .bento-item-meta {
+    font-size: 0.7rem; color: #999; font-weight: 400; margin-left: 5px;
   }
   .bento-item p {
-    font-size: 0.8rem; color: rgba(255,255,255,0.7);
-    line-height: 1.65; margin: 0;
+    font-size: 0.8rem; color: #555;
+    line-height: 1.65; margin: 8px 0 14px;
   }
-  .bento-item:nth-child(1) h3 { font-size: 1.15rem; }
-  .bento-item:nth-child(1) p { font-size: 0.86rem; color: rgba(255,255,255,0.75); }
+  .bento-item:nth-child(1) h3 { font-size: 1rem; }
+  .bento-item:nth-child(1) p { font-size: 0.86rem; color: #444; }
+  .bento-item:nth-child(5) h3 { font-size: 1rem; }
+  .bento-item:nth-child(5) p { max-width: 640px; }
+  /* Footer: tags + CTA */
+  .bento-item-footer {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-top: auto;
+  }
+  .bento-item-tags { display: flex; gap: 5px; flex-wrap: wrap; }
+  .bento-item-tag {
+    font-size: 0.65rem; padding: 3px 7px; border-radius: 6px;
+    background: rgba(0,0,0,0.05); color: #666;
+    transition: background 0.2s;
+  }
+  .bento-item:hover .bento-item-tag { background: rgba(0,0,0,0.09); }
+  .bento-item-cta {
+    font-size: 0.7rem; color: #bbb;
+    opacity: 0; transition: opacity 0.3s;
+    white-space: nowrap; margin-left: 8px;
+  }
+  .bento-item:hover .bento-item-cta { opacity: 1; }
 
 
   @media (max-width: 768px) {
@@ -1383,41 +1423,107 @@
       <p>Todo lo que necesitás para convertir conversaciones en decisiones.</p>
     </div>
     <div class="bento-grid">
+
+      <!-- 1: span-2, persistent hover -->
       <div class="bento-item">
-        <div class="bento-item-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        <div class="bento-item-header">
+          <div class="bento-item-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          </div>
+          <span class="bento-item-badge">IA · paralelo</span>
         </div>
-        <h3>Escala sin perder señal</h3>
-        <p>Cientos de conversaciones individuales simultáneas sin coordinar agenda, sin encuestadores, sin perder el matiz de lo que cada persona realmente piensa.</p>
+        <h3>Escala sin perder señal<span class="bento-item-meta">asíncrono</span></h3>
+        <p>Un agente de IA conduce entrevistas individuales en texto, en paralelo, con cada persona de la organización. Sin formularios, sin agendar sesiones, sin moderador humano. Cada conversación es independiente y captura respuestas abiertas — no opciones predefinidas.</p>
+        <div class="bento-item-footer">
+          <div class="bento-item-tags">
+            <span class="bento-item-tag">#entrevistas</span>
+            <span class="bento-item-tag">#sin-agenda</span>
+            <span class="bento-item-tag">#texto-libre</span>
+          </div>
+          <span class="bento-item-cta">Explorar →</span>
+        </div>
       </div>
+
+      <!-- 2: span-1 -->
       <div class="bento-item">
-        <div class="bento-item-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><line x1="16" x2="8" y1="13" y2="13"/><line x1="16" x2="8" y1="17" y2="17"/></svg>
+        <div class="bento-item-header">
+          <div class="bento-item-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+          </div>
+          <span class="bento-item-badge">3 capas</span>
         </div>
-        <h3>De conversación a evidencia</h3>
-        <p>Hecho, contexto y consecuencia — sin interpretación sesgada.</p>
+        <h3>De conversación a evidencia<span class="bento-item-meta">estructurado</span></h3>
+        <p>Cada conversación se procesa en tres capas: qué se dijo, en qué contexto, y qué consecuencia tiene para el negocio. El output es evidencia clasificada, no texto crudo.</p>
+        <div class="bento-item-footer">
+          <div class="bento-item-tags">
+            <span class="bento-item-tag">#hecho</span>
+            <span class="bento-item-tag">#contexto</span>
+            <span class="bento-item-tag">#consecuencia</span>
+          </div>
+          <span class="bento-item-cta">Explorar →</span>
+        </div>
       </div>
+
+      <!-- 3: span-2 -->
       <div class="bento-item">
-        <div class="bento-item-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+        <div class="bento-item-header">
+          <div class="bento-item-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+          </div>
+          <span class="bento-item-badge">motor semántico</span>
         </div>
-        <h3>Patrones que no aparecen en voz alta</h3>
-        <p>Análisis semántico que revela lo que se repite, se contradice y nadie dice abiertamente.</p>
+        <h3>Lo que nadie dice en voz alta<span class="bento-item-meta">anonimato por diseño</span></h3>
+        <p>El motor semántico agrupa respuestas por similitud, detecta contradicciones entre lo que distintos roles reportan y surfacea temas recurrentes que no aparecen si preguntás directamente. El anonimato por diseño es lo que habilita esa señal.</p>
+        <div class="bento-item-footer">
+          <div class="bento-item-tags">
+            <span class="bento-item-tag">#patrones</span>
+            <span class="bento-item-tag">#contradicciones</span>
+            <span class="bento-item-tag">#anonimato</span>
+          </div>
+          <span class="bento-item-cta">Explorar →</span>
+        </div>
       </div>
+
+      <!-- 4: span-1 -->
       <div class="bento-item">
-        <div class="bento-item-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        <div class="bento-item-header">
+          <div class="bento-item-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <span class="bento-item-badge">antes vs. después</span>
         </div>
-        <h3>Antes y después con datos</h3>
-        <p>Para saber si el cambio fue real o solo discursivo.</p>
+        <h3>¿El cambio fue real?<span class="bento-item-meta">comparación semántica</span></h3>
+        <p>Corrés el mismo diagnóstico en distintos momentos y comparás resultados a nivel semántico. Ves qué narrativas cambiaron, cuáles persisten y con qué intensidad.</p>
+        <div class="bento-item-footer">
+          <div class="bento-item-tags">
+            <span class="bento-item-tag">#narrativas</span>
+            <span class="bento-item-tag">#tiempo</span>
+          </div>
+          <span class="bento-item-cta">Explorar →</span>
+        </div>
       </div>
+
+      <!-- 5: span-3 full width -->
       <div class="bento-item">
-        <div class="bento-item-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" x2="15.42" y1="13.51" y2="17.49"/><line x1="15.41" x2="8.59" y1="6.51" y2="10.49"/></svg>
+        <div class="bento-item-header">
+          <div class="bento-item-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <span class="bento-item-badge">permisos por rol</span>
         </div>
-        <h3>Cada nivel ve lo que necesita</h3>
-        <p>Sin ruido, listo para decidir.</p>
+        <h3>Cada nivel ve lo que necesita<span class="bento-item-meta">sin datos individuales</span></h3>
+        <p>El dashboard tiene vistas con permisos diferenciados por rol. El CEO accede al diagnóstico estratégico consolidado. El líder de equipo ve los patrones de su área. Nadie ve datos individuales — el anonimato se mantiene estructuralmente en todas las capas.</p>
+        <div class="bento-item-footer">
+          <div class="bento-item-tags">
+            <span class="bento-item-tag">#CEO</span>
+            <span class="bento-item-tag">#líderes</span>
+            <span class="bento-item-tag">#RRHH</span>
+            <span class="bento-item-tag">#privacidad</span>
+          </div>
+          <span class="bento-item-cta">Explorar →</span>
+        </div>
       </div>
+
     </div>
   </div>
 </section>
