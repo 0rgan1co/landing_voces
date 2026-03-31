@@ -412,11 +412,10 @@
     overflow: hidden;
     border-radius: 20px;
     cursor: pointer;
-    flex-shrink: 0;
-    width: 72px;
-    transition: width 0.5s cubic-bezier(0.4,0,0.2,1);
+    flex: 0 0 72px;
+    transition: flex 0.5s cubic-bezier(0.4,0,0.2,1);
   }
-  .expand-card.is-expanded { width: 400px; }
+  .expand-card.is-expanded { flex: 1 1 55%; }
 
   .expand-card img {
     width: 100%;
