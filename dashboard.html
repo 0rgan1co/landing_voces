@@ -4,30 +4,30 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dashboard — Voces.ai</title>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48' fill='none'%3E%3Crect x='6' y='16' width='4' height='16' rx='2' fill='%23f97316'/%3E%3Crect x='14' y='8' width='4' height='32' rx='2' fill='%23f97316'/%3E%3Crect x='22' y='14' width='4' height='20' rx='2' fill='%23f97316'/%3E%3Crect x='30' y='6' width='4' height='36' rx='2' fill='%23f97316'/%3E%3Crect x='38' y='18' width='4' height='12' rx='2' fill='%23f97316'/%3E%3C/svg%3E">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48' fill='none'%3E%3Crect x='6' y='16' width='4' height='16' rx='2' fill='%2300C8FF'/%3E%3Crect x='14' y='8' width='4' height='32' rx='2' fill='%2300C8FF'/%3E%3Crect x='22' y='14' width='4' height='20' rx='2' fill='%2300C8FF'/%3E%3Crect x='30' y='6' width='4' height='36' rx='2' fill='%2300C8FF'/%3E%3Crect x='38' y='18' width='4' height='12' rx='2' fill='%2300C8FF'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Bebas+Neue&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
   :root {
-    --accent: #f97316; --accent-light: #fb923c; --accent-dark: #c2410c; --accent-bg: #fff7ed;
+    --accent: #00C8FF; --accent-light: #4AD9FF; --accent-dark: #005A7F; --accent-bg: #E8FAFF;
     --dark: #0a0a0a; --dark-2: #171717; --dark-3: #262626;
     --gray-50: #fafafa; --gray-100: #f5f5f5; --gray-200: #e5e5e5;
     --gray-400: #a3a3a3; --gray-600: #525252;
     --sidebar-w: 240px; --topbar-h: 56px; --radius: 10px;
     /* Theme tokens */
-    --bg: #fcfcfa; --bg-2: #f5f0e8; --text: #1f1f1f; --text-2: rgba(0,0,0,0.6);
+    --bg: #F6FBFF; --bg-2: #EBF8FF; --text: #1f1f1f; --text-2: rgba(0,0,0,0.6);
     --card-bg: #ffffff; --card-border: rgba(0,0,0,0.1);
     --nav-bg: rgba(252,252,250,0.95); --nav-border: rgba(0,0,0,0.08);
   }
   [data-theme="dark"] {
-    --bg: #141414; --bg-2: #1e1e1e; --text: #f8f5ee; --text-2: rgba(255,255,255,0.6);
+    --bg: #141414; --bg-2: #1e1e1e; --text: #E8F4FA; --text-2: rgba(255,255,255,0.6);
     --card-bg: #1e1e1e; --card-border: rgba(255,255,255,0.1);
     --nav-bg: rgba(20,20,20,0.95); --nav-border: rgba(255,255,255,0.08);
     --gray-50: #1e1e1e; --gray-100: #2a2a2a; --gray-200: rgba(255,255,255,0.1);
     --gray-400: rgba(255,255,255,0.4); --gray-600: rgba(255,255,255,0.6);
-    --accent-bg: rgba(249,115,22,0.1);
+    --accent-bg: rgba(0,200,255,0.1);
   }
   body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -46,7 +46,8 @@
     z-index: 50; transition: transform 0.2s;
   }
   .sidebar-logo {
-    padding: 18px 20px; font-size: 1rem; font-weight: 800;
+    padding: 18px 20px; font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; font-weight: 400;
+    letter-spacing: 0.1em; text-transform: uppercase;
     display: flex; align-items: center; gap: 8px;
     border-bottom: 1px solid var(--dark-3);
   }
@@ -58,7 +59,7 @@
     color: var(--gray-400); transition: all 0.15s; border-left: 3px solid transparent;
   }
   .sidebar-nav a:hover { color: #fff; background: rgba(255,255,255,0.05); }
-  .sidebar-nav a.active { color: #fff; background: rgba(249,115,22,0.15); border-left-color: var(--accent); font-weight: 600; }
+  .sidebar-nav a.active { color: #fff; background: rgba(0,200,255,0.15); border-left-color: var(--accent); font-weight: 600; }
   .sidebar-nav a svg { width: 18px; height: 18px; flex-shrink: 0; }
   .sidebar-section { padding: 16px 20px 6px; font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.2px; color: var(--gray-600); }
   .sidebar-footer {
@@ -107,8 +108,8 @@
     font-weight: 600; border: none; cursor: pointer; font-family: inherit;
     transition: transform 0.1s, box-shadow 0.15s;
   }
-  .btn-primary { background: var(--accent); color: #fff; box-shadow: 0 2px 8px rgba(249,115,22,0.2); }
-  .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(249,115,22,0.3); }
+  .btn-primary { background: var(--accent); color: #fff; box-shadow: 0 2px 8px rgba(0,200,255,0.2); }
+  .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,200,255,0.3); }
   .btn-outline { background: var(--card-bg); color: var(--text); border: 1.5px solid var(--gray-200); }
   .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
   .btn svg { width: 16px; height: 16px; }
@@ -118,7 +119,7 @@
     background: var(--card-bg); border: 1.5px solid var(--gray-200); border-radius: var(--radius);
     padding: 20px; transition: border-color 0.15s, box-shadow 0.15s; cursor: pointer;
   }
-  .project-card:hover { border-color: var(--accent); box-shadow: 0 4px 16px rgba(249,115,22,0.06); }
+  .project-card:hover { border-color: var(--accent); box-shadow: 0 4px 16px rgba(0,200,255,0.06); }
   .project-card-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 8px; }
   .project-card h3 { font-size: 0.95rem; font-weight: 700; }
   .project-card p { font-size: 0.82rem; color: var(--gray-600); margin-bottom: 14px; line-height: 1.5; }
@@ -222,14 +223,14 @@
 </style>
 </head>
 <body>
-<a href="#main-content" class="sr-only" style="position:absolute;top:-100px;left:0;z-index:999;background:var(--accent,#f97316);color:#fff;padding:8px 16px;font-size:0.85rem;" onfocus="this.style.top='0';" onblur="this.style.top='-100px';">Saltar al contenido</a>
+<a href="#main-content" class="sr-only" style="position:absolute;top:-100px;left:0;z-index:999;background:var(--accent,#00C8FF);color:#fff;padding:8px 16px;font-size:0.85rem;" onfocus="this.style.top='0';" onblur="this.style.top='-100px';">Saltar al contenido</a>
 <div class="app">
 
 <!-- SIDEBAR (EARS-051) -->
 <aside class="sidebar" id="sidebar">
   <div class="sidebar-logo">
     <svg width="20" height="20" viewBox="0 0 48 48" fill="none"><rect x="6" y="16" width="4" height="16" rx="2" fill="currentColor"/><rect x="14" y="8" width="4" height="32" rx="2" fill="currentColor"/><rect x="22" y="14" width="4" height="20" rx="2" fill="currentColor"/><rect x="30" y="6" width="4" height="36" rx="2" fill="currentColor"/><rect x="38" y="18" width="4" height="12" rx="2" fill="currentColor"/></svg>
-    Voces.ai
+    VOCES
   </div>
   <nav class="sidebar-nav">
     <div class="sidebar-section">General</div>
@@ -356,13 +357,19 @@
         <label for="cfg-themes">Temas de seguimiento</label>
         <textarea id="cfg-themes" placeholder="Ej: Liderazgo, comunicación, autonomía, bienestar"></textarea>
       </div>
-      <div class="form-group">
-        <label for="cfg-lang">Idioma</label>
-        <select id="cfg-lang">
-          <option value="es">Español</option>
-          <option value="en">English</option>
-          <option value="pt">Português</option>
-        </select>
+      <div style="display:flex;gap:12px;">
+        <div class="form-group" style="flex:1;">
+          <label for="cfg-lang">Idioma</label>
+          <select id="cfg-lang">
+            <option value="es">Español</option>
+            <option value="en">English</option>
+            <option value="pt">Português</option>
+          </select>
+        </div>
+        <div class="form-group" style="flex:1;">
+          <label for="cfg-duration">Duración máxima (min)</label>
+          <input type="number" id="cfg-duration" min="5" max="120" value="30" placeholder="30">
+        </div>
       </div>
       <div class="form-actions">
         <button type="button" class="btn btn-outline" onclick="closeModal('config-interview-modal')">Cancelar</button>
@@ -384,7 +391,18 @@
       <input type="text" id="invite-link" readonly>
       <button class="btn btn-primary" onclick="copyInviteLink()" id="copy-btn">Copiar</button>
     </div>
-    <p style="font-size:0.78rem; color:var(--gray-400);">Cada persona que acceda al link iniciará una entrevista anónima e individual.</p>
+    <div style="border-top:1px solid var(--gray-200); padding-top:14px; margin-top:8px;">
+      <label style="display:block; font-size:0.82rem; font-weight:600; margin-bottom:6px;">Enviar por email</label>
+      <div style="display:flex; gap:8px;">
+        <input type="email" id="invite-email" placeholder="participante@empresa.com" style="flex:1; padding:9px 12px; border:1.5px solid var(--gray-200); border-radius:8px; font-size:0.82rem; font-family:inherit; outline:none;">
+        <button class="btn btn-outline" onclick="sendInviteEmail()" id="send-email-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          Enviar
+        </button>
+      </div>
+      <p id="invite-email-feedback" style="font-size:0.75rem; margin-top:6px; display:none;"></p>
+    </div>
+    <p style="font-size:0.78rem; color:var(--gray-400); margin-top:12px;">Cada persona que acceda al link iniciará una entrevista anónima e individual.</p>
   </div>
 </div>
 
@@ -476,6 +494,7 @@ async function createProject(e) {
 
 // State
 var currentProject = null;
+var interviewSubscription = null;
 
 // Open project — load interview view (EARS-055)
 async function openProject(id) {
@@ -488,6 +507,30 @@ async function openProject(id) {
   document.querySelectorAll('.sidebar-nav a').forEach(function(a) { a.classList.remove('active'); });
   document.querySelector('[data-page="interviews"]').classList.add('active');
   loadInterviews();
+  subscribeToInterviews(id);
+}
+
+// Real-time progress (EARS-058)
+function subscribeToInterviews(projectId) {
+  unsubscribeInterviews();
+  interviewSubscription = _supabase
+    .channel('interviews-' + projectId)
+    .on('postgres_changes', {
+      event: '*',
+      schema: 'public',
+      table: 'interviews',
+      filter: 'project_id=eq.' + projectId
+    }, function(payload) {
+      loadInterviews();
+    })
+    .subscribe();
+}
+
+function unsubscribeInterviews() {
+  if (interviewSubscription) {
+    _supabase.removeChannel(interviewSubscription);
+    interviewSubscription = null;
+  }
 }
 
 // Load interviews (EARS-055, 059)
@@ -506,7 +549,7 @@ async function loadInterviews() {
   var html = '<button class="back-btn" onclick="backToProjects()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg> Volver a proyectos</button>';
 
   html += '<div class="summary-bar">' +
-    '<div class="summary-card"><div class="num">' + total + '</div><div class="lbl">Total</div></div>' +
+    '<div class="summary-card"><div class="num">' + total + '</div><div class="lbl">Invitados</div></div>' +
     '<div class="summary-card"><div class="num">' + started + '</div><div class="lbl">Iniciadas</div></div>' +
     '<div class="summary-card"><div class="num green">' + completed + '</div><div class="lbl">Completadas</div></div>' +
     '<div class="summary-card"><div class="num purple">' + rate + '%</div><div class="lbl">Tasa de completitud</div></div>' +
@@ -549,6 +592,7 @@ async function loadInterviews() {
 
 // Back to projects
 function backToProjects() {
+  unsubscribeInterviews();
   currentProject = null;
   document.getElementById('page-title').textContent = 'Proyectos';
   document.getElementById('search-input').placeholder = 'Buscar proyectos...';
@@ -569,10 +613,13 @@ async function saveInterviewConfig(e) {
   var questions = [document.getElementById('cfg-question').value];
   var themes = document.getElementById('cfg-themes').value;
   if (themes) questions.push('Temas: ' + themes);
+  var maxDuration = parseInt(document.getElementById('cfg-duration').value) || 30;
   await _supabase.from('projects').update({
-    interview_questions: questions
+    interview_questions: questions,
+    max_duration_minutes: maxDuration
   }).eq('id', currentProject.id);
   currentProject.interview_questions = questions;
+  currentProject.max_duration_minutes = maxDuration;
   closeModal('config-interview-modal');
 }
 
@@ -592,6 +639,33 @@ function copyInviteLink() {
     btn.textContent = 'Copiado!';
     setTimeout(function() { btn.textContent = 'Copiar'; }, 2000);
   });
+}
+
+async function sendInviteEmail() {
+  var emailInput = document.getElementById('invite-email');
+  var email = emailInput.value.trim();
+  var feedback = document.getElementById('invite-email-feedback');
+  if (!email || !email.includes('@')) {
+    feedback.style.display = 'block'; feedback.style.color = '#e65100';
+    feedback.textContent = 'Ingresá un email válido.'; return;
+  }
+  var btn = document.getElementById('send-email-btn');
+  btn.disabled = true; btn.innerHTML = '<div class="spinner"></div>';
+  var link = document.getElementById('invite-link').value;
+  var projectName = currentProject ? currentProject.name : 'Voces.ai';
+  var { error } = await _supabase.functions.invoke('send-confirmation', {
+    body: { name: '', email: email, company: '', invite_link: link, project_name: projectName }
+  });
+  btn.disabled = false; btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg> Enviar';
+  if (error) {
+    feedback.style.display = 'block'; feedback.style.color = '#e65100';
+    feedback.textContent = 'Error al enviar. Intentá de nuevo.';
+  } else {
+    feedback.style.display = 'block'; feedback.style.color = '#2e7d32';
+    feedback.textContent = 'Invitación enviada a ' + email;
+    emailInput.value = '';
+    setTimeout(function() { feedback.style.display = 'none'; }, 4000);
+  }
 }
 
 // Sidebar navigation
