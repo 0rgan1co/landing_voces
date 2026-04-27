@@ -922,61 +922,6 @@
   }
   @keyframes hwDraw { to { stroke-dashoffset: 0; } }
 
-  /* === LOGOS CAROUSEL === */
-  .logos-section {
-    padding: 44px 0;
-    background: var(--bg);
-    border-bottom: 1px solid var(--card-border);
-    overflow: hidden;
-  }
-  .logos-heading {
-    text-align: center;
-    font-size: 0.72rem;
-    font-weight: 700;
-    letter-spacing: 1px;
-    color: var(--gray-400);
-    text-transform: uppercase;
-    margin-bottom: 28px;
-  }
-  .logos-track-outer {
-    position: relative;
-    overflow: hidden;
-  }
-  .logos-track-outer::before,
-  .logos-track-outer::after {
-    content: ''; position: absolute; top: 0; bottom: 0;
-    width: 100px; z-index: 2; pointer-events: none;
-  }
-  .logos-track-outer::before {
-    left: 0;
-    background: linear-gradient(to right, var(--bg) 20%, transparent);
-  }
-  .logos-track-outer::after {
-    right: 0;
-    background: linear-gradient(to left, var(--bg) 20%, transparent);
-  }
-  .logos-track {
-    display: flex;
-    width: max-content;
-    animation: logoScroll 30s linear infinite;
-  }
-  .logos-track:hover { animation-play-state: paused; }
-  @keyframes logoScroll {
-    from { transform: translateX(0); }
-    to   { transform: translateX(-50%); }
-  }
-  .logo-item {
-    display: flex; align-items: center; justify-content: center;
-    padding: 0 40px; height: 44px; flex-shrink: 0;
-    opacity: 0.38; transition: opacity 0.25s;
-  }
-  .logo-item:hover { opacity: 0.65; }
-  .logo-item svg { height: 20px; width: auto; }
-  .logo-item span {
-    font-size: 1rem; font-weight: 800; letter-spacing: -0.03em;
-    color: var(--text); white-space: nowrap;
-  }
-
   /* === SR-ONLY (accessibility) === */
   .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
 
@@ -1318,37 +1263,6 @@
   </div>
 </section>
 
-
-<!-- CONFÍAN EN NOSOTROS -->
-<section class="logos-section">
-  <p class="logos-heading">Confían en nosotros</p>
-  <div class="logos-track-outer">
-    <div class="logos-track" aria-hidden="true">
-      <!-- Set 1 -->
-      <div class="logo-item"><span>Arcor</span></div>
-      <div class="logo-item"><span style="font-style:italic;font-weight:700;">Telecom</span></div>
-      <div class="logo-item"><span style="letter-spacing:0.08em;font-size:0.85rem;">GALICIA</span></div>
-      <div class="logo-item"><span>Naranja X</span></div>
-      <div class="logo-item"><span style="font-weight:900;letter-spacing:-0.04em;">YPF</span></div>
-      <div class="logo-item"><span style="letter-spacing:0.04em;">Grupo Pegasus</span></div>
-      <div class="logo-item"><span style="font-style:italic;">Despegar</span></div>
-      <div class="logo-item"><span style="font-weight:900;letter-spacing:-0.02em;">OCA</span></div>
-      <div class="logo-item"><span>Laboratorios Bagó</span></div>
-      <div class="logo-item"><span style="letter-spacing:0.1em;font-size:0.82rem;">OSDE</span></div>
-      <!-- Set 2 (duplicate for seamless loop) -->
-      <div class="logo-item"><span>Arcor</span></div>
-      <div class="logo-item"><span style="font-style:italic;font-weight:700;">Telecom</span></div>
-      <div class="logo-item"><span style="letter-spacing:0.08em;font-size:0.85rem;">GALICIA</span></div>
-      <div class="logo-item"><span>Naranja X</span></div>
-      <div class="logo-item"><span style="font-weight:900;letter-spacing:-0.04em;">YPF</span></div>
-      <div class="logo-item"><span style="letter-spacing:0.04em;">Grupo Pegasus</span></div>
-      <div class="logo-item"><span style="font-style:italic;">Despegar</span></div>
-      <div class="logo-item"><span style="font-weight:900;letter-spacing:-0.02em;">OCA</span></div>
-      <div class="logo-item"><span>Laboratorios Bagó</span></div>
-      <div class="logo-item"><span style="letter-spacing:0.1em;font-size:0.82rem;">OSDE</span></div>
-    </div>
-  </div>
-</section>
 
 <!-- SECTION 2: PROPUESTA DE VALOR + FEATURES (2-column) -->
 <section id="funcionalidades" class="value-features reveal">
