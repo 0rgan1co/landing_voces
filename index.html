@@ -37,8 +37,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
-<link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Bebas+Neue&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Bebas+Neue&display=swap"></noscript>
+<link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@600;700;800&family=Red+Hat+Display:wght@400;500;600;700&family=Bebas+Neue&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@600;700;800&family=Red+Hat+Display:wght@400;500;600;700&family=Bebas+Neue&display=swap"></noscript>
 <style>
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; }
@@ -46,6 +46,13 @@
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     color: var(--text); background: var(--bg); line-height: 1.6; transition: background 0.3s, color 0.3s;
     -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Manrope', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    letter-spacing: -0.015em;
+  }
+  .lead, .display-text {
+    font-family: 'Red Hat Display', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   }
   a { color: inherit; text-decoration: none; }
 
@@ -174,8 +181,9 @@
     line-height: 1.1; margin-bottom: 20px; letter-spacing: -0.03em;
   }
   .hero-sub {
+    font-family: 'Red Hat Display', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     font-size: 1.15rem; color: rgba(255,255,255,0.75); max-width: 520px;
-    margin: 0 0 32px; line-height: 1.7;
+    margin: 0 0 32px; line-height: 1.7; font-weight: 400;
   }
   .hero-ctas { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
   .hero-grid {
@@ -938,39 +946,33 @@
   .proof-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,200,255,0.08); }
   .proof-num { font-size: 2.2rem; font-weight: 800; color: var(--accent); margin-bottom: 6px; }
   .proof-text { font-size: 0.85rem; color: var(--gray-600); line-height: 1.5; }
-  .testimonial-scroll-wrap {
-    margin-top: 40px; overflow: hidden; position: relative;
-    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
-    mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
-  }
-  .testimonial-track {
-    display: flex; gap: 20px; width: max-content;
-    animation: testimonialScroll 30s linear infinite;
-  }
-  .testimonial-track:hover { animation-play-state: paused; }
-  @keyframes testimonialScroll {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
+  .testimonial-single-wrap {
+    margin-top: 40px; display: flex; justify-content: center;
   }
   .testimonial-card {
-    padding: 24px; border-radius: 14px; width: 340px; flex-shrink: 0;
+    padding: 28px; border-radius: 14px; max-width: 560px; width: 100%;
     background: var(--card-bg); border: 1px solid var(--card-border);
     transition: border-color 0.2s;
   }
   .testimonial-card:hover { border-color: rgba(0,200,255,0.3); }
   .testimonial-author {
-    display: flex; align-items: center; gap: 10px; margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid var(--card-border);
+    display: flex; align-items: center; gap: 12px; margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid var(--card-border);
   }
   .testimonial-card p {
-    font-size: 0.9rem; line-height: 1.7; color: var(--gray-600); margin: 0;
+    font-size: 0.95rem; line-height: 1.7; color: var(--gray-600); margin: 0;
   }
   .testimonial-avatar {
-    width: 40px; height: 40px; border-radius: 50%; flex-shrink: 0;
+    width: 44px; height: 44px; border-radius: 50%; flex-shrink: 0;
     object-fit: cover;
+    background: linear-gradient(135deg, rgba(0,200,255,0.25), rgba(0,200,255,0.05));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.85rem; font-weight: 700; color: var(--accent);
+    border: 1px solid rgba(0,200,255,0.25);
   }
-  .testimonial-info { display: flex; flex-direction: column; }
-  .testimonial-name { font-size: 0.82rem; font-weight: 600; color: var(--text); }
-  .testimonial-role { font-size: 0.72rem; color: var(--text-2); }
+  .testimonial-info { display: flex; flex-direction: column; gap: 2px; }
+  .testimonial-name { font-size: 0.88rem; font-weight: 600; color: var(--text); text-decoration: none; }
+  .testimonial-name:hover { color: var(--accent); }
+  .testimonial-role { font-size: 0.74rem; color: var(--text-2); line-height: 1.4; }
 
   /* === SCROLL REVEAL === */
   .reveal {
@@ -1566,89 +1568,16 @@
       <span class="tag">Testimonios</span>
       <h2>Historias de celebración y aprendizaje</h2>
     </div>
-    <div class="testimonial-scroll-wrap">
-      <div class="testimonial-track">
-        <div class="testimonial-card">
-          <div class="testimonial-author">
-            <img class="testimonial-avatar" src="avatar-1.jpg" alt="Director de Transformación">
-            <div class="testimonial-info">
-              <span class="testimonial-name">Director de Transformación</span>
-              <span class="testimonial-role">Servicios financieros · LATAM</span>
-            </div>
+    <div class="testimonial-single-wrap">
+      <div class="testimonial-card">
+        <div class="testimonial-author">
+          <span class="testimonial-avatar" aria-hidden="true">JB</span>
+          <div class="testimonial-info">
+            <a class="testimonial-name" href="https://www.linkedin.com/in/juanmanuelbadaloni/" target="_blank" rel="noopener">Juan Badaloni</a>
+            <span class="testimonial-role">Jefe de Gabinete · Subsecretaría de Comunicación Digital · Gobierno de la Ciudad de Buenos Aires</span>
           </div>
-          <p>Por primera vez pudimos ver lo que realmente estaba pasando en los equipos. No era lo que suponíamos. Las decisiones que tomamos después fueron completamente distintas.</p>
         </div>
-        <div class="testimonial-card">
-          <div class="testimonial-author">
-            <img class="testimonial-avatar" src="avatar-2.jpg" alt="VP de Personas">
-            <div class="testimonial-info">
-              <span class="testimonial-name">VP de Personas</span>
-              <span class="testimonial-role">Empresa agropecuaria · Argentina</span>
-            </div>
-          </div>
-          <p>En dos semanas tuvimos un diagnóstico que con la metodología anterior nos hubiera tomado un trimestre. Y con mucha más profundidad.</p>
-        </div>
-        <div class="testimonial-card">
-          <div class="testimonial-author">
-            <img class="testimonial-avatar" src="avatar-3.jpg" alt="CEO">
-            <div class="testimonial-info">
-              <span class="testimonial-name">CEO</span>
-              <span class="testimonial-role">Empresa de tecnología · LATAM</span>
-            </div>
-          </div>
-          <p>Lo más valioso fue lo que apareció en las narrativas: temas que todos conocíamos pero que nadie se animaba a poner en agenda.</p>
-        </div>
-        <div class="testimonial-card">
-          <div class="testimonial-author">
-            <img class="testimonial-avatar" src="avatar-4.jpg" alt="Directora de Cultura">
-            <div class="testimonial-info">
-              <span class="testimonial-name">Directora de Cultura</span>
-              <span class="testimonial-role">Retail · México</span>
-            </div>
-          </div>
-          <p>El anonimato hizo la diferencia. La gente habló con una honestidad que nunca vimos en encuestas ni en focus groups.</p>
-        </div>
-        <!-- Duplicados para loop infinito -->
-        <div class="testimonial-card">
-          <div class="testimonial-author">
-            <img class="testimonial-avatar" src="avatar-1.jpg" alt="Director de Transformación">
-            <div class="testimonial-info">
-              <span class="testimonial-name">Director de Transformación</span>
-              <span class="testimonial-role">Servicios financieros · LATAM</span>
-            </div>
-          </div>
-          <p>Por primera vez pudimos ver lo que realmente estaba pasando en los equipos. No era lo que suponíamos. Las decisiones que tomamos después fueron completamente distintas.</p>
-        </div>
-        <div class="testimonial-card">
-          <div class="testimonial-author">
-            <img class="testimonial-avatar" src="avatar-2.jpg" alt="VP de Personas">
-            <div class="testimonial-info">
-              <span class="testimonial-name">VP de Personas</span>
-              <span class="testimonial-role">Empresa agropecuaria · Argentina</span>
-            </div>
-          </div>
-          <p>En dos semanas tuvimos un diagnóstico que con la metodología anterior nos hubiera tomado un trimestre. Y con mucha más profundidad.</p>
-        </div>
-        <div class="testimonial-card">
-          <div class="testimonial-author">
-            <img class="testimonial-avatar" src="avatar-3.jpg" alt="CEO">
-            <div class="testimonial-info">
-              <span class="testimonial-name">CEO</span>
-              <span class="testimonial-role">Empresa de tecnología · LATAM</span>
-            </div>
-          </div>
-          <p>Lo más valioso fue lo que apareció en las narrativas: temas que todos conocíamos pero que nadie se animaba a poner en agenda.</p>
-        </div>
-        <div class="testimonial-card">
-          <div class="testimonial-author">
-            <img class="testimonial-avatar" src="avatar-4.jpg" alt="Directora de Cultura">
-            <div class="testimonial-info">
-              <span class="testimonial-name">Directora de Cultura</span>
-              <span class="testimonial-role">Retail · México</span>
-            </div>
-          </div>
-          <p>El anonimato hizo la diferencia. La gente habló con una honestidad que nunca vimos en encuestas ni en focus groups.</p>
-        </div>
+        <p>[PENDIENTE: agregar cita textual]</p>
       </div>
     </div>
   </div>
@@ -1657,8 +1586,8 @@
 <!-- SECTION 5: CTA "ZOOM IN" -->
 <section id="agendar" class="cta-final reveal">
   <div class="container">
-    <p style="font-size:clamp(1rem,2vw,1.25rem); color:rgba(255,255,255,0.75); margin-bottom:12px; font-weight:500; max-width:620px; margin-left:auto; margin-right:auto;">Lo que no escuchamos también influye en los resultados.</p>
-    <p style="font-size:clamp(1.5rem,3.5vw,2.2rem); color:#fff; margin-bottom:16px; font-weight:800; letter-spacing:-0.02em; line-height:1.2; max-width:680px; margin-left:auto; margin-right:auto;">¿Cuánto de lo que pasa en tu organización es un punto ciego?</p>
+    <p class="lead" style="font-size:clamp(1rem,2vw,1.25rem); color:rgba(255,255,255,0.75); margin-bottom:12px; font-weight:500; max-width:620px; margin-left:auto; margin-right:auto;">Lo que no escuchamos también influye en los resultados.</p>
+    <p style="font-family:'Manrope','Inter',sans-serif; font-size:clamp(1.5rem,3.5vw,2.2rem); color:#fff; margin-bottom:16px; font-weight:800; letter-spacing:-0.02em; line-height:1.2; max-width:680px; margin-left:auto; margin-right:auto;">¿Cuánto de lo que pasa en tu organización es un punto ciego?</p>
     <p style="font-size:clamp(0.9rem,1.5vw,1rem); color:rgba(255,255,255,0.55); margin-bottom:8px; font-weight:400; max-width:560px; margin-left:auto; margin-right:auto; line-height:1.7;">Voces es un aliado para tomar decisiones con datos.</p>
     <p style="font-size:clamp(0.9rem,1.5vw,1rem); color:rgba(255,255,255,0.55); margin-bottom:28px; font-weight:400; max-width:560px; margin-left:auto; margin-right:auto; line-height:1.7;">No es un reemplazo del liderazgo. Es la evidencia que le faltaba.</p>
     <div class="cta-final-actions">

@@ -132,8 +132,8 @@
 | 2 sem | de diagnóstico completo vs. 4 meses con metodología tradicional. Sin consultoras, con total anonimato. |
 
 **Testimonio:**
-> "Por primera vez pudimos ver lo que realmente estaba pasando en los equipos. No era lo que suponíamos. Las decisiones que tomamos después fueron completamente distintas."
-> — Director de Transformación, empresa de servicios financieros (LATAM)
+> "[PENDIENTE: agregar cita textual]"
+> — [Juan Badaloni](https://www.linkedin.com/in/juanmanuelbadaloni/), Jefe de Gabinete · Subsecretaría de Comunicación Digital · Gobierno de la Ciudad de Buenos Aires
 
 ---
 
