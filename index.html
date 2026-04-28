@@ -186,8 +186,8 @@
   .metric-label { font-size: 0.75rem; color: rgba(255,255,255,0.45); margin-top: 2px; letter-spacing: 0.3px; }
   .hero .tag { margin-bottom: 20px; background: rgba(255,255,255,0.15); color: #fff; border: 1px solid rgba(255,255,255,0.25); }
   .hero h1 {
-    font-size: clamp(2rem, 4.5vw, 3rem); font-weight: 800;
-    line-height: 1.1; margin-bottom: 20px; letter-spacing: -0.03em;
+    font-size: clamp(2rem, 4.5vw, 3rem); font-weight: 700;
+    line-height: 1.1; margin-bottom: 20px; letter-spacing: -0.025em;
   }
   .hero-sub {
     font-family: 'Fraunces', Georgia, serif;
@@ -289,8 +289,8 @@
     display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start;
   }
   .value-features h2 {
-    font-size: clamp(1.7rem, 3.2vw, 2.3rem); font-weight: 800;
-    margin-bottom: 24px; letter-spacing: -0.03em; line-height: 1.18;
+    font-size: clamp(1.7rem, 3.2vw, 2.3rem); font-weight: 600;
+    margin-bottom: 24px; letter-spacing: -0.025em; line-height: 1.18;
     text-align: center;
   }
   /* Gradient cards for value props */
@@ -411,7 +411,7 @@
 
   /* === SECTION 3: USE CASES (cards) === */
   .use-cases { padding: 80px 0; text-align: center; background: var(--accent-bg); }
-  .use-cases h2 { font-size: clamp(1.4rem, 3vw, 1.85rem); font-weight: 800; margin-bottom: 8px; letter-spacing: -0.01em; }
+  .use-cases h2 { font-size: clamp(1.4rem, 3vw, 1.85rem); font-weight: 600; margin-bottom: 8px; letter-spacing: -0.015em; }
   .use-cases-sub { font-size: 0.95rem; color: var(--gray-600); margin-bottom: 40px; max-width: 560px; margin-left: auto; margin-right: auto; line-height: 1.6; }
 
   /* === EXPAND CARDS (Section 3) === */
@@ -497,7 +497,7 @@
   }
   .expand-card-title {
     font-size: 1.5rem;
-    font-weight: 800;
+    font-weight: 600;
     color: #fff;
     letter-spacing: -0.02em;
     margin-bottom: 8px;
@@ -741,8 +741,8 @@
     display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center;
   }
   .demo-section h2 {
-    font-size: clamp(1.4rem, 3vw, 1.85rem); font-weight: 800;
-    margin-bottom: 32px; letter-spacing: -0.01em;
+    font-size: clamp(1.4rem, 3vw, 1.85rem); font-weight: 600;
+    margin-bottom: 32px; letter-spacing: -0.015em;
   }
   .process-steps { display: flex; flex-direction: column; gap: 24px; }
   .process-step { display: flex; gap: 16px; align-items: flex-start; }
@@ -769,7 +769,7 @@
     opacity: 0.15; z-index: 0;
   }
   .cta-final > .container { position: relative; z-index: 1; }
-  .cta-final h2 { font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 800; margin-bottom: 24px; }
+  .cta-final h2 { font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 600; letter-spacing: -0.015em; margin-bottom: 24px; }
   .cta-final-actions { display: flex; gap: 16px; justify-content: center; align-items: center; flex-wrap: wrap; }
   .cta-final .btn-ghost { color: var(--accent-light); }
 
@@ -805,12 +805,17 @@
     position: relative; max-height: 90vh; overflow-y: auto; color: #fff;
   }
   .modal-logo {
-    display: flex; align-items: center; justify-content: center; gap: 10px;
-    margin-bottom: 8px; font-size: 1.3rem; font-weight: 800; color: #fff;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    margin-bottom: 8px; font-size: 1.2rem;
+    font-family: 'Plus Jakarta Sans', 'Inter', sans-serif; font-weight: 600;
+    letter-spacing: -0.005em; color: #fff;
   }
   .modal-logo svg { color: var(--accent); }
-  .modal-tagline { font-size: 0.9rem; color: rgba(255,255,255,0.45); margin-bottom: 36px; }
-  .modal h3 { font-size: 1.15rem; font-weight: 800; margin-bottom: 6px; color: #fff; }
+  .modal-tagline {
+    font-family: 'Fraunces', Georgia, serif; font-style: italic; font-weight: 500;
+    font-size: 0.95rem; color: rgba(255,255,255,0.6); margin-bottom: 36px;
+  }
+  .modal h3 { font-size: 1.15rem; font-weight: 600; margin-bottom: 6px; color: #fff; letter-spacing: -0.01em; }
   .modal > p { font-size: 0.85rem; color: rgba(255,255,255,0.5); margin-bottom: 24px; }
   .modal-close {
     position: absolute; top: 16px; right: 16px; background: none; border: none;
@@ -945,7 +950,7 @@
   /* === SOCIAL PROOF === */
   .social-proof-section { padding: 64px 0; background: var(--bg); }
   .social-proof-header { text-align: center; margin-bottom: 40px; }
-  .social-proof-header h2 { font-size: clamp(1.3rem, 2.5vw, 1.7rem); font-weight: 800; margin-top: 12px; }
+  .social-proof-header h2 { font-size: clamp(1.3rem, 2.5vw, 1.7rem); font-weight: 600; letter-spacing: -0.015em; margin-top: 12px; }
   .proof-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 900px; margin: 0 auto; }
   .proof-card {
     background: linear-gradient(135deg, var(--accent-bg) 0%, var(--card-bg) 100%);
@@ -1025,7 +1030,7 @@
   }
   .bento-header h2 {
     font-size: clamp(1.4rem, 2.8vw, 1.8rem);
-    font-weight: 800;
+    font-weight: 600;
     color: #fff;
     margin: 14px 0 10px;
     letter-spacing: -0.02em;

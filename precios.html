@@ -13,16 +13,16 @@
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
   :root {
     --accent: #00C8FF; --accent-light: #4AD9FF; --accent-dark: #005A7F; --accent-bg: #E8FAFF;
-    --bg: #F6FBFF; --bg-2: #EBF8FF; --text: #1f1f1f; --text-2: rgba(0,0,0,0.6);
-    --card-bg: #ffffff; --card-border: rgba(0,0,0,0.1);
-    --nav-bg: rgba(252,252,250,0.95); --nav-border: rgba(0,0,0,0.08);
+    --bg: #F6FBFF; --bg-2: #EBF8FF; --text: #0A0A0A; --text-2: rgba(10,10,10,0.6);
+    --card-bg: #ffffff; --card-border: rgba(0,90,127,0.18);
+    --nav-bg: rgba(246,251,255,0.92); --nav-border: rgba(0,0,0,0.08);
     --max-w: 1080px; --radius: 12px;
   }
   [data-theme="dark"] {
-    --bg: #141414; --bg-2: #1e1e1e; --text: #E8F4FA; --text-2: rgba(255,255,255,0.6);
-    --card-bg: #1e1e1e; --card-border: rgba(255,255,255,0.1);
-    --nav-bg: rgba(20,20,20,0.95); --nav-border: rgba(255,255,255,0.08);
-    --accent-bg: rgba(0,200,255,0.1);
+    --bg: #081018; --bg-2: #0F1F30; --text: #E8F4FA; --text-2: rgba(255,255,255,0.6);
+    --card-bg: #132638; --card-border: rgba(255,255,255,0.13);
+    --nav-bg: rgba(8,16,24,0.92); --nav-border: rgba(255,255,255,0.08);
+    --accent-bg: rgba(0,200,255,0.14);
   }
   body {
     font-family: 'Inter', -apple-system, sans-serif; color: var(--text);
@@ -78,8 +78,8 @@
     background-image: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(0,200,255,0.06) 0%, transparent 70%);
   }
   .pricing-hero h1 {
-    font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 800;
-    letter-spacing: -0.03em; margin: 16px 0 12px; line-height: 1.15;
+    font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 700;
+    letter-spacing: -0.025em; margin: 16px 0 12px; line-height: 1.15;
   }
   .pricing-hero .sub {
     font-size: 1.05rem; color: var(--text-2); max-width: 480px;
@@ -129,7 +129,7 @@
 
   /* === FAQ === */
   .faq { padding: 80px 0; text-align: center; background: var(--bg-2); border-top: 1px solid var(--card-border); }
-  .faq h2 { font-size: clamp(1.3rem, 2.5vw, 1.7rem); font-weight: 800; margin: 12px 0 0; letter-spacing: -0.01em; }
+  .faq h2 { font-size: clamp(1.3rem, 2.5vw, 1.7rem); font-weight: 600; margin: 12px 0 0; letter-spacing: -0.015em; }
   .faq-list { max-width: 680px; margin: 36px auto 0; text-align: left; }
   .faq-item { border-bottom: 1px solid var(--card-border); }
   .faq-item:last-child { border-bottom: none; }
@@ -148,16 +148,16 @@
   /* === CTA === */
   .cta {
     padding: 72px 0; text-align: center;
-    background: #1f1f1f;
+    background: #081018;
     border-top: 1px solid rgba(255,255,255,0.08);
   }
   .cta h2 { color: #E8F4FA; }
-  .cta h2 { font-size: clamp(1.2rem, 2.5vw, 1.5rem); font-weight: 800; margin-bottom: 8px; }
+  .cta h2 { font-size: clamp(1.2rem, 2.5vw, 1.5rem); font-weight: 600; margin-bottom: 8px; letter-spacing: -0.015em; }
   .cta .sub { font-size: 1rem; color: var(--accent-light); font-weight: 600; margin-bottom: 28px; }
   .cta p { color: rgba(255,255,255,0.7); }
 
   /* === FOOTER === */
-  .footer { background: #1f1f1f; border-top: 1px solid rgba(255,255,255,0.08); padding: 28px 0; font-size: 0.82rem; color: rgba(255,255,255,0.5); }
+  .footer { background: #081018; border-top: 1px solid rgba(255,255,255,0.08); padding: 28px 0; font-size: 0.82rem; color: rgba(255,255,255,0.5); }
   .footer .container { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
   .footer a:hover { color: #fff; }
 
