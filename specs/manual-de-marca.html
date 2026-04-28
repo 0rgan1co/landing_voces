@@ -1,0 +1,1005 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Manual de marca - Voces.ai</title>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600&display=swap");
+
+    :root {
+      --bg: #f6fbff;
+      --paper: #ffffff;
+      --ink: #0a0a0a;
+      --muted: #4a5560;
+      --line: #d9eaf2;
+      --link: #005a7f;
+      --code-bg: #f2f9fd;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: linear-gradient(180deg, #f6fbff 0%, #ebf8ff 100%);
+      font: 16px/1.58 Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 28px 18px 56px;
+    }
+
+    article {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 24px 22px;
+      box-shadow: 0 12px 30px rgba(0, 90, 127, 0.06);
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      margin: 1.2em 0 0.45em;
+      line-height: 1.22;
+    }
+
+    h1 {
+      margin-top: 0;
+      font-size: 2rem;
+    }
+
+    h2 {
+      font-size: 1.55rem;
+    }
+
+    h3 {
+      font-size: 1.24rem;
+    }
+
+    p {
+      margin: 0.5em 0 0.95em;
+    }
+
+    a {
+      color: var(--link);
+    }
+
+    hr {
+      border: 0;
+      border-top: 1px solid var(--line);
+      margin: 22px 0;
+    }
+
+    ul,
+    ol {
+      margin: 0.45em 0 0.9em 1.3em;
+    }
+
+    li {
+      margin: 0.25em 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0 16px;
+      font-size: 0.97rem;
+    }
+
+    th,
+    td {
+      border: 1px solid var(--line);
+      padding: 9px 10px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    thead th {
+      background: #f1f9fd;
+      font-weight: 700;
+    }
+
+    code {
+      background: var(--code-bg);
+      border: 1px solid #d6ebf5;
+      border-radius: 6px;
+      padding: 0.1em 0.34em;
+      font-family: "JetBrains Mono", "Fira Code", Consolas, monospace;
+      font-size: 0.92em;
+    }
+
+    pre {
+      overflow-x: auto;
+      background: #0f1d2b;
+      color: #e7f5ff;
+      border-radius: 10px;
+      padding: 12px 14px;
+      font-family: "JetBrains Mono", "Fira Code", Consolas, monospace;
+      font-size: 0.9rem;
+      line-height: 1.45;
+    }
+
+    pre code {
+      background: transparent;
+      border: 0;
+      color: inherit;
+      padding: 0;
+    }
+
+    .color-swatch {
+      display: inline-block;
+      width: 0.9em;
+      height: 0.9em;
+      margin-left: 0.35em;
+      vertical-align: -0.08em;
+      border-radius: 0.18em;
+      border: 1px solid rgba(0, 0, 0, 0.25);
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+    }
+
+    .inline-palette {
+      display: inline-flex;
+      flex-wrap: wrap;
+      gap: 0.35em;
+      align-items: center;
+    }
+
+    .inline-palette .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3em;
+      padding: 0.08em 0.38em;
+      border-radius: 999px;
+      border: 1px solid #d2e6f1;
+      background: #f4fbff;
+      font-family: "JetBrains Mono", "Fira Code", Consolas, monospace;
+      font-size: 0.78em;
+      line-height: 1.2;
+      white-space: nowrap;
+    }
+
+    .badge-preview {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.28rem;
+      padding: 0.14rem 0.42rem;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font-size: 0.72rem;
+      line-height: 1.2;
+      white-space: nowrap;
+      font-weight: 600;
+    }
+
+    .badge-preview__label {
+      opacity: 0.92;
+    }
+
+    .badge-preview__value {
+      font-weight: 700;
+      letter-spacing: 0.01em;
+    }
+
+    .badge-preview--code {
+      border-radius: 6px;
+      font-family: "JetBrains Mono", "Fira Code", Consolas, monospace;
+      font-size: 0.7rem;
+      padding: 0.12rem 0.38rem;
+    }
+
+    .button-preview {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.34rem;
+      padding: 0.38rem 0.76rem;
+      border-radius: 8px;
+      border: 1px solid transparent;
+      font-size: 0.8rem;
+      font-weight: 600;
+      line-height: 1.15;
+      white-space: nowrap;
+      min-height: 32px;
+    }
+
+    .button-preview--icon {
+      width: 40px;
+      height: 40px;
+      padding: 0;
+      border-radius: 999px;
+    }
+
+    .button-preview svg,
+    .button-icon-preview svg {
+      width: 16px;
+      height: 16px;
+      display: block;
+      flex-shrink: 0;
+    }
+
+    .button-icon-preview {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      border: 1px solid #d6e8f3;
+      background: #f4fbff;
+      color: #005a7f;
+    }
+
+    .wordmark-preview {
+      margin: 0.9rem 0 1.15rem;
+      border: 1px solid #d9eaf2;
+      border-radius: 14px;
+      padding: 14px;
+      background: #f8fcff;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 10px;
+    }
+
+    .wordmark-preview-card {
+      border-radius: 12px;
+      border: 1px solid #dceef7;
+      background: #ffffff;
+      overflow: hidden;
+    }
+
+    .wordmark-preview-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 8px 10px;
+      border-bottom: 1px solid #e8f3f9;
+      background: #f6fbff;
+    }
+
+    .wordmark-preview-label {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: #214355;
+      line-height: 1.2;
+    }
+
+    .wordmark-preview-weight {
+      font-size: 0.78rem;
+      color: #46687a;
+      white-space: nowrap;
+    }
+
+    .wordmark-preview-surface {
+      padding: 10px;
+      border-bottom: 1px solid #eef6fb;
+    }
+
+    .wordmark-preview-surface:last-child {
+      border-bottom: 0;
+    }
+
+    .wordmark-preview-surface-light {
+      background: linear-gradient(180deg, #ffffff 0%, #f3fafe 100%);
+    }
+
+    .wordmark-preview-surface-dark {
+      background: linear-gradient(180deg, #0f2231 0%, #123149 100%);
+    }
+
+    .wordmark-preview-caption {
+      display: block;
+      margin-bottom: 7px;
+      font-size: 0.72rem;
+      color: #5a7586;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .wordmark-preview-sample {
+      display: inline-block;
+      font-size: 1.65rem;
+      line-height: 1;
+      letter-spacing: 0.005em;
+      text-rendering: geometricPrecision;
+      background: linear-gradient(128deg, #005a7f 0%, #00c8ff 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .wordmark-preview-surface-dark .wordmark-preview-caption {
+      color: #9cc3da;
+    }
+
+    .wordmark-preview-surface-dark .wordmark-preview-sample {
+      background: linear-gradient(128deg, #73dcff 0%, #d4f4ff 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+    }
+
+    .wordmark-font-jakarta {
+      font-family: "Plus Jakarta Sans", Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-weight: 600;
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <article id="content"></article>
+  </main>
+
+  <script id="md-source" type="text/plain"># Manual de marca — Voces.ai
+
+Documento de referencia para **identidad visual, tono y tokens de UI** de **Voces.ai**. Incluye los dos **temas de producto** oficiales — **Claro** y **Oscuro** — y las familias cromáticas compartidas. Úsalo para presentaciones, material externo, implementación de tokens o guías de componentes.
+
+**Nota de implementación:** el admin y otras apps pueden seguir sirviendo todavía el tema legado (acento violeta en `styles.css`); al migrar, alinear con las tablas de este manual.
+
+---
+
+## 1. Identidad y posicionamiento
+
+| Elemento           | Contenido                                                                                                                                                                                                                     |
+| ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Nombre**         | Voces.ai                                                                                                                                                                                                                      |
+| **Tagline (es)**   | Sistema de escucha sistémica y diagnóstico cultural                                                                                                                                                                           |
+| **Claim (README)** | _Transformando el ruido organizacional en inteligencia evolutiva._                                                                                                                                                            |
+| **Idea central**   | Plataforma de **diagnóstico cultural** y **escucha sistémica** con entrevistas conversacionales guiadas por IA; anonimización, narrativas y hallazgos para diálogo organizacional. Más detalle: [docs/brief.md](../brief.md). |
+
+**Tono sugerido** (alineado al brief): riguroso y humano; visibilizar lo sutil, el sentido colectivo y el diálogo. La IA es punto de partida, no sustituto de la conversación.
+
+### 1.1 Lockup de marca seleccionado (`🎙️Voces.ai`)
+
+- **Forma canónica del lockup:** `🎙️Voces.ai` (sin espacio entre emoji y wordmark).
+- **Tipografía aprobada:** `Plus Jakarta Sans` (`600`) para el wordmark.
+- **Alcance estricto:** esta decisión aplica **solo** al lockup `🎙️Voces.ai` (wordmark de marca). No reemplaza `Inter`, `Fraunces` ni `JetBrains Mono` en roles de UI/cuerpo/editorial/código.
+
+---
+
+## 2. Temas: Claro y Oscuro
+
+| Tema       | Perfil                                                                                                        | Uso principal                                                                           |
+| ---------- | ------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| **Claro**  | Superficies **claras**, atmósfera **cálida y editorial** (cielo + matices humanos: corales y lavados suaves). | Primer contacto, narrativa, material comercial, lectura prolongada en entorno luminoso. |
+| **Oscuro** | Superficies **oscuras**, **cielo profundo**; contraste estable y foco en paneles.                             | Uso operativo intenso, análisis, continuidad con entornos de producto en baja luz.      |
+
+**Claro** es el nombre oficial del tema de **superficies claras** de Voces (identidad de producto; no se limita a replicar el ajuste “en claro” del sistema operativo). **Oscuro** es el tema de **superficie profunda** de la misma familia cromática.
+
+Sugerencia de asignación automática (opcional):
+
+- `prefers-color-scheme: light` → Tema **Claro**
+- `prefers-color-scheme: dark` → Tema **Oscuro**
+
+Fallbacks de negocio (ejemplo): landing pública en **Claro**; consola de administración en **Oscuro** — ajustar según decisión de producto.
+
+---
+
+## 3. Base cromática (origen y adaptación)
+
+La cromática base toma el lenguaje del manual de referencia de Next Steps Lab (PDF de marca en el repositorio: colores **celeste**, **azul de profundidad** y **amarillo señal**, sobre blanco y negro). **Voces.ai no copia la identidad de NST**; reutiliza esa base y la amplía con acentos propios (coral, menta) para evitar monotonía y sostener rigor + calidez.
+
+| Rol de marca   | Hex referencia | Uso                                                                                       |
+| -------------- | -------------- | ----------------------------------------------------------------------------------------- |
+| Cielo (acción) | `#00C8FF`      | CTAs, enlaces, foco, iconografía de acción, degradados de wordmark                        |
+| Profundidad    | `#005A7F`      | Títulos fuertes, anclas, gravedad sin apagar el cielo                                     |
+| Señal (oro)    | `#FFCC00`      | Aviso puntual, hallazgos críticos, “faro” — pocos focos por vista; no es color de relleno |
+
+
+
+---
+
+## 4. Familias de acento (anti-monotonía)
+
+Más allá del oro, dos familias dan **matices** sin sustituir al cielo como eje de acción:
+
+| Familia   | Intención                                                                                  | Rango (referencia)                                                                                                                |
+| --------- | ------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------- |
+| **Coral** | Calor humano, citas, voz, tensión empática, bienvenida                                     | Sólido ~`#D94D3D`–`#E86050` (Claro); ~`#FF7B6A`–`#F59B8D` (Oscuro). Lavados: `#FFEEEA` / `rgba(255,123,106,0.14–0.22)` según tema |
+| **Menta** | Crecimiento, “listo”, confirmación, insights **positivos**; distinto del oro (menos grito) | Sólido ~`#0F9D8A`–`#14B8A6` (Claro); ~`#3EE0C4`–`#4FD8C2` (Oscuro). Fondos suaves: `#E0F7F3` o menta a baja opacidad              |
+
+
+
+**Reglas:** (1) El **cielo** manda la jerarquía de acción. (2) Un bloque, una intención de acento (coral _o_ menta _o_ oro en primer plano). (3) **Coral** no sustituye al rojo de error/destructivo del sistema. (4) Ajustar hex finales a **WCAG** según par texto/fondo al implementar.
+
+### 4.1 Matriz de uso de acentos en UI
+
+Esta matriz traduce la semántica de color a decisiones de interfaz y sugiere tokens CSS para implementación gradual.
+
+| Acento                                 | Usar en                                                                 | Evitar en                                                                | Ejemplos de componentes                                  | Token CSS sugerido                                  |
+| -------------------------------------- | ----------------------------------------------------------------------- | ------------------------------------------------------------------------ | -------------------------------------------------------- | --------------------------------------------------- |
+| **Cielo** (`#00C8FF`)                  | Acciones primarias, foco, navegación activa, enlaces                    | Bloques narrativos largos o estados semánticos de resultado              | Botón primario, enlace activo, estado `:focus`, toggle  | `--accent`, `--accent-hover`, `--accent-soft`      |
+| **Profundidad** (`#005A7F`)            | Jerarquía visual, títulos, énfasis estructural                          | Llamadas de acción principales cuando ya existe cielo                    | Título de tarjeta, chip neutro de jerarquía             | `--text-strong` o `--brand-depth`                  |
+| **Señal oro** (`#FFCC00`)              | Alertas puntuales, hallazgos críticos, foco de atención                 | Fondos masivos o repetición en múltiples tarjetas de una misma pantalla  | Badge crítico, callout de atención                      | `--accent-signal`                                   |
+| **Coral** (ver §4)                     | Voz humana, citas, tensión empática, narrativa                          | Errores del sistema o acciones destructivas                              | Cita destacada, bloque testimonial, highlight de voz     | `--accent-coral`, `--accent-coral-soft`            |
+| **Menta** (ver §4)                     | Confirmación, progreso positivo, insights favorables                    | Acciones primarias o avisos de alta urgencia                             | Badge "completado", chip positivo, resumen favorable    | `--accent-mint`, `--accent-mint-soft`              |
+
+**Regla operativa:** por bloque visual, usar un solo acento semántico dominante (coral _o_ menta _o_ oro), manteniendo **cielo** como eje de interacción.
+
+---
+
+## 5. Tema **Claro** (tokens de referencia)
+
+Fondo y papel respirado; cielo y profundidad para títulos y acciones; coral y menta para capas de significado (no reemplazan al cielo).
+
+### Superficies y estructura
+
+| Token (conceptual) | Hex / nota                            | Uso                                                 |
+| ------------------ | ------------------------------------- | --------------------------------------------------- |
+| Papel / atmósfera  | `#F6FBFF` a gradiente hacia `#EBF8FF` | Fondo de página                                     |
+| Superficie         | `#FFFFFF`                             | Tarjetas, paneles                                   |
+| Tinta principal    | `#0A0A0A`                             | Cuerpo y títulos (o equivalente con buen contraste) |
+| Tinta secundaria   | `#4A5560`                             | Metadatos, ayuda                                    |
+| Bordes             | `#D9EAF2`                             | Divisores, contención                               |
+
+
+
+### Marca y acentos (Claro)
+
+| Token (conceptual)    | Hex / nota            | Uso                                                  |
+| --------------------- | --------------------- | ---------------------------------------------------- |
+| Cielo                 | `#00C8FF`             | CTAs, enlaces activos, iconos de acción              |
+| Profundidad           | `#005A7F`             | Títulos, wordmark, chips de énfasis                  |
+| Hover cielo           | `#4AD9FF` (si aplica) | Estados hover sobre acciones                         |
+| Señal oro             | `#FFCC00`             | 1–2 avisos fuertes por pantalla, hallazgos puntuales |
+| Coral sólido / lavado | ver §4                | Narrativa, citas, “voz”                              |
+| Menta sólida / lavada | ver §4                | Síntesis positiva, completado, highlights suaves     |
+
+**Wordmark (recomendado con paleta cielo):** degradé de texto aprox. `#005A7F` → `#00C8FF` (~120–135°), `Plus Jakarta Sans` en peso 600, en formato **🎙️Voces.ai** (sin espacio).
+
+---
+
+## 6. Tema **Oscuro** (tokens de referencia)
+
+Cielo profundo; el mismo cielo y profundidad que ancla; coral y menta con luminancia ajustada a fondos oscuros.
+
+### Superficies y estructura
+
+| Token (conceptual) | Hex / nota                                                                  | Uso                      |
+| ------------------ | --------------------------------------------------------------------------- | ------------------------ |
+| Fondo base         | `#081018` (radiales hacia tonos pétreos, ej. `#0F1D2B`–`#123149`, opcional) | Lienzo                   |
+| Superficie elevada | `#132638`                                                                   | Tablas, paneles, modales |
+| Bordes             | `#24455F`                                                                   | Línea estructural        |
+| Texto principal    | `#E7F5FF` (tinte cielo)                                                     | Cuerpo y títulos         |
+| Texto secundario   | `#9CC3DA`                                                                   | Apoyo, metadatos         |
+| Cielo + hover      | `#00C8FF` / `#4AD9FF`                                                       | Acción y estados         |
+| Profundidad        | `#005A7F` a variantes ligeras para bordes/títulos según contexto            | Jerarquía, chips         |
+
+
+
+### Acentos (Oscuro)
+
+| Token (conceptual) | Hex / nota                                          | Uso                                  |
+| ------------------ | --------------------------------------------------- | ------------------------------------ |
+| Señal oro          | `#FFCC00` o `#FFD24D` (si hace falta más contraste) | Misma función de “faro” que en Claro |
+| Coral, menta       | ver §4 (valores **Oscuro**)                         | Misma semántica que en Claro         |
+
+**Estética global:** cristal (_glass_), `backdrop-filter` donde encaje, bordes suaves. Sombras: ver implementación; no introducir un tercer color de marca ajenos a la tabla.
+
+**Wordmark (Oscuro):** degradé aprox. `#00C8FF` → `#4AD9FF`, o texto `#E7F5FF` con cielo en interacción.
+
+---
+
+## 7. Logo, emoji y favicon
+
+### En la barra de la aplicación
+
+- **Bloque:** lockup **🎙️Voces.ai** en la misma línea (p. ej. clases `.nav-logo` y `.nav-title` donde existan).
+- **Tratamiento coherente con el manual cielo** (tema **Claro** u **Oscuro**): según sección 5 o 6; mientras dure el legado en CSS, sigue pudiendo verse el degradé **violeta** (`#7c5cfc` → `#9178ff`) en código antiguo.
+
+No hay hoy un logotipo vectorial independiente; el **lockup canónico** es `🎙️Voces.ai`.
+
+### Favicon (sitio)
+
+- Se publica vía `**/favicon.svg`** y `**/favicon.ico**` con el **mismo\*\* SVG: micrófono sobre fondo; ver `src/constants/micFaviconSvg.js`.
+
+Uso en PDF o presentaciones: replicar **🎙️Voces.ai** con cromática del **tema** elegido (Claro u Oscuro), o el favicon derivado del SVG.
+
+---
+
+## 8. Tipografía
+
+| Rol                                             | Stack                                                    | Carga y pesos recomendados                                                                                                                                                                                                        |
+| ----------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **UI y cuerpo**                                 | `"Inter"`, -apple-system, BlinkMacSystemFont, sans-serif | Cargar por defecto 400, 500, 600 (`700` solo si una pantalla lo justifica). Referencia: `admin.html`, `interview.html`.                                                                                                         |
+| **Acento editorial** (p. ej. tablero Hallazgos) | `"Fraunces"`, Georgia, serif                             | Priorizar 600 (`700` opcional para titulares puntuales de alto impacto). Mantener uso restringido en admin.                                                                                                                     |
+| **Código y datos densos**                       | `"JetBrains Mono"`, `"Fira Code"`, monospace             | Priorizar 500 y 600. Carga en Google Fonts: `admin.html`, `interview.html`, `data-protection.html`; ventanas de salida vía `stepOutputWindowFavicon.js` (`STEP_OUTPUT_JETBRAINS_MONO_FONT_HTML`). Token: `var(--font-mono)`. |
+
+- **Tamaño base:** `16px` en `html` (`1rem` = 16px).
+- **Interlineado base:** ~`1.6` en cuerpo.
+- **Suavizado:** `-webkit-font-smoothing: antialiased` en UI.
+- **Escala tipográfica recomendada (producto):**
+  - `display`: `2.25rem` / `1.15` / `600` (Inter).
+  - `h1`: `1.75rem` / `1.2` / `600` (Inter).
+  - `h2`: `1.375rem` / `1.25` / `600` (Inter o Fraunces solo en contexto editorial).
+  - `h3`: `1.125rem` / `1.3` / `600` (Inter).
+  - `body-lg`: `1.0625rem` / `1.6` / `400` (Inter).
+  - `body`: `1rem` / `1.6` / `400` (Inter).
+  - `caption/meta`: `0.875rem` / `1.45` / `500` (Inter).
+  - `mono-sm`: `0.875rem` / `1.45` / `500` (JetBrains Mono).
+- **Reglas de uso (obligatorias):**
+  - `Fraunces` solo en titulares editoriales, citas destacadas y bloques narrativos clave.
+  - No usar `Fraunces` en botones, inputs, tablas operativas, navegación ni menús.
+  - `JetBrains Mono` solo en código, IDs, timestamps, métricas, JSON y salidas técnicas.
+  - Evitar `JetBrains Mono` en párrafos explicativos o copy de UI general.
+
+---
+
+## 9. Sistema reutilizable de badges
+
+### 9.1 Inventario actual (base para unificación)
+
+| Familia | Clase base detectada | Variantes activas (ejemplos) | Uso principal |
+| ------- | -------------------- | ----------------------------- | ------------- |
+| **Estado** | `.status-badge` | `.status-active`, `.status-paused`, `.status-processing`, `.hallazgos-status--error` | Estado operativo en Entrevistas, Usuarios y Análisis |
+| **Métrica** | `.findings-metric-badge` | `--hint`, `--narrative-inline`, `--interview`, `--quote-message`, `--static` | KPIs y metadatos en Hallazgos/Tablero |
+| **Microdato** | `.findings-mini-badge` | `--numeric` | Celdas numéricas compactas |
+| **Resumen semántico** | `.findings-entity-summary-chip` | `--emoji`, `--tag` | Chips de etiquetas y reacciones |
+| **Identificador técnico** | `.config-card-display-id`, `.findings-drawer-code-pill` | `s6-chip`, `s6-badge` (salida Paso 6) | IDs, códigos y trazabilidad |
+
+### 9.2 Set reutilizable oficial
+
+Usar un set único de badge con jerarquía clara y semántica estable:
+
+- **Badge de estado:** para lifecycle y estado de procesos (`activo`, `pausado`, `procesando`, `error`).
+- **Badge de métrica:** para pares `label + valor` de KPIs.
+- **Badge de etiqueta:** para taxonomía y tags de contenido.
+- **Badge de ID/código:** para identificadores técnicos (mono, alta legibilidad).
+
+Reglas de implementación:
+
+- Mantener radio cápsula (`999px`) para estado/métrica/etiqueta; usar radio menor para código (`6px` aprox.).
+- Mantener peso visual: label `600`, valor `700` en badges de métrica.
+- Evitar crear nuevos prefijos de clase; extender familias existentes detectadas.
+- Alinear colores de badges con la matriz de acentos de §4.1 (cielo = interacción, menta = positivo, coral = humano, oro = señal puntual).
+- Reservar variantes locales (`s6-*`) para documentos exportados; no trasladarlas directo a UI operativa.
+
+### 9.3 Colores de badges (actual + acento recomendado)
+
+| Tipo | Clase / variante | Color actual (resumen) | Acento recomendado (unificación) | Ejemplo visual |
+| ---- | ---------------- | ---------------------- | --------------------------------- | -------------- |
+| **Estado — activo** | `.status-active` | Fondo menta suave + texto éxito | **Menta** (`#14B8A6` / soft `#E0F7F3`) | `[[BADGE_PREVIEW:status-active]]` |
+| **Estado — pausado/procesando** | `.status-paused`, `.status-processing` | Fondo ámbar suave + texto ámbar | **Oro señal** (`#FFCC00` con texto profundidad) | `[[BADGE_PREVIEW:status-paused]]` |
+| **Estado — completado** | `.status-completed` | Token de acento de tema | **Cielo** (`#00C8FF` / soft `rgba(0,200,255,.14)`) | `[[BADGE_PREVIEW:status-completed]]` |
+| **Estado — error (hallazgos)** | `.hallazgos-status--error` | Fondo rojo suave + texto rojo | **Sin acento de marca** (mantener rojo sistema) | `[[BADGE_PREVIEW:status-error]]` |
+| **Métrica base** | `.findings-metric-badge` | Borde neutro + texto oscuro | **Profundidad** (`#005A7F`) para versión neutra | `[[BADGE_PREVIEW:metric-base]]` |
+| **Métrica — temperatura** | `[data-metric-hint-key="temperature"]` | Borde/fondo ámbar en drawer | **Oro señal** (`#FFCC00`) | `[[BADGE_PREVIEW:metric-temperature]]` |
+| **Métrica — abstracción** | `[data-metric-hint-key="abstraction"]` | Borde/fondo menta en drawer | **Menta** (`#14B8A6`) | `[[BADGE_PREVIEW:metric-abstraction]]` |
+| **Métrica — narrativas** | `[data-metric-hint-key="narrativeCountByItem"]` | Borde/fondo coral en drawer | **Coral** (`#E86050` / soft `#FFEEEA`) | `[[BADGE_PREVIEW:metric-narratives]]` |
+| **Métrica — mensaje** | `.findings-metric-badge--quote-message` | Borde/fondo cian + valor claro | **Cielo** (`#00C8FF`) | `[[BADGE_PREVIEW:metric-message]]` |
+| **Etiqueta emoji** | `.findings-entity-summary-chip--emoji` | Neutro oscuro translúcido | **Profundidad** (`#005A7F` soft) | `[[BADGE_PREVIEW:chip-emoji]]` |
+| **Etiqueta de tag** | `.findings-entity-summary-chip--tag` | Color dinámico de etiqueta + texto blanco | **Coral/Menta/Profundidad** según categoría | `[[BADGE_PREVIEW:chip-tag]]` |
+| **Microbadge numérico** | `.findings-mini-badge--numeric` | Superficie neutra + borde tenue | **Profundidad suave** (`rgba(0,90,127,.16)`) | `[[BADGE_PREVIEW:mini-numeric]]` |
+| **ID/código** | `.findings-drawer-code-pill` | Lavanda/azul translúcido + texto claro | **Profundidad + cielo** (blend técnico) | `[[BADGE_PREVIEW:code-pill]]` |
+
+Notas:
+
+- Donde hay `var(...)`, el valor exacto depende del tema (`Claro`/`Oscuro`) y debe mantener contraste WCAG.
+- Para nuevas variantes, reutilizar esta paleta antes de introducir nuevos colores.
+- En `manual-de-marca.html`, la columna "Ejemplo visual" se renderiza como badge real para cada fila.
+
+---
+
+## 10. Sistema reutilizable de botones
+
+### 10.1 Colores de botones (actual + acento recomendado)
+
+| Variante | Clase base | Color actual (resumen) | Acento recomendado (unificación) | Ejemplo visual |
+| -------- | ---------- | ---------------------- | --------------------------------- | -------------- |
+| **Primario** | `.btn.btn-primary` | Fondo `var(--accent)`, texto blanco | **Cielo** (`#00C8FF`) con texto profundidad (`#003549`) | `[[BUTTON_PREVIEW:primary]]` |
+| **Secundario** | `.btn.btn-secondary` | Uso real en vistas; estilo pendiente de consolidar global | **Profundidad suave** (`#005A7F` sobre fondo claro) | `[[BUTTON_PREVIEW:secondary]]` |
+| **Fantasma** | `.btn.btn-ghost` | Fondo transparente, borde tenue, texto secundario | **Profundidad** para texto y borde (`#005A7F` + alfa) | `[[BUTTON_PREVIEW:ghost]]` |
+| **Peligro** | `.btn.btn-danger` | Fondo `var(--danger)`, texto blanco | **Sin acento de marca** (rojo de sistema) | `[[BUTTON_PREVIEW:danger]]` |
+| **Ícono circular** | `.btn.btn-icon` (+ variante) | Botón circular 40x40, color según variante combinada | **Cielo** para acción principal, **Fantasma** para secundaria | `[[BUTTON_PREVIEW:icon]]` |
+
+### 10.2 Símbolos base para botones
+
+| Acción | Símbolo base | Semántica visual | Uso recomendado |
+| ------ | ------------ | ---------------- | --------------- |
+| **Agregar / crear** | `[[BUTTON_ICON:add]]` | `+` directo, alta detectabilidad | Altas de configuración, invitaciones, análisis |
+| **Importar** | `[[BUTTON_ICON:import]]` | Bandeja + flecha de entrada (adjunto) | Cargar JSON/archivos al sistema |
+| **Exportar** | `[[BUTTON_ICON:export]]` | Bandeja + flecha de salida | Descargar CSV/JSON o reporte |
+| **Editar** | `[[BUTTON_ICON:edit]]` | Lápiz sobre objeto | Edición de entidad existente |
+| **Eliminar** | `[[BUTTON_ICON:delete]]` | Papelera | Acciones destructivas con confirmación |
+| **Procesar** | `[[BUTTON_ICON:process]]` | Engranaje | Disparar procesamiento por lote |
+| **Enviar** | `[[BUTTON_ICON:send]]` | Avión de papel | Envío de mensaje/formulario |
+| **Filtrar** | `[[BUTTON_ICON:filter]]` | Embudo | Aplicar criterios/filtros en listados |
+| **Ordenar ascendente** | `[[BUTTON_ICON:sortUp]]` | Flecha hacia arriba | Ordenar de menor a mayor / A-Z |
+| **Ordenar descendente** | `[[BUTTON_ICON:sortDown]]` | Flecha hacia abajo | Ordenar de mayor a menor / Z-A |
+| **Cerrar** | `[[BUTTON_ICON:close]]` | X de cierre | Cerrar modales, popovers o paneles |
+| **Etiquetar** | `[[BUTTON_ICON:tag]]` | Etiqueta (tag) | Asignar o editar etiquetas |
+| **Reacciones** | `[[BUTTON_ICON:reaction]]` | Carita/emoji | Agregar o gestionar reacciones |
+| **Ver** | `[[BUTTON_ICON:view]]` | Ojo | Ver detalle o vista previa |
+| **Pausar** | `[[BUTTON_ICON:pause]]` | Doble barra vertical | Pausar flujo o reproducción activa |
+| **Reanudar** | `[[BUTTON_ICON:resume]]` | Triángulo de play | Retomar flujo pausado |
+| **Resetear / volver** | `[[BUTTON_ICON:reset]]` | Flecha hacia la izquierda | Volver estado/filtro al valor inicial |
+
+### 10.3 Tamaños y composición
+
+- Tamaños estándar: `.btn-sm`, base `.btn`, `.btn-lg`.
+- Orden recomendado de clases: `.btn` + variante de intención + tamaño + modificador (`.btn-icon`, utilitarios).
+- En modales: acción primaria a la derecha; cancelar/fantasma a la izquierda.
+- No crear botones ad-hoc por pantalla si una combinación existente cubre el caso.
+- En `manual-de-marca.html`, las columnas de ejemplo visual y símbolo base se renderizan como controles reales para revisión.
+
+---
+
+## 11. Forma, movimiento y profundidad
+
+| Token                         | Valor                                | Uso                          |
+| ----------------------------- | ------------------------------------ | ---------------------------- |
+| `--radius-sm` … `--radius-xl` | 8 / 12 / 16 / 20 px                  | Controles, tarjetas, modales |
+| Transición base               | 200ms `cubic-bezier(0.4, 0, 0.2, 1)` | Interacción por defecto      |
+| Transición lenta              | 400ms (mismo easing)                 | Pliegues o secciones amplias |
+
+**Acento en controles nativos (checkbox, radio, rango, listas desplegables):** en implementación, `accent-color` alineado al **cielo** (`#00C8FF`, p. ej. vía `var(--accent)`) evita el azul genérico del sistema en muchos motores. **Limitación:** en `<select>`, el color de la fila resaltada o elegida al abrir la lista **suelen pintarla el SO o el propio navegador**; no siempre se puede sustituir por cielo solo con CSS. Si hiciera falta un aspecto 100% controlado, el camino es un desplegable **accesible** (combobox) con estilos de la marca, no un `<select>` puramente nativo.
+
+---
+
+## 12. Voz y UI en español
+
+- Títulos de modales, etiquetas y botones: **oración capitalizada** (p. ej. "Guardar", "Agregar una nueva configuración"); nombre del producto: **Voces.ai** como marca registrada en copy.
+- Mensajes de error hacia quien usa el producto: **español** claro, accionable, alineado a LNI del repositorio cuando aplica.
+
+---
+
+## 13. Referencia técnica (mantenimiento)
+
+| Recurso                              | Ruta o nota                                                                                                                                         |
+| ------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Design system (tokens en producción) | `apps/admin-web/public/css/styles.css` — `accent-color` + tokens por `data-voces-ui-theme`; revisar restos de legado (p. ej. entrevista) por módulo |
+| Favicon                              | `src/constants/micFaviconSvg.js`, rutas en `src/app.js`                                                                                             |
+| HTML de referencia                   | `apps/admin-web/public/admin.html`, `apps/interview-web/public/interview.html`                                                                      |
+| Bocetos cromáticos (investigación)   | `docs/_research/landing/light-clear-themes/` (HTMLs de prueba; no reemplazan este manual)                                                           |
+
+**Cuando** se actualicen colores, familias o nombres de tema en CSS o producto, **actualizar este documento** y, si aplica, añadir una nota al pie de sección 13 o una entrada breve bajo _Historial_ al final.
+
+---
+
+## Historial
+
+| Fecha        | Cambio                                                                                                                                       |
+| ------------ | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| Abril 2026   | Se separa el símbolo de ordenar en dos acciones: ascendente (flecha arriba) y descendente (flecha abajo).                               |
+| Abril 2026   | Se agregan símbolos base de filtrar, ordenar, cerrar, etiquetar, reacciones y ver en la sección 10.                                      |
+| Abril 2026   | Se agrega símbolo base de resetear (flecha a la izquierda) y se separan pausar/reanudar como acciones independientes en sección 10.      |
+| Abril 2026   | Se amplía sección 10 con matriz de colores de botones (actual + acento recomendado), preview visual por fila y símbolos base canónicos de acción. |
+| Abril 2026   | Se mejora sección 9.3 con recomendación de acentos por tipo de badge y ejemplo visual por fila en la versión HTML del manual.               |
+| Abril 2026   | Se elige de forma definitiva `Plus Jakarta Sans` (`600`) para `🎙️Voces.ai` y se actualizan lineamientos de lockup en el manual.             |
+| Abril 2026   | Se agrega inventario real de badges y se define set reutilizable oficial de badges y botones (variantes, tamaños y reglas de composición). |
+| Abril 2026   | Se mueven 3 pruebas tipográficas de `🎙️Voces.ai` a sección 1 (Identidad y posicionamiento), se mantiene alcance exclusivo a wordmark y sin espacio. |
+| Abril 2026   | Se añade matriz de uso de acentos en UI (sección 4.1) con casos recomendados, anti-patrones y tokens CSS sugeridos para implementación.         |
+| Abril 2026   | Opción A tipográfica: pesos recomendados por familia, escala explícita (`display` a `mono-sm`) y reglas de uso para `Fraunces`/`JetBrains Mono`. |
+| Abril 2026   | JetBrains Mono cargada en admin, entrevista, data-protection y popups de JSON/salida de análisis; UI usa `var(--font-mono)`.                 |
+| Abril 2026   | `accent-color` cielo en controles nativos; nota de limitación en `<select>` (lista desplegable depende del SO/navegador).                    |
+| Abril 2026   | Manual unificado: temas **Claro** y **Oscuro**, base NST + familias coral/menta/oro/cielo/profundidad, sin nombres alternativos de producto. |
+| Feb–Abr 2026 | Versiones anteriores descritas en bloque; enfoque en legado oscuro y violeta en el repo.                                                     |
+</script>
+  <script>
+    function escapeHtml(text) {
+      return String(text)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+    }
+
+    function formatInline(text) {
+      let s = escapeHtml(text);
+      const code = [];
+      s = s.replace(/`([^`]+)`/g, (_, t) => {
+        const token = `@@CODE${code.length}@@`;
+        code.push(`<code>${t}</code>`);
+        return token;
+      });
+      s = s.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
+      s = s.replace(/\*(.+?)\*/g, "<em>$1</em>");
+      s = s.replace(/_(.+?)_/g, "<em>$1</em>");
+      s = s.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
+      s = s.replace(/@@CODE(\d+)@@/g, (_, i) => code[Number(i)] || "");
+      return s;
+    }
+
+    function parseRow(line) {
+      let raw = line.trim();
+      if (raw.startsWith("|")) raw = raw.slice(1);
+      if (raw.endsWith("|")) raw = raw.slice(0, -1);
+      return raw.split("|").map((c) => c.trim());
+    }
+
+    function isTableSeparator(line) {
+      const t = line.trim();
+      if (!t.includes("-")) return false;
+      const raw = t.startsWith("|") ? t.slice(1) : t;
+      const parts = (raw.endsWith("|") ? raw.slice(0, -1) : raw).split("|").map((p) => p.trim());
+      return parts.length > 0 && parts.every((p) => /^:?-{3,}:?$/.test(p));
+    }
+
+    function renderMarkdown(markdown) {
+      const lines = String(markdown).replace(/\r\n/g, "\n").split("\n");
+      const out = [];
+      let i = 0;
+      let inCode = false;
+      let codeLines = [];
+
+      function closeCode() {
+        if (!inCode) return;
+        out.push(`<pre><code>${escapeHtml(codeLines.join("\n"))}</code></pre>`);
+        inCode = false;
+        codeLines = [];
+      }
+
+      while (i < lines.length) {
+        const raw = lines[i];
+        const line = raw.trim();
+
+        if (raw.startsWith("```")) {
+          if (!inCode) {
+            inCode = true;
+            codeLines = [];
+          } else {
+            closeCode();
+          }
+          i++;
+          continue;
+        }
+        if (inCode) {
+          codeLines.push(raw);
+          i++;
+          continue;
+        }
+        if (!line) {
+          i++;
+          continue;
+        }
+        if (/^---+$/.test(line)) {
+          out.push("<hr>");
+          i++;
+          continue;
+        }
+
+        const h = line.match(/^(#{1,6})\s+(.+)$/);
+        if (h) {
+          out.push(`<h${h[1].length}>${formatInline(h[2])}</h${h[1].length}>`);
+          i++;
+          continue;
+        }
+
+        if (raw.includes("|") && i + 1 < lines.length && isTableSeparator(lines[i + 1])) {
+          const rows = [];
+          rows.push(parseRow(raw));
+          i += 2;
+          while (i < lines.length && lines[i].trim().includes("|")) {
+            rows.push(parseRow(lines[i]));
+            i++;
+          }
+          const head = rows[0] || [];
+          const body = rows.slice(1);
+          const thead = `<thead><tr>${head.map((c) => `<th>${formatInline(c)}</th>`).join("")}</tr></thead>`;
+          const tbody = `<tbody>${body.map((r) => `<tr>${r.map((c) => `<td>${formatInline(c)}</td>`).join("")}</tr>`).join("")}</tbody>`;
+          out.push(`<table>${thead}${tbody}</table>`);
+          continue;
+        }
+
+        if (/^[-*]\s+/.test(line)) {
+          const items = [];
+          while (i < lines.length && /^\s*[-*]\s+/.test(lines[i])) {
+            items.push(lines[i].replace(/^\s*[-*]\s+/, ""));
+            i++;
+          }
+          out.push(`<ul>${items.map((it) => `<li>${formatInline(it)}</li>`).join("")}</ul>`);
+          continue;
+        }
+
+        if (/^\d+\.\s+/.test(line)) {
+          const items = [];
+          while (i < lines.length && /^\s*\d+\.\s+/.test(lines[i])) {
+            items.push(lines[i].replace(/^\s*\d+\.\s+/, ""));
+            i++;
+          }
+          out.push(`<ol>${items.map((it) => `<li>${formatInline(it)}</li>`).join("")}</ol>`);
+          continue;
+        }
+
+        const paragraph = [];
+        while (i < lines.length) {
+          const t = lines[i].trim();
+          if (!t || /^#/.test(t) || /^---+$/.test(t)) break;
+          if ((lines[i].includes("|") && i + 1 < lines.length && isTableSeparator(lines[i + 1])) || /^\s*[-*]\s+/.test(lines[i]) || /^\s*\d+\.\s+/.test(lines[i]) || lines[i].startsWith("```")) break;
+          paragraph.push(formatInline(lines[i]));
+          i++;
+        }
+        out.push(`<p>${paragraph.join("<br>")}</p>`);
+      }
+
+      closeCode();
+      return out.join("\n");
+    }
+
+    function addColorSwatches(root) {
+      const hexPattern = /^#(?:[0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/;
+      const codes = root.querySelectorAll("code");
+      for (const codeEl of codes) {
+        const hex = (codeEl.textContent || "").trim();
+        if (!hexPattern.test(hex)) continue;
+        if (codeEl.nextElementSibling && codeEl.nextElementSibling.classList.contains("color-swatch")) continue;
+        const sw = document.createElement("span");
+        sw.className = "color-swatch";
+        sw.style.backgroundColor = hex;
+        sw.setAttribute("aria-label", `Muestra ${hex}`);
+        sw.title = hex;
+        codeEl.insertAdjacentElement("afterend", sw);
+      }
+    }
+
+    function replaceSeeSection4(root) {
+      const rows = root.querySelectorAll("table tr");
+      const sets = {
+        coral: ["#D94D3D", "#E86050", "#FF7B6A", "#F59B8D", "#FFEEEA"],
+        menta: ["#0F9D8A", "#14B8A6", "#3EE0C4", "#4FD8C2", "#E0F7F3"],
+        coralMentaOscuro: ["#FF7B6A", "#F59B8D", "#3EE0C4", "#4FD8C2"]
+      };
+      function buildPalette(hexes) {
+        return `<span class="inline-palette">${hexes.map((hex) => `<span class="chip"><code>${hex}</code><span class="color-swatch" style="background-color:${hex}" aria-label="Muestra ${hex}" title="${hex}"></span></span>`).join("")}</span>`;
+      }
+      for (const row of rows) {
+        const cells = row.querySelectorAll("td");
+        if (cells.length < 2) continue;
+        const left = (cells[0].textContent || "").toLowerCase();
+        const right = (cells[1].textContent || "").trim().toLowerCase();
+        if (!right.includes("ver §4")) continue;
+        if (left.includes("coral sólido")) {
+          cells[1].innerHTML = buildPalette(sets.coral);
+          continue;
+        }
+        if (left.includes("menta sólida")) {
+          cells[1].innerHTML = buildPalette(sets.menta);
+          continue;
+        }
+        if (left.includes("coral, menta")) {
+          cells[1].innerHTML = buildPalette(sets.coralMentaOscuro);
+        }
+      }
+    }
+
+    function replaceWordmarkPreviewPlaceholder(root) {
+      const paragraphs = root.querySelectorAll("p");
+      for (const paragraph of paragraphs) {
+        const text = (paragraph.textContent || "").trim();
+        if (!text.includes("[[WORDMARK_PREVIEW]]")) continue;
+        paragraph.innerHTML = `
+          <div class="wordmark-preview" role="group" aria-label="Vista previa de lockup Voces.ai">
+            <div class="wordmark-preview-card">
+              <div class="wordmark-preview-head">
+                <span class="wordmark-preview-label">Opción seleccionada — Plus Jakarta Sans</span>
+                <span class="wordmark-preview-weight">600</span>
+              </div>
+              <div class="wordmark-preview-surface wordmark-preview-surface-light">
+                <span class="wordmark-preview-caption">Fondo claro</span>
+                <span class="wordmark-preview-sample wordmark-font-jakarta">🎙️Voces.ai</span>
+              </div>
+              <div class="wordmark-preview-surface wordmark-preview-surface-dark">
+                <span class="wordmark-preview-caption">Fondo oscuro</span>
+                <span class="wordmark-preview-sample wordmark-font-jakarta">🎙️Voces.ai</span>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+    }
+
+    function replaceBadgePreviewPlaceholders(root) {
+      const previewMap = {
+        "status-active": { label: "Activo", value: "OK", bg: "#E0F7F3", border: "#8BDFD2", color: "#0F7A6B" },
+        "status-paused": { label: "Procesando", value: "…", bg: "#FFF6CC", border: "#F0D86A", color: "#7A5A00" },
+        "status-completed": { label: "Completado", value: "100%", bg: "rgba(0,200,255,0.14)", border: "rgba(0,90,127,0.34)", color: "#005A7F" },
+        "status-error": { label: "Error", value: "!", bg: "rgba(248,113,113,0.18)", border: "rgba(185,28,28,0.38)", color: "#B91C1C" },
+        "metric-base": { label: "Métrica", value: "42", bg: "rgba(0,90,127,0.08)", border: "rgba(0,90,127,0.28)", color: "#005A7F" },
+        "metric-temperature": { label: "Temp.", value: "0.78", bg: "rgba(255,204,0,0.18)", border: "rgba(255,204,0,0.52)", color: "#7A5A00" },
+        "metric-abstraction": { label: "Abstr.", value: "0.66", bg: "rgba(20,184,166,0.16)", border: "rgba(20,184,166,0.45)", color: "#0F7A6B" },
+        "metric-narratives": { label: "Narr.", value: "12", bg: "#FFEEEA", border: "rgba(232,96,80,0.45)", color: "#A73E31" },
+        "metric-message": { label: "Mensaje", value: "Ver", bg: "rgba(0,200,255,0.14)", border: "rgba(0,200,255,0.45)", color: "#005A7F" },
+        "chip-emoji": { label: "🙂", value: "8", bg: "rgba(0,90,127,0.12)", border: "rgba(0,90,127,0.26)", color: "#0E3C54" },
+        "chip-tag": { label: "Etiqueta", value: "Personas", bg: "#E86050", border: "rgba(160,55,42,0.35)", color: "#FFFFFF" },
+        "mini-numeric": { label: "N", value: "24", bg: "rgba(0,90,127,0.12)", border: "rgba(0,90,127,0.28)", color: "#0E3C54" },
+        "code-pill": { label: "CI", value: "{7}", bg: "rgba(110,130,200,0.28)", border: "rgba(110,130,200,0.45)", color: "rgba(210,220,250,0.98)", code: true }
+      };
+
+      const cells = root.querySelectorAll("td, p, li");
+      const pattern = /\[\[BADGE_PREVIEW:([a-z0-9-]+)\]\]/;
+      for (const cell of cells) {
+        const text = (cell.textContent || "").trim();
+        const match = text.match(pattern);
+        if (!match) continue;
+        const key = match[1];
+        const def = previewMap[key];
+        if (!def) continue;
+        const cls = def.code ? "badge-preview badge-preview--code" : "badge-preview";
+        cell.innerHTML = `<span class="${cls}" style="background:${def.bg};border-color:${def.border};color:${def.color}"><span class="badge-preview__label">${def.label}</span><span class="badge-preview__value">${def.value}</span></span>`;
+      }
+    }
+
+    function getButtonIconSvg(key) {
+      const icons = {
+        add: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>',
+        import: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>',
+        export: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>',
+        edit: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>',
+        delete: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>',
+        process: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.6 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9c0 .7.41 1.31 1.05 1.57.15.06.3.09.46.09H21a2 2 0 0 1 0 4h-.09c-.16 0-.31.03-.46.09-.64.26-1.05.87-1.05 1.57z"></path></svg>',
+        send: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 2L11 13"></path><path d="M22 2l-7 20-4-9-9-4 20-7z"></path></svg>',
+        filter: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="22 3 2 3 10 12 10 19 14 21 14 12 22 3"></polygon></svg>',
+        sortUp: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="20" x2="12" y2="5"></line><polyline points="7 10 12 5 17 10"></polyline></svg>',
+        sortDown: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="4" x2="12" y2="19"></line><polyline points="7 14 12 19 17 14"></polyline></svg>',
+        sort: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="8" y1="4" x2="8" y2="20"></line><polyline points="5 7 8 4 11 7"></polyline><line x1="16" y1="4" x2="16" y2="20"></line><polyline points="13 17 16 20 19 17"></polyline></svg>',
+        close: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>',
+        tag: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.59 13.41L11 3H4v7l9.59 9.59a2 2 0 0 0 2.82 0l4.18-4.18a2 2 0 0 0 0-2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>',
+        reaction: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M8 14s1.5 2 4 2 4-2 4-2"></path><line x1="9" y1="9" x2="9.01" y2="9"></line><line x1="15" y1="9" x2="15.01" y2="9"></line></svg>',
+        view: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"></path><circle cx="12" cy="12" r="3"></circle></svg>',
+        pause: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>',
+        resume: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M5 3l14 9-14 9V3z"></path></svg>',
+        reset: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="11 17 6 12 11 7"></polyline><line x1="18" y1="12" x2="6" y2="12"></line></svg>',
+        pauseResume: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="4" y="4" width="5" height="16"></rect><rect x="11" y="4" width="5" height="16"></rect><path d="M18 4l6 8-6 8V4z"></path></svg>'
+      };
+      return icons[key] || icons.add;
+    }
+
+    function replaceButtonPreviewPlaceholders(root) {
+      const previewMap = {
+        primary: { label: "Guardar", bg: "#00C8FF", border: "#00C8FF", color: "#003549", icon: "add", iconOnly: false },
+        secondary: { label: "Probar", bg: "rgba(0,90,127,0.10)", border: "rgba(0,90,127,0.35)", color: "#005A7F", icon: null, iconOnly: false },
+        ghost: { label: "Cancelar", bg: "transparent", border: "rgba(0,90,127,0.30)", color: "#005A7F", icon: null, iconOnly: false },
+        danger: { label: "Eliminar", bg: "#C62828", border: "#C62828", color: "#FFFFFF", icon: "delete", iconOnly: false },
+        icon: { label: "", bg: "#00C8FF", border: "#00C8FF", color: "#003549", icon: "add", iconOnly: true }
+      };
+
+      const cells = root.querySelectorAll("td, p, li");
+      const pattern = /\[\[BUTTON_PREVIEW:([a-z0-9-]+)\]\]/;
+      for (const cell of cells) {
+        const text = (cell.textContent || "").trim();
+        const match = text.match(pattern);
+        if (!match) continue;
+        const def = previewMap[match[1]];
+        if (!def) continue;
+        const cls = def.iconOnly ? "button-preview button-preview--icon" : "button-preview";
+        const icon = def.icon ? getButtonIconSvg(def.icon) : "";
+        const label = def.iconOnly ? "" : `<span>${def.label}</span>`;
+        cell.innerHTML = `<span class="${cls}" style="background:${def.bg};border-color:${def.border};color:${def.color}">${icon}${label}</span>`;
+      }
+    }
+
+    function replaceButtonIconPlaceholders(root) {
+      const cells = root.querySelectorAll("td, p, li");
+      const pattern = /\[\[BUTTON_ICON:([a-zA-Z0-9-]+)\]\]/;
+      for (const cell of cells) {
+        const text = (cell.textContent || "").trim();
+        const match = text.match(pattern);
+        if (!match) continue;
+        const iconKey = match[1];
+        const svg = getButtonIconSvg(iconKey);
+        cell.innerHTML = `<span class="button-icon-preview" aria-label="Símbolo ${iconKey}">${svg}</span>`;
+      }
+    }
+
+    const md = document.getElementById("md-source").textContent || "";
+    const content = document.getElementById("content");
+    content.innerHTML = renderMarkdown(md);
+    addColorSwatches(content);
+    replaceSeeSection4(content);
+    replaceBadgePreviewPlaceholders(content);
+    replaceButtonPreviewPlaceholders(content);
+    replaceButtonIconPlaceholders(content);
+    replaceWordmarkPreviewPlaceholder(content);
+  </script>
+</body>
+
+</html>
